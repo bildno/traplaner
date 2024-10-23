@@ -23,6 +23,13 @@ public class MemberController {
         return "member/pw-change";
     }
 
+    @GetMapping("/myPage")
+    public String myPage(){
+
+        return "member/my-page";
+    }
+
+
 
     @GetMapping("/sign-up")
     public String join() {
