@@ -36,5 +36,7 @@
                     <h3>MY TRAPLAN</h3> <br>
                     <a href="http://localhost:8181/travelplan">여행계획작성</a>
                 </section>
+
+            <button>커밋 테스트용 버튼</button>
 </body>
 </html>
