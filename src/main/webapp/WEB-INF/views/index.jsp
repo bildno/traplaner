@@ -23,7 +23,7 @@
                 <header>
                     <a href="http://localhost:8181">로고</a>
                     <a href="http://localhost:8181/travelboard">게시판</a>
-                    <a href="http://localhost:8181/mypage">마이페이지</a>
+                    <a href="members/myPage">마이페이지</a>
                     <a href="members/sign-in">로그인</a>
                     <a href="http://localhost:8181/home">로그아웃</a>
                 </header>
