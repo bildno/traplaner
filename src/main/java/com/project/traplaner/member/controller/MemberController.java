@@ -17,54 +17,45 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    //비밀 번호 변경 양식 열기
     @GetMapping("/pw-change")
     public String pwChange() {
-
         return "member/pw-change";
     }
-
-
+    // 회원가입 양식 열기
     @GetMapping("/sign-up")
     public String join() {
-
         return "member/sign-up";
     }
-
+    // 회원 가입 요청
     @PostMapping("/join")
     public String sing_up(SignUpRequestDto dto) {
-
         dto.setLoginMethod(Member.LoginMethod.COMMON);
         System.out.println(dto.getLoginMethod().toString());
         memberService.join(dto);
         return "member/sign-in";
     }
-
+    // 이메일, 아이디 중복 검사
     @PostMapping("/overlapping")
     @ResponseBody
-    public ResponseEntity<?> check(@RequestParam String email) {
+    public ResponseEntity<?> check(
+            @RequestParam String type,
+            @RequestParam String keyword) {
 
-
-        boolean flag = memberService.overlapping(email);
-        return ResponseEntity.ok()
-                .body(flag);
+        boolean flag = memberService.duplicateTest(type,keyword);
+//        return ResponseEntity.ok()
+//                .body(flag);
+        return ResponseEntity.ok(flag);
     }
-
+    //로그인 열기
     @GetMapping("/sign-in")
     public String index() {
-
-
         return "member/sign-in";
     }
 
 
-//    sns.kakao.app-key=9d40d3ab8f7a7bfd11013922f7d0a3d6
-//    sns.kakao.redirect-uri=http://localhost:8181/oauth/kakao
-//    sns.kakao.logout-redirect=http://localhost:8181
-
     private String rootPath = "";
-
     private String appKey = "";
-
 
     // 로그인 화면 요청
     @GetMapping("/naver-sign-in")

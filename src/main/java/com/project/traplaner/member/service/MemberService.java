@@ -21,5 +21,9 @@ public class MemberService {
 
         return memberMapper.overlapping(email);
     }
+    public boolean duplicateTest(String type, String keyword){
+       return memberMapper.duplicateTest(type,keyword);
+    }
+
 
 }

@@ -38,7 +38,7 @@ mybatis:
 
 sns:
   kakao:
-    Client-Id: kakao
+    Client-Id: ed255593c893c0dfdf69726766e4c8d9
     redirect-uri: http://localhost:8181/auth/kakao
     logout-redirect: http://localhost:8181
 

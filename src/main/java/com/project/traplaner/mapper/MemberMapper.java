@@ -10,4 +10,5 @@ public interface MemberMapper {
 
     boolean overlapping(String email);
 
+    boolean duplicateTest(String type, String keyword);
 }
