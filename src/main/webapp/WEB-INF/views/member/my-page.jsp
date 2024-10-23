@@ -69,7 +69,7 @@
                     alt=""
             />
             <div class="manage_box">
-                <a href="">계정관리</a><a href="">내 게시물</a
+                <a href="">계정관리</a><a href="/members/myPage/my-board">내 게시물</a
             ><a href="">나의 여행</a><a href="">좋아요한 게시물</a>
             </div>
         </div>

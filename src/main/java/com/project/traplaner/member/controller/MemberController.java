@@ -63,6 +63,12 @@ public class MemberController {
         return "member/sign-in";
     }
 
+    @GetMapping("/myPage/my-board")
+    public String myBoard() {
+
+        return "member/myBoard";
+    }
+
 
 //    sns.kakao.app-key=9d40d3ab8f7a7bfd11013922f7d0a3d6
 //    sns.kakao.redirect-uri=http://localhost:8181/oauth/kakao

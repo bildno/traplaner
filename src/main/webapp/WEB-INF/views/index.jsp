@@ -21,7 +21,7 @@
         %>
         <h1><%= userName %> 님 안녕하세요!</h1>
                 <header>
-                    <a href="http://localhost:8181">로고</a>
+                    <a href="http://localhost:8181"><img src="/assets/img/logo.png" alt="업다"></a>
                     <a href="http://localhost:8181/travelboard">게시판</a>
                     <a href="members/myPage">마이페이지</a>
                     <a href="members/sign-in">로그인</a>
