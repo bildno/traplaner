@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Getter
 @Setter
@@ -18,10 +19,10 @@ public class SignUpRequestDto {
 
     private Member.LoginMethod loginMethod;
 
-    public Member toEntity() {
+    public Member toEntity(PasswordEncoder encoder) {
         return Member.builder()
                 .email(email)
-                .password(password)
+                .password(encoder.encode(password))
                 .nickName(nickName)
                 .loginMethod(loginMethod)
                 .build();

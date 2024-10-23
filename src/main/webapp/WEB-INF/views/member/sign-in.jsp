@@ -101,6 +101,14 @@
 
     </a>
 </div>
+<script>
+    const serverResult = '${result}';
+    if(serverResult==='NO_ACC'){
+        alert("회원가입을 먼저 진행해 주세요!")
+    }else if (serverResult === 'NO_PW'){
+        alert('비밀번호가 틀렸어요!')
+    }
+</script>
 </body>
 
 

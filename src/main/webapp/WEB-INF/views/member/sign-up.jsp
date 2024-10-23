@@ -121,7 +121,6 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   </div>
 </div>
 
-
     <script>
       const $email = document.getElementById("email-input");
       const pattern2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
