@@ -2,11 +2,9 @@
 <html>
 <head>
   <title>Title</title>
+
 </head>
 <body>
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-<script src="fullcalendar/lib/locales-all.js"></script>
-
 
 <style>
   .container {
@@ -15,11 +13,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-
-  a {
-    text-decoration: none;
-    margin-bottom: 10px;
   }
   .mypage_section {
     display: flex;
@@ -32,6 +25,7 @@
     border: 1px solid rgb(238, 238, 238);
     border-radius: 5px;
     margin-bottom: 50px;
+    height: 700px;
   }
   .img_box {
     height: 50%;
@@ -74,6 +68,11 @@
     border: 2px solid lightgray;
     border-radius: 5px;
   }
+  .manage_box a{
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: black;
+  }
 </style>
 
 <div class="container">
@@ -87,8 +86,8 @@
               alt=""
       />
       <div class="manage_box">
-        <a href="">계정관리</a><a href="/members/myPage/my-board">내 게시물</a
-      ><a href="">나의 여행</a><a href="">좋아요한 게시물</a>
+        <a href="">계정관리</a><a href="/members/my-page/my-board">내 게시물</a
+      ><a style="font-weight: bold" href="/members/my-page/my-plan">나의 여행</a><a href="">좋아요한 게시물</a>
       </div>
     </div>
     <div class="mypage_section2">
@@ -100,10 +99,9 @@
         <table>
           <tr>
             <th style="width: 5%;"><span>번호</span></th>
-            <th style="width: 60%;">게시글 제목</th>
-            <th style="width: 10%;"><span>작성자</span></th>
-            <th style="width: 10%;"><span>작성일</span></th>
-            <th style="width: 10%;"><span>좋아요 수</span></th>
+            <th style="width: 60%;"><span>게시글 제목</span></th>
+            <th style="width: 10%;"><span>여행일</span></th>
+            <th style="width: 10%;"><span>공유여부</span></th>
           </tr>
 
           <tr>
@@ -112,10 +110,11 @@
                        value="망곰이당"
                        onclick="location.href='community_info?community_number=${dto.community_number}&contents_number=${dto221.contents_number }'"
                        readonly></td>
-            <td><span>망곰이</span></td>
             <td><span><fmt:formatDate
-                    value="${ dto.community_date }" pattern="yyyy-MM-dd" />2024.10.23</span></td>
-            <td><span>22</span></td>
+                     value="${ dto.community_date }" pattern="yyyy-MM-dd" />2024.10.23</span></td>
+           <td>
+             <input type="checkbox">
+           </td>
           </tr>
           <%--<c:forEach var="dto" items="${ communitylist }">
             <tr>
@@ -139,3 +138,4 @@
 
 </body>
 </html>
+
