@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -118,6 +119,9 @@
                     value="${ dto.community_date }" pattern="yyyy-MM-dd" />2024.10.23</span></td>
             <td><span>22</span></td>
           </tr>
+
+
+
           <%--<c:forEach var="dto" items="${ communitylist }">
             <tr>
               <td><span>${ dto.community_number }</span></td>

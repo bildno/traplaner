@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c"
+           uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
   <title>Title</title>
@@ -103,20 +105,22 @@
             <th style="width: 10%;"><span>여행일</span></th>
             <th style="width: 10%;"><span>공유여부</span></th>
           </tr>
+          <c:forEach var="travels" items="${list}">
+            <tr>
+              <td><span>${travels.id}</span></td>
+              <td><input type="text" name="con_text"
+                         value="${travels.title}"
+                         onclick="location.href='community_info?community_number=&contents_number='"
+                         readonly></td>
+              <td>
+              <span>${travels.startDate} ~ ${travels.endDate}</span>
+              <td>
+                <input type="checkbox">
+              </td>
+            </tr>
+          </c:forEach>
 
-          <tr>
-            <td><span>1</span></td>
-            <td><input type="text" name="con_text" id="con_text1"
-                       value="망곰이당"
-                       onclick="location.href='community_info?community_number=${dto.community_number}&contents_number=${dto221.contents_number }'"
-                       readonly></td>
-            <td><span><fmt:formatDate
-                     value="${ dto.community_date }" pattern="yyyy-MM-dd" />2024.10.23</span></td>
-           <td>
-             <input type="checkbox">
-           </td>
-          </tr>
-          <%--<c:forEach var="dto" items="${ communitylist }">
+        <%--<c:forEach var="dto" items="${ communitylist }">
             <tr>
               <td><span>${ dto.community_number }</span></td>
               <td><span>${ dto.community_member_name }</span></td>
