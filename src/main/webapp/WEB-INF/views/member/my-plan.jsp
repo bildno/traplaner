@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c"
+           uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
   <title>Title</title>
@@ -52,7 +54,7 @@
   }
   .con22 input{
     /*border-radius: 5px;*/
-    width: 80%;
+    width: 70%;
     margin: 5px 0 5px 20px;
     cursor: pointer;
     /*border: 1px solid rgb(238, 238, 238);*/
@@ -73,6 +75,7 @@
     text-decoration: none;
     color: black;
   }
+
 </style>
 
 <div class="container">
@@ -99,36 +102,24 @@
         <table>
           <tr>
             <th style="width: 5%;"><span>번호</span></th>
-            <th style="width: 60%;"><span>게시글 제목</span></th>
-            <th style="width: 10%;"><span>여행일</span></th>
+            <th style="width: 50%;"><span>게시글 제목</span></th>
+            <th style="width: 25%;"><span>여행일</span></th>
             <th style="width: 10%;"><span>공유여부</span></th>
           </tr>
-
-          <tr>
-            <td><span>1</span></td>
-            <td><input type="text" name="con_text" id="con_text1"
-                       value="망곰이당"
-                       onclick="location.href='community_info?community_number=${dto.community_number}&contents_number=${dto221.contents_number }'"
-                       readonly></td>
-            <td><span><fmt:formatDate
-                     value="${ dto.community_date }" pattern="yyyy-MM-dd" />2024.10.23</span></td>
-           <td>
-             <input type="checkbox">
-           </td>
-          </tr>
-          <%--<c:forEach var="dto" items="${ communitylist }">
+          <c:forEach var="travels" items="${list}">
             <tr>
-              <td><span>${ dto.community_number }</span></td>
-              <td><span>${ dto.community_member_name }</span></td>
-              <td><input type="text" name="con_text" id="con_text"
-                         value="${ dto.community_title }"
-                         onclick="location.href='community_info?community_number=${dto.community_number}&contents_number=${dto221.contents_number }'"
+              <td><span>${travels.id}</span></td>
+              <td><input type="text" name="con_text"
+                         value="${travels.title}"
+                         onclick="location.href='community_info?community_number=&contents_number='"
                          readonly></td>
-              <td><span><fmt:formatDate
-                      value="${ dto.community_date }" pattern="yyyy-MM-dd" /></span></td>
-              <td><span>${ dto.community_hit }</span></td>
+              <td>
+              <span>${travels.startDate} ~ ${travels.endDate}</span>
+              <td>
+                <input type="checkbox">
+              </td>
             </tr>
-          </c:forEach>--%>
+          </c:forEach>
         </table>
       </div>
     </div>

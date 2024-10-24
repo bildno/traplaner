@@ -1,10 +1,13 @@
 package com.project.traplaner.member.controller;
 
 import com.project.traplaner.entity.Member;
+import com.project.traplaner.entity.Travel;
 import com.project.traplaner.member.dto.LoginRequestDto;
 import com.project.traplaner.member.service.LoginResult;
 import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.member.dto.SignUpRequestDto;
+import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
+import com.project.traplaner.mypage.service.MyPageBoardService;
 import com.project.traplaner.util.FileUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,8 +16,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/members")
@@ -38,11 +44,6 @@ public class MemberController {
     }
     // 회원가입 양식 열기
 
-    @GetMapping("/myPage")
-    public String myPage(){
-
-        return "member/my-page";
-    }
 
     @GetMapping("/sign-up")
     public String join() {
@@ -76,9 +77,8 @@ public class MemberController {
         boolean flag = memberService.duplicateTest(type,keyword);
         return ResponseEntity.ok()
                 .body(flag);
-
     }
-    //로그인 열기
+
     @GetMapping("/sign-in")
     public String index() {
         return "member/sign-in";
@@ -113,6 +113,39 @@ public class MemberController {
         System.out.println("[dbg] naver-sign-in 진입!!!");
         log.info("naver-sing-in 진입");
 
+    }
+
+    private final MyPageBoardService myPageBoardService;
+
+    @GetMapping("/my-page")
+    public String myPage(){
+
+        return "member/my-page";
+    }
+
+    @GetMapping("/my-page/my-board")
+    public String myBoard() {
+
+
+
+        return "member/my-board";
+    }
+
+
+    // 마이페이지 나의 여행
+    @GetMapping("/my-page/my-plan")
+    public String myPlan(
+             Model model) {
+
+        int memberId = 2;
+        System.out.println("asdasdasdasdas");
+        List<TravelListResponseDTO> dtoList = myPageBoardService.getList(memberId);
+
+        log.info("dtoList: {}", dtoList);
+
+        model.addAttribute("list", dtoList);
+
+        return "member/my-plan";
     }
 
 
