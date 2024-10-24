@@ -1,5 +1,7 @@
 package com.project.traplaner.travelBoard.controller;
 
+import com.project.traplaner.entity.TravelBoard;
+import com.project.traplaner.mapper.TravelBoardMapper;
 import com.project.traplaner.travelBoard.dto.SearchDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO;
 import com.project.traplaner.travelBoard.service.TravelBoardService;
@@ -23,7 +25,12 @@ public class TravelBoardController {
     private final TravelBoardService travelBoardService;
 
     // 목록 요청 (페이징과 검색 기능을 곁들인)
-    @GetMapping("/")
+//    @GetMapping("")
+//    public String list() {
+//        System.out.println("목록");
+//        return "travelBoard/list";
+//    }
+    @GetMapping("")
     public String list(Model model,
                        @ModelAttribute("s") SearchDTO page) {
         Map<String, Object> map = travelBoardService.getList(page);
@@ -32,14 +39,34 @@ public class TravelBoardController {
         return "travelBoard/list";
     }
 
-    @GetMapping("/info/{id}")
-    public String detail(@PathVariable int id,
-                         // model에 직접 데이터를 담는 로직을 생략할 수 있는 @ModelAttribute
-                         @ModelAttribute("s") SearchDTO page,
-                         Model model) {
-        TravelBoardDetailResponseDTO dto = travelBoardService.getDetail(id);
-        model.addAttribute("b", dto);
+//    @GetMapping("/info")
+//    public String detail() {
+//        System.out.println("글");
+//        return "travelBoard/info";
+//    }
+
+//    @GetMapping("/info")
+//    public String detail(@PathVariable int id,
+//                         // model에 직접 데이터를 담는 로직을 생략할 수 있는 @ModelAttribute
+//                         @ModelAttribute("s") SearchDTO page,
+//                         Model model) {
+//        id=1;
+//        System.out.println("sasas");
+//        TravelBoardDetailResponseDTO dto = travelBoardService.getDetail(id);
+//        model.addAttribute("b", dto);
 //        model.addAttribute("p", page);
-        return "travelBoard/info";
+//        return "travelBoard/info";
+//    }
+
+
+
+    @GetMapping("/info")
+    public String info(Model model){
+        int id =1;
+
+        TravelBoardMapper travelBoardMapper;
+
+
+        return
     }
 }

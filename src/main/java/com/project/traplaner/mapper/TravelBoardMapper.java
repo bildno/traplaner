@@ -9,6 +9,9 @@ import java.util.List;
 
 @Mapper
 public interface TravelBoardMapper {
+    // 제목 조회
+    TravelBoard  findTitle();
+
     // 목록 조회
     List<TravelBoardDetailResponseDTO> findAll(PageDTO page);
 
