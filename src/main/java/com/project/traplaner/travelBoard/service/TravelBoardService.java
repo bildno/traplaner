@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class TravelBoardService {
-    // mybatis가 우리가 만든 xml을 클래스로 변환해서 빈등록을 해 두기 때문에 주입이 가능하다.
+
     private final TravelBoardMapper mapper;
 
     // mapper로부터 전달받은 entity list를 dto list로 변환해서 컨트롤러에게 리턴

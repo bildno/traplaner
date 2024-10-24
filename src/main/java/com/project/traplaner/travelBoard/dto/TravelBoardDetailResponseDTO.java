@@ -1,29 +1,27 @@
 package com.project.traplaner.travelBoard.dto;
 
+import com.project.traplaner.entity.Favorite;
+import com.project.traplaner.entity.Travel;
 import com.project.traplaner.entity.TravelBoard;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.nio.channels.Pipe;
+
 @Getter
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
 public class TravelBoardDetailResponseDTO {
-    private final int id;
-    private final int travelId;
-    private final String content;
-    private final String writeDate;
-    private final String memberNickName;
-//    private final int viewCount;
+    private String title;
+    private String writer;
+    private String writeDate;
+    private String content;
+    private int likeCount;
 
-    public TravelBoardDetailResponseDTO(TravelBoard board) {
-        this.id = board.getId();
-        this.travelId = board.getTravelId();
-        this.content = board.getContent();
-        this.writeDate = TravelBoardListResponseDTO.makePrettierDateString(board.getWriteDate());
-        this.memberNickName = board.getMemberNickName();
-//        this.viewCount = board.getViewCount();
+    public TravelBoardDetailResponseDTO(TravelBoard travelBoard) {
+        this.writeDate = TravelBoardListResponseDTO.makePrettierDateString(travelBoard.getWriteDate());
     }
 }

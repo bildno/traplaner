@@ -24,17 +24,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class TravelBoard {
-//    private int id;
-//    private int travelBoardId;
-//    private int travelId;
-//    private String memberNickName;
-//    private LocalDateTime writeDate;
-
     private int id;
     private int travelId;
-    private String content;
-    //    private int viewCount;
-    private LocalDateTime writeDate;
     private String memberNickName;
-    private int title;
+    private LocalDateTime writeDate;
+    private String content;
 }
