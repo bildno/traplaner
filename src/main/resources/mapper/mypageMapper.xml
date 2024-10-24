@@ -1,0 +1,22 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.project.traplaner.mapper.MyPageBoardMapper">
+
+    <select id="selectTravelById">
+        select * from tbl_travel where member_id = #{id}
+    </select>
+
+    <delete id="deleteTravelById">
+        delete from tbl_travel where id = #{id}
+    </delete>
+
+    <delete id="deleteTravelByMemberOrder">
+        delete from tbl_travel where id = #{id} and member_id = #{memberId}
+    </delete>
+
+
+
+</mapper>

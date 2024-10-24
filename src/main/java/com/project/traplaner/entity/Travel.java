@@ -17,7 +17,7 @@ public class Travel {
     private boolean isDomestic;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
     private LocalDateTime updateAt;
     private boolean share;
 }
