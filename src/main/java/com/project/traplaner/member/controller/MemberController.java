@@ -44,8 +44,6 @@ public class MemberController {
         return "member/my-page";
     }
 
-
-
     @GetMapping("/sign-up")
     public String join() {
         return "member/sign-up";

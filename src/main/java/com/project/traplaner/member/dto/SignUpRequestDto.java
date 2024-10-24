@@ -26,14 +26,14 @@ public class SignUpRequestDto {
     private String password;
 
     @NotBlank
-    @Size(min=2, max=6)
+    @Size(min = 2, max = 6)
     private String nickName;
 
     private MultipartFile profileImage;
 
     private Member.LoginMethod loginMethod;
 
-    public Member toEntity(PasswordEncoder encoder) {
+
     public Member toEntity(PasswordEncoder encoder, String savePath) {
         return Member.builder()
                 .email(email)
@@ -43,5 +43,5 @@ public class SignUpRequestDto {
                 .profileImg(savePath)
                 .build();
     }
-
 }
+

@@ -54,7 +54,7 @@ public class NaverService {
                             .email(naverUser.getNaverUserDetail().getEmail())
                             .password(UUID.randomUUID().toString())
                             .loginMethod(Member.LoginMethod.NAVER)
-                            .build());
+                            .build(),naverUser.getNaverUserDetail().getProfileImage());
         }
         memberService.maintainLoginState(session, naverUser.getNaverUserDetail().getId());
     }

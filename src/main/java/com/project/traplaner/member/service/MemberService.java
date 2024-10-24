@@ -22,7 +22,6 @@ public class MemberService {
 
     private final MemberMapper memberMapper;
     private final PasswordEncoder encoder;
-    private final PasswordEncoder encoder;
 
     public boolean join(SignUpRequestDto dto, String savePath){
 

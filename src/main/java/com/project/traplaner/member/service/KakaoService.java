@@ -40,7 +40,7 @@ public class KakaoService {
                             .password(UUID.randomUUID().toString())
                             .nickName(kakaoUser.getProperties().getNickname())
                             .email(kakaoUser.getAccount().getEmail())
-                            .build());
+                            .build(), kakaoUser.getProperties().getProfileImage());
         }
         // 우리 사이트 로그인 처리
         memberService.maintainLoginState(session, kakaoUser.getAccount().getEmail());

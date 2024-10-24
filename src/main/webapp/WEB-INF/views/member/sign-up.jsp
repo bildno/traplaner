@@ -113,7 +113,6 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
           width: 200px;
           height: 200px;
         }
-//  <--- 프로필 이미지
 </style>
 <html>
 <body>
@@ -123,12 +122,10 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   <h1 id="join_h1">회원가입</h1>
   <h2 id="join_exp"></h2>
   <div class="contents">
-    <form name="join" method="post" id="signUpForm">
-      <div id="insert">
-        <div>
-          <input type="email" placeholder="이메일" id="emailValue" name="email" class="email_input" />
+
+    <input type="email" placeholder="이메일" id="emailValue" name="email" class="email_input" />
     <form action="/members/sign-up"
-    name="signup"
+    name="join"
     id="signUpForm"
     method="post"
     enctype="multipart/form-data">
@@ -201,38 +198,8 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   </div>
 </div>
 <script type="module" src="/assets/js/signUp.js"></script>
-
-
     <script>
-      /*
-      const $email = document.getElementById("email-input");
-      const pattern2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
-      const $emailLabel = document.querySelector(".emailwarn");
-
-
-      $email.onblur = function (e) {
-
-        if (!pattern2.test($email.value)) {
-
-          $emailLabel.style.display = "";
-        }else {
-
-          $emailLabel.style.display = "none";
-        }
-
-      };
-      export const checkAvailability = async (email) => {
-        const response = await fetch(
-                `http://localhost:8181/members/check?type=${email}`
-        );
-        const flag = await response.json();
-        return !flag; // 논리 반전해서 리턴 -> 중복됐으면 false로 해석하기 위해.
-      };
-
-      const isAvailable = await checkAvailability("account", value);
-*/
-
-      // 프로필 사진 업로드 관련 스크립트  --->
+            // 프로필 사진 업로드 관련 스크립트  --->
       const $profile = document.querySelector(".profile");
       const $fileInput = document.getElementById("profile-img");
 
