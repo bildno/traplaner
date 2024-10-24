@@ -67,7 +67,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     </div>
     <div>
     <h2 class="intro-text">
-        Welcome!!! ${sessionScope.login == null ? '': login.name}
+        Welcome!!! ${sessionScope.login == null ? '': login.nickname}
     </h2>
 </div>
 </div>

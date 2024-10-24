@@ -34,7 +34,7 @@ public class KakaoService {
         // 문서에도 나와있었지만, 자체 로그인 처리 완료는 우리 서비스에서 마무리 지어 줘야 합니다.
         // 가져온 카카오 유저로 우리서비스에 이용자인지 확인하기
         if (!memberService.duplicateTest("email", kakaoUser.getAccount().getEmail())) {
-            //커먼 아이디와 같은 이메일일 경우 처리 해야함
+            // 커먼 아이디와 같은 이메일일 경우를 처리 해야함
             // 한 번도 카카오 로그인을 한 적이 없다면 회원 가입이 들어간다.
             memberService.join(SignUpRequestDto.builder()
                             .password(UUID.randomUUID().toString())

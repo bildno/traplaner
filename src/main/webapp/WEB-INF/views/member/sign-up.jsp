@@ -85,8 +85,6 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   img{
     width: 100px;
   }
-
-
         .container.wrap {
           margin-top: 200px;
           margin-bottom: 200px;
@@ -123,11 +121,11 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   <h2 id="join_exp"></h2>
   <div class="contents">
 
-    <input type="email" placeholder="이메일" id="emailValue" name="email" class="email_input" />
-    <form action="/members/sign-up"
+    <form
     name="join"
     id="signUpForm"
     method="post"
+    action="<c:url value="/members/sign-up"/>"
     enctype="multipart/form-data">
 
     <!-- 프로필 이미지 -->
@@ -153,7 +151,8 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     <div id="insert">
       <div>
-          <input type="email" placeholder="이메일" name="email" class="email_input" />
+
+        <input type="email" placeholder="이메일" id="emailValue" name="email" class="email_input" />
           <input
                   id="id_check"
                   type="button"

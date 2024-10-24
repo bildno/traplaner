@@ -1,5 +1,4 @@
 // 유효성 검증 관련 함수들 임포트
-// 디스트럭처링을 통해 특정 js 파일에서 원하는 함수만 가져와서 쓸라고.
 import { validateInput } from './validation.js';
 import { debounce } from './util.js';
 
@@ -8,8 +7,6 @@ const form = document.getElementById('signUpForm'); // 회원가입 폼
 const signupButton = document.getElementById('joinbtn'); // 회원가입 버튼
 const EmailCheckButton = document.getElementById('id_check');
 const NicknameCheckButton = document.getElementById('nickName_check');
-
-
 
 // 각 필드에 대한 정보 배열 (id, 유효성 검증 함수, 에러 메시지 표시 요소, 초기 유효 상태)
 const fields = [

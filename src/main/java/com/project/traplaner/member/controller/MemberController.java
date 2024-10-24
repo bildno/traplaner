@@ -62,7 +62,7 @@ public class MemberController {
         log.info("signup(): savePath {}", savePath);
         // e:파일 업로드 -------------------------
 
-//        memberService.join(dto);
+        memberService.join(dto,savePath);
 
         return "member/sign-in";
     }

@@ -9,5 +9,6 @@ public class LoginUserResponseDTO {
     private String nickname;
     private String email;
     private String loginMethod;
+    private String profile;
 
 }

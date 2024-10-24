@@ -51,6 +51,7 @@ public class MemberService {
                 .nickname(foundMember.getNickName())
                 .email(foundMember.getEmail())
                 .loginMethod(foundMember.getLoginMethod().toString())
+                .profile(foundMember.getProfileImg())
                 .build();
 
         // 세션에 로그인 한 회원 정보를 저장
