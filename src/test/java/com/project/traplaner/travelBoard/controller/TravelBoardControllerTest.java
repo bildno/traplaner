@@ -2,6 +2,7 @@ package com.project.traplaner.travelBoard.controller;
 
 import com.project.traplaner.entity.TravelBoard;
 import com.project.traplaner.mapper.TravelBoardMapper;
+import com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ class TravelBoardControllerTest {
         // given
         int id = 1;
         // when
-        TravelBoard one = travelBoardMapper.findOne(id);
+        TravelBoardDetailResponseDTO one = travelBoardMapper.findOne(id);
         // then
         String content = one.getContent();
 

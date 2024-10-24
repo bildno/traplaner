@@ -8,6 +8,7 @@ import com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,30 +20,18 @@ import java.util.stream.Collectors;
 @Slf4j
 public class TravelBoardService {
 
-    private final TravelBoardMapper mapper;
+    private final TravelBoardMapper travelBoardMapper;
 
-    // mapper로부터 전달받은 entity list를 dto list로 변환해서 컨트롤러에게 리턴
-//    public Map<String, Object> getList(PageDTO page) {
-//        // 전체 게시글을 가지고 오는것이 아닌, 특정 페이지 부분만 가져와야 함.
-//        List<TravelBoardDetailResponseDTO> boardList = mapper.findAll(page);
-//        log.info("boardList: {}", boardList);
-//        PageMaker pageMaker = new PageMaker(page, mapper.getTotalCount(page));
-//
-//        List<TravelBoardListResponseDTO> dtoList = boardList.stream()
-//                .map(TravelBoardListResponseDTO::new)
-//                .collect(Collectors.toList());
-//
-//        Map<String, Object> result = new HashMap<>();
-//        result.put("bList", dtoList);
-//        result.put("pm", pageMaker);
-//        return result;
+    // mapper로 전달받은 entity list를 dto list로 변환해서 controller에게 리턴
+
+    public List<TravelBoardListResponseDTO> findAll() {
+        List<TravelBoardListResponseDTO> travelBoardListResponseDTOS = travelBoardMapper.findAll();
+        return travelBoardListResponseDTOS;
+    }
+
+//    public TravelBoardDetailResponseDTO findOne() {
+//        TravelBoardDetailResponseDTO travelBoardDetailResponseDTO = travelBoardMapper.findOne();
+//        return travelBoardDetailResponseDTO;
 //    }
 
-    public TravelBoardDetailResponseDTO getDetail(int id) {
-        // 상세보기니까 조회수를 하나 올려주는 처리를 하자.
-        // 상세 조회 전에 실행하자.
-//        mapper.updateViewCount(id);
-        TravelBoard board = mapper.findOne(id);
-        return new TravelBoardDetailResponseDTO(board);
-    }
 }

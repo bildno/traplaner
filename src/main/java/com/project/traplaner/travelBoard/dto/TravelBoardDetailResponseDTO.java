@@ -25,3 +25,8 @@ public class TravelBoardDetailResponseDTO {
         this.writeDate = TravelBoardListResponseDTO.makePrettierDateString(travelBoard.getWriteDate());
     }
 }
+
+
+
+
+

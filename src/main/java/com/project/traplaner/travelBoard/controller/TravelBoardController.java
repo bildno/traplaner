@@ -1,9 +1,9 @@
 package com.project.traplaner.travelBoard.controller;
 
-import com.project.traplaner.entity.TravelBoard;
 import com.project.traplaner.mapper.TravelBoardMapper;
 import com.project.traplaner.travelBoard.dto.SearchDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO;
+import com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO;
 import com.project.traplaner.travelBoard.service.TravelBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,60 +26,20 @@ public class TravelBoardController {
     private final TravelBoardService travelBoardService;
     private final TravelBoardMapper travelBoardMapper;
 
-    // 목록 요청 (페이징과 검색 기능을 곁들인)
-//    @GetMapping("")
-//    public String list() {
-//        System.out.println("목록");
-//        return "travelBoard/list";
-//    }
-//    @GetMapping("")
-//    public String list(Model model,
-//                       @ModelAttribute("s") SearchDTO page) {
-//        Map<String, Object> map = travelBoardService.getList(page);
-//        model.addAttribute("bList", map.get("bList"));
-//        model.addAttribute("maker", map.get("pm"));
-//        return "travelBoard/list";
-//    }
-
-    @GetMapping("/list")
-    public String travelBoardList(Model model) {
-        List<TravelBoard> all = travelBoardMapper.findAll();
+    @GetMapping("")
+    public String travelBoardList(Model model, SearchDTO search) {
+        List<TravelBoardListResponseDTO> all = travelBoardService.findAll();
         model.addAttribute("travelBoardList", all);
 
         return "travelBoard/list";
     }
 
-
     @GetMapping("/info")
-    public String detail() {
-        System.out.println("글");
-
+    public String travelBoardDetail(Model model) {
+        TravelBoardDetailResponseDTO one = travelBoardService.findOne();
+        model.addAttribute("travelBoardDetail", model);
 
         return "travelBoard/info";
     }
-
-//    @GetMapping("/info")
-//    public String detail(@PathVariable int id,
-//                         // model에 직접 데이터를 담는 로직을 생략할 수 있는 @ModelAttribute
-//                         @ModelAttribute("s") SearchDTO page,
-//                         Model model) {
-//        id=1;
-//        System.out.println("sasas");
-//        TravelBoardDetailResponseDTO dto = travelBoardService.getDetail(id);
-//        model.addAttribute("b", dto);
-//        model.addAttribute("p", page);
-//        return "travelBoard/info";
-//    }
-
-
-
-//    @GetMapping("/info")
-//    public String info(Model model){
-//        int id =1;
-//
-//        return
-//    }
-
-
 
 }
