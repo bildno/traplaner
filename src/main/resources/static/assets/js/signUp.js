@@ -7,6 +7,7 @@ import { debounce } from './util.js';
 const form = document.getElementById('signUpForm'); // 회원가입 폼
 const signupButton = document.getElementById('signup-btn'); // 회원가입 버튼
 const EmailCheckButton = document.getElementById('id_check');
+const emailValue = document.getElementById('emailValue');
 const NicknameCheckButton = document.getElementById('id_nickname');
 
 // 각 필드에 대한 정보 배열 (id, 유효성 검증 함수, 에러 메시지 표시 요소, 초기 유효 상태)
@@ -52,7 +53,7 @@ const updateButtonState = () => {
 
 // 이메일 유효성검사 버튼 이벤트 리스터 추가
 EmailCheckButton.addEventListener('click', (e) => {
-
+  fields.email = validateInput.email(e.target.value);
 })
 //닉네임 유효성 검사 버튼 이벤트 리스너 추가
 NicknameCheckButton.addEventListener('click', (e) => {
