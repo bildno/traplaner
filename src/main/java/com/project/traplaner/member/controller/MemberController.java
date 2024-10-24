@@ -1,15 +1,20 @@
 package com.project.traplaner.member.controller;
 
 import com.project.traplaner.entity.Member;
+import com.project.traplaner.entity.Travel;
 import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.member.dto.SignUpRequestDto;
-import com.project.traplaner.util.FileUtils;
+import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
+import com.project.traplaner.mypage.service.MyPageBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/members")
@@ -31,11 +36,13 @@ public class MemberController {
         return "member/pw-change";
     }
 
+
     @GetMapping("/myPage")
     public String myPage(){
 
         return "member/my-page";
     }
+
 
 
 
@@ -80,6 +87,7 @@ public class MemberController {
     }
 
 
+
 //    sns.kakao.app-key=9d40d3ab8f7a7bfd11013922f7d0a3d6
 //    sns.kakao.redirect-uri=http://localhost:8181/oauth/kakao
 //    sns.kakao.logout-redirect=http://localhost:8181
@@ -96,6 +104,39 @@ public class MemberController {
         System.out.println("[dbg] naver-sign-in 진입!!!");
         log.info("naver-sing-in 진입");
 
+    }
+
+    private final MyPageBoardService myPageBoardService;
+
+    @GetMapping("/my-page")
+    public String myPage(){
+
+        return "member/my-page";
+    }
+
+    @GetMapping("/my-page/my-board")
+    public String myBoard() {
+
+
+
+        return "member/my-board";
+    }
+
+
+    // 마이페이지 나의 여행
+    @GetMapping("/my-page/my-plan")
+    public String myPlan(
+             Model model) {
+
+        int memberId = 2;
+        System.out.println("asdasdasdasdas");
+        List<TravelListResponseDTO> dtoList = myPageBoardService.getList(memberId);
+
+        log.info("dtoList: {}", dtoList);
+
+        model.addAttribute("list", dtoList);
+
+        return "member/my-plan";
     }
 
 
