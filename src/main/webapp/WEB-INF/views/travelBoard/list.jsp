@@ -90,6 +90,17 @@
                 </nav>
             </div>
         </div>
+
+
+        <c:forEach var="w" items="${travelBoardList}">
+            <div>
+                ${w.travelId}
+                ${w.content}
+            </div>
+
+
+        </c:forEach>
+
         </div>
 </body>
 </html>

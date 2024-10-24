@@ -57,6 +57,13 @@
 <!--        LIMIT #{pageStart}, #{amount}-->
 <!--    </select>-->
 
+
+    <select id="findAll" resultType="com.project.traplaner.entity.TravelBoard">
+        select * from tbl_travel_board
+    </select>
+
+
+
     <select id="findOne" resultType="travelboard">
         SELECT * FROM tbl_travel_board
         WHERE id = #{id}

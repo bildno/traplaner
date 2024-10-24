@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -23,6 +24,7 @@ import java.util.Map;
 public class TravelBoardController {
 
     private final TravelBoardService travelBoardService;
+    private final TravelBoardMapper travelBoardMapper;
 
     // 목록 요청 (페이징과 검색 기능을 곁들인)
 //    @GetMapping("")
@@ -30,20 +32,31 @@ public class TravelBoardController {
 //        System.out.println("목록");
 //        return "travelBoard/list";
 //    }
-    @GetMapping("")
-    public String list(Model model,
-                       @ModelAttribute("s") SearchDTO page) {
-        Map<String, Object> map = travelBoardService.getList(page);
-        model.addAttribute("bList", map.get("bList"));
-        model.addAttribute("maker", map.get("pm"));
+//    @GetMapping("")
+//    public String list(Model model,
+//                       @ModelAttribute("s") SearchDTO page) {
+//        Map<String, Object> map = travelBoardService.getList(page);
+//        model.addAttribute("bList", map.get("bList"));
+//        model.addAttribute("maker", map.get("pm"));
+//        return "travelBoard/list";
+//    }
+
+    @GetMapping("/list")
+    public String travelBoardList(Model model) {
+        List<TravelBoard> all = travelBoardMapper.findAll();
+        model.addAttribute("travelBoardList", all);
+
         return "travelBoard/list";
     }
 
-//    @GetMapping("/info")
-//    public String detail() {
-//        System.out.println("글");
-//        return "travelBoard/info";
-//    }
+
+    @GetMapping("/info")
+    public String detail() {
+        System.out.println("글");
+
+
+        return "travelBoard/info";
+    }
 
 //    @GetMapping("/info")
 //    public String detail(@PathVariable int id,
@@ -60,13 +73,13 @@ public class TravelBoardController {
 
 
 
-    @GetMapping("/info")
-    public String info(Model model){
-        int id =1;
+//    @GetMapping("/info")
+//    public String info(Model model){
+//        int id =1;
+//
+//        return
+//    }
 
-        TravelBoardMapper travelBoardMapper;
 
 
-        return
-    }
 }

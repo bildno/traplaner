@@ -22,21 +22,21 @@ public class TravelBoardService {
     private final TravelBoardMapper mapper;
 
     // mapper로부터 전달받은 entity list를 dto list로 변환해서 컨트롤러에게 리턴
-    public Map<String, Object> getList(PageDTO page) {
-        // 전체 게시글을 가지고 오는것이 아닌, 특정 페이지 부분만 가져와야 함.
-        List<TravelBoardDetailResponseDTO> boardList = mapper.findAll(page);
-        log.info("boardList: {}", boardList);
-        PageMaker pageMaker = new PageMaker(page, mapper.getTotalCount(page));
-
-        List<TravelBoardListResponseDTO> dtoList = boardList.stream()
-                .map(TravelBoardListResponseDTO::new)
-                .collect(Collectors.toList());
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("bList", dtoList);
-        result.put("pm", pageMaker);
-        return result;
-    }
+//    public Map<String, Object> getList(PageDTO page) {
+//        // 전체 게시글을 가지고 오는것이 아닌, 특정 페이지 부분만 가져와야 함.
+//        List<TravelBoardDetailResponseDTO> boardList = mapper.findAll(page);
+//        log.info("boardList: {}", boardList);
+//        PageMaker pageMaker = new PageMaker(page, mapper.getTotalCount(page));
+//
+//        List<TravelBoardListResponseDTO> dtoList = boardList.stream()
+//                .map(TravelBoardListResponseDTO::new)
+//                .collect(Collectors.toList());
+//
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("bList", dtoList);
+//        result.put("pm", pageMaker);
+//        return result;
+//    }
 
     public TravelBoardDetailResponseDTO getDetail(int id) {
         // 상세보기니까 조회수를 하나 올려주는 처리를 하자.

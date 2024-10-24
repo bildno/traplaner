@@ -13,7 +13,7 @@ public interface TravelBoardMapper {
     TravelBoard  findTitle();
 
     // 목록 조회
-    List<TravelBoardDetailResponseDTO> findAll(PageDTO page);
+    List<TravelBoard> findAll();
 
     // 상세 조회
     TravelBoard findOne(int id);
