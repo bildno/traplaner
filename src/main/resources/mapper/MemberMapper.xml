@@ -12,5 +12,4 @@
     <select id="overlapping" resultType="boolean">
         select * from tbl_member where email = #{#email}
     </select>
-
 </mapper>
