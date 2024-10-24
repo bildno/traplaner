@@ -23,7 +23,7 @@ public class MemberController {
         return "member/pw-change";
     }
 
-    @GetMapping("/myPage")
+    @GetMapping("/my-page")
     public String myPage(){
 
         return "member/my-page";
@@ -37,6 +37,7 @@ public class MemberController {
         return "member/sign-up";
     }
 
+
     @PostMapping("/join")
     public String sing_up(SignUpRequestDto dto) {
 
@@ -45,6 +46,7 @@ public class MemberController {
         memberService.join(dto);
         return "member/sign-in";
     }
+
 
     @PostMapping("/overlapping")
     @ResponseBody
@@ -61,6 +63,12 @@ public class MemberController {
 
 
         return "member/sign-in";
+    }
+
+    @GetMapping("/my-page/my-board")
+    public String myBoard() {
+
+        return "member/my-board";
     }
 
 
@@ -83,4 +91,10 @@ public class MemberController {
     }
 
 
+    // 마이페이지 나의 여행
+    @GetMapping("/my-page/my-plan")
+    public String myPlan() {
+
+        return "member/my-plan";
+    }
 }
