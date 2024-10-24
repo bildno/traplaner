@@ -58,21 +58,20 @@ public class MemberController {
     public String index() {
         return "member/sign-in";
     }
-    //로그인 검증
+    //로그인 요청
     @PostMapping("/sign-in")
     public String signIn(LoginRequestDto dto,
                          RedirectAttributes ra,
                          HttpServletResponse response,
                          HttpServletRequest request) {
 
-        // 자동 로그인 서비스를 추가하기 위해 세션과 응답객체도 함께 전달.
         LoginResult result = memberService.authenticate(dto, request.getSession(), response);
         // redirect에서 데이터를 일회성으로 전달할 때 사용하는 메서드.
         ra.addFlashAttribute("result", result);
 
         if (result == LoginResult.SUCCESS) { // 로그인 성공
             // 세션으로 로그인을 유지
-            // 서비스에게 세션 객체와 아이디를 전달.
+            // 서비스에게 세션 객체와 이메일을 전달.
             memberService.maintainLoginState(request.getSession(), dto.getEmail());
             return "redirect:/";
         }

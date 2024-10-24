@@ -2,22 +2,19 @@
 // 아이디, 이메일 중복 동시 처리하기 위해 type을 선언.
 export const checkAvailability = async (type, keyword) => {
   const response = await fetch(
-    `http://localhost:8181/members/check?type=${type}&keyword=${keyword}`
+    `http://localhost:8181/members/duplicateTest?type=${type}&keyword=${keyword}`
   );
   const flag = await response.json();
   return !flag; // 논리 반전해서 리턴 -> 중복됐으면 false로 해석하기 위해.
 };
 
-// 유효성 검증에 사용될 정규표현식 패턴들 정의
-// 아이디 패턴: 영문 대소문자와 숫자, 4~14글자
-const accountPattern = /^[a-zA-Z0-9]{4,14}$/;
 
 // 비밀번호 패턴: 반드시 영문, 숫자, 특수문자를 포함하여 8자 이상
 const passwordPattern =
   /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*?_~])[A-Za-z\d!@#$%^&*?_~]{8,}$/;
 
 // 이름 패턴: 한글만 허용
-const namePattern = /^[가-힣]+$/;
+const nickNamePattern = /^[가-힣]+$/;
 
 // 이메일 패턴: 기본적인 이메일 형식
 const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
@@ -78,11 +75,11 @@ export const validateInput = {
     return { valid: true };
   },
 
-  // 이름 유효성 검사 함수
-  name: (value) => {
+  // 닉네임 유효성 검사 함수
+  nickname: (value) => {
     // 빈 값 검사
     if (!value.trim())
-      return { valid: false, message: '이름은 필수정보입니다!' };
+      return { valid: false, message: '닉네임은 필수정보입니다!' };
 
     // 정규표현식 검사
     if (!namePattern.test(value))

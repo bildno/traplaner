@@ -3,6 +3,7 @@ package com.project.traplaner.member.service;
 import com.project.traplaner.entity.Member;
 import com.project.traplaner.member.dto.NaverSignUpRequestDto;
 import com.project.traplaner.member.dto.NaverUserResponseDto;
+import com.project.traplaner.member.dto.SignUpRequestDto;
 import jakarta.mail.Header;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,8 @@ import java.util.UUID;
 @Slf4j
 public class NaverService {
 
+    private final MemberService memberService;
+
     public void login(Map<String, String> params, HttpSession session) {
 
 
@@ -43,20 +46,17 @@ public class NaverService {
         // 이제 네이버 인증 서버와의 연결은 더 필요하지 않습니다.
         // 문서에도 나와있었지만, 자체 로그인 처리 완료는 우리 서비스에서 마무리 지어 줘야 합니다.
         // 사이트 회원가입 시키기
-        /* 작업중...
-        if (!memberService.checkIdentifier("email", naverUser.getNaverUserDetail().getEmail())) {
+
+        if (!memberService.duplicateTest("email", naverUser.getNaverUserDetail().getEmail())) {
 
             // 한번도 회원 가입한 적이 없다면, 회원 가입 수행
-            memberService.join(NaverSignUpRequestDto.builder()
+            memberService.join(SignUpRequestDto.builder()
                             .email(naverUser.getNaverUserDetail().getEmail())
                             .password(UUID.randomUUID().toString())
                             .loginMethod(Member.LoginMethod.NAVER)
-                            .build(),
-                    naverUser.getNaverUserDetail().getProfileImage());
+                            .build());
         }
-
-        memberSevice.maintainLoginState(session, naverUser.getNaverUserDetail().getId());
-        */
+        memberService.maintainLoginState(session, naverUser.getNaverUserDetail().getId());
     }
 
     private NaverUserResponseDto getNaverUserInfo(String accessToken) {

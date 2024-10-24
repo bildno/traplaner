@@ -56,6 +56,7 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     background-color: white;
     color: gray;
     margin-left: 20%;
+    cursor: pointer;
   }
 
   #id_check {
@@ -66,11 +67,27 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     margin-left: 5px;
     background-color: white;
     color: gray;
+    cursor: pointer;
+  }
+
+
+  #nickName_check {
+    padding: 5px;
+    border: 1px solid rgb(238, 238, 238);
+    border-radius: 5px;
+    font-size: 10px;
+    margin-left: 5px;
+    background-color: white;
+    color: gray;
+    cursor: pointer;
   }
   #profile_img{
     width: 300px;
   }
 </style>
+<html>
+<body>
+
 
 <div class="container">
   <h1 id="join_h1">회원가입</h1>
@@ -107,6 +124,12 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         </div>
         <div>
           <input type="text" placeholder="닉네임" name="nickName" id="usern" />
+          <input
+                  id="nickName_check"
+                  type="button"
+                  value="닉네임 중복 확인"
+                  formaction="/members/overlapping"
+          />
         </div>
         <br />
         <input
@@ -120,37 +143,6 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     </form>
   </div>
 </div>
-
-    <script>
-      const $email = document.getElementById("email-input");
-      const pattern2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
-      const $emailLabel = document.querySelector(".emailwarn");
-
-
-      $email.onblur = function (e) {
-
-        if (!pattern2.test($email.value)) {
-
-          $emailLabel.style.display = "";
-        }else {
-
-          $emailLabel.style.display = "none";
-        }
-
-      };
-      export const checkAvailability = async (email) => {
-        const response = await fetch(
-                `http://localhost:8181/members/check?type=${email}`
-        );
-        const flag = await response.json();
-        return !flag; // 논리 반전해서 리턴 -> 중복됐으면 false로 해석하기 위해.
-      };
-
-      const isAvailable = await checkAvailability("account", value);
-
-
-
-
-    </script>
+<script type="module" src="/assets/js/signUp.js"></script>
   </body>
 </html>

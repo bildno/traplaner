@@ -12,12 +12,12 @@
             String userName = "방문자";
             // 요청 객체에게 쿠키를 달라고 하면 모든 쿠키가 담긴 배열리 리턴.
             // 클라이언트에게 쿠키를 검사
-            Cookie[] cookies = request.getCookies();
-            for(Cookie c : cookies) {
-                if (c.getName().equals("login")) {
-                    userName = c.getValue();
-                }
-            }
+//            Cookie[] cookies = request.getCookies();
+//            for(Cookie c : cookies) {
+//                if (c.getName().equals("login")) {
+//                    userName = c.getValue();
+//                }
+//            }
         %>
         <h1><%= userName %> 님 안녕하세요!</h1>
                 <header>
