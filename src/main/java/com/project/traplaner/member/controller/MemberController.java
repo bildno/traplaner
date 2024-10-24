@@ -4,6 +4,7 @@ import com.project.traplaner.entity.Member;
 import com.project.traplaner.entity.Travel;
 import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.member.dto.SignUpRequestDto;
+import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
 import com.project.traplaner.mypage.service.MyPageBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -109,13 +110,11 @@ public class MemberController {
 
         int memberId = 2;
         System.out.println("asdasdasdasdas");
-        List<Travel> list = myPageBoardService.getList(memberId);
+        List<TravelListResponseDTO> dtoList = myPageBoardService.getList(memberId);
 
-        list.forEach(travel -> {
-            System.out.println(travel.getId());
-        });
+        log.info("dtoList: {}", dtoList);
 
-        model.addAttribute("list", list);
+        model.addAttribute("list", dtoList);
 
         return "member/my-plan";
     }
