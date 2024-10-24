@@ -6,6 +6,7 @@ import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.member.dto.SignUpRequestDto;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
 import com.project.traplaner.mypage.service.MyPageBoardService;
+import com.project.traplaner.util.FileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,15 +36,6 @@ public class MemberController {
 
         return "member/pw-change";
     }
-
-
-    @GetMapping("/myPage")
-    public String myPage(){
-
-        return "member/my-page";
-    }
-
-
 
 
     @GetMapping("/sign-up")
