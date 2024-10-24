@@ -5,10 +5,12 @@ import com.project.traplaner.member.dto.LoginRequestDto;
 import com.project.traplaner.member.service.LoginResult;
 import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.member.dto.SignUpRequestDto;
+import com.project.traplaner.util.FileUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,14 +22,30 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 public class MemberController {
 
+    @Value("${file.upload.root-path-profile}")
+    private String rootPathProfile;
+
+    @Value("${file.upload.root-path-travel}")
+    private String rootPathTravel;
+
     private final MemberService memberService;
 
     //비밀 번호 변경 양식 열기
     @GetMapping("/pw-change")
     public String pwChange() {
+
         return "member/pw-change";
     }
     // 회원가입 양식 열기
+
+    @GetMapping("/myPage")
+    public String myPage(){
+
+        return "member/my-page";
+    }
+
+
+
     @GetMapping("/sign-up")
     public String join() {
         return "member/sign-up";
@@ -38,7 +56,16 @@ public class MemberController {
     public String sing_up(SignUpRequestDto dto) {
         dto.setLoginMethod(Member.LoginMethod.COMMON);
         System.out.println(dto.getLoginMethod().toString());
-        memberService.join(dto);
+
+        // s:파일 업로드 ----------------------
+        String savePath = FileUtils.uploadFile(dto.getProfileImage(), rootPathProfile);
+
+        log.info("rootPathProfile: {}", rootPathProfile);
+        log.info("signup(): savePath {}", savePath);
+        // e:파일 업로드 -------------------------
+
+//        memberService.join(dto);
+
         return "member/sign-in";
     }
     // 이메일, 닉네임 중복 검사

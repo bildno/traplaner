@@ -17,12 +17,11 @@ spring:
       enabled: true
       max-file-size: 10MB
 
-
 file:
   upload:
-    root-path: #?????????
-
-
+    root-path: C:/devlop/upload
+    root-path-profile: C:/devlop/upload/profile
+    root-path-travel: C:/devlop/upload/travel
 
 # log level setting
 logging:

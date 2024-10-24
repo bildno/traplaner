@@ -9,20 +9,24 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import static com.project.traplaner.member.service.LoginResult.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MemberService {
 
     private final MemberMapper memberMapper;
     private final PasswordEncoder encoder;
+    private final PasswordEncoder encoder;
 
-    public boolean join(SignUpRequestDto dto){
+    public boolean join(SignUpRequestDto dto, String savePath){
 
-        return memberMapper.save(dto.toEntity(encoder));
+        return memberMapper.save(dto.toEntity(encoder, savePath));
     }
 
     public boolean duplicateTest(String type, String keyword){
