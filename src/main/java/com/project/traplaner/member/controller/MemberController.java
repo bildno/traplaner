@@ -34,7 +34,7 @@ public class MemberController {
     }
 
     // 회원 가입 요청
-    @PostMapping("/join")
+    @PostMapping("/sign-up")
     public String sing_up(SignUpRequestDto dto) {
         dto.setLoginMethod(Member.LoginMethod.COMMON);
         System.out.println(dto.getLoginMethod().toString());
@@ -64,11 +64,9 @@ public class MemberController {
                          RedirectAttributes ra,
                          HttpServletResponse response,
                          HttpServletRequest request) {
-
+        log.info("/member/sign-in: POST, dto: {}", dto);
         LoginResult result = memberService.authenticate(dto, request.getSession(), response);
-        // redirect에서 데이터를 일회성으로 전달할 때 사용하는 메서드.
         ra.addFlashAttribute("result", result);
-
         if (result == LoginResult.SUCCESS) { // 로그인 성공
             // 세션으로 로그인을 유지
             // 서비스에게 세션 객체와 이메일을 전달.

@@ -94,15 +94,14 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   <h2 id="join_exp"></h2>
   <img id="profile_img" src="/assets/img/basicProfile.png" alt="업따" />
   <div class="contents">
-    <form name="join" method="post">
+    <form name="join" method="post" id="signUpForm">
       <div id="insert">
         <div>
-          <input type="email" placeholder="이메일" name="email" class="email_input" />
+          <input type="email" placeholder="이메일" id="emailValue" name="email" class="email_input" />
           <input
                   id="id_check"
                   type="button"
                   value="이메일 중복 확인"
-                  formaction="/members/overlapping"
           />
         </div>
         <div>
@@ -128,7 +127,6 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
                   id="nickName_check"
                   type="button"
                   value="닉네임 중복 확인"
-                  formaction="/members/overlapping"
           />
         </div>
         <br />

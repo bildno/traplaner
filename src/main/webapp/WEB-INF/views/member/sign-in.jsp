@@ -83,8 +83,8 @@
         name="sign-in"
 >
     <div class="form-text">
-        <input type="text" placeholder="이메일을 입력하세요" name="email">
-        <input type="text" placeholder="비밀번호를 입력하세요" name="passward">
+        <input type="email" placeholder="이메일을 입력하세요" name="email">
+        <input type="password" placeholder="비밀번호를 입력하세요" name="password">
     </div>
     <button id="login-btn">로그인</button>
 </form>

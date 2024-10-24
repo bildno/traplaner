@@ -13,7 +13,7 @@
         SELECT COUNT(*)
         FROM tbl_member
         <if test="type == 'nickname'">
-            WHERE account = #{keyword}
+            WHERE nick_name = #{keyword}
         </if>
         <if test="type == 'email'">
             WHERE email = #{keyword}
