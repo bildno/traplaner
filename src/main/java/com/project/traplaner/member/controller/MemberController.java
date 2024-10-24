@@ -8,6 +8,7 @@ import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
 import com.project.traplaner.mypage.service.MyPageBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +22,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
 
+    @Value("${file.upload.root-path-profile}")
+    private String rootPathProfile;
+
+    @Value("${file.upload.root-path-travel}")
+    private String rootPathTravel;
+
     private final MemberService memberService;
 
     @GetMapping("/pw-change")
     public String pwChange() {
 
         return "member/pw-change";
+    }
+
+
+    @GetMapping("/myPage")
+    public String myPage(){
+
+        return "member/my-page";
     }
 
 
@@ -38,21 +52,27 @@ public class MemberController {
         return "member/sign-up";
     }
 
-
     @PostMapping("/join")
     public String sing_up(SignUpRequestDto dto) {
 
         dto.setLoginMethod(Member.LoginMethod.COMMON);
         System.out.println(dto.getLoginMethod().toString());
-        memberService.join(dto);
+
+        // s:파일 업로드 ----------------------
+        String savePath = FileUtils.uploadFile(dto.getProfileImage(), rootPathProfile);
+
+        log.info("rootPathProfile: {}", rootPathProfile);
+        log.info("signup(): savePath {}", savePath);
+        // e:파일 업로드 -------------------------
+
+//        memberService.join(dto);
+
         return "member/sign-in";
     }
-
 
     @PostMapping("/overlapping")
     @ResponseBody
     public ResponseEntity<?> check(@RequestParam String email) {
-
 
         boolean flag = memberService.overlapping(email);
         return ResponseEntity.ok()
@@ -65,7 +85,6 @@ public class MemberController {
 
         return "member/sign-in";
     }
-
 
 
 
@@ -103,6 +122,7 @@ public class MemberController {
         return "member/my-board";
     }
 
+
     // 마이페이지 나의 여행
     @GetMapping("/my-page/my-plan")
     public String myPlan(
@@ -118,5 +138,6 @@ public class MemberController {
 
         return "member/my-plan";
     }
+
 
 }

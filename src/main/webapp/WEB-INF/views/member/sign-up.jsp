@@ -67,19 +67,74 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     background-color: white;
     color: gray;
   }
-  #profile_img{
-    width: 300px;
+
+  img{
+    width: 100px;
   }
+
+  // 프로필 이미지  --->
+        .container.wrap {
+          margin-top: 200px;
+          margin-bottom: 200px;
+        }
+        .profile {
+          margin-bottom: 70px;
+          text-align: center;
+        }
+        .profile label {
+          font-weight: 700;
+          font-size: 1.2em;
+          cursor: pointer;
+          color: rgb(140, 217, 248);
+        }
+        .profile .thumbnail-box {
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin: 30px auto 10px;
+          cursor: pointer;
+        }
+        .profile .thumbnail-box img {
+          width: 200px;
+          height: 200px;
+        }
+//  <--- 프로필 이미지
 </style>
 
 <div class="container">
   <h1 id="join_h1">회원가입</h1>
   <h2 id="join_exp"></h2>
-  <img id="profile_img" src="/assets/img/basicProfile.png" alt="업따" />
   <div class="contents">
-    <form name="join" method="post">
-      <div id="insert">
-        <div>
+    <form action="/members/sign-up"
+    name="signup"
+    id="signUpForm"
+    method="post"
+    enctype="multipart/form-data">
+
+    <!-- 프로필 이미지 -->
+
+    <div class="profile">
+      <div class="thumbnail-box">
+        <img src="/assets/img/image-add.png" alt="프로필 썸네일" />
+      </div>
+
+      <label>프로필 이미지 추가</label>
+
+      <input
+        type="file"
+        id="profile-img"
+        accept="image/*"
+        style="display: none"
+        name="profileImage"
+      />
+    </div>
+    <!------------------->
+
+
+
+    <div id="insert">
+      <div>
           <input type="email" placeholder="이메일" name="email" class="email_input" />
           <input
                   id="id_check"
@@ -123,6 +178,7 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
     <script>
+      /*
       const $email = document.getElementById("email-input");
       const pattern2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
       const $emailLabel = document.querySelector(".emailwarn");
@@ -148,9 +204,27 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
       };
 
       const isAvailable = await checkAvailability("account", value);
+*/
 
+      // 프로필 사진 업로드 관련 스크립트  --->
+      const $profile = document.querySelector(".profile");
+      const $fileInput = document.getElementById("profile-img");
 
+      $profile.onclick = (e) => {
+        $fileInput.click();
+      };
 
+      $fileInput.onchange = (e) => {
+        const fileData = $fileInput.files[0];
+        console.log(fileData);
+        const reader = new FileReader();
+        reader.readAsDataURL(fileData);
+        reader.onloadend = (e) => {
+          const $img = document.querySelector(".thumbnail-box img");
+          $img.setAttribute("src", reader.result);
+        };
+      };
+      // <--- 프로필 사진 업로드 관련 스크립트
 
     </script>
   </body>
