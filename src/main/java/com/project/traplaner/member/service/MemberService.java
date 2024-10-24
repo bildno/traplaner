@@ -8,10 +8,19 @@ import com.project.traplaner.member.dto.SignUpRequestDto;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Map;
 
 import static com.project.traplaner.member.service.LoginResult.*;
 
@@ -58,6 +67,31 @@ public class MemberService {
         session.setAttribute("login", dto);
         // 세션 수명 설정
         session.setMaxInactiveInterval(60 * 60); // 1시간
+
+    }
+
+    public void kakaoLogout(LoginUserResponseDTO dto, HttpSession session) {
+
+        String requestUri = "https://kapi.kakao.com/v1/user/logout";
+
+        String accessToken = (String) session.getAttribute("access_token");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + accessToken);
+
+        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+        params.add("target_id_type", "email");
+        params.add("target_id", dto.getEmail());
+
+        ResponseEntity<Map> responseEntity = new RestTemplate().exchange(
+                requestUri,
+                HttpMethod.POST,
+                new HttpEntity<>(params, headers),
+                Map.class);
+
+    }
+
+    public void naverLogout(LoginUserResponseDTO dto, HttpSession session) {
 
     }
 }
