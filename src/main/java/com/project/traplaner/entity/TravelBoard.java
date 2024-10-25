@@ -17,20 +17,17 @@ import java.time.LocalDateTime;
     `content`           varchar(1000) NOT NULL
     );
  */
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
+
+@Getter @Setter
+@ToString @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Slf4j
 public class TravelBoard {
     private int id;
-    private int travelBoardId;
     private int travelId;
     private String memberNickName;
     private LocalDateTime writeDate;
     private String content;
-
 }

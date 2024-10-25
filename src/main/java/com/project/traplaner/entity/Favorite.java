@@ -10,6 +10,6 @@ import lombok.*;
 
 public class Favorite {
     private int id;
-    private int userId;
+    private int memberId;
     private int travelBoardId;
 }
