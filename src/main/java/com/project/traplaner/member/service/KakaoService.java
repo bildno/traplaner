@@ -1,6 +1,7 @@
 package com.project.traplaner.member.service;
 
 //import com.project.traplaner.member.service.MemberService;
+import com.project.traplaner.entity.Member;
 import com.project.traplaner.member.dto.KakaoUserResponseDTO;
 import com.project.traplaner.member.dto.SignUpRequestDto;
 import jakarta.servlet.http.HttpSession;
@@ -40,6 +41,7 @@ public class KakaoService {
                             .password(UUID.randomUUID().toString())
                             .nickName(kakaoUser.getProperties().getNickname())
                             .email(kakaoUser.getAccount().getEmail())
+                            .loginMethod(Member.LoginMethod.KAKAO)
                             .build(), kakaoUser.getProperties().getProfileImage());
         }
         // 우리 사이트 로그인 처리
