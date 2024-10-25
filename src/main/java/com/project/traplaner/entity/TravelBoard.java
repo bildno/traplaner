@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Slf4j
 public class TravelBoard {
     private int id;
     private int travelId;

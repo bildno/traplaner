@@ -21,8 +21,8 @@
     <mappers>
         <mapper resource="mapper/MemberMapper.xml"/>
         <mapper resource="mapper/TravelBoardMapper.xml" />
+        <mapper resource="mapper/mypageMapper.xml"/>
 
     </mappers>
-
 
 </configuration>
