@@ -41,7 +41,7 @@
               <a class="nav-link active" aria-current="page" href="/travelboard">게시판</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/members">마이페이지</a>
+              <a class="nav-link" href="/my-page/${login.id}">마이페이지</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/members/sign-out">로그아웃</a>
