@@ -62,6 +62,7 @@
                 <p>2024년 10월 22일 ~ 2024년 10월 30일</p>
             </div>
 
+
         </div>
     </div>
     <div id="map-info">
@@ -72,6 +73,9 @@
 
 
 <script>
+
+
+    let period =[];
     function myMap() {
         var mapOptions = {
             center: new google.maps.LatLng(51.508742, -0.12085),
@@ -82,20 +86,32 @@
             document.getElementById("googleMap"),
             mapOptions
         );
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'ko',
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'ko',
+                dateClick: function(info) {
+                    alert('Clicked on: ' + info.dateStr);
+                    alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+                    alert('Current view: ' + info.view.type);
+                    // change the day's background color just for fun
+                    info.dayEl.style.backgroundColor = 'red';
+                }
+            });
+
+            calendar.render();
         });
 
-        calendar.render();
-    });
+
+
+    }
 </script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 <script src="fullcalendar/lib/locales-all.js"></script>
+<script src='fullcalendar/dist/index.global.js'></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&callback=myMap"></script>
 
 
