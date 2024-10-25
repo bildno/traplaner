@@ -95,7 +95,7 @@
       <div class="manage_box">
         <a href="">계정관리</a><a style="font-weight: bold" href="/my-page/mytravelboard/${login.nickName}">내 게시물</a
       ><a href="/my-page/mytravel/${login.id}">나의 여행</a>
-        <a   href="/my-page/${login.id}">여행일정</a><a href="/my-page/favorite/${login.id}">좋아요한 게시물</a>
+        <a   href="/my-page/${login.id}">여행일정</a><a href="/mypage/favorite/${login.id}">좋아요한 게시물</a>
       </div>
     </div>
     <div class="mypage_section2">
@@ -107,20 +107,22 @@
         <table>
           <tr>
             <th style="width: 5%;"><span>번호</span></th>
-            <th style="width: 60%;">게시글 제목</th>
-            <th style="width: 10%;"><span>작성일</span></th>
+            <th style="width: 70%;">게시글 제목</th>
+            <th style="width: 10%;"><span>작성자</span></th>
+            <th style="width: 15%;"><span>작성일</span></th>
           </tr>
 
 
 
 
-          <c:forEach var="dto" items="${ dtoList }">
+          <c:forEach var="list" items="${list}">
             <tr>
-              <td><span>${ dto.id }</span></td>
+              <td><span>${ list.id }</span></td>
               <td><input type="text" name="con_text" id="con_text"
-                         value="${dto.title}"
+                         value="${list.title}"
                          readonly></td>
-              <td><span>${dto.formatDate}</span></td>
+                         <td><span>${list.memberNickName}</span></td>
+              <td><span>${list.formatDate}</span></td>
 
 
 

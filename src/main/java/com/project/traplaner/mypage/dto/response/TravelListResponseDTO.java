@@ -26,7 +26,7 @@ public class TravelListResponseDTO {
         this.share = travel.isShare();
     }
 
-    private String makeDateStringFomatter(LocalDateTime startDate) {
+    private static String makeDateStringFomatter(LocalDateTime startDate) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return dtf.format(startDate);
     }

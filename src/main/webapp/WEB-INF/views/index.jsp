@@ -54,15 +54,21 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/travelboard/list">게시판</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/my-page/${login.id}">마이페이지</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/members/sign-out">로그아웃</a>
-            </li>
+            <c:if test="${login.id != null}">
+              <li class="nav-item">
+                <a class="nav-link" href="/my-page/${login.id}">마이페이지</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/members/sign-out">로그아웃</a>
+              </li>
+            </c:if>
+            <c:if test="${login.id == null}">
+              <a class="nav-link" href="/members/sign-in">로그인</a>
+              <a class="nav-link" href="/members/sign-up">회원가입</a>
+            </c:if>
             <li class="nav-item">
               <!--a class="nav-link disabled" href="/members/sign-in" aria-disabled="true">로그인</a-->
-              <a class="nav-link" href="/members/sign-in">로그인</a>
+
             </li>
           </ul>
         </div>
