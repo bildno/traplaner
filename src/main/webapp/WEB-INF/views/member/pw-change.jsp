@@ -1,5 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 
 <style>
     .container {
@@ -73,6 +71,7 @@
     }
 </style>
 <div class="container">
+    <%@ include file="../header.jsp"%>
     <h1 id="join_h1">비밀번호 변경</h1>
     <h2 id="join_exp"></h2>
     <img id="profile_img" src="/assets/img/basicProfile.png" alt="업따" />

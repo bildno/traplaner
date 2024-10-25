@@ -16,12 +16,14 @@ public class TravelListResponseDTO {
     private String title;
     private String startDate;
     private String endDate;
+    private boolean share;
 
     public TravelListResponseDTO(Travel travel) {
         this.id = travel.getId();
         this.title = travel.getTitle();
         this.startDate = makeDateStringFomatter(travel.getStartDate());
         this.endDate = makeDateStringFomatter(travel.getEndDate());
+        this.share = travel.isShare();
     }
 
     private String makeDateStringFomatter(LocalDateTime startDate) {
