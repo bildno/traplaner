@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/assets/img/favicon.ico">
+    <link rel="icon" href="/assets/img/favicon.ico" />
     <title>TRAPLAN(Main)</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -23,7 +23,21 @@
     <!------------------ 네비게이션바/메뉴 ----------------------->
     <nav class="navbar navbar-expand-sm bg-body-tertiary fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">TRAPLAN</a>
+        <a class="navbar-brand" href="/">
+          <!-- img src="/assets/img/logo.png" alt="TRAPLAN" style="width: 30px" class="rounded-pill" /-->
+          TRAPLAN
+        </a>
+        <!--- 프로필 출력::시작 --->
+        <c:if test="${login.profile == null}">
+          <img src="/assets/img/anonymous.jpg" alt="프사" style="width: 30px" class="rounded-pill" />
+        </c:if>
+
+        <c:if test="${login != null && login.profile != null}">
+          <img src="/display${login.profile}" alt="프사" style="width: 30px" class="rounded-pill" />
+        </c:if>
+        <span class="navbar-text">&nbsp;&nbsp;Welcome ${sessionScope.login == null ? '' : login.nickName}</span>
+        <!--- 프로필 출력::종료 --->
+
         <button
           class="navbar-toggler"
           type="button"
@@ -38,7 +52,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/travelboard">게시판</a>
+              <a class="nav-link active" aria-current="page" href="/travelboard/list">게시판</a>
             </li>
             <c:if test="${login.id != null}">
               <li class="nav-item">
@@ -135,4 +149,3 @@
     </div>
   </body>
 </html>
-
