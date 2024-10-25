@@ -1,6 +1,6 @@
 package com.project.traplaner.member.service;
 
-//import com.project.traplaner.member.MemberService;
+//import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.member.dto.KakaoUserResponseDTO;
 import com.project.traplaner.member.dto.SignUpRequestDto;
 import jakarta.servlet.http.HttpSession;

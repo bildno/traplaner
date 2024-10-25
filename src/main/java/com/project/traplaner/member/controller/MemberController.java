@@ -1,7 +1,6 @@
 package com.project.traplaner.member.controller;
 
 import com.project.traplaner.entity.Member;
-import com.project.traplaner.entity.Travel;
 import com.project.traplaner.member.dto.LoginRequestDto;
 import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import com.project.traplaner.member.service.LoginResult;
@@ -103,19 +102,16 @@ public class MemberController {
         return "redirect:/members/sign-in"; // 로그인 실패 시
     }
 
-
-
     @Value("${sns.kakao.Client-Id}")
     private  String kakaoClientId;
     @Value("${sns.kakao.logout-redirect}")
     private String kakaoLogoutRedirectUri;
 
-
-    @Value("${sns.naver.Client-Id}")
-    private  String naverClientId;
-    @Value("${sns.naver.logout-redirect}")
-    private String naverLogoutRedirectUri;
-
+//    @Value("${sns.naver.Client-Id}")
+//    private  String naverClientId;
+//    @Value("${sns.naver.logout-redirect}")
+//    private String naverLogoutRedirectUri;
+//
     //네이버 로그인 화면 요청
     @GetMapping("/naver-sign-in")
     public void naverSignIn(){
@@ -148,7 +144,7 @@ public class MemberController {
 //        else if (dto.getLoginMethod().equals("NAVER")) {
 //            memberService.naverLogout(dto, session);
 //
-//            String reqUri = "https://kauth.kakao.com/oauth/logout";
+//            String reqUri = "https://kauth.naver.com/oauth/logout";
 //            reqUri += "?client_id=" + naverClientKey;
 //            reqUri += "&logout_redirect_uri=" + naverLogoutRedirectUri;
 //            return "redirect:" + reqUri;
