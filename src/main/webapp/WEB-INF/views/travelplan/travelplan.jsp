@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
 
@@ -43,16 +43,20 @@
         #travel-period h3 {
             display: block;
         }
+        #calendar{
+
+        }
     </style>
 </head>
+<html>
 <body>
 
-<%@ include file="../header.jsp"%>
+<%--<%@ include file="../header.jsp"%>--%>
 <div class="container">
     <div id="travel-info">
         <div id="travel-info-container">
             <div id="travel-name">세계 여행</div>
-            <div id="calandar"></div>
+            <div id="calendar"></div>
             <div id="travel-period">
                 <h3>여행기간</h3>
                 <p>2024년 10월 22일 ~ 2024년 10월 30일</p>
@@ -61,10 +65,11 @@
         </div>
     </div>
     <div id="map-info">
-        <div id="googleMap" style="width: 100%; height: 50%"></div>
+        <div id="googleMap" style="width: 100%; height: 100%"></div>
     </div>
 </div>
 </body>
+
 
 <script>
     function myMap() {
@@ -89,10 +94,10 @@
         calendar.render();
     });
 </script>
-
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 <script src="fullcalendar/lib/locales-all.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&callback=myMap"></script>
+
 
 </html>
 
