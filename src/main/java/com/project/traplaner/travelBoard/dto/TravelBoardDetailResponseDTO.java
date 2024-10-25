@@ -3,10 +3,7 @@ package com.project.traplaner.travelBoard.dto;
 import com.project.traplaner.entity.Favorite;
 import com.project.traplaner.entity.Travel;
 import com.project.traplaner.entity.TravelBoard;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.nio.channels.Pipe;
 
@@ -14,6 +11,7 @@ import java.nio.channels.Pipe;
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
 public class TravelBoardDetailResponseDTO {
     private int id;
     private String title;
