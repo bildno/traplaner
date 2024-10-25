@@ -23,6 +23,7 @@ public class TravelBoardDetailResponseDTO {
     private int likeCount;
 
     public TravelBoardDetailResponseDTO(TravelBoard travelBoard, Travel travel) {
+        this.id = travel.getId();
         this.title = travel.getTitle();
         this.writeDate = TravelBoardListResponseDTO.makePrettierDateString(travelBoard.getWriteDate());
     }

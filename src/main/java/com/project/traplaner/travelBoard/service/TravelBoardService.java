@@ -27,8 +27,7 @@ public class TravelBoardService {
     }
 
     public TravelBoardDetailResponseDTO findOne(int id) {
-        TravelBoardDetailResponseDTO travelBoardDetailResponseDTO = travelBoardMapper.findOne(id);
-        return travelBoardDetailResponseDTO;
+        return travelBoardMapper.findOne(id);
     }
 
 }

@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -26,20 +23,19 @@ import java.util.Map;
 public class TravelBoardController {
 
     private final TravelBoardService travelBoardService;
-    private final TravelBoardMapper travelBoardMapper;
 
     @GetMapping("/list")
     public String list(Model model) {
         List<TravelBoardListResponseDTO> all = travelBoardService.findAll();
-        model.addAttribute("travelBoardList", all);
+        model.addAttribute("tbList", all);
         System.out.println("목록");
         return "travelBoard/list";
     }
 
     @GetMapping("/info/{id}")
-    public String info(Model model, @PathVariable int id) {
+    public String info(Model model, @PathVariable("id") int id, @ModelAttribute TravelBoardDetailResponseDTO travelBoardDetailResponseDTO) {
         TravelBoardDetailResponseDTO one = travelBoardService.findOne(id);
-        model.addAttribute("travelBoardList", one);
+        model.addAttribute("tOne", one);
         System.out.println("글");
         return "travelBoard/info";
     }
