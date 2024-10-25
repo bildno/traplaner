@@ -41,5 +41,9 @@ public class MyPageBoardService {
         return dtoList;
     }
 
+   public void updateShare(int id){
+        myPageBoardMapper.updateShare(id);
+   }
+
 }
 

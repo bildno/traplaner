@@ -16,4 +16,6 @@ public interface MyPageBoardMapper {
     void deleteTravelByMemberOrder(Integer id, int memberId);
 
     List<TravelBoardResponseDTO> selectTravelBoardByNickName(String nickName);
+
+    void updateShare(Integer id);
 }

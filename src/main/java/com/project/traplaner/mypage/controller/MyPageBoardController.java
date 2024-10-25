@@ -5,10 +5,13 @@ import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
 import com.project.traplaner.mypage.service.MyPageBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -60,6 +63,14 @@ public class MyPageBoardController {
     public String tempMain() {
 
         return "main";
+    }
+
+    @PostMapping("/my-page/shareIs/{id}")
+    @ResponseBody
+    public ResponseEntity<?> shareIs(@PathVariable int id) {
+        myPageBoardService.updateShare(id);
+
+        return ResponseEntity.ok().body("success");
     }
 
 

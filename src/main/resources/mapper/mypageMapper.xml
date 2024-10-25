@@ -28,5 +28,10 @@
     </select>
 
 
+    <update id="updateShare">
+        update tbl_travel set share = not share where id = #{id}
+    </update>
+
+
 
 </mapper>
