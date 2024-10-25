@@ -61,10 +61,11 @@ public class MemberController {
         log.info("signup(): savePath {}", savePath);
         // e:파일 업로드 -------------------------
 
-        memberService.join(dto,savePath);
+        memberService.join(dto, savePath);
 
         return "member/sign-in";
     }
+
     // 이메일, 닉네임 중복 검사
     @PostMapping("/duplicateTest")
     @ResponseBody
@@ -72,7 +73,7 @@ public class MemberController {
             @RequestParam String type,
             @RequestParam String keyword) {
 
-        boolean flag = memberService.duplicateTest(type,keyword);
+        boolean flag = memberService.duplicateTest(type, keyword);
         return ResponseEntity.ok()
                 .body(flag);
     }
@@ -81,6 +82,7 @@ public class MemberController {
     public String index() {
         return "member/sign-in";
     }
+
     //로그인 요청
     @PostMapping("/sign-in")
     public String signIn(LoginRequestDto dto,
@@ -100,18 +102,18 @@ public class MemberController {
     }
 
     @Value("${sns.kakao.Client-Id}")
-    private  String kakaoClientId;
+    private String kakaoClientId;
     @Value("${sns.kakao.logout-redirect}")
     private String kakaoLogoutRedirectUri;
 
-//    @Value("${sns.naver.Client-Id}")
+    //    @Value("${sns.naver.Client-Id}")
 //    private  String naverClientId;
 //    @Value("${sns.naver.logout-redirect}")
 //    private String naverLogoutRedirectUri;
 //
     //네이버 로그인 화면 요청
     @GetMapping("/naver-sign-in")
-    public void naverSignIn(){
+    public void naverSignIn() {
 
         System.out.println("[dbg] naver-sign-in 진입!!!");
         log.info("naver-sing-in 진입");
@@ -155,3 +157,4 @@ public class MemberController {
 
         return "redirect:/";
     }
+}
