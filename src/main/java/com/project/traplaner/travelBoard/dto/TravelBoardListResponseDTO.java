@@ -19,10 +19,11 @@ public class TravelBoardListResponseDTO {
 
     public TravelBoardListResponseDTO(TravelBoardDetailResponseDTO board) {
         this.shortTitle = makeShortTitle(board.getTitle());
+        this.writer = board.getWriter();
     }
 
     public static String makePrettierDateString(LocalDateTime writeDate) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy. MM. dd.");
         return dtf.format(writeDate);
     }
 

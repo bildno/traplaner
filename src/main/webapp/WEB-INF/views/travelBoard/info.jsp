@@ -17,12 +17,11 @@
                 <h2>작성일자: ${tOne.writeDate}</h2>
                 <h2>작성자: ${tOne.writer}</h2>
                 <br>
-                <label for="title">제목</label>
-                <input type="text" id="title" name="title" value="${tOne.title}" readonly />
-                <label for="like">좋아요</label>
-                <input type="text" id="title" name="title" value="${tOne.likeCount}" readonly />
-                <label for="content">내용</label>
-                <div id="content">${tOne.content}</div>
+                <h3>제목: ${tOne.title}</h3>
+                <h3>좋아요: ${tOne.likeCount}</h3>
+                <div id="content">
+                    <h3>내용: ${tOne.content}</h3>
+                </div>
             </div>
         </body>
 
