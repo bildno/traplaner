@@ -89,7 +89,7 @@
     <c:if test="${login != null}">
       <div class="d-flex align-items-center gap-3">
         <a href="/my-page/${login.id}" class="nav-link">마이페이지</a>
-        <a href="logout.jsp" class="nav-link">로그아웃</a>
+        <a href="/members/sign-out" class="nav-link">로그아웃</a>
         <!-- 프로필 이미지 표시 -->
         <img src="./image/logo.png" alt="Profile" class="traplan-profile-img">
       </div>
