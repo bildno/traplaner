@@ -4,43 +4,45 @@
 
 <mapper namespace="com.project.traplaner.mapper.TravelBoardMapper">
 
-    <sql id="search">
-        <if test="type == 'title'">
-            WHERE title LIKE CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="type == 'content'">
-            WHERE content LIKE CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="type == 'writer'">
-            WHERE writer LIKE CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="type == 'tc'">
-            WHERE title LIKE CONCAT('%', #{keyword}, '%')
-            OR content LIKE CONCAT('%', #{keyword}, '%')
-        </if>
-    </sql>
+<!--    <sql id="search">-->
+<!--        <if test="type == 'title'">-->
+<!--            WHERE title LIKE CONCAT('%', #{keyword}, '%')-->
+<!--        </if>-->
+<!--        <if test="type == 'content'">-->
+<!--            WHERE content LIKE CONCAT('%', #{keyword}, '%')-->
+<!--        </if>-->
+<!--        <if test="type == 'writer'">-->
+<!--            WHERE writer LIKE CONCAT('%', #{keyword}, '%')-->
+<!--        </if>-->
+<!--        <if test="type == 'tc'">-->
+<!--            WHERE title LIKE CONCAT('%', #{keyword}, '%')-->
+<!--            OR content LIKE CONCAT('%', #{keyword}, '%')-->
+<!--        </if>-->
+<!--    </sql>-->
 
 
-    <!--    목록: 제목, 작성자, 작성일 // 검색, 페이징-->
+    <!--    목록: 제목, 작성자, 작성일 -->
     <select id="findAll" resultType="com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO">
         SELECT
-        t.title,
-        tb.member_nick_name,
+        t.id,
+        t.title AS short_title,
+        tb.member_nick_name AS writer,
         tb.write_date
         FROM tbl_travel t
         JOIN tbl_travel_board tb
         ON t.id = tb.travel_id
-        <include refid="search" />
-        GROUP BY tb.id
-        ORDER BY tb.id DESC
-        LIMIT #{pageStart}, #{amount}
+<!--        <include refid="search" />-->
+<!--        GROUP BY tb.id-->
+<!--        ORDER BY tb.id DESC-->
+<!--        LIMIT #{pageStart}, #{amount}-->
     </select>
 
 <!--    게시물 상세조회: 제목, 작성자, 작성일, 내용, 좋아요수-->
     <select id="findOne" resultType="com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO">
         SELECT
-        t.title,
-        tb.member_nick_name,
+        t.id,
+        t.title AS title,
+        tb.member_nick_name AS writer,
         tb.write_date,
         tb.content,
         (SELECT COUNT(*) FROM tbl_favorite WHERE travel_board_id) AS likeCount
@@ -51,20 +53,19 @@
     </select>
 
 <!--    검색 게시물 개수    -->
-    <select id="getTotalCount" resultType="int">
-        SELECT
-        COUNT(*)
-        FROM tbl_travel_board
-        <include refid="search" />
-    </select>
+<!--    <select id="getTotalCount" resultType="int">-->
+<!--        SELECT-->
+<!--        COUNT(*)-->
+<!--        FROM tbl_travel_board-->
+<!--        <include refid="search" />-->
+<!--    </select>-->
 
 <!--  좋아요수  -->
-
-    <insert id="insertLikeCount">
-        INSERT INTO tbl_favorite (member_id, travel_board_id) value (#{member_id}, #{travel_board_id});
-    </insert>
-    <select id="selectLikeCount">
-        SELECT COUNT(*) FROM tbl_favorite WHERE travel_board_id
-    </select>
+<!--    <insert id="insertLikeCount">-->
+<!--        INSERT INTO tbl_favorite (member_id, travel_board_id) value (#{member_id}, #{travel_board_id});-->
+<!--    </insert>-->
+<!--    <select id="selectLikeCount">-->
+<!--        SELECT COUNT(*) FROM tbl_favorite WHERE travel_board_id-->
+<!--    </select>-->
 
 </mapper>

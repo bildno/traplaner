@@ -16,17 +16,5 @@ class TravelBoardControllerTest {
 
     @Autowired
     TravelBoardMapper  travelBoardMapper;
-    @Test
-    @DisplayName("sadas")
-    void asdas() {
-        // given
-        int id = 1;
-        // when
-        TravelBoardDetailResponseDTO one = travelBoardMapper.findOne(id);
-        // then
-        String content = one.getContent();
-
-        System.out.println(content);
-    }
 
 }

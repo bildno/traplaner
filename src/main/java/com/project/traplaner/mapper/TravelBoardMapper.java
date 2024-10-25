@@ -5,6 +5,7 @@ import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -14,9 +15,9 @@ public interface TravelBoardMapper {
     // 목록 조회
     List<TravelBoardListResponseDTO> findAll();
 
-    // 상세 조회
+     //상세 조회
     TravelBoardDetailResponseDTO findOne(int id);
 
     // 검색 게시물 개수 카운트
-    int getTotalCount(PageDTO page);
+//    int getTotalCount(PageDTO page);
 }

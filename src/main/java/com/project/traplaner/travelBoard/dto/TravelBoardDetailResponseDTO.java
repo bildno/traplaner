@@ -15,13 +15,15 @@ import java.nio.channels.Pipe;
 @EqualsAndHashCode
 @AllArgsConstructor
 public class TravelBoardDetailResponseDTO {
+    private int id;
     private String title;
     private String writer;
     private String writeDate;
     private String content;
     private int likeCount;
 
-    public TravelBoardDetailResponseDTO(TravelBoard travelBoard) {
+    public TravelBoardDetailResponseDTO(TravelBoard travelBoard, Travel travel) {
+        this.title = travel.getTitle();
         this.writeDate = TravelBoardListResponseDTO.makePrettierDateString(travelBoard.getWriteDate());
     }
 }

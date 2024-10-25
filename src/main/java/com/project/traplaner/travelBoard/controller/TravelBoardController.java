@@ -1,10 +1,12 @@
 package com.project.traplaner.travelBoard.controller;
 
+import com.project.traplaner.entity.TravelBoard;
 import com.project.traplaner.mapper.TravelBoardMapper;
 import com.project.traplaner.travelBoard.dto.SearchDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO;
 import com.project.traplaner.travelBoard.service.TravelBoardService;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -26,20 +28,21 @@ public class TravelBoardController {
     private final TravelBoardService travelBoardService;
     private final TravelBoardMapper travelBoardMapper;
 
-    @GetMapping("")
-    public String travelBoardList(Model model, SearchDTO search) {
+    @GetMapping("/list")
+    public String list(Model model) {
         List<TravelBoardListResponseDTO> all = travelBoardService.findAll();
         model.addAttribute("travelBoardList", all);
-
+        System.out.println("목록");
         return "travelBoard/list";
     }
 
-    @GetMapping("/info")
-    public String travelBoardDetail(Model model) {
-        TravelBoardDetailResponseDTO one = travelBoardService.findOne();
-        model.addAttribute("travelBoardDetail", model);
-
+    @GetMapping("/info/{id}")
+    public String info(Model model, @PathVariable int id) {
+        TravelBoardDetailResponseDTO one = travelBoardService.findOne(id);
+        model.addAttribute("travelBoardList", one);
+        System.out.println("글");
         return "travelBoard/info";
     }
+
 
 }

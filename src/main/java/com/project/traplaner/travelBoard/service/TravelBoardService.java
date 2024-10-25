@@ -1,23 +1,20 @@
 package com.project.traplaner.travelBoard.service;
 
-import com.project.traplaner.entity.TravelBoard;
 import com.project.traplaner.mapper.TravelBoardMapper;
-import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Getter
 public class TravelBoardService {
 
     private final TravelBoardMapper travelBoardMapper;
@@ -29,9 +26,9 @@ public class TravelBoardService {
         return travelBoardListResponseDTOS;
     }
 
-//    public TravelBoardDetailResponseDTO findOne() {
-//        TravelBoardDetailResponseDTO travelBoardDetailResponseDTO = travelBoardMapper.findOne();
-//        return travelBoardDetailResponseDTO;
-//    }
+    public TravelBoardDetailResponseDTO findOne(int id) {
+        TravelBoardDetailResponseDTO travelBoardDetailResponseDTO = travelBoardMapper.findOne(id);
+        return travelBoardDetailResponseDTO;
+    }
 
 }

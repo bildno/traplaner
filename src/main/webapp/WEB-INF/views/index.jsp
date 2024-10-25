@@ -75,7 +75,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
     <div class="container">
                 <div class="item"><a href="/">로고</a></div>
-                <div class="item"><a href="/travelboard">게시판(공유여행목록)</a></div>
+                <div class="item"><a href="/travelboard/list">게시판(공유여행목록)</a></div>
                 <div class="item"><a href="/members">마이페이지</a></div>
                 <div class="item"><a href="/members/sign-in">로그인</a></div>
                 <div class="item"><a href="/members/sign-out">로그아웃</a></div>
