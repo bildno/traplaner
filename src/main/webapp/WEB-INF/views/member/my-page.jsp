@@ -17,10 +17,6 @@
         justify-content: center;
     }
 
-    a {
-        text-decoration: none;
-        margin-bottom: 10px;
-    }
     .mypage_section {
         display: flex;
         justify-content: center;
@@ -32,6 +28,7 @@
         border: 1px solid rgb(238, 238, 238);
         border-radius: 5px;
         margin-bottom: 50px;
+        height: 700px;
     }
     .img_box {
         height: 50%;
@@ -56,10 +53,16 @@
     .mypage_section2{
         width: 800px;
     }
+    .manage_box a{
+        margin-bottom: 20px;
+        text-decoration: none;
+        color: black;
+    }
+
 </style>
 
 <div class="container">
-    <h1 id="mypage_h1">프로필 관리</h1>
+    <h1 id="mypage_h1">여행 일정</h1>
     <div class="mypage_section">
         <div class="mypage_section1">
             <img
@@ -69,8 +72,9 @@
                     alt=""
             />
             <div class="manage_box">
-                <a href="">계정관리</a><a href="">내 게시물</a
-            ><a href="">나의 여행</a><a href="">좋아요한 게시물</a>
+                <a href="">계정관리</a><a href="/my-page/mytravelboard">내 게시물</a
+            ><a href="/my-page/mytravel">나의 여행</a>
+                <a style="font-weight: bold"  href="/my-page">여행일정</a><a href="/mypage/favorite">좋아요한 게시물</a>
             </div>
         </div>
         <div class="mypage_section2">

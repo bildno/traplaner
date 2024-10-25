@@ -1,13 +1,13 @@
 package com.project.traplaner.member.controller;
 
 import com.project.traplaner.entity.Member;
+
 import com.project.traplaner.member.dto.LoginRequestDto;
 import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import com.project.traplaner.member.service.LoginResult;
+
 import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.member.dto.SignUpRequestDto;
-import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
-import com.project.traplaner.mypage.service.MyPageBoardService;
 import com.project.traplaner.util.FileUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,11 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/members")
@@ -121,6 +118,7 @@ public class MemberController {
 
     }
 
+
     // 로그아웃 요청 처리
     @GetMapping("/sign-out")
     public String signOut(HttpSession session,
@@ -157,39 +155,3 @@ public class MemberController {
 
         return "redirect:/";
     }
-
-    private final MyPageBoardService myPageBoardService;
-
-    @GetMapping("/my-page")
-    public String myPage(){
-
-        return "member/my-page";
-    }
-
-    @GetMapping("/my-page/my-board")
-    public String myBoard() {
-
-
-
-        return "member/my-board";
-    }
-
-
-    // 마이페이지 나의 여행
-    @GetMapping("/my-page/my-plan")
-    public String myPlan(
-             Model model) {
-
-        int memberId = 2;
-        System.out.println("asdasdasdasdas");
-        List<TravelListResponseDTO> dtoList = myPageBoardService.getList(memberId);
-
-        log.info("dtoList: {}", dtoList);
-
-        model.addAttribute("list", dtoList);
-
-        return "member/my-plan";
-    }
-
-
-}
