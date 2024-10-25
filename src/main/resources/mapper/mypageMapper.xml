@@ -17,6 +17,21 @@
         delete from tbl_travel where id = #{id} and member_id = #{memberId}
     </delete>
 
+    <select id="selectTravelBoardByNickName" resultType="com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO">
+        select
+            board.*,
+            travel.title
+        from tbl_travel_board board
+        join tbl_travel travel
+        on board.travel_id = travel.id
+        where board.member_nick_name = #{nickName};
+    </select>
+
+
+    <update id="updateShare">
+        update tbl_travel set share = not share where id = #{id}
+    </update>
+
 
 
 </mapper>

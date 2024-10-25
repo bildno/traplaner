@@ -31,5 +31,6 @@ public class TravelBoard {
     private int travelId;
     private String memberNickName;
     private LocalDateTime writeDate;
+    private String content;
 
 }

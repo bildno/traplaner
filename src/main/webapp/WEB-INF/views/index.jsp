@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ taglib
-prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -55,6 +55,8 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
       </div>
     </nav>
 
+
+
     <!------------------ 추천 여행지 carousel ----------------------->
     <div id="demo" class="carousel slide mt-5" data-bs-ride="carousel">
       <div class="carousel-indicators">
@@ -85,6 +87,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
       </div>
     </div>
 
+
     <!--------------------- My여행추가, My여행목록 ----------------------->
     <div class="container mt-4">
       <div class="row">
@@ -101,6 +104,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
           </div>
         </div>
 
+
         <div class="col-sm-4">
           <div class="card p-1">
             <img src="/assets/img/홍콩-250x140.jpg" alt="" class="card-img-top" />
@@ -110,6 +114,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
             </div>
           </div>
         </div>
+
 
         <div class="col-sm-4">
           <div class="card p-1">
