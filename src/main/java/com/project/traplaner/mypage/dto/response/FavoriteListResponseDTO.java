@@ -17,9 +17,9 @@ public class FavoriteListResponseDTO {
     private int id;
     private int memberId;
     private int travelBoardId;
-    private String member_nick_name;
+    private String memberNickName;
     private LocalDateTime writeDate;
-
+    private String title;
     private String formatDate;
 
     public static String makeDateStringFomatter(LocalDateTime startDate) {

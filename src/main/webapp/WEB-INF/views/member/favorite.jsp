@@ -115,13 +115,14 @@
 
 
 
-          <c:forEach var="list" items="${ list }">
+          <c:forEach var="list" items="${list}">
             <tr>
-              <td><span>${ dto.id }</span></td>
+              <td><span>${ list.id }</span></td>
               <td><input type="text" name="con_text" id="con_text"
-                         value="${dto.title}"
+                         value="${list.title}"
                          readonly></td>
-              <td><span>${dto.formatDate}</span></td>
+                         <td><span>${list.memberNickName}</span></td>
+              <td><span>${list.formatDate}</span></td>
 
 
 
