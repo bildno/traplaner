@@ -8,10 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -65,10 +62,26 @@ public class MyPageBoardController {
         return "main";
     }
 
-    @PostMapping("/my-page/shareIs/{id}")
+    @PostMapping("/my-page/shareIs/{boardId}")
     @ResponseBody
-    public ResponseEntity<?> shareIs(@PathVariable int id) {
-        myPageBoardService.updateShare(id);
+    public ResponseEntity<?> shareIs(@PathVariable int boardId) {
+        myPageBoardService.updateShare(boardId);
+        System.out.println("asdasd");
+
+        return ResponseEntity.ok().body("success");
+    }
+
+    @PostMapping("/my-page/delete/{boardId}/{memberId}")
+    @ResponseBody
+    public ResponseEntity<?> deleteBoard(@PathVariable int boardId,
+                                         @PathVariable int memberId,
+                                         Model model){
+
+        List<TravelListResponseDTO> dtoList = myPageBoardService.getList(memberId);
+
+        model.addAttribute("list", dtoList);
+
+        myPageBoardService.deleteBoard(boardId);
 
         return ResponseEntity.ok().body("success");
     }

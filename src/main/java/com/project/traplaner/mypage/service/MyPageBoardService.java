@@ -45,5 +45,9 @@ public class MyPageBoardService {
         myPageBoardMapper.updateShare(id);
    }
 
+   public void deleteBoard(int boardId){
+        myPageBoardMapper.deleteTravelByMemberOrder(boardId);
+   }
+
 }
 

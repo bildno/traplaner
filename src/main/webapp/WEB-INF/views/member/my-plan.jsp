@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../header.jsp" %>
 
+<html>
 <head>
     <title>Title</title>
 
@@ -90,7 +92,6 @@
 </head>
 <body>
 
-<%@ include file="../header.jsp" %>
 
 
 <div class="container">
@@ -139,9 +140,12 @@
                                                onchange="shareChange(${travels.id})">
                                     </c:when>
                                     <c:otherwise>
-                                        <input type="checkbox" id="shareIs">
+                                        <input type="checkbox" id="shareIs" onchange="shareChange(${travels.id})">
                                     </c:otherwise>
                                 </c:choose>
+                            </td>
+                            <td>
+                            <img style="width: 20px" src="/assets/img/delete.png" onclick="deleteBoard(${travels.id}, ${login.id})">
                             </td>
                         </tr>
                     </c:forEach>
@@ -153,27 +157,42 @@
 
 <script>
 
-    function shareChange(id) {
-        const url = "/my-page/shareIs/" + id;
 
+    function shareChange(id){
+        const url = 'http://localhost:8181/my-page/shareIs/' + id;
 
-        const payload = {
-            text: textVal,
-            author: writerVal,
-            bno: bno,
-        };
-
-        const requestinfo = {
+        fetch(url, {
             method: "POST",
-            header: {
-                "content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-        }
-
-        fetch(url, requestinfo).then((res) => {
-
         })
+            .then(res => {
+                if (res.status === 200) {
+                    alert('공유 여부가 변경됨!');
+                } else {
+                    alert('공유 변경 과정에서 문제가 발생!');
+                }
+            });
+
+    };
+
+    function deleteBoard(id, memberId){
+        const url = 'http://localhost:8181/my-page/delete/' + id +"/" + memberId;
+        if(confirm("정말 삭제하시겠습니까?")){
+
+
+            fetch(url, {
+                method : "POST",
+            })
+                .then(res => {
+                    if (res.status === 200) {
+                        alert("여행이 삭제됨")
+                        location.reload(true);
+                    } else {
+                        alert("삭제 과정에서 문제발생")
+                    }
+                })
+        } else{
+            return false;
+        }
 
 
     }
