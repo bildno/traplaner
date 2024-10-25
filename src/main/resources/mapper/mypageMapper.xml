@@ -14,7 +14,7 @@
     </delete>
 
     <delete id="deleteTravelByMemberOrder">
-        delete from tbl_travel where id = #{id} and member_id = #{memberId}
+        delete from tbl_travel where id = #{id}
     </delete>
 
     <select id="selectTravelBoardByNickName" resultType="com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO">

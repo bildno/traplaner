@@ -144,6 +144,9 @@
                                     </c:otherwise>
                                 </c:choose>
                             </td>
+                            <td>
+                            <img style="width: 20px" src="/assets/img/delete.png" onclick="deleteBoard(${travels.id}, ${login.id})">
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -169,10 +172,30 @@
                 }
             });
 
-
-
-
     };
+
+    function deleteBoard(id, memberId){
+        const url = 'http://localhost:8181/my-page/delete/' + id +"/" + memberId;
+        if(confirm("정말 삭제하시겠습니까?")){
+
+
+            fetch(url, {
+                method : "POST",
+            })
+                .then(res => {
+                    if (res.status === 200) {
+                        alert("여행이 삭제됨")
+                        location.reload(true);
+                    } else {
+                        alert("삭제 과정에서 문제발생")
+                    }
+                })
+        } else{
+            return false;
+        }
+
+
+    }
 
 </script>
 </body>

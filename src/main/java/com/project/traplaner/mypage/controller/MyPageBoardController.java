@@ -71,5 +71,20 @@ public class MyPageBoardController {
         return ResponseEntity.ok().body("success");
     }
 
+    @PostMapping("/my-page/delete/{boardId}/{memberId}")
+    @ResponseBody
+    public ResponseEntity<?> deleteBoard(@PathVariable int boardId,
+                                         @PathVariable int memberId,
+                                         Model model){
+
+        List<TravelListResponseDTO> dtoList = myPageBoardService.getList(memberId);
+
+        model.addAttribute("list", dtoList);
+
+        myPageBoardService.deleteBoard(boardId);
+
+        return ResponseEntity.ok().body("success");
+    }
+
 
 }

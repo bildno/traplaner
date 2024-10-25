@@ -13,7 +13,7 @@ public interface MyPageBoardMapper {
 
     void deleteTravelById(Integer id);
 
-    void deleteTravelByMemberOrder(Integer id, int memberId);
+    void deleteTravelByMemberOrder(Integer id);
 
     List<TravelBoardResponseDTO> selectTravelBoardByNickName(String nickName);
 
