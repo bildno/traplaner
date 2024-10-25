@@ -89,9 +89,9 @@
               alt=""
       />
       <div class="manage_box">
-        <a href="">계정관리</a><a style="font-weight: bold" href="/my-page/mytravelboard">내 게시물</a
-      ><a  href="/my-page/mytravel">나의 여행</a>
-        <a href="/my-page">여행일정</a><a href="/mypage/favorite">좋아요한 게시물</a>
+        <a href="">계정관리</a><a href="/my-page/mytravelboard/${login.id}">내 게시물</a
+      ><a href="/my-page/mytravel/${login.id}">나의 여행</a>
+        <a style="font-weight: bold"  href="/my-page/${login.id}">여행일정</a><a href="/mypage/favorite/${login.id}">좋아요한 게시물</a>
       </div>
     </div>
     <div class="mypage_section2">
