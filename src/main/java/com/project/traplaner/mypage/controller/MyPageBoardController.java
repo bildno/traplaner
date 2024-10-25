@@ -1,5 +1,7 @@
 package com.project.traplaner.mypage.controller;
 
+import com.project.traplaner.entity.Favorite;
+import com.project.traplaner.mypage.dto.response.FavoriteListResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
 import com.project.traplaner.mypage.service.MyPageBoardService;
@@ -87,8 +89,11 @@ public class MyPageBoardController {
     }
 
     @GetMapping("/my-page/favorite/{memberId}")
-    public String favorite(@PathVariable int memberId){
+    public String favorite(@PathVariable int memberId,
+                           Model model){
+        List<FavoriteListResponseDTO> favorite = myPageBoardService.favorite(memberId);
 
+        model.addAttribute( "list", favorite);
 
 
         return "member/favorite";

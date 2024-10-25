@@ -107,14 +107,15 @@
         <table>
           <tr>
             <th style="width: 5%;"><span>번호</span></th>
-            <th style="width: 60%;">게시글 제목</th>
-            <th style="width: 10%;"><span>작성일</span></th>
+            <th style="width: 70%;">게시글 제목</th>
+            <th style="width: 10%;"><span>작성자</span></th>
+            <th style="width: 15%;"><span>작성일</span></th>
           </tr>
 
 
 
 
-          <c:forEach var="dto" items="${ dtoList }">
+          <c:forEach var="list" items="${ list }">
             <tr>
               <td><span>${ dto.id }</span></td>
               <td><input type="text" name="con_text" id="con_text"
