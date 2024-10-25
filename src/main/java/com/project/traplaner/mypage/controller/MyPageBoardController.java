@@ -1,5 +1,6 @@
 package com.project.traplaner.mypage.controller;
 
+import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
 import com.project.traplaner.mypage.service.MyPageBoardService;
 import lombok.RequiredArgsConstructor;
@@ -30,11 +31,11 @@ public class MyPageBoardController {
 
     // 마이 페이지 내 게시물
     // db연동 아직 x
-    @GetMapping("/my-page/mytravelboard/{member_id}")
-    public String myBoard(@PathVariable int member_id, Model model) {
+    @GetMapping("/my-page/mytravelboard/{nickName}")
+    public String myBoard(@PathVariable String nickName, Model model) {
 
-
-
+        List<TravelBoardResponseDTO> dtoList = myPageBoardService.getTravelList(nickName);
+        model.addAttribute("dtoList", dtoList);
 
         return "member/my-board";
     }

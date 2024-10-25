@@ -58,7 +58,7 @@ public class MemberService {
         // DB 데이터를 사용할 것만 정제
         LoginUserResponseDTO dto = LoginUserResponseDTO.builder()
                 .id(foundMember.getId())
-                .nickname(foundMember.getNickName())
+                .nickName(foundMember.getNickName())
                 .email(foundMember.getEmail())
                 .loginMethod(foundMember.getLoginMethod().toString())
                 .profile(foundMember.getProfileImg())

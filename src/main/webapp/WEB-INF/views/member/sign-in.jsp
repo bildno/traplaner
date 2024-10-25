@@ -1,7 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-    <title>Sign-in</title>
+<title>Sign-in</title>
     <style>
         body{
             display: flex;
@@ -73,6 +70,7 @@
     </style>
 
 <body>
+<%@ include file="../header.jsp"%>
 <img id="logo" src="/assets/img/sign-in-logo.png" alt="업다">
 <h1>
     즐거운 여행의 시작,<br> 트래플랜

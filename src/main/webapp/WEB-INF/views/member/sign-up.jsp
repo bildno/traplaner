@@ -1,5 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ taglib
-uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <style>
   .container {
     margin-top: 150px;
@@ -115,7 +114,7 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <body>
 
-
+<%@ include file="../header.jsp"%>
 <div class="container">
   <h1 id="join_h1">회원가입</h1>
   <h2 id="join_exp"></h2>

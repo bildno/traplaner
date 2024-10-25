@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ taglib
-prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -47,6 +47,8 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     </style>
   <body>
 
+    <%@ include file="header.jsp"%>
+
     <div>
     <!-- 프로필 사진-->
     <div class="profile-box">
@@ -67,7 +69,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     </div>
     <div>
     <h2 class="intro-text">
-        Welcome!!! ${sessionScope.login == null ? '': login.nickname}
+        Welcome!!! ${sessionScope.login == null ? '': login.nickName}
     </h2>
 </div>
 </div>
