@@ -83,8 +83,8 @@
         name="sign-in"
 >
     <div class="form-text">
-        <input type="text" placeholder="이메일을 입력하세요" name="email">
-        <input type="text" placeholder="비밀번호를 입력하세요" name="passward">
+        <input type="email" placeholder="이메일을 입력하세요" name="email">
+        <input type="password" placeholder="비밀번호를 입력하세요" name="password">
     </div>
     <button id="login-btn">로그인</button>
 </form>
@@ -101,6 +101,14 @@
 
     </a>
 </div>
+<script>
+    const serverResult = '${result}';
+    if(serverResult==='NO_ACC'){
+        alert("회원가입을 먼저 진행해 주세요!")
+    }else if (serverResult === 'NO_PW'){
+        alert('비밀번호가 틀렸어요!')
+    }
+</script>
 </body>
 
 

@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.multipart.MultipartFile;
 
 @Getter
@@ -25,12 +26,13 @@ public class SignUpRequestDto {
     private String password;
 
     @NotBlank
-    @Size(min=2, max=6)
+    @Size(min = 2, max = 6)
     private String nickName;
 
     private MultipartFile profileImage;
 
     private Member.LoginMethod loginMethod;
+
 
     public Member toEntity(PasswordEncoder encoder, String savePath) {
         return Member.builder()
@@ -41,5 +43,5 @@ public class SignUpRequestDto {
                 .profileImg(savePath)
                 .build();
     }
-
 }
+
