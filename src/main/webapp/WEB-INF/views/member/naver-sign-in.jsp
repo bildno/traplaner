@@ -1,5 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %> <%@ taglib
-prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -7,6 +6,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <title>네이버 로그인 테스트</title>
   </head>
   <body>
+  <%@ include file="../header.jsp"%>
     <div>
       <table
         style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%"
