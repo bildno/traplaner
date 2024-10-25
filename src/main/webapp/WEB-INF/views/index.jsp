@@ -35,7 +35,7 @@
         <c:if test="${login != null && login.profile != null}">
           <img src="/display${login.profile}" alt="프사" style="width: 30px" class="rounded-pill" />
         </c:if>
-        <span class="navbar-text">&nbsp;&nbsp;Welcome ${sessionScope.login == null ? '' : login.nickname}</span>
+        <span class="navbar-text">&nbsp;&nbsp;Welcome ${sessionScope.login == null ? '' : login.nickName}</span>
         <!--- 프로필 출력::종료 --->
 
         <button
@@ -52,7 +52,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/travelboard">게시판</a>
+              <a class="nav-link active" aria-current="page" href="/travelboard/list">게시판</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/my-page/${login.id}">마이페이지</a>
