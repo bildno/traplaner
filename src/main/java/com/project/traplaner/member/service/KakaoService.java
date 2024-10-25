@@ -1,7 +1,8 @@
 package com.project.traplaner.member.service;
 
-//import com.project.traplaner.member.MemberService;
+//import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.member.dto.KakaoUserResponseDTO;
+import com.project.traplaner.member.dto.SignUpRequestDto;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,25 +16,35 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class KakaoService {
-
-//    private final MemberService memberService;
+    private final MemberService memberService;
 
     // 로그인 처리
     public void login(Map<String, String> params, HttpSession session) {
 
         String accessToken = getKakaoAccessToken(params);
-
         // 발급받은 액세스 토큰으로 사용자 정보 가져오기
         KakaoUserResponseDTO kakaoUser = getKakaoUserInfo(accessToken);
-
         // 이제 카카오 인증 서버와의 연결은 더 필요하지 않습니다.
         // 문서에도 나와있었지만, 자체 로그인 처리 완료는 우리 서비스에서 마무리 지어 줘야 합니다.
         // 가져온 카카오 유저로 우리서비스에 이용자인지 확인하기
+        if (!memberService.duplicateTest("email", kakaoUser.getAccount().getEmail())) {
+            // 커먼 아이디와 같은 이메일일 경우를 처리 해야함
+            // 한 번도 카카오 로그인을 한 적이 없다면 회원 가입이 들어간다.
+            memberService.join(SignUpRequestDto.builder()
+                            .password(UUID.randomUUID().toString())
+                            .nickName(kakaoUser.getProperties().getNickname())
+                            .email(kakaoUser.getAccount().getEmail())
+                            .build(), kakaoUser.getProperties().getProfileImage());
+        }
+        // 우리 사이트 로그인 처리
+        memberService.maintainLoginState(session, kakaoUser.getAccount().getEmail());
+
     }
 
     private KakaoUserResponseDTO getKakaoUserInfo(String accessToken) {

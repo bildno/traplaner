@@ -56,6 +56,7 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     background-color: white;
     color: gray;
     margin-left: 20%;
+    cursor: pointer;
   }
 
   #id_check {
@@ -66,13 +67,24 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     margin-left: 5px;
     background-color: white;
     color: gray;
+    cursor: pointer;
+  }
+
+
+  #nickName_check {
+    padding: 5px;
+    border: 1px solid rgb(238, 238, 238);
+    border-radius: 5px;
+    font-size: 10px;
+    margin-left: 5px;
+    background-color: white;
+    color: gray;
+    cursor: pointer;
   }
 
   img{
     width: 100px;
   }
-
-  // 프로필 이미지  --->
         .container.wrap {
           margin-top: 200px;
           margin-bottom: 200px;
@@ -99,17 +111,21 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
           width: 200px;
           height: 200px;
         }
-//  <--- 프로필 이미지
 </style>
+<html>
+<body>
+
 
 <div class="container">
   <h1 id="join_h1">회원가입</h1>
   <h2 id="join_exp"></h2>
   <div class="contents">
-    <form action="/members/sign-up"
-    name="signup"
+
+    <form
+    name="join"
     id="signUpForm"
     method="post"
+    action="<c:url value="/members/sign-up"/>"
     enctype="multipart/form-data">
 
     <!-- 프로필 이미지 -->
@@ -135,12 +151,12 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     <div id="insert">
       <div>
-          <input type="email" placeholder="이메일" name="email" class="email_input" />
+
+        <input type="email" placeholder="이메일" id="emailValue" name="email" class="email_input" />
           <input
                   id="id_check"
                   type="button"
                   value="이메일 중복 확인"
-                  formaction="/members/overlapping"
           />
         </div>
         <div>
@@ -162,6 +178,11 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         </div>
         <div>
           <input type="text" placeholder="닉네임" name="nickName" id="usern" />
+          <input
+                  id="nickName_check"
+                  type="button"
+                  value="닉네임 중복 확인"
+          />
         </div>
         <br />
         <input
@@ -175,38 +196,9 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     </form>
   </div>
 </div>
-
-
+<script type="module" src="/assets/js/signUp.js"></script>
     <script>
-      /*
-      const $email = document.getElementById("email-input");
-      const pattern2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
-      const $emailLabel = document.querySelector(".emailwarn");
-
-
-      $email.onblur = function (e) {
-
-        if (!pattern2.test($email.value)) {
-
-          $emailLabel.style.display = "";
-        }else {
-
-          $emailLabel.style.display = "none";
-        }
-
-      };
-      export const checkAvailability = async (email) => {
-        const response = await fetch(
-                `http://localhost:8181/members/check?type=${email}`
-        );
-        const flag = await response.json();
-        return !flag; // 논리 반전해서 리턴 -> 중복됐으면 false로 해석하기 위해.
-      };
-
-      const isAvailable = await checkAvailability("account", value);
-*/
-
-      // 프로필 사진 업로드 관련 스크립트  --->
+            // 프로필 사진 업로드 관련 스크립트  --->
       const $profile = document.querySelector(".profile");
       const $fileInput = document.getElementById("profile-img");
 

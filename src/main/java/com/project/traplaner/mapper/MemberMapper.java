@@ -8,6 +8,7 @@ public interface MemberMapper {
 
     boolean save(Member member);
 
-    boolean overlapping(String email);
+    boolean duplicateTest(String type, String keyword);
 
+    Member findOne(String email);
 }

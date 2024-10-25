@@ -33,7 +33,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         font-size: 10px;
         color: white;
     }
-    
+
     .item {
         width: 100px;
         height: 100px;
@@ -46,7 +46,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 */
     </style>
   <body>
-        
+
     <div>
     <!-- 프로필 사진-->
     <div class="profile-box">
@@ -67,7 +67,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     </div>
     <div>
     <h2 class="intro-text">
-        Welcome!!! ${sessionScope.login == null ? '': login.name}
+        Welcome!!! ${sessionScope.login == null ? '': login.nickname}
     </h2>
 </div>
 </div>
