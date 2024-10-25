@@ -86,5 +86,13 @@ public class MyPageBoardController {
         return ResponseEntity.ok().body("success");
     }
 
+    @GetMapping("/my-page/favorite/{memberId}")
+    public String favorite(@PathVariable int memberId){
+
+
+
+        return "member/favorite";
+    }
+
 
 }
