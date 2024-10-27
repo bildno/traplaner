@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface TravelMapper {
+
     void saveTravel(Travel travel);
 
     void postJourney(Journey journey);

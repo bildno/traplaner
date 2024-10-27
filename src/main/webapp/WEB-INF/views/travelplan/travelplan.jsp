@@ -5,7 +5,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Traplan</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+    />
     <style>
         html {
             height: 100vh;
@@ -33,19 +37,96 @@
             padding: 5%;
             font-size: larger;
         }
-        #map-info {
-            width: 70%;
-            border: 3px solid skyblue;
+        #travel-name input{
+            height: 40px;
+            width: 300px;
+            font-size:15px
         }
+
         #travel-info-container {
             margin: 5%;
+            height: 95%;
+            overflow: hidden;
         }
         #travel-period h3 {
             display: block;
         }
         #calendar{
-
+            font-size: 9px;
+            width: 90%;
+            margin: 5%;
+            cursor: pointer;
         }
+        #map-info {
+            width: 70%;
+            border: 3px solid skyblue;
+        }
+        #day-select{
+            display: none;
+        }
+        .form-container {
+            background-color: #F2F1F1;
+            padding: 20px;
+            display: none;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            width: 60px;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="file"] {
+            flex: 1;
+            padding: 5px;
+            font-size: 14px;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+        .form-actions button {
+            padding: 5px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .submit-btn {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+        .cancel-btn {
+            background-color: #f44336;
+            color: #fff;
+        }
+        #location{
+            margin-right: 10px;
+        }
+        #journey-display{
+            height: 250px;
+            margin-bottom: 10px;
+            overflow: scroll;
+            display: none;
+        }
+        #save-journey{
+            background-color: #F2F1F1;
+            margin-top: 10px;
+            padding: 5px;
+            display: none;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .fas{
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <html>
@@ -55,65 +136,127 @@
 <div class="container">
     <div id="travel-info">
         <div id="travel-info-container">
-            <div id="travel-name">세계 여행</div>
+            <div id="travel-name">
+                <input placeholder="이번 여행의 이름을 지어주세요!">
+            </div>
             <div id="calendar"></div>
             <div id="travel-period">
-                <h3>여행기간</h3>
-                <p>2024년 10월 22일 ~ 2024년 10월 30일</p>
+                <h3>여행기간 &nbsp <i class="fas fa-calendar"></i></h3>
+                <p>달력을 드래그해주세요!</p>
             </div>
+            <select id="day-select"> </select>
+            <div id="journey-display">
 
-
+            </div>
+            <div class="form-container">
+            <form>
+                <div class="form-group">
+                    <label for="time">시간</label>
+                    <input type="time" id="time" name="time">
+                </div>
+                <div class="form-group">
+                    <label for="schedule">일정 제목</label>
+                    <input type="text" id="schedule" name="schedule">
+                </div>
+                <div class="form-group">
+                    <label for="location">장소</label>
+                    <input type="text" id="location" name="location">
+                    <button id="location-btn">입력</button>
+                </div>
+                <div class="form-group">
+                    <label for="budget">예산</label>
+                    <input type="text" id="budget" name="budget">
+                    ₩
+                </div>
+                <div class="form-group">
+                    <label for="reservation">예약</label>
+                    <input type="file" id="reservation" name="reservation">
+                </div>
+            </form>
         </div>
+            <div id="save-journey">
+                <img src="/assets/img/add_circle.png">
+            </div>
+        </div>
+
     </div>
     <div id="map-info">
-        <div id="googleMap" style="width: 100%; height: 100%"></div>
+        <div id="map" style="width: 100%; height: 100%"></div>
     </div>
 </div>
 </body>
+<%--스크립트문--%>
+<script type="module" src="/assets/js/travelplan.js"></script>
 
-
+<!-- 구글 맵 부트스트랩 로더 -->
+<script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&loading=async&libraries=geometry,marker,places,localContext&callback=initMap">
+</script>
 <script>
 
+    // 구글 맵 구현부분
+    let map;
+    const $location = document.querySelector("#location");
+    const $locationBtn = document.querySelector("#location-btn")
 
-    let period =[];
-    function myMap() {
-        var mapOptions = {
-            center: new google.maps.LatLng(51.508742, -0.12085),
-            zoom: 5,
-        };
-
-        var map = new google.maps.Map(
-            document.getElementById("googleMap"),
-            mapOptions
-        );
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'ko',
-                dateClick: function(info) {
-                    alert('Clicked on: ' + info.dateStr);
-                    alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-                    alert('Current view: ' + info.view.type);
-                    // change the day's background color just for fun
-                    info.dayEl.style.backgroundColor = 'red';
-                }
-            });
-
-            calendar.render();
+    function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center:  { lat:37.564214, lng:127.001699 },
+            zoom: 10,
+            mapId: "DEMO_MAP_ID",
         });
-
-
-
     }
+    async function findPlaces(text) {
+        const { Place } = await google.maps.importLibrary("places");
+        //@ts-ignore
+        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+        const request = {
+            textQuery: text,
+            fields: ["displayName", "location","id","formattedAddress"],
+            language: "ko",
+        maxResultCount: 1,
+        };
+        //@ts-ignore
+        const { places } = await Place.searchByText(request);
+
+        if (places.length) {
+
+            const { LatLngBounds } = await google.maps.importLibrary("core");
+            const bounds = new LatLngBounds();
+            // Loop through and get all the results.
+            places.forEach((place) => {
+                //data-set에 정보 넣기
+                console.log(place);
+                $location.setAttribute("data-placeId", place.id)
+                $location.setAttribute("data-address", place.formattedAddress)
+                const markerView = new AdvancedMarkerElement({
+                    map,
+                    position: place.location,
+                    title: place.displayName,
+                });
+
+                bounds.extend(place.location);
+                console.log(place);
+            });
+            map.setCenter(bounds.getCenter());
+            map.zoom = 20;
+        } else {
+            console.log("No results");
+        }
+    }
+    window.initMap = initMap;
+
+
+    $locationBtn.addEventListener("click",(e)=>{
+        e.preventDefault();
+        findPlaces($location.value).then(r => {
+        });
+    })
+
 </script>
+<!-- 풀캘린더 로더 -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-<script src="fullcalendar/lib/locales-all.js"></script>
-<script src='fullcalendar/dist/index.global.js'></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&callback=myMap"></script>
-
-
+<%--<script src="fullcalendar/lib/locales-all.js"></script>--%>
+<%--<script src='fullcalendar/dist/index.global.js'></script>--%>
 </html>
 
