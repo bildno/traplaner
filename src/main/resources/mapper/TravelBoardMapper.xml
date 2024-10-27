@@ -5,18 +5,30 @@
 <mapper namespace="com.project.traplaner.mapper.TravelBoardMapper">
 
     <sql id="search">
-        <if test="type == 'title'">
-            WHERE t.title LIKE CONCAT('%', #{keyword}, '%')
+        <if test="page.option == 'title'">
+            WHERE t.title LIKE CONCAT('%', #{page.keyword}, '%')
         </if>
-        <if test="type == 'content'">
-            WHERE tb.content LIKE CONCAT('%', #{keyword}, '%')
+        <if test="page.option == 'content'">
+            WHERE tb.content LIKE CONCAT('%', #{page.keyword}, '%')
         </if>
-        <if test="type == 'writer'">
-            WHERE m.nick_name LIKE CONCAT('%', #{keyword}, '%')
+        <if test="page.option == 'writer'">
+            WHERE m.nick_name LIKE CONCAT('%', #{page.keyword}, '%')
         </if>
-        <if test="type == 'tc'">
-            WHERE t.title LIKE CONCAT('%', #{keyword}, '%')
-            OR tb.content LIKE CONCAT('%', #{keyword}, '%')
+        <if test="page.option == 'tc'">
+            WHERE t.title LIKE CONCAT('%', #{page.keyword}, '%')
+            OR tb.content LIKE CONCAT('%', #{page.keyword}, '%')
+        </if>
+    </sql>
+
+    <sql id="arrange">
+        <if test="arrange.type == 'new'">
+            ORDER BY tb.write_date DESC
+        </if>
+        <if test="arrange.type == 'old'">
+            ORDER BY tb.write_date ASC
+        </if>
+        <if test="arrange.type == 'best'">
+            ORDER BY likeCount DESC
         </if>
     </sql>
 
@@ -26,15 +38,16 @@
         t.id,
         t.title AS short_title,
         m.nick_name AS writer,
-        tb.write_date
+        tb.write_date,
+        COUNT(f.member_id) AS likeCount
         FROM tbl_member AS m
         JOIN tbl_travel AS t ON m.id = t.member_id
         JOIN tbl_travel_board AS tb ON t.id = tb.travel_id
         LEFT JOIN tbl_favorite AS f ON tb.id = f.travel_board_id
         <include refid="search" />
         GROUP BY tb.id, m.nick_name, t.id, t.title, tb.write_date, tb.content
-        ORDER BY write_date ASC
-        LIMIT #{pageStart}, #{amount}
+        <include refid="arrange" />
+        LIMIT #{page.pageStart}, #{page.amount}
     </select>
 
     <!-- 게시물 상세조회: 제목, 작성자, 작성일, 내용, 좋아요수 -->

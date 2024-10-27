@@ -16,6 +16,7 @@ public class TravelBoardListResponseDTO {
     private String shortTitle;
     private String writer;
     private String writeDate;
+    private int likeCount;
 
     public TravelBoardListResponseDTO(TravelBoardDetailResponseDTO board) {
         this.shortTitle = makeShortTitle(board.getTitle());

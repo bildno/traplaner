@@ -108,7 +108,7 @@
                     <div class="search">
                         <!-- 검색창 영역 -->
                         <form action="/travelboard/list" method="get" name="search" id="find">
-                            <select class="form-select" name="type" id="search-type">
+                            <select class="form-select" name="search.option" id="search-type">
                                 <option value="title">제목</option>
                                 <option value="content">내용</option>
                                 <option value="writer">작성자</option>
@@ -119,8 +119,8 @@
                             <button type="submit" id="searching">검색</button>
                         </form>
                         <!-- 최신순, 과거순, 좋아요순 -->
-                        <form action="/travelboard/list" method="get" id="option">
-                            <select class="form-select" name="type" id="select-type">
+                        <form action="/travelboard/list" method="get" name="arrange" id="option">
+                            <select class="form-select" name="arrange.type" id="select-type">
                                 <option value="new">최신순</option>
                                 <option value="old">과거순</option>
                                 <option value="best">좋아요순</option>
