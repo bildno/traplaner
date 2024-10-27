@@ -30,7 +30,6 @@
 
                 #find {
                     flex-direction: row;
-                    border-radius: 40%;
                 }
 
                 .form-control {
@@ -51,13 +50,14 @@
 
                 #list {
                     position: relative;
-                    left: 190px;
-                    top: 50px;
+                    left: auto;
+                    top: auto;
                     width: 100%;
                 }
 
                 .list-container {
                     width: 600px;
+                    place-items: center;
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
                     grid-template-rows: minmax(100px, auto);

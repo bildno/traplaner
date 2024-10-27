@@ -45,7 +45,7 @@
         tb.member_nick_name AS writer,
         tb.write_date,
         tb.content,
-        (SELECT COUNT(*) FROM tbl_favorite WHERE travel_board_id) AS likeCount
+        (SELECT COUNT(*) FROM tbl_favorite WHERE travel_board_id=#{id}) AS likeCount
         FROM tbl_travel t
         JOIN tbl_travel_board tb
         ON t.id = tb.travel_id
