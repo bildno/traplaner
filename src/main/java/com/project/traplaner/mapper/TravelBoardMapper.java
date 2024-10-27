@@ -1,12 +1,9 @@
 package com.project.traplaner.mapper;
 
-import com.project.traplaner.entity.TravelBoard;
-import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
