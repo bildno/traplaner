@@ -25,16 +25,17 @@ public class TravelBoardController {
     private final TravelBoardService travelBoardService;
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<TravelBoardListResponseDTO> all = travelBoardService.findAll();
-        model.addAttribute("tbList", all);
+    public String list(Model model, @ModelAttribute("s") SearchDTO page) {
+        Map<String, Object> map = travelBoardService.getList(page);
+        model.addAttribute("tbList", map.get("tbList"));
+        model.addAttribute("maker", map.get("pm"));
         System.out.println("목록");
         return "travelBoard/list";
     }
 
     @GetMapping("/info/{id}")
     public String info(Model model, @PathVariable("id") int id, @ModelAttribute TravelBoardDetailResponseDTO travelBoardDetailResponseDTO) {
-        TravelBoardDetailResponseDTO one = travelBoardService.findOne(id);
+        TravelBoardDetailResponseDTO one = travelBoardService.getOne(id);
         model.addAttribute("tOne", one);
         System.out.println("글");
         return "travelBoard/info";

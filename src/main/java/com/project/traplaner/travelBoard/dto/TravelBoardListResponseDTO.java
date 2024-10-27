@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TravelBoardListResponseDTO {
-    private String id;
+    private int id;
     private String shortTitle;
     private String writer;
     private String writeDate;
@@ -20,6 +20,7 @@ public class TravelBoardListResponseDTO {
     public TravelBoardListResponseDTO(TravelBoardDetailResponseDTO board) {
         this.shortTitle = makeShortTitle(board.getTitle());
         this.writer = board.getWriter();
+        this.writeDate = board.getWriteDate();
     }
 
     public static String makePrettierDateString(LocalDateTime writeDate) {
@@ -28,7 +29,7 @@ public class TravelBoardListResponseDTO {
     }
 
     private String makeShortTitle(String title) {
-        return sliceString(title, 10);
+        return sliceString(title, 8);
     }
 
     private String sliceString(String target, int wishLength) {

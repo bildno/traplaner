@@ -25,7 +25,6 @@
                 #option {
                     flex-direction: row;
                     margin-right: 8px;
-                    margin-top: 1px;
                 }
 
                 #find {
@@ -37,7 +36,8 @@
                     width: 200px;
                 }
 
-                #select-type {
+                #select-type,
+                #search-type {
                     height: 23px;
                     width: 100px;
                 }
@@ -69,6 +69,30 @@
                     height: 240px;
                     border-radius: 1%;
                 }
+
+                /* 페이지 스타일 */
+                /* pagination style */
+                .bottom-section {
+                    display: flex;
+                    width: fit-content;
+                    margin: 0 auto;
+                }
+
+                .bottom-section nav {
+                    flex: 1;
+                    justify-content: center;
+                }
+
+
+                .pagination-custom a {
+                    color: #444 !important;
+                }
+
+                .pagination-custom li.active a,
+                .pagination-custom li:hover a {
+                    background: #333 !important;
+                    color: #fff !important;
+                }
             </style>
 
         </head>
@@ -79,17 +103,17 @@
 
 
             <!-- 검색창 영역 -->
-            <div class="search">
+            <div class="top-section">
                 <fieldset id="field">
                     <div class="search">
                         <!-- 검색창 영역 -->
                         <form action="/travelboard/list" method="get" name="search" id="find">
-                            <!-- <select class="form-select" name="type" id="search-type">
+                            <select class="form-select" name="type" id="search-type">
                                 <option value="title">제목</option>
                                 <option value="content">내용</option>
                                 <option value="writer">작성자</option>
                                 <option value="tc">제목+내용</option>
-                            </select> -->
+                            </select>
                             <input placeholder="제목, 작성자, 내용" type="search" class="form-control" name="keyword"
                                 value="${s.keyword}" autocomplete="off">
                             <button type="submit" id="searching">검색</button>
@@ -110,7 +134,7 @@
             <main id="list">
                 <div class="list-container">
                     <c:forEach var="tb" items="${tbList}">
-                        <a href="localhost:8181/travelboard/info/${tOne.id}">
+                        <a href="localhost:8181/travelboard/info/${tb.id}">
                             <img src="/assets/img/disneyland_hongkong.jpg" alt="여행이미지" class="image"> <br>
                             ${tb.shortTitle} <br>
                             ${tb.writer} <br>
@@ -119,6 +143,37 @@
                     </c:forEach>
                 </div>
             </main>
+
+            <!-- 게시글 목록 하단 영역 -->
+            <div class="bottom-section">
+                <!-- 페이지 버튼 영역 -->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-lg pagination-custom">
+                        <c:if test="${maker.prev}">
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="/travelboard/list?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
+                            </li>
+                        </c:if>
+
+                        <!-- step은 기본값이 1, 생략 가능 -->
+                        <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
+                            <li data-page-num="${i}" class="page-item">
+                                <a class="page-link"
+                                    href="/travelboard/list?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
+                            </li>
+                        </c:forEach>
+
+
+                        <c:if test="${maker.next}">
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="/travelboard/list?pageNo=${maker.end + 1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
+                            </li>
+                        </c:if>
+                    </ul>
+                </nav>
+            </div>
 
         </body>
 
