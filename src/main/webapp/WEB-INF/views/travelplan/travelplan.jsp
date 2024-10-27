@@ -17,7 +17,7 @@
         .container {
             display: flex;
             width: 90%;
-            height: 90%;
+            height: 93%;
             border: 2px solid skyblue;
             position: absolute;
             left: 50%;
@@ -126,6 +126,14 @@
         .fas{
             cursor: pointer;
         }
+        #save-travel{
+            color: white;
+            background-color: black;
+            display: none;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-left: 90%;
+        }
 
     </style>
 </head>
@@ -177,7 +185,9 @@
             <div id="save-journey">
                 <img src="/assets/img/add_circle.png">
             </div>
+            <button id="save-travel">저장</button>
         </div>
+
 
     </div>
     <div id="map-info">

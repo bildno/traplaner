@@ -48,6 +48,7 @@ async function calendarRender(){
             document.querySelector(".form-container").style.display = "block";
             document.querySelector("#save-journey").style.display = "flex";
             document.querySelector("#journey-display").style.display = "block";
+            document.querySelector("#save-travel").style.display = "block";
             addOpt(diffDays);
         }
     });
@@ -147,6 +148,19 @@ document.querySelector("#journey-display").addEventListener(
 document.querySelector(".fas").addEventListener("click",()=>{
     document.getElementById('calendar').style.display="block";
     calendarRender().then(r => {});
+})
+
+document.getElementById("save-travel").addEventListener("click",()=>{
+    data.travel.title = document.getElementById("travel-name").value;
+    const json = JSON.stringify(data);
+    fetch("travelplan", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: {json},
+
+    }).then(r => {})
 })
 
 
