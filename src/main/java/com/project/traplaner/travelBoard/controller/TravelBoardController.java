@@ -25,7 +25,6 @@ public class TravelBoardController {
         Map<String, Object> map = travelBoardService.getList(page);
         model.addAttribute("tbList", map.get("tbList"));
         model.addAttribute("maker", map.get("pm"));
-        System.out.println("목록");
         return "travelBoard/list";
     }
 
@@ -33,7 +32,6 @@ public class TravelBoardController {
     public String info(Model model, @PathVariable("id") int id) {
         TravelBoardDetailResponseDTO one = travelBoardService.getOne(id);
         model.addAttribute("tOne", one);
-        System.out.println("글");
         return "travelBoard/info";
     }
 
