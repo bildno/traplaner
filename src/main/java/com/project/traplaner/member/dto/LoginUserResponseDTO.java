@@ -1,8 +1,11 @@
 package com.project.traplaner.member.dto;
 
+import com.project.traplaner.main.dto.TopThreeFavoriteTravelDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.util.List;
 
 @Getter @ToString @Builder
 public class LoginUserResponseDTO {
@@ -12,4 +15,6 @@ public class LoginUserResponseDTO {
     private String loginMethod;
     private String profile;
 
+    // 10/28, by jhjeong
+    private List<TopThreeFavoriteTravelDto> topThreeFavoriteTravelDtoList;
 }

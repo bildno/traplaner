@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -68,14 +68,35 @@
             </c:if>
             <li class="nav-item">
               <!--a class="nav-link disabled" href="/members/sign-in" aria-disabled="true">로그인</a-->
-
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
+    <!---------------------login 디버깅 출력 ------------------------>
+    <br /><br /><br /><br />
+    <c:if test="${login != null && login.profile != null}">
+      <c:if test="${not empty login.topThreeFavoriteTravelDtoList}">
+        <ul>
+          <c:forEach items="${login.topThreeFavoriteTravelDtoList}" var="travel">
+            <li>
+              <strong>Title:</strong> ${travel.title} <br /> <strong>Member Nickname:</strong> ${travel.memberNickName}
+              <br /> <strong>Like Count:</strong> ${travel.likeCount} <br /> <strong>Content:</strong> ${travel.content}
+              <br /> <strong>Travel Image:</strong> ${travel.travelImg}
+            </li>
+          </c:forEach>
+        </ul>
+      </c:if>
 
+      private int id; // 여행 ID private int memberId; // 회원 ID private String memberNickName; // 회원 닉네임 private
+      String title; // 여행 제목 private String travelImg; // 여행 이미지 URL private Integer likeCount; // 좋아요 수
+      private String content; // 여행 게시판 내용
+
+      <img src="/display${login.profile}" alt="프사" style="width: 30px" class="rounded-pill" />
+    </c:if>
+
+    <!---------------------login 디버깅 출력 ------------------------>
 
     <!------------------ 추천 여행지 carousel ----------------------->
     <div id="demo" class="carousel slide mt-5" data-bs-ride="carousel">
@@ -107,7 +128,6 @@
       </div>
     </div>
 
-
     <!--------------------- My여행추가, My여행목록 ----------------------->
     <div class="container mt-4">
       <div class="row">
@@ -124,27 +144,27 @@
           </div>
         </div>
 
-
-        <div class="col-sm-4">
-          <div class="card p-1">
-            <img src="/assets/img/홍콩-250x140.jpg" alt="" class="card-img-top" />
-            <div class="card-img-overlay">
-              <h4 class="card-title text-white">홍콩</h4>
-              <p class="card-text text-white">침사추이, 몽콕, 스탠리, 빅토리아피크, 망고쥬스</p>
+        <c:if test="${login != null && login.profile != null}">
+          <div class="col-sm-4">
+            <div class="card p-1">
+              <img src="/assets/img/홍콩-250x140.jpg" alt="" class="card-img-top" />
+              <div class="card-img-overlay">
+                <h4 class="card-title text-white">홍콩</h4>
+                <p class="card-text text-white">침사추이, 몽콕, 스탠리, 빅토리아피크, 망고쥬스</p>
+              </div>
             </div>
           </div>
-        </div>
 
-
-        <div class="col-sm-4">
-          <div class="card p-1">
-            <img src="/assets/img/부산-250x140.jpg" alt="" class="card-img-top" />
-            <div class="card-img-overlay">
-              <h4 class="card-title text-white">부산-마이뭇다아이가</h4>
-              <p class="card-text text-white">해운대, 광안리, 국제시장, 자갈치시장, 서면</p>
+          <div class="col-sm-4">
+            <div class="card p-1">
+              <img src="/assets/img/부산-250x140.jpg" alt="" class="card-img-top" />
+              <div class="card-img-overlay">
+                <h4 class="card-title text-white">부산-마이뭇다아이가</h4>
+                <p class="card-text text-white">해운대, 광안리, 국제시장, 자갈치시장, 서면</p>
+              </div>
             </div>
           </div>
-        </div>
+        </c:if>
       </div>
     </div>
   </body>

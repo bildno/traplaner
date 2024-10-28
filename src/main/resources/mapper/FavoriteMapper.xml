@@ -15,4 +15,17 @@
 
     </select>
 
+    <!-- 10/28 by jhjeong -->
+    <insert id="save">
+        INSERT INTO
+            tbl_favorite(
+                member_id,
+                travel_board_id
+            )
+        VALUES(
+            #{memberId},
+            #{travelBoardId}
+        )
+    </insert>
+
 </mapper>

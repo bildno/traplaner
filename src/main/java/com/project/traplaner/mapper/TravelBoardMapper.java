@@ -20,4 +20,7 @@ public interface TravelBoardMapper {
 
     // 검색 게시물 개수 카운트
 //    int getTotalCount(PageDTO page);
+
+    // 10/28 by jhjeong
+    void save(TravelBoard travelBoard);
 }

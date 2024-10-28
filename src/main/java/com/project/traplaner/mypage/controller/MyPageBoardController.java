@@ -1,6 +1,5 @@
 package com.project.traplaner.mypage.controller;
 
-import com.project.traplaner.entity.Favorite;
 import com.project.traplaner.mypage.dto.response.FavoriteListResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
@@ -61,7 +60,7 @@ public class MyPageBoardController {
     @GetMapping("/tempMain")
     public String tempMain() {
 
-        return "main";
+        return "old-main";
     }
 
     @PostMapping("/my-page/shareIs/{boardId}")

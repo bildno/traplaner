@@ -73,6 +73,10 @@ public class MemberController {
             @RequestParam String type,
             @RequestParam String keyword) {
 
+        System.out.println("============================");
+        System.out.println("type = " + type);
+        System.out.println("keyword = " + keyword);
+
         boolean flag = memberService.duplicateTest(type, keyword);
         return ResponseEntity.ok()
                 .body(flag);

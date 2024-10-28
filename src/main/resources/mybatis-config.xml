@@ -14,8 +14,10 @@
 
     <typeAliases>
         <!-- 엔터티 클래스 별칭 붙이기 -->
-        <typeAlias type="com.project.traplaner.entity.Member"/>
+        <typeAlias type="com.project.traplaner.entity.Member" alias="member"/>
         <typeAlias type="com.project.traplaner.entity.TravelBoard" alias="travelboard" />
+        <!-- 10/28 by jhjeong -->
+        <typeAlias type="com.project.traplaner.entity.Travel" alias="travel" />
     </typeAliases>
 
     <mappers>
@@ -23,7 +25,8 @@
         <mapper resource="mapper/TravelBoardMapper.xml" />
         <mapper resource="mapper/mypageMapper.xml"/>
         <mapper resource="mapper/FavoriteMapper.xml"/>
-
+        <!-- 10/28 by jhjeong -->
+        <mapper resource="mapper/TravelMapper.xml"/>
     </mappers>
 
 </configuration>

@@ -13,9 +13,10 @@ public interface FavoriteMapper {
 
     List<FavoriteListResponseDTO> favorite_List(int memberId);
 
+    // 10/28 by jhjeong
+    void save(Favorite favorite);
 
 
-
-public interface FavoriteMapper {
+//public interface FavoriteMapper {
 
 }

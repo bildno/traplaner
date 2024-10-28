@@ -68,4 +68,20 @@
 <!--        SELECT COUNT(*) FROM tbl_favorite WHERE travel_board_id-->
 <!--    </select>-->
 
+    <!-- 10/28 by jhjeong -->
+    <insert id="save">
+        INSERT INTO
+            tbl_travel_board(
+                travel_id,
+                member_nick_name,
+                write_date,
+                content
+            )
+        VALUES(
+            #{travelId},
+            #{memberNickName},
+            #{writeDate},
+            #{content}
+        )
+    </insert>
 </mapper>
