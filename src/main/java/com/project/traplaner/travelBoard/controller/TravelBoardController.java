@@ -1,6 +1,5 @@
 package com.project.traplaner.travelBoard.controller;
 
-import com.project.traplaner.travelBoard.dto.ArrangeDTO;
 import com.project.traplaner.travelBoard.dto.SearchDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO;
 import com.project.traplaner.travelBoard.service.TravelBoardService;
@@ -21,9 +20,9 @@ public class TravelBoardController {
     private final TravelBoardService travelBoardService;
 
     @GetMapping("/list")
-    public String list(Model model, @ModelAttribute("s") SearchDTO page, @ModelAttribute("a") ArrangeDTO arrange) {
+    public String list(Model model, @ModelAttribute("s") SearchDTO page) {
 
-        Map<String, Object> map = travelBoardService.getList(page, arrange);
+        Map<String, Object> map = travelBoardService.getList(page);
         model.addAttribute("tbList", map.get("tbList"));
         model.addAttribute("maker", map.get("pm"));
         System.out.println("목록");
