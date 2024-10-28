@@ -1,5 +1,6 @@
 package com.project.traplaner.mypage.controller;
 
+import com.project.traplaner.entity.Member;
 import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.mypage.dto.ModifyMemberInfoDTO;
 import com.project.traplaner.mypage.dto.response.FavoriteListResponseDTO;
@@ -116,7 +117,7 @@ public class MyPageController {
         boolean b = memberService.updateInfo(dto);
 
 
-        System.out.println(dto.getNewPw()+"23232323");
+
         if (b) {
             return ResponseEntity.ok().body("success");
         } else {
@@ -125,9 +126,25 @@ public class MyPageController {
 
 
     }
+
+
+    @PostMapping("/my-page/nickNameChk/{newNick}")
+    public ResponseEntity<?> nickNameChk(@PathVariable String newNick) {
+        String type = "nickname";
+
+        boolean b = memberService.duplicateTest(type, newNick);
+        System.out.println(b);
+        if (!b) {
+            System.out.println("트루");
+             return ResponseEntity.ok().body("success");
+        }else {
+            System.out.println("폴스");
+            return ResponseEntity.badRequest().body("fail");
+        }
+
+    }
+
 }
 
-//    @PostMapping("/my-page/nickNameChk")
-//    public String nickNameChk() {}
-//
-//}
+
+

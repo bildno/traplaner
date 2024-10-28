@@ -133,7 +133,7 @@
                              style="width: 250px; border-radius: 50%; margin-bottom: 50px; margin-top: 30px"
                              class="rounded-pill"/>
                     </c:if>
-
+                    <input type="email" value="${login.email}" readonly style="border: none; outline: none" >
                     <input id="newPw" placeholder="새 비밀번호" type="password">
                     <input id="pwChk" placeholder="비밀번호 확인" type="password">
                     <div style="text-align: center">
@@ -207,20 +207,32 @@
     }
 
     function checkNick(id){
-    url="http://localhost:8181/my-page/nickNameChk" + id;
-        if(newNick == null){
+
+        if(newNick.value === ""){
             newNick.value = ${login.nickName}
         }
 
+
+        url="http://localhost:8181/my-page/nickNameChk/"+ newNick.value;
 
     fetch(url, {
         method: "POST",
     })
 
+        .then(res =>{
+            console.log(res.body)
+            console.log(res.status)
+            if(res.status === 200){
+                alert("사용가능한 닉네임입니다.")
+            }else {
+                alert("중복된 닉네임 입니다.")
+            }
+        })
 
     }
 
 </script>
 </body>
 </html>
+
 

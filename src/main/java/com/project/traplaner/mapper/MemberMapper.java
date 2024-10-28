@@ -14,4 +14,5 @@ public interface MemberMapper {
     Member findOne(String email);
 
     boolean update(Member member);
+
 }
