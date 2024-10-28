@@ -1,7 +1,10 @@
 package com.project.traplaner.mypage.service;
 
+import com.project.traplaner.entity.Favorite;
 import com.project.traplaner.entity.Travel;
+import com.project.traplaner.mapper.FavoriteMapper;
 import com.project.traplaner.mapper.MyPageBoardMapper;
+import com.project.traplaner.mypage.dto.response.FavoriteListResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
 import lombok.AllArgsConstructor;
@@ -17,9 +20,10 @@ import java.util.stream.Collectors;
 public class MyPageBoardService {
 
     private final MyPageBoardMapper myPageBoardMapper;
+    private final FavoriteMapper favoriteMapper;
 
 
-    public List<TravelListResponseDTO> getList(int memberId){
+    public List<TravelListResponseDTO> getList(int memberId) {
 
         List<Travel> travels = myPageBoardMapper.selectTravelById(memberId);
         List<TravelListResponseDTO> dtoList = travels.stream()
@@ -29,7 +33,7 @@ public class MyPageBoardService {
         return dtoList;
     }
 
-    public List<TravelBoardResponseDTO> getTravelList(String nickName){
+    public List<TravelBoardResponseDTO> getTravelList(String nickName) {
         List<TravelBoardResponseDTO> dtoList = myPageBoardMapper.selectTravelBoardByNickName(nickName);
 
         dtoList.forEach(dto -> {
@@ -41,13 +45,26 @@ public class MyPageBoardService {
         return dtoList;
     }
 
-   public void updateShare(int id){
+    public void updateShare(int id) {
         myPageBoardMapper.updateShare(id);
-   }
+    }
 
-   public void deleteBoard(int boardId){
+    public void deleteBoard(int boardId) {
         myPageBoardMapper.deleteTravelByMemberOrder(boardId);
-   }
+    }
+
+    public List<FavoriteListResponseDTO> favorite(int memberId) {
+
+        List<FavoriteListResponseDTO> favorites = favoriteMapper.favorite_List(memberId);
+
+        favorites.forEach(dto -> {
+            dto.setFormatDate(FavoriteListResponseDTO.makeDateStringFomatter(dto.getWriteDate()));
+
+        });
+
+
+        return favorites;
+    }
 
 }
 

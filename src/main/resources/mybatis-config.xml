@@ -22,6 +22,7 @@
         <mapper resource="mapper/MemberMapper.xml"/>
         <mapper resource="mapper/TravelBoardMapper.xml" />
         <mapper resource="mapper/mypageMapper.xml"/>
+        <mapper resource="mapper/FavoriteMapper.xml"/>
 
     </mappers>
 

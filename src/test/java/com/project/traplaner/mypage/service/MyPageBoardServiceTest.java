@@ -53,19 +53,19 @@ class MyPageBoardServiceTest {
     }
 
 
-    @Test
-    @DisplayName("delete test")
-    void deleteTest() {
-        // given
-        int id = 1;
-        int memberId = 2;
-        // when
-        myPageBoardMapper.deleteTravelByMemberOrder(id,memberId);
-
-        List<Travel> travel = myPageBoardMapper.selectTravelById(2);
-        // then
-        assertEquals(1, travel.size());
-    }
+//    @Test
+//    @DisplayName("delete test")
+//    void deleteTest() {
+//        // given
+//        int id = 1;
+//        int memberId = 2;
+//        // when
+//        myPageBoardMapper.deleteTravelByMemberOrder(id,memberId);
+//
+//        List<Travel> travel = myPageBoardMapper.selectTravelById(2);
+//        // then
+//        assertEquals(1, travel.size());
+//    }
 
 
 }

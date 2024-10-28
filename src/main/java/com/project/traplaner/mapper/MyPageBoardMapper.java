@@ -18,4 +18,6 @@ public interface MyPageBoardMapper {
     List<TravelBoardResponseDTO> selectTravelBoardByNickName(String nickName);
 
     void updateShare(Integer id);
+
+
 }
