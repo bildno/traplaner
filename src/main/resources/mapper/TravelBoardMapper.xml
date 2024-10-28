@@ -34,7 +34,17 @@
         LEFT JOIN tbl_favorite AS f ON tb.id = f.travel_board_id
         <include refid="search"/>
         GROUP BY tb.id, m.nick_name, t.id, t.title, tb.write_date, tb.content
-        ORDER BY tb.write_date DESC
+        <choose>
+            <when test="sortType == 'new'">
+                ORDER BY tb.write_date DESC
+            </when>
+            <when test="sortType == 'old'">
+                ORDER BY tb.write_date ASC
+            </when>
+            <when test="sortType == 'best'">
+                ORDER BY likeCount DESC
+            </when>
+        </choose>
         LIMIT #{pageStart}, #{amount}
     </select>
 
