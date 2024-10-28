@@ -61,8 +61,6 @@
 <script src="fullcalendar/lib/locales-all.js"></script>
 
 
-<%@ include file="../header.jsp"%>
-
 <div class="container">
     <h1 id="mypage_h1">여행 일정</h1>
     <div class="mypage_section">
