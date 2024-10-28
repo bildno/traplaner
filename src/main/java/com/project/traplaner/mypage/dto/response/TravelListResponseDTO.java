@@ -27,7 +27,7 @@ public class TravelListResponseDTO {
     }
 
     private String makeDateStringFomatter(LocalDateTime startDate) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy. MM. dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return dtf.format(startDate);
     }
 
