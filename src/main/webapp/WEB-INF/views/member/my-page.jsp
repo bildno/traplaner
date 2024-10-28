@@ -70,8 +70,8 @@
 
 <%@ include file="../header.jsp" %>
 
+
 <div class="container">
-    <h1 id="mypage_h1">여행 일정</h1>
     <div class="mypage_section">
         <div class="mypage_section1">
             <c:if test="${login.profile == null}">
