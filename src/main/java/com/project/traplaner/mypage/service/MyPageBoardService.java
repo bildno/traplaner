@@ -1,8 +1,10 @@
 package com.project.traplaner.mypage.service;
 
 import com.project.traplaner.entity.Favorite;
+import com.project.traplaner.entity.Member;
 import com.project.traplaner.entity.Travel;
 import com.project.traplaner.mapper.FavoriteMapper;
+import com.project.traplaner.mapper.MemberMapper;
 import com.project.traplaner.mapper.MyPageBoardMapper;
 import com.project.traplaner.mypage.dto.response.FavoriteListResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
@@ -21,6 +23,7 @@ public class MyPageBoardService {
 
     private final MyPageBoardMapper myPageBoardMapper;
     private final FavoriteMapper favoriteMapper;
+    private final MemberMapper memberMapper;
 
 
     public List<TravelListResponseDTO> getList(int memberId) {

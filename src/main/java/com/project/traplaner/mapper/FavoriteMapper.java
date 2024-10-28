@@ -10,5 +10,5 @@ public interface FavoriteMapper {
 
 
     List<FavoriteListResponseDTO> favorite_List(int memberId);
-
 }
+

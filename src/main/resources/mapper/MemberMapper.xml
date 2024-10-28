@@ -24,4 +24,10 @@
         FROM tbl_member
         WHERE email = #{email}
     </select>
+
+
+    <update id="update">
+        update tbl_member set password = #{password}, nick_name= #{nickName} where id = #{id};
+    </update>
+
 </mapper>
