@@ -2,7 +2,11 @@ package com.project.traplaner.travelplan.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import com.project.traplaner.travelplan.dto.TravelPlanRequestDTO;
+import com.project.traplaner.travelplan.service.TravelService;
+import com.project.traplaner.util.FileUtils;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -17,6 +21,8 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 public class travelController {
+    private final TravelService travelService;
+
     @GetMapping("/travelplan")
     public String travelPlan() {
         return "travelplan/travelplan";
@@ -25,12 +31,15 @@ public class travelController {
 
     @PostMapping("/travelplan")
     public String travelSave(@RequestParam("data") String data,
-                             @RequestParam Map<String, MultipartFile> reservationFiles) throws JsonProcessingException {
+                             @RequestParam Map<String, MultipartFile> reservationFiles,
+                             HttpSession session
+                             ) throws JsonProcessingException {
 
         log.info("reservationFile: {}", reservationFiles);
 
         ObjectMapper objectMapper = new ObjectMapper();
         TravelPlanRequestDTO requestDTO = objectMapper.readValue(data, TravelPlanRequestDTO.class);
+
 
         for (Map.Entry<String, MultipartFile> entry : reservationFiles.entrySet()) {
             // 이미지 파일만 따로 Map으로 받았어요.
@@ -42,14 +51,16 @@ public class travelController {
             int journeyId = Integer.parseInt(key.split("_")[1]); // 0, 1, 2 ...
             requestDTO.getJourneys().get(journeyId).setReservationConfirmImagePath(file);
         }
-
         log.info("최종 dto 형태 보자: {}", requestDTO);
 
+
         //사용자 확인
+        LoginUserResponseDTO LoginDto
+                = (LoginUserResponseDTO) session.getAttribute("login");
 
-       //json 파싱
-
-       //서비스 로직으로 json 전달?
+        //서비스 로직으로 json 전환 데이터 전달?
+        travelService.saveTravel(requestDTO.getTravel(),LoginDto.getId());
+        travelService.saveJourneys(requestDTO.getJourneys());
 
         // 마이 페이지로 리턴
         return "travelplan/travelplan";

@@ -13,4 +13,5 @@ public interface TravelMapper {
 
     void updateJourney(Journey journey);
 
+    Integer getNextTravelId();
 }

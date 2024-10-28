@@ -5,12 +5,25 @@
 <mapper namespace="com.project.traplaner.mapper.MyPageBoardMapper">
 
     <insert id="saveTravel">
+        INSERT INTO travel (memberId,title, start_date, end_date)
+        VALUES (#{memberId}, #{title}, #{startDate}, #{endDate})
+    </insert>
+    <insert id="postJourney" parameterType="com.project.traplaner.entity.Journey">
+        INSERT INTO journey (
+        travel_id, accommodation_name, journey_name,
+        accommodation_road_address_name, start_time, end_time,
+        google_map_location_pin_information, reservation_confirm_image_path, budget
+        )
+        VALUES (
+        #{travelId}, #{location}, #{journeyName},
+        #{accommodationRoadAddressName}, #{startTime}, #{endTime},
+        #{googleMapLocationPinInformation}, #{reservationConfirmImagePath}, #{budget}
+        )
     </insert>
 
-    <insert id="postJourney">
-    </insert>
+    <select id="getNextTravelId" resultType="int">
+        SHOW TABLE STATUS LIKE 'tbl_travel'
+    </select>
 
-    <update id="updateJourney">
-    </update>
 
 </mapper>
