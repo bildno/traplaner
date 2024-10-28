@@ -48,7 +48,7 @@ async function calendarRender(){
             document.querySelector(".form-container").style.display = "block";
             document.querySelector("#save-journey").style.display = "flex";
             document.querySelector("#journey-display").style.display = "block";
-            document.querySelector("#save-travel").style.display = "block";
+            document.querySelector("#travel-info-footer").style.display = "flex";
             addOpt(diffDays);
         }
     });
@@ -63,7 +63,8 @@ function addJourney() {
     const day = parseInt($day.options[$day.selectedIndex].text.replace(/\D/g, ''))
     const date = data.travel.startDate;
     date.setDate(date.getDate()+day-1);
-    const time = document.getElementById('time').value;
+    const startTime = document.getElementById('start-time').value;
+    const endTime = document.getElementById('end-time').value;
     const title = document.getElementById('schedule').value;
     const location = document.getElementById('location').value;
     const locationId = document.getElementById('location').dataset.placeid;
@@ -75,7 +76,8 @@ function addJourney() {
         id: journeyId++, // 고유 ID 부여
         day,
         date,
-        time,
+        startTime,
+        endTime,
         title,
         location,
         locationId,
@@ -99,13 +101,13 @@ function updateJourneyView() {
             .forEach(journey => {
             const journeyItem = document.createElement('div');
             journeyItem.innerHTML = `
-        <p><strong>시간:</strong> ${journey.time}</p>
+        <p><strong>시간:</strong> ${journey.startTime} ~ ${journey.endTime}</p>
         <p><strong>일정 제목:</strong> ${journey.title}</p>
         <p><strong>장소:</strong> ${journey.location}</p>
         <p><strong>예산:</strong> ₩${journey.budget}</p>
         <p><strong>예약:</strong> ${journey.reservation}</p>
         <button data-id = ${journey.id}>x</button>
-      `;
+      `
             journeyItem.style.borderBottom = "1px solid black";
             journeyItem.style.marginBottom = '10px';
             journeyDisplay.appendChild(journeyItem);
@@ -113,10 +115,17 @@ function updateJourneyView() {
     } else {
         journeyDisplay.innerHTML = '<p>일정이 없습니다.</p>';
     }
+    const $budget = document.querySelector('#display-budget');
+    let budget =0;
+    data.journeys.forEach((journey) => {
+        budget += parseInt(journey.budget);
+    })
+    $budget.innerText = "총 예산: " + budget;
 }
 
 function clearForm() {
-    document.getElementById('time').value = '';
+    document.getElementById('start-time').value = '';
+    document.getElementById('end-time').value = '';
     document.getElementById('schedule').value = '';
     document.getElementById('location').value = '';
     document.getElementById('budget').value = '';
@@ -153,15 +162,17 @@ document.querySelector(".fas").addEventListener("click",()=>{
 document.getElementById("save-travel").addEventListener("click",()=>{
     data.travel.title = document.getElementById("travel-name").value;
     const json = JSON.stringify(data);
-    fetch("travelplan", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-        },
-        body: {json},
-
-    }).then(r => {})
+    console.log(json);
+    // fetch("travelplan", {
+    //     method: "POST",
+    //     headers: {
+    //         'Content-Type': 'application/json;charset=utf-8',
+    //     },
+    //     body: {json},
+    //
+    // }).then(r => {})
 })
+
 
 
 

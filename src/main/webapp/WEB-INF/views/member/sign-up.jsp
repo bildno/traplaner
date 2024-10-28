@@ -215,7 +215,6 @@
           $img.setAttribute("src", reader.result);
         };
       };
-      // <--- 프로필 사진 업로드 관련 스크립트
 
     </script>
   </body>

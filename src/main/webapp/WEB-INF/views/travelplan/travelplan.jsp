@@ -46,7 +46,7 @@
         #travel-info-container {
             margin: 5%;
             height: 95%;
-            overflow: hidden;
+            overflow: auto;
         }
         #travel-period h3 {
             display: block;
@@ -80,6 +80,7 @@
             font-size: 14px;
         }
         .form-group input[type="text"],
+        .form-group input[type="number"],
         .form-group input[type="file"] {
             flex: 1;
             padding: 5px;
@@ -126,13 +127,19 @@
         .fas{
             cursor: pointer;
         }
+        #travel-info-footer{
+            margin-top: 10px;
+            display: none;
+            justify-content: flex-end;
+        }
         #save-travel{
             color: white;
             background-color: black;
-            display: none;
             cursor: pointer;
-            margin-top: 10px;
-            margin-left: 90%;
+            margin-right: 10px;
+        }
+        #display-budget{
+            margin-right: 10px;
         }
 
     </style>
@@ -159,8 +166,10 @@
             <div class="form-container">
             <form>
                 <div class="form-group">
-                    <label for="time">시간</label>
-                    <input type="time" id="time" name="time">
+                    <label for="start-time">시간</label>
+                    <input type="time" id="start-time" name="time">
+                    <span>&nbsp ~ &nbsp</span>
+                    <input type="time" id="end-time">
                 </div>
                 <div class="form-group">
                     <label for="schedule">일정 제목</label>
@@ -173,7 +182,7 @@
                 </div>
                 <div class="form-group">
                     <label for="budget">예산</label>
-                    <input type="text" id="budget" name="budget">
+                    <input type="number" id="budget" name="budget">
                     ₩
                 </div>
                 <div class="form-group">
@@ -185,7 +194,11 @@
             <div id="save-journey">
                 <img src="/assets/img/add_circle.png">
             </div>
-            <button id="save-travel">저장</button>
+            <div id="travel-info-footer">
+                <span id="display-budget">총 예산 : 0</span>
+                <button id="save-travel">저장</button>
+            </div>
+
         </div>
 
 
@@ -233,12 +246,12 @@
 
             const { LatLngBounds } = await google.maps.importLibrary("core");
             const bounds = new LatLngBounds();
-            // Loop through and get all the results.
             places.forEach((place) => {
                 //data-set에 정보 넣기
                 console.log(place);
                 $location.setAttribute("data-placeId", place.id)
                 $location.setAttribute("data-address", place.formattedAddress)
+
                 const markerView = new AdvancedMarkerElement({
                     map,
                     position: place.location,
@@ -247,9 +260,15 @@
 
                 bounds.extend(place.location);
                 console.log(place);
+
+                map = new google.maps.Map(document.getElementById("map"), {
+                    center: bounds.getCenter(),
+                    zoom: 14,
+                    mapId: "DEMO_MAP_ID",
+                });
             });
-            map.setCenter(bounds.getCenter());
-            map.zoom = 20;
+
+
         } else {
             console.log("No results");
         }
@@ -261,6 +280,18 @@
         e.preventDefault();
         findPlaces($location.value).then(r => {
         });
+    })
+
+    //프로필 사진 업로드 관련 스크립트
+    const $FileInput = document.getElementById("reservation");
+    $FileInput.addEventListener("change",()=>{
+        const fileData = $FileInput.files[0];
+        console.log(fileData);
+        const reader = new FileReader();
+        reader.readAsDataURL(fileData);
+        reader.onloadend = (e) => {
+            $FileInput.setAttribute("src", reader.result);
+        };
     })
 
 </script>
