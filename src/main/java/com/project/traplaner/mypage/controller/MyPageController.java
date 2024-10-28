@@ -1,6 +1,7 @@
 package com.project.traplaner.mypage.controller;
 
-import com.project.traplaner.entity.Favorite;
+import com.project.traplaner.member.service.MemberService;
+import com.project.traplaner.mypage.dto.ModifyMemberInfoDTO;
 import com.project.traplaner.mypage.dto.response.FavoriteListResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +19,10 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-public class MyPageBoardController {
+public class MyPageController {
 
     private final MyPageBoardService myPageBoardService;
+    private final MemberService memberService;
 
     // 마이페이지 메인 (달력 있는 곳)
     // 달력에 일정 띄워주는 작업 해야댐
@@ -47,7 +50,7 @@ public class MyPageBoardController {
     // 페이징기능 x, member_id 받아오는 처리 해야댐
     @GetMapping("/my-page/mytravel/{member_id}")
     public String myPlan(@PathVariable int member_id,
-            Model model) {
+                         Model model) {
 
         System.out.println(member_id);
         List<TravelListResponseDTO> dtoList = myPageBoardService.getList(member_id);
@@ -77,7 +80,7 @@ public class MyPageBoardController {
     @ResponseBody
     public ResponseEntity<?> deleteBoard(@PathVariable int boardId,
                                          @PathVariable int memberId,
-                                         Model model){
+                                         Model model) {
 
         List<TravelListResponseDTO> dtoList = myPageBoardService.getList(memberId);
 
@@ -90,14 +93,41 @@ public class MyPageBoardController {
 
     @GetMapping("/my-page/favorite/{memberId}")
     public String favorite(@PathVariable int memberId,
-                           Model model){
+                           Model model) {
         List<FavoriteListResponseDTO> favorite = myPageBoardService.favorite(memberId);
 
-        model.addAttribute( "list", favorite);
-
+        model.addAttribute("list", favorite);
 
         return "member/favorite";
     }
 
+    @GetMapping("/my-page/pwChange")
+    public String pwChange() {
 
+
+        return "member/my-pw-change";
+    }
+
+    @PostMapping("/my-page/changeConfirm")
+    public ResponseEntity<?> changeConfirm(@Validated @RequestBody ModifyMemberInfoDTO dto) {
+        System.out.println("asdasd");
+
+        System.out.println(dto.getNewPw()+"asaddasaswwww");
+        boolean b = memberService.updateInfo(dto);
+
+
+        System.out.println(dto.getNewPw()+"23232323");
+        if (b) {
+            return ResponseEntity.ok().body("success");
+        } else {
+            return ResponseEntity.ok().body("fail");
+        }
+
+
+    }
 }
+
+//    @PostMapping("/my-page/nickNameChk")
+//    public String nickNameChk() {}
+//
+//}
