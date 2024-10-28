@@ -5,6 +5,7 @@ import com.project.traplaner.mapper.MemberMapper;
 import com.project.traplaner.member.dto.LoginRequestDto;
 import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import com.project.traplaner.member.dto.SignUpRequestDto;
+import com.project.traplaner.mypage.dto.ModifyMemberInfoDTO;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -95,4 +96,10 @@ public class MemberService {
     public void naverLogout(LoginUserResponseDTO dto, HttpSession session) {
 
     }
+
+    public boolean updateInfo(ModifyMemberInfoDTO dto){
+
+        return memberMapper.update(dto.toEntity(encoder));
+    }
+
 }

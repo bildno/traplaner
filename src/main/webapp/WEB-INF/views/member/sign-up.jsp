@@ -124,7 +124,7 @@
     name="join"
     id="signUpForm"
     method="post"
-    action="<c:url value="/members/sign-up"/>"
+    action="/members/sign-up"
     enctype="multipart/form-data">
 
     <!-- 프로필 이미지 -->
