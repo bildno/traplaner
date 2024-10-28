@@ -31,6 +31,8 @@ public class MyPageController {
     @GetMapping("/my-page/{member_id}")
     public String myPage(@PathVariable int member_id, Model model) {
 
+        List<TravelListResponseDTO> dtoList = myPageBoardService.getList(member_id);
+        model.addAttribute("dtoList", dtoList);
 
         return "member/my-page";
     }
@@ -113,9 +115,8 @@ public class MyPageController {
     public ResponseEntity<?> changeConfirm(@Validated @RequestBody ModifyMemberInfoDTO dto) {
         System.out.println("asdasd");
 
-        System.out.println(dto.getNewPw()+"asaddasaswwww");
+        System.out.println(dto.getNewPw() + "asaddasaswwww");
         boolean b = memberService.updateInfo(dto);
-
 
 
         if (b) {
@@ -135,10 +136,8 @@ public class MyPageController {
         boolean b = memberService.duplicateTest(type, newNick);
         System.out.println(b);
         if (!b) {
-            System.out.println("트루");
-             return ResponseEntity.ok().body("success");
-        }else {
-            System.out.println("폴스");
+            return ResponseEntity.ok().body("success");
+        } else {
             return ResponseEntity.badRequest().body("fail");
         }
 

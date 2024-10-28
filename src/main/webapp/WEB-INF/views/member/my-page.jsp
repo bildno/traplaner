@@ -66,7 +66,6 @@
 </head>
 <body>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-<script src="fullcalendar/lib/locales-all.js"></script>
 
 
 <%@ include file="../header.jsp" %>
@@ -80,7 +79,8 @@
             </c:if>
             <c:if test="${login != null && login.profile != null}">
                 <img src="/display${login.profile}" alt="프사"
-                     style="width: 250px; border-radius: 50%; margin-bottom: 50px; margin-top: 30px" class="rounded-pill"/>
+                     style="width: 250px; border-radius: 50%; margin-bottom: 50px; margin-top: 30px"
+                     class="rounded-pill"/>
             </c:if>
             <div class="manage_box">
                 <a href="/my-page/pwChange">계정관리</a><a href="/my-page/mytravelboard/${login.nickName}">내 게시물</a
@@ -95,15 +95,27 @@
     </div>
 </div>
 
+
+
 <script>
+
     document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
-
+        <%--var title = ${dtoList.startDate}--%>
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             locale: 'ko',
-        });
+            events : [
+              <c:forEach var="dto" items="${dtoList}">
+                {
+                    title: "${dto.title}",
+                    start: "${dto.startDate}",
+                    end : "${dto.endDate}"
+                },
+                </c:forEach>
+            ]
 
+        });
         calendar.render();
     });
 

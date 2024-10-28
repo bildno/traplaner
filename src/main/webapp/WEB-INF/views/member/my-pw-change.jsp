@@ -133,7 +133,7 @@
                              style="width: 250px; border-radius: 50%; margin-bottom: 50px; margin-top: 30px"
                              class="rounded-pill"/>
                     </c:if>
-                    <input type="email" value="${login.email}" readonly style="border: none; outline: none" >
+                    <input type="emailtext" value="${login.email}" readonly style="border: none; outline: none" >
                     <input id="newPw" placeholder="새 비밀번호" type="password">
                     <input id="pwChk" placeholder="비밀번호 확인" type="password">
                     <div style="text-align: center">
