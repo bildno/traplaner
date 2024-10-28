@@ -34,7 +34,6 @@ public class Journey {
     private int id;
     private int travelId;
     private String journeyName;
-    private String accommodationDate;
     private String accommodationRoadAddressName;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
@@ -42,7 +41,7 @@ public class Journey {
     private LocalDateTime updateTime;
     private String googleMapLocationPinInformation;
     private String reservationConfirmImagePath;
-    private boolean shear;
+    private boolean share;
     private PlaceType placeType;
 
     @Getter @ToString @AllArgsConstructor

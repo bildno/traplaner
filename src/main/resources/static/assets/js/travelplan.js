@@ -5,7 +5,7 @@ let data ={
         title : "",
         startDate : Date.now(),
         endDate : Date.now(),
-        share : false
+
     },
     journeys : []
 }
@@ -70,7 +70,8 @@ function addJourney() {
     const locationId = document.getElementById('location').dataset.placeid;
     const address = document.getElementById('location').dataset.address;
     const budget = document.getElementById('budget').value;
-    const reservation = document.getElementById('reservation').files[0] ? document.getElementById('reservation').files[0].name : '없음';
+    const reservation = document.getElementById('reservation').files[0] ? document.getElementById('reservation').files[0] : null;
+    console.log('reservation: ', reservation);
 
     const newJourney = {
         id: journeyId++, // 고유 ID 부여
@@ -161,16 +162,35 @@ document.querySelector(".fas").addEventListener("click",()=>{
 
 document.getElementById("save-travel").addEventListener("click",()=>{
     data.travel.title = document.getElementById("travel-name").value;
+    console.log(data.travel.title);
     const json = JSON.stringify(data);
     console.log(json);
-    fetch("travelplan", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-        },
-        body: {json},
 
-    }).then(r => {})
+    const formData = new FormData();
+    formData.append("data", json);
+
+    data.journeys.forEach((journey, index) => {
+        console.log(journey.reservation);
+        // reservation_0, reservation_1, reservation_2.....
+        formData.append(`reservation_` + index, journey.reservation);
+    });
+    console.log(formData.toString());
+
+    fetch("/travelplan", {
+        method: "POST",
+        body: formData
+    });
+
+
+
+    // fetch("travelplan", {
+    //     method: "POST",
+    //     headers: {
+    //         'Content-Type': 'application/json;charset=utf-8',
+    //     },
+    //     body: {json},
+    //
+    // }).then(r => {})
 })
 
 
