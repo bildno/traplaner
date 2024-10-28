@@ -16,12 +16,14 @@ public class travelController {
         return "travelplan/travelplan";
     }
     @PostMapping("/travelplan")
-    public void travelSave(@RequestParam String travelplan) {
+    public String travelSave() {
        //사용자 확인
 
        //json 파싱
 
        //서비스 로직으로 json 전달?
 
+        // 마이 페이지로 리턴
+        return "travelplan/travelplan";
     }
 }

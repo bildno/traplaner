@@ -282,17 +282,7 @@
         });
     })
 
-    //프로필 사진 업로드 관련 스크립트
-    const $FileInput = document.getElementById("reservation");
-    $FileInput.addEventListener("change",()=>{
-        const fileData = $FileInput.files[0];
-        console.log(fileData);
-        const reader = new FileReader();
-        reader.readAsDataURL(fileData);
-        reader.onloadend = (e) => {
-            $FileInput.setAttribute("src", reader.result);
-        };
-    })
+
 
 </script>
 <!-- 풀캘린더 로더 -->

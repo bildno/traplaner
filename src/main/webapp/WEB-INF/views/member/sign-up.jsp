@@ -205,6 +205,7 @@
         $fileInput.click();
       };
 
+      // 단순히 화면단에 썸네일 띄우는 것.
       $fileInput.onchange = (e) => {
         const fileData = $fileInput.files[0];
         console.log(fileData);
