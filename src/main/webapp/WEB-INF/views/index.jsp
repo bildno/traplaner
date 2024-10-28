@@ -74,30 +74,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       </div>
     </nav>
 
-    <!---------------------login 디버깅 출력 ------------------------>
-    <br /><br /><br /><br />
-    <c:if test="${login != null && login.profile != null}">
-      <c:if test="${not empty login.topThreeFavoriteTravelDtoList}">
-        <ul>
-          <c:forEach items="${login.topThreeFavoriteTravelDtoList}" var="travel">
-            <li>
-              <strong>Title:</strong> ${travel.title} <br /> <strong>Member Nickname:</strong> ${travel.memberNickName}
-              <br /> <strong>Like Count:</strong> ${travel.likeCount} <br /> <strong>Content:</strong> ${travel.content}
-              <br /> <strong>Travel Image:</strong> ${travel.travelImg}
-            </li>
-          </c:forEach>
-        </ul>
-      </c:if>
-
-      private int id; // 여행 ID private int memberId; // 회원 ID private String memberNickName; // 회원 닉네임 private
-      String title; // 여행 제목 private String travelImg; // 여행 이미지 URL private Integer likeCount; // 좋아요 수
-      private String content; // 여행 게시판 내용
-
-      <img src="/display${login.profile}" alt="프사" style="width: 30px" class="rounded-pill" />
-    </c:if>
-
-    <!---------------------login 디버깅 출력 ------------------------>
-
     <!------------------ 추천 여행지 carousel ----------------------->
     <div id="demo" class="carousel slide mt-5" data-bs-ride="carousel">
       <div class="carousel-indicators">
@@ -106,19 +82,31 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <button data-bs-target="#demo" data-bs-slide-to="2"></button>
         <button data-bs-target="#demo" data-bs-slide-to="3"></button>
       </div>
+
       <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="/assets/img/경주-800x320.jpg" alt="" class="d-block w-100" />
-        </div>
-        <div class="carousel-item">
-          <img src="/assets/img/부산-800x320.jpg" alt="" class="d-block w-100" />
-        </div>
-        <div class="carousel-item">
-          <img src="/assets/img/남이섬-800x320.jpg" alt="" class="d-block w-100" />
-        </div>
-        <div class="carousel-item">
-          <img src="/assets/img/홍콩-800x320.jpg" alt="" class="d-block w-100" />
-        </div>
+        
+        <c:if test="${login.profile == null}">
+          <div class="carousel-item active">
+            <img src="/assets/img/경주-800x320.jpg" alt="" class="d-block w-100" />
+          </div>
+          <div class="carousel-item">
+            <img src="/assets/img/부산-800x320.jpg" alt="" class="d-block w-100" />
+          </div>
+          <div class="carousel-item">
+            <img src="/assets/img/남이섬-800x320.jpg" alt="" class="d-block w-100" />
+          </div>
+        </c:if>
+  
+        <c:if test="${login != null && login.profile != null}">
+          <c:forEach items="${login.topThreeFavoriteTravelDtoList}" var="travel" varStatus="status">
+              <div class="carousel-item<c:out value='${status.first ? " active" : ""}'/>">
+                <a href="/travelboard/info/${travel.id}">
+                  <img src="/display${travel.travelImg}" alt="" class="d-block w-100" />
+                </a>
+              </div>
+          </c:forEach>
+        </c:if>
+
         <button class="carousel-control-prev" data-bs-target="#demo" data-bs-slide="prev">
           <span class="carousel-control-prev-icon"></span>
         </button>
@@ -132,10 +120,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <div class="container mt-4">
       <div class="row">
         <div class="col-sm-4">
-          <div class="card p-1">
+          <div class="card p-1 mt-2">
             <a href="/travelplan">
-              <img src="/assets/img/add-250x140.jpg" alt="" class="card-img-top img-fluid" />
+              <img src="/assets/img/add-800x320.jpg" alt="" class="card-img-top img-fluid" />
             </a>
+            <div class="pt-2">
+              <h6 class="card-title">여행을 떠나요~</h6>
+            </div>
             <!--
             <div class="card-img-overlay">
               <h4 class="card-title text-primary">여행추가</>
@@ -143,8 +134,22 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             -->
           </div>
         </div>
-
+ 
         <c:if test="${login != null && login.profile != null}">
+
+          <c:forEach items="${login.mainTravelDtoList}" var="travel" varStatus="status">
+            <div class="col-sm-4">
+              <div class="card p-1 mt-2">
+                <a href="/my-page/mytravel/${travel.id}">
+                  <img src="/display${travel.travelImg}" class="card-img-bottom" alt="이미지를 클릭하면 해당 여행으로 이동합니다."/>
+                </a>
+                <div class="pt-2">
+                  <h6 class="card-title">${travel.title}</h6>
+                </div>
+              </div>
+            </div>
+          </c:forEach>
+<!--
           <div class="col-sm-4">
             <div class="card p-1">
               <img src="/assets/img/홍콩-250x140.jpg" alt="" class="card-img-top" />
@@ -164,6 +169,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               </div>
             </div>
           </div>
+-->
         </c:if>
       </div>
     </div>

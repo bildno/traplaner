@@ -26,6 +26,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 public class MemberController {
 
+    @Value("${file.upload.root-path}")
+    private String rootPath;
+
     @Value("${file.upload.root-path-profile}")
     private String rootPathProfile;
 
@@ -55,9 +58,11 @@ public class MemberController {
         System.out.println(dto.getLoginMethod().toString());
 
         // s:파일 업로드 ----------------------
-        String savePath = FileUtils.uploadFile(dto.getProfileImage(), rootPathProfile);
+//        String savePath = FileUtils.uploadFile(dto.getProfileImage(), rootPathProfile);
+        String savePath = FileUtils.uploadFile(dto.getProfileImage(), rootPath);
 
-        log.info("rootPathProfile: {}", rootPathProfile);
+//        log.info("rootPathProfile: {}", rootPathProfile);
+        log.info("rootPathProfile: {}", rootPath);
         log.info("signup(): savePath {}", savePath);
         // e:파일 업로드 -------------------------
 

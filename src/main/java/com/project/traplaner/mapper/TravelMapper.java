@@ -2,6 +2,7 @@ package com.project.traplaner.mapper;
 
 import com.project.traplaner.entity.Travel;
 import com.project.traplaner.entity.TravelBoard;
+import com.project.traplaner.main.dto.MainTravelDto;
 import com.project.traplaner.main.dto.TopThreeFavoriteTravelDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,5 +19,6 @@ public interface TravelMapper {
   */
     List<TopThreeFavoriteTravelDto> findTopThree();
 
+    List<MainTravelDto> findByEmail(String email);
 
 }

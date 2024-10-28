@@ -67,7 +67,7 @@ class MemberMapperTest {
             LocalDateTime tmpUpdatedDate =
                     LocalDateTime.now().plusDays(3 + (int) (Math.random() * randomPara) + 1);
 
-            String fileName = String.format("\\0425d9dc324e4d2a822b8ac905123b%02d.java", (int) (Math.random() * 9) + 1);
+            String fileName = String.format("\\0425d9dc324e4d2a822b8ac905123b%02d.jpg", (int) (Math.random() * 9) + 1);
 
             Travel travel = Travel.builder()
                     .memberId(tmpMemberId)

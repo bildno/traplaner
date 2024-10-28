@@ -1,6 +1,7 @@
 package com.project.traplaner.member.service;
 
 import com.project.traplaner.entity.Member;
+import com.project.traplaner.main.dto.MainTravelDto;
 import com.project.traplaner.main.dto.TopThreeFavoriteTravelDto;
 import com.project.traplaner.mapper.MemberMapper;
 import com.project.traplaner.mapper.TravelMapper;
@@ -66,6 +67,14 @@ public class MemberService {
         System.out.println(topThreeFavoriteTravelDtoList.toString());
         System.out.println("--------------------------------------------------");
 
+        // 가입자 Travel 가져오기
+        List<MainTravelDto> mainTravelDtoList = travelMapper.findByEmail(email);
+        System.out.println("--------------------------------------------------");
+        System.out.println(mainTravelDtoList.toString());
+        log.info("mainTravelDtoList: {}", mainTravelDtoList.toString());
+        System.out.println("--------------------------------------------------");
+
+
         // DB 데이터를 사용할 것만 정제
         LoginUserResponseDTO dto = LoginUserResponseDTO.builder()
                 .id(foundMember.getId())
@@ -74,6 +83,7 @@ public class MemberService {
                 .loginMethod(foundMember.getLoginMethod().toString())
                 .profile(foundMember.getProfileImg())
                 .topThreeFavoriteTravelDtoList(topThreeFavoriteTravelDtoList) // 10/28 by jhjeong
+                .mainTravelDtoList(mainTravelDtoList)   // 10/28 by jhjeong
                 .build();
 
         // 세션에 로그인 한 회원 정보를 저장

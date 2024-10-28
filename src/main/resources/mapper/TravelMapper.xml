@@ -28,19 +28,16 @@
     </insert>
 
     <!--
-    <select id="findOne" resultType="travel">
-        SELECT *
-        FROM tbl_travel
-        WHERE member_id = #{memberId}
-    </select>
-
-
-    <select id="findTopThree" resultType="travel">
-        SELECT *
-        FROM tbl_travel
-        WHERE member_id = #{memberId}
-    </select>
+    #
+    # 멤버 이메일로 travel 뽑아오기
+    #
     -->
+    <select id="findByEmail" resultType="com.project.traplaner.main.dto.MainTravelDto">
+        SELECT t.*
+        FROM tbl_travel t
+        JOIN tbl_member tm ON t.member_id = tm.id
+        WHERE tm.email=#{email}
+    </select>
 
     <!--
     #
@@ -66,7 +63,7 @@
                 travel_board_id
         ) AS fav ON tb.id = fav.travel_board_id
         ORDER BY
-            fav.like_count DESC LIMIT 3;
+            fav.like_count DESC LIMIT 4;
     </select>
     <!-- SELECT의 경우에는 반환되는 타입을 작성해 주어야 합니다.
    resultType을 통해 리턴되는 객체의 타입을 얘기해 줍니다.

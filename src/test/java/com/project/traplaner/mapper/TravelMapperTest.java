@@ -1,5 +1,6 @@
 package com.project.traplaner.mapper;
 
+import com.project.traplaner.main.dto.MainTravelDto;
 import com.project.traplaner.main.dto.TopThreeFavoriteTravelDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,19 @@ class TravelMapperTest {
         assertNotNull(topThree);
     }
 
+    @Test
+    @DisplayName("이메일로 가입자 작성 Travel 검색")
+    void findByEmailTest() {
+        // given
+        String email = "test8@gamil.com";
 
+        // when
+        List<MainTravelDto> mainTravelDtoList
+                = travelMapper.findByEmail("test8@gmail.com");
+
+        // then
+        assertNotNull(mainTravelDtoList);
+    }
 
 
 }
