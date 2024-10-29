@@ -9,11 +9,14 @@ import com.project.traplaner.util.FileUtils;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
@@ -30,9 +33,10 @@ public class travelController {
 
 
     @PostMapping("/travelplan")
-    public String travelSave(@RequestParam("data") String data,
-                             @RequestParam Map<String, MultipartFile> reservationFiles,
-                             HttpSession session
+    @ResponseBody
+    public ResponseEntity<?> travelSave(@RequestParam("data") String data,
+                                     @RequestParam Map<String, MultipartFile> reservationFiles,
+                                     HttpSession session
                              ) throws JsonProcessingException {
 
         log.info("reservationFile: {}", reservationFiles);
@@ -61,7 +65,6 @@ public class travelController {
         travelService.saveTravel(requestDTO.getTravel(),LoginDto.getId());
         travelService.saveJourneys(requestDTO.getJourneys());
 
-        // 마이 페이지로 리턴
-        return "my-page/"+ LoginDto.getId();
+        return ResponseEntity.ok().body(LoginDto.getId());
     }
 }

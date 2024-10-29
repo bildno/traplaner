@@ -179,7 +179,11 @@ document.getElementById("save-travel").addEventListener("click",()=>{
     fetch("/travelplan", {
         method: "POST",
         body: formData
-    });
+    })
+        .then(res => res.json())
+        .then(data => {
+            location.href="/my-page/" + data;
+        });
 
 
 

@@ -114,6 +114,7 @@ public class TravelPlanRequestDTO {
                     .travelId(travelId)
                     .journeyName(journeyName)
                     .accommodationRoadAddressName(accommodationRoadAddressName)
+                    .accommodationName(location)
                     .startDate(s)
                     .endDate(e)
                     .googleMapLocationPinInformation(googleMapLocationPinInformation)

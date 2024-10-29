@@ -25,8 +25,8 @@ public class TravelService {
     }
 
     public void saveJourneys(List<JourneyInfo> journeys) {
-
-        int travelId = Math.toIntExact(travelMapper.getNextTravelId().getAutoIncrement());
+        int travelId = travelMapper.getNextTravelId();
+        log.info("travelId: {}", travelId);
         for (JourneyInfo journey : journeys) {
             if(journey.getReservationConfirmImagePath()!=null) {
                 String savePath = FileUtils.uploadFile(
