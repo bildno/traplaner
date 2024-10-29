@@ -36,16 +36,16 @@ public class Journey {
     private String journeyName;
     private String accommodationName;
     private String accommodationRoadAddressName;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private String googleMapLocationPinInformation;
     private String reservationConfirmImagePath;
     private boolean share;
     private PlaceType placeType;
-    private int budget;
     private String journeyImg;
+    private int budget;
 
     @Getter @ToString @AllArgsConstructor
     public enum PlaceType {
