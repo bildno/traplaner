@@ -1,7 +1,6 @@
 package com.project.traplaner.entity;
 
 import lombok.*;
-
 import java.time.LocalDateTime;
 
 @Getter @ToString
@@ -12,6 +11,7 @@ import java.time.LocalDateTime;
 @Builder
 
 public class Travel {
+
     private int id;
     private int memberId;
     private String title;

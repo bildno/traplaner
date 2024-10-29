@@ -34,6 +34,7 @@ public class Journey {
     private int id;
     private int travelId;
     private String journeyName;
+    private String accommodationName;
     private String accommodationRoadAddressName;
     private LocalDateTime startDate;
     private LocalDateTime endDate;

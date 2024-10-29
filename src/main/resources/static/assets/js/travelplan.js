@@ -161,7 +161,7 @@ document.querySelector(".fas").addEventListener("click",()=>{
 })
 
 document.getElementById("save-travel").addEventListener("click",()=>{
-    data.travel.title = document.getElementById("travel-name").value;
+    data.travel.title = document.querySelector("#travel-name input").value;
     console.log(data.travel.title);
     const json = JSON.stringify(data);
     console.log(json);
@@ -183,14 +183,6 @@ document.getElementById("save-travel").addEventListener("click",()=>{
 
 
 
-    // fetch("travelplan", {
-    //     method: "POST",
-    //     headers: {
-    //         'Content-Type': 'application/json;charset=utf-8',
-    //     },
-    //     body: {json},
-    //
-    // }).then(r => {})
 })
 
 

@@ -12,7 +12,9 @@
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
     <typeAliases>
-        <typeAlias type="com.project.traplaner.entity.Member" />
+        <typeAlias type="com.project.traplaner.entity.Member" alias="member"/>
+        <typeAlias type="com.project.traplaner.entity.Journey" alias="journey"/>
+        <typeAlias type="com.project.traplaner.travelplan.dto.TableStatusDto" alias="status"/>
     </typeAliases>
 <!--    <mappers>-->
 
@@ -21,6 +23,7 @@
     <mappers>
         <mapper resource="mapper/MemberMapper.xml"/>
         <mapper resource="mapper/mypageMapper.xml"/>
+        <mapper resource="mapper/TravelMapper.xml"/>
 
     </mappers>
 

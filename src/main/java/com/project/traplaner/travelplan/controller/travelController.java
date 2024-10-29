@@ -51,14 +51,13 @@ public class travelController {
             int journeyId = Integer.parseInt(key.split("_")[1]); // 0, 1, 2 ...
             requestDTO.getJourneys().get(journeyId).setReservationConfirmImagePath(file);
         }
-        log.info("최종 dto 형태 보자: {}", requestDTO);
-
 
         //사용자 확인
         LoginUserResponseDTO LoginDto
                 = (LoginUserResponseDTO) session.getAttribute("login");
 
-        //서비스 로직으로 json 전환 데이터 전달?
+        //서비스 로직으로 전환된 json 데이터 전달?
+
         travelService.saveTravel(requestDTO.getTravel(),LoginDto.getId());
         travelService.saveJourneys(requestDTO.getJourneys());
 

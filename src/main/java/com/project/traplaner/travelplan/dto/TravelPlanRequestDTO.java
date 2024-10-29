@@ -10,7 +10,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import static java.time.format.DateTimeFormatter.ISO_INSTANT;
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
 @Setter
 @Getter
@@ -28,37 +34,35 @@ public class TravelPlanRequestDTO {
         @JsonProperty("title")
         private String title;
         @JsonProperty("startDate")
-        private static String startDate;
+        private String startDate;
         @JsonProperty("endDate")
-        private static String endDate;
+        private String endDate;
 
         public Travel toEntity(int memberId) {
+            OffsetDateTime startOffsetDateTime = OffsetDateTime.parse(startDate);
+            OffsetDateTime endOffsetDateTime = OffsetDateTime.parse(endDate);
             return Travel.builder()
                     .memberId(memberId)
                     .title(title)
-                    .startDate(LocalDateTime.parse(startDate))
-                    .endDate(LocalDateTime.parse(endDate))
+                    .startDate(startOffsetDateTime.toLocalDateTime())
+                    .endDate(endOffsetDateTime.toLocalDateTime())
                     .build();
         }
     }
 
     List<JourneyInfo> journeys;
 
-    @Setter @Getter @ToString
+    @Getter @Setter @ToString
     @JsonIgnoreProperties("reservation")
     public static class JourneyInfo {
         @JsonProperty("id")
         private int journeyId;
-
         @JsonProperty("day")
         private int day;
-
         @JsonProperty("date")
         private String date;
-
         @JsonProperty("location")
         private String location;
-
         @JsonProperty("title")
         private String journeyName;
         @JsonProperty("address")
@@ -72,28 +76,51 @@ public class TravelPlanRequestDTO {
         private MultipartFile reservationConfirmImagePath;
         @JsonProperty("budget")
         private int budget;
-
         public Journey toEntity(int travelId, String filePath) {
+            // 날짜 문자열을 OffsetDateTime으로 파싱 후 LocalDate로 변환
+            OffsetDateTime offsetDateTime = OffsetDateTime.parse(date);
+            LocalDate localDate = offsetDateTime.toLocalDate();
+            // 시간 문자열을 LocalTime으로 파싱
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+            LocalTime localStartTime = LocalTime.parse(startTime, timeFormatter);
+            LocalTime localEndTime = LocalTime.parse(endTime, timeFormatter);
+            // LocalDate와 LocalTime을 결합하여 LocalDateTime 생성
+            LocalDateTime s = LocalDateTime.of(localDate, localStartTime);
+            LocalDateTime e = LocalDateTime.of(localDate, localEndTime);
             return Journey.builder()
+                    .travelId(travelId)
                     .journeyName(journeyName)
+                    .accommodationName(location)
                     .accommodationRoadAddressName(accommodationRoadAddressName)
-                    .startDate(LocalDateTime.parse(startTime))
-                    .endDate(LocalDateTime.parse(endTime))
+                    .startDate(s)
+                    .endDate(e)
                     .googleMapLocationPinInformation(googleMapLocationPinInformation)
                     .reservationConfirmImagePath(filePath)
                     .budget(budget)
                     .build();
         }
         public Journey toEntity(int travelId) {
+            // 날짜 문자열을 OffsetDateTime으로 파싱 후 LocalDate로 변환
+            OffsetDateTime offsetDateTime = OffsetDateTime.parse(date);
+            LocalDate localDate = offsetDateTime.toLocalDate();
+            // 시간 문자열을 LocalTime으로 파싱
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+            LocalTime localStartTime = LocalTime.parse(startTime, timeFormatter);
+            LocalTime localEndTime = LocalTime.parse(endTime, timeFormatter);
+            // LocalDate와 LocalTime을 결합하여 LocalDateTime 생성
+            LocalDateTime s = LocalDateTime.of(localDate, localStartTime);
+            LocalDateTime e = LocalDateTime.of(localDate, localEndTime);
             return Journey.builder()
+                    .travelId(travelId)
                     .journeyName(journeyName)
                     .accommodationRoadAddressName(accommodationRoadAddressName)
-                    .startDate(LocalDateTime.parse(startTime))
-                    .endDate(LocalDateTime.parse(endTime))
+                    .startDate(s)
+                    .endDate(e)
                     .googleMapLocationPinInformation(googleMapLocationPinInformation)
                     .budget(budget)
                     .build();
         }
     }
+
 
 }
