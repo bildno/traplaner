@@ -28,7 +28,7 @@ public class PageMaker {
     public PageMaker(PageDTO page, int totalCount) {
         this.page = page;
         this.totalCount = totalCount;
-
+        System.out.println("페이지메이커");
         makePageInfo();
     }
 
@@ -40,7 +40,7 @@ public class PageMaker {
 
         // 시작 페이지 번호 (begin) 계산
         this.begin = this.end - PAGE_COUNT + 1;
-
+        System.out.println(begin);
         // 이전 버튼 활성화 여부 (prev)
 //        this.prev = begin == 1 ? false : true;
         this.prev = begin > 1;

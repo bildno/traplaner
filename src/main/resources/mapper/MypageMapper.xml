@@ -1,0 +1,68 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.project.traplaner.mapper.MyPageBoardMapper">
+
+    <select id="selectTravelById" resultType="com.project.traplaner.entity.Travel">
+        select * from tbl_travel where member_id = #{id}
+    </select>
+
+    <delete id="deleteTravelById">
+        delete from tbl_travel where id = #{id}
+    </delete>
+
+    <delete id="deleteTravelByMemberOrder">
+        delete from tbl_travel where id = #{id}
+    </delete>
+
+    <select id="selectTravelBoardByNickName" resultType="com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO">
+        select
+            board.*,
+            travel.title
+        from tbl_travel_board board
+        join tbl_travel travel
+        on board.travel_id = travel.id
+        where board.member_nick_name = #{nickName};
+    </select>
+
+
+    <update id="updateShare">
+        update tbl_travel set share = not share where id = #{id}
+    </update>
+
+
+
+    <select id="findAll" resultType="travel">
+        SELECT * from tbl_travel where member_id = #{memberId} LIMIT #{page.pageStart},#{page.amount}
+    </select>
+
+    <select id="getTotalCount" resultType="int">
+        select count(*) from tbl_travel where member_id = #{memberId}
+    </select>
+
+    <select id="getBoardTotal" resultType="int">
+        select count(*) from tbl_travel_board where member_nick_name = #{nickName}
+    </select>
+
+    <select id="findBoardAll" resultType="com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO">
+
+        select
+        board.id,
+        board.travel_id,
+        board.member_nick_name,
+        DATE_FORMAT(board.write_date, '%Y-%m-%d') as write_date,
+        board.content,
+        travel.title
+        from tbl_travel_board board
+        join tbl_travel travel
+        on board.travel_id = travel.id
+        where board.member_nick_name = #{nickName} LIMIT #{page.pageStart}, #{page.amount}
+    </select>
+
+    <select id="getTotal" resultType="int">
+        select count(*) from tbl_favorite where member_id = #{memberId}
+    </select>
+
+</mapper>
