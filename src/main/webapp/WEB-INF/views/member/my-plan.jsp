@@ -197,7 +197,7 @@
                         <c:if test="${maker.prev}">
                             <li class="page-item">
                                 <a class="page-link"
-                                    href="/my-page/mytravel?pageNo=${maker.begin-1}">&lt;&lt;</a>
+                                    href="/my-page/mytravel/${login.id}?pageNo=${maker.begin-1}&amount=${s.amount}">&lt;&lt;</a>
                             </li>
                         </c:if>
 
@@ -205,7 +205,7 @@
                         <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
                             <li data-page-num="${i}" class="page-item">
                                 <a class="page-link"
-                                    href="/my-page/mytravel?pageNo=${i}">${i}</a>
+                                    href="/my-page/mytravel/${login.id}?pageNo=${i}&amount=${s.amount}">${i}</a>
                             </li>
                         </c:forEach>
 
@@ -213,7 +213,7 @@
                         <c:if test="${maker.next}">
                             <li class="page-item">
                                 <a class="page-link"
-                                    href="/my-page/mytravel?pageNo=${maker.end + 1}">&gt;&gt;</a>
+                                    href="/my-page/mytravel/${login.id}?pageNo=${maker.end + 1}&amount=${s.amount}">&gt;&gt;</a>
                             </li>
                         </c:if>
                     </ul>

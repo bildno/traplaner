@@ -60,6 +60,7 @@ public class MyPageController {
     @GetMapping("/my-page/mytravel/{member_id}")
     public String myTravel(@PathVariable int member_id, Model model,
                            @ModelAttribute("s") PageDTO page) {
+        System.out.println("컨트롤ㄹ러러러러");
 
         Map<String, Object> map = myPageBoardService.findAll(member_id, page);
 
@@ -101,10 +102,12 @@ public class MyPageController {
 
     @GetMapping("/my-page/favorite/{memberId}")
     public String favorite(@PathVariable int memberId,
+                           @ModelAttribute("s") PageDTO page,
                            Model model) {
-        List<FavoriteListResponseDTO> favorite = myPageBoardService.favorite(memberId);
+        Map<String, Object> map = myPageBoardService.favorite(memberId, page);
 
-        model.addAttribute("list", favorite);
+        model.addAttribute("list", map.get("favorite") );
+        model.addAttribute("maker", map.get("pm"));
 
         return "member/favorite";
     }

@@ -12,6 +12,7 @@ import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelBoard.service.PageMaker;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.tags.shaded.org.apache.bcel.generic.NEW;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -77,17 +78,20 @@ public class MyPageBoardService {
         myPageBoardMapper.deleteTravelByMemberOrder(boardId);
     }
 
-    public List<FavoriteListResponseDTO> favorite(int memberId) {
-
-        List<FavoriteListResponseDTO> favorites = favoriteMapper.favorite_List(memberId);
+    public Map<String, Object> favorite(int memberId,PageDTO page) {
+        PageMaker pageMaker = new PageMaker(page, favoriteMapper.getTotal(page, memberId));
+        List<FavoriteListResponseDTO> favorites = favoriteMapper.favorite_List(memberId, page);
 
         favorites.forEach(dto -> {
             dto.setFormatDate(FavoriteListResponseDTO.makeDateStringFomatter(dto.getWriteDate()));
 
         });
 
+        Map<String, Object> result = new HashMap<>();
+        result.put("favorites",favorites);
+        result.put("pm",pageMaker);
 
-        return favorites;
+        return result;
     }
 
 
