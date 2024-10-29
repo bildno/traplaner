@@ -88,8 +88,20 @@
                     margin-left: 8px;
                 }
 
-                .fa-heart:hover {
+                #like-button {
+                    background-color: none;
+                    border: none;
                     cursor: pointer;
+                    border-radius: 5px;
+                    transition: background-color 0.3s;
+                }
+
+                .fa-solid {
+                    color: red;
+                }
+
+                #like-count {
+                    color: #333;
                 }
             </style>
         </head>
@@ -100,8 +112,10 @@
                 <h1>${tOne.title}</h1>
                 <p class="author-date">${tOne.writer} ${tOne.writeDate}
                     <span class="heart">
-                        <button><i class="fa-solid fa-heart" id="like" onclick="iLikeIt()"></i></button>
-                        <span id="likeCount">${tOne.likeCount}</span>
+                        <button id="like-button" onclick="toggleLike(${tOne.id})">
+                            <i class="fa-solid fa-heart"></i>
+                            <span id="like-count">${tOne.likeCount}</span>
+                        </button>
                     </span>
                 </p>
                 <div class="section photo">사진</div>
@@ -113,6 +127,20 @@
                 <div class="section schedule">여정</div>
             </div>
 
+            <script>
+                function toggleLike(travelBoardId) {
+                    const url = 'http://localhost:8181/travelboard/' + travelBoardId + '/toggle-like';
+                    console.log(travelBoardId);
+                    fetch(url, {
+                        method: "POST"
+                    })
+                        .then(response => response.text())  // 응답을 텍스트로 받아
+                        .then(data => {
+                            document.getElementById("like-count").innerText = data; // 정수를 그대로 표시
+                        })
+                        .catch(error => console.error("Error:", error));
+                }
+            </script>
         </body>
 
         </html>

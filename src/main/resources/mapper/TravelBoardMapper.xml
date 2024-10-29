@@ -74,6 +74,35 @@
         <include refid="search"/>
     </select>
 
+    <!-- 좋아요 상태 확인 -->
+    <select id="isLikedByMember" parameterType="map" resultType="boolean">
+        SELECT EXISTS(
+        SELECT 1 FROM tbl_favorite
+        WHERE travel_board_id = #{travelBoardId}
+        AND member_id = #{memberId}
+        )
+    </select>
+
+    <!-- 좋아요 추가 -->
+    <insert id="addLike">
+        INSERT INTO tbl_favorite (travel_board_id, member_id)
+        VALUES (#{travelBoardId}, #{memberId})
+    </insert>
+
+    <!-- 좋아요 제거 -->
+    <delete id="removeLike">
+        DELETE FROM tbl_favorite
+        WHERE travel_board_id = #{travelBoardId}
+        AND member_id = #{memberId}
+    </delete>
+
+    <!-- 좋아요 개수 조회 -->
+    <select id="getLikeCount" resultType="int">
+        SELECT COUNT(member_id)
+        FROM tbl_favorite
+        WHERE travel_board_id = #{travelBoardId}
+    </select>
+
     <!-- 10/28 by jhjeong -->
     <insert id="save">
         INSERT INTO
