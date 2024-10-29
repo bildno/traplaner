@@ -167,22 +167,22 @@
             <form>
                 <div class="form-group">
                     <label for="start-time">시간</label>
-                    <input type="time" id="start-time" name="time">
+                    <input type="time" id="start-time" name="time" required>
                     <span>&nbsp ~ &nbsp</span>
-                    <input type="time" id="end-time">
+                    <input type="time" id="end-time" required>
                 </div>
                 <div class="form-group">
                     <label for="schedule">일정 제목</label>
-                    <input type="text" id="schedule" name="schedule">
+                    <input type="text" id="schedule" name="schedule" required>
                 </div>
                 <div class="form-group">
                     <label for="location">장소</label>
-                    <input type="text" id="location" name="location">
+                    <input type="text" id="location" name="location" required>
                     <button id="location-btn">입력</button>
                 </div>
                 <div class="form-group">
                     <label for="budget">예산</label>
-                    <input type="number" id="budget" name="budget">
+                    <input type="number" id="budget" name="budget" required>
                     ₩
                 </div>
                 <div class="form-group">
@@ -252,11 +252,7 @@
                 $location.setAttribute("data-placeId", place.id)
                 $location.setAttribute("data-address", place.formattedAddress)
 
-                const markerView = new AdvancedMarkerElement({
-                    map,
-                    position: place.location,
-                    title: place.displayName,
-                });
+
 
                 bounds.extend(place.location);
                 console.log(place);
@@ -265,6 +261,11 @@
                     center: bounds.getCenter(),
                     zoom: 14,
                     mapId: "DEMO_MAP_ID",
+                });
+                const markerView = new AdvancedMarkerElement({
+                    map,
+                    position: place.location,
+                    title: place.displayName,
                 });
             });
 

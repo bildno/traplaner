@@ -17,7 +17,7 @@
         VALUES (
         #{travelId}, #{accommodationName}, #{journeyName},
         #{accommodationRoadAddressName}, #{startDate}, #{endDate},
-        #{googleMapLocationPinInformation}, #{reservationConfirmImagePath}, #{budget}
+        #{googleMapLocationPinInformation}, #{reservationConfirmImagePath}, #{budget})
     </insert>
     <insert id="save">
         INSERT INTO
@@ -43,8 +43,11 @@
         )
     </insert>
 
-    <select id="getNextTravelId" resultType="status">
-        SHOW TABLE STATUS LIKE 'tbl_travel'
+    <select id="getNextTravelId" resultType="int">
+        SELECT id
+        FROM tbl_travel
+        ORDER BY id DESC
+        LIMIT 1;
     </select>
     <!--
     #

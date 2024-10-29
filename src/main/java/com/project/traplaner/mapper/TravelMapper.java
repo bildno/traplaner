@@ -26,5 +26,5 @@ public interface TravelMapper {
     void updateJourney(Journey journey);
     List<MainTravelDto> findByEmail(String email);
 
-    TableStatusDto getNextTravelId();
+    int getNextTravelId();
 }

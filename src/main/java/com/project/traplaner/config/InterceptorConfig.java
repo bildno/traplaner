@@ -21,7 +21,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/members/sign-in", "/members/sign-up"); // 언제 동작?
         registry
                 .addInterceptor(travelBoardInterceptor)
-                .addPathPatterns("/my-page/*");
+                .addPathPatterns("/my-page/*","/travelplan");
     }
 }
 
