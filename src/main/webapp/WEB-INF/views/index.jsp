@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -173,5 +174,127 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </c:if>
       </div>
     </div>
+
+    <!--------------------- 페이징 ---------------------------------------->
+    <div class="container mt-4">
+      <h2 class="mb-4">Travel List</h2>
+      <div class="row">
+      <div id="card-container" class="col-sm-4">
+          <!-- 카드 항목들이 JavaScript로 생성됩니다 -->
+      </div>
+  </div>
+      <nav aria-label="Page navigation example" class="mt-4">
+          <ul id="pagination" class="pagination justify-content-center">
+              <!-- 페이지 번호가 JavaScript로 생성됩니다 -->
+          </ul>
+      </nav>
+    </div>
+
+    <script>
+      
+     const travelList = [];
+      
+      <c:if test="${login != null && login.profile != null}">
+        // JSTL을 사용해 JSP에서 자바스크립트 배열로 데이터 전송
+
+        <c:forEach items="${login.mainTravelDtoList}" var="travel" varStatus="status">
+            travelList.push({
+                id: "${travel.id}",
+                travelImg: "${fn:escapeXml(travel.travelImg)}",
+                travelTitle: "${travel.title}"
+            });
+        </c:forEach>
+      </c:if>
+      
+      const cardsPerPage = 3;
+      let currentPage = 1;
+
+      console.log(travelList);
+      
+      function displayCards() {
+          const cardContainer = document.getElementById("card-container");
+          cardContainer.innerHTML = "";
+
+          const start = (currentPage - 1) * cardsPerPage;
+          const end = start + cardsPerPage;
+          const cards = travelList.slice(start, end);
+
+          console.log("cards: ");
+          console.log(cards);
+          
+          cards.forEach(card => {
+            console.log(card.id);
+            console.log(card.travelTitle);
+            console.log(card.travelImg);
+   
+
+          const temp = `div "${card.travelTitle}" div`;
+          console.log(temp);
+        });
+
+          cards.forEach(card => {
+              const cardElement = document.createElement("div");
+              cardElement.className = "card p-1 mt-2";
+              console.log(card.travelImg.replace(/^"/, ''));
+              
+                    cardElement.innerHTML = `        
+              <a href="/my-page/mytravel/` + card.id + `">
+                  <img src="/display/042` + card.travelImg.replace(/^"/, '') + `" class="card-img-top img-fluid" alt="이미지를 클릭하면 해당 여행으로 이동합니다."/>
+                </a>
+                <div class="pt-2">
+                  <h6 class="card-title">` + card.travelTitle +`</h6>
+                </div>
+                `;
+                
+              // cardElement.innerHTML = `
+              //     <div class="card">
+              //         <div class="card-body">
+              //             <h5 class="card-title">` + card.travelTitle + `</h5>
+              //             <p class="card-text">` + card.id + `</p>
+              //         </div>
+              //     </div>
+              // `;
+              console.log(cardElement.innerHTML);
+
+              cardContainer.appendChild(cardElement);
+          });
+      }
+
+      function displayPagination() {
+    const pagination = document.getElementById("pagination");
+    pagination.innerHTML = "";
+
+    const pageCount = Math.ceil(travelList.length / cardsPerPage);
+    for (let i = 1; i <= pageCount; i++) {
+        const pageItem = document.createElement("li");
+        //pageItem.className = `page-item`+ i +`===`+ currentPage + `? "active" : ""`;
+
+        if(i === currentPage){
+          pageItem.className = `page-item active`;
+        } else {
+          pageItem.className = `page-item`;
+        }
+
+        console.log("pageItem.className");
+        console.log(pageItem.className);
+        
+        pageItem.innerHTML = `<a class="page-link" href="#">`+i+`</a>`;
+
+        pageItem.addEventListener("click", function(e) {
+            e.preventDefault();
+            currentPage = i;
+            displayCards();
+            displayPagination();
+        });
+
+        pagination.appendChild(pageItem);
+    }
+}
+      // 초기 표시
+      displayCards();
+      displayPagination();
+</script>
+
+
   </body>
 </html>
