@@ -1,7 +1,10 @@
 package com.project.traplaner.member.service;
 
 import com.project.traplaner.entity.Member;
+import com.project.traplaner.main.dto.MainTravelDto;
+import com.project.traplaner.main.dto.TopThreeFavoriteTravelDto;
 import com.project.traplaner.mapper.MemberMapper;
+import com.project.traplaner.mapper.TravelMapper;
 import com.project.traplaner.member.dto.LoginRequestDto;
 import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import com.project.traplaner.member.dto.SignUpRequestDto;
@@ -21,6 +24,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.project.traplaner.member.service.LoginResult.*;
@@ -32,6 +36,7 @@ public class MemberService {
 
     private final MemberMapper memberMapper;
     private final PasswordEncoder encoder;
+    private final TravelMapper travelMapper;
 
     public boolean join(SignUpRequestDto dto, String savePath){
 
@@ -56,6 +61,21 @@ public class MemberService {
 
     public void maintainLoginState(HttpSession session, String email) {
         Member foundMember = memberMapper.findOne(email);
+
+        // Top 3 Favorite, 10/28, by jhjeong
+        List<TopThreeFavoriteTravelDto> topThreeFavoriteTravelDtoList = travelMapper.findTopThree();
+        System.out.println("--------------------------------------------------");
+        System.out.println(topThreeFavoriteTravelDtoList.toString());
+        System.out.println("--------------------------------------------------");
+
+        // 가입자 Travel 가져오기
+        List<MainTravelDto> mainTravelDtoList = travelMapper.findByEmail(email);
+        System.out.println("--------------------------------------------------");
+        System.out.println(mainTravelDtoList.toString());
+        log.info("mainTravelDtoList: {}", mainTravelDtoList.toString());
+        System.out.println("--------------------------------------------------");
+
+
         // DB 데이터를 사용할 것만 정제
         LoginUserResponseDTO dto = LoginUserResponseDTO.builder()
                 .id(foundMember.getId())
@@ -63,6 +83,8 @@ public class MemberService {
                 .email(foundMember.getEmail())
                 .loginMethod(foundMember.getLoginMethod().toString())
                 .profile(foundMember.getProfileImg())
+                .topThreeFavoriteTravelDtoList(topThreeFavoriteTravelDtoList) // 10/28 by jhjeong
+                .mainTravelDtoList(mainTravelDtoList)   // 10/28 by jhjeong
                 .build();
 
         // 세션에 로그인 한 회원 정보를 저장

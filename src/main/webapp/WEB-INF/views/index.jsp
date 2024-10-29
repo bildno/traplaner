@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -68,14 +68,11 @@
             </c:if>
             <li class="nav-item">
               <!--a class="nav-link disabled" href="/members/sign-in" aria-disabled="true">로그인</a-->
-
             </li>
           </ul>
         </div>
       </div>
     </nav>
-
-
 
     <!------------------ 추천 여행지 carousel ----------------------->
     <div id="demo" class="carousel slide mt-5" data-bs-ride="carousel">
@@ -85,19 +82,31 @@
         <button data-bs-target="#demo" data-bs-slide-to="2"></button>
         <button data-bs-target="#demo" data-bs-slide-to="3"></button>
       </div>
+
       <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="/assets/img/경주-800x320.jpg" alt="" class="d-block w-100" />
-        </div>
-        <div class="carousel-item">
-          <img src="/assets/img/부산-800x320.jpg" alt="" class="d-block w-100" />
-        </div>
-        <div class="carousel-item">
-          <img src="/assets/img/남이섬-800x320.jpg" alt="" class="d-block w-100" />
-        </div>
-        <div class="carousel-item">
-          <img src="/assets/img/홍콩-800x320.jpg" alt="" class="d-block w-100" />
-        </div>
+        
+        <c:if test="${login.profile == null}">
+          <div class="carousel-item active">
+            <img src="/assets/img/경주-800x320.jpg" alt="" class="d-block w-100" />
+          </div>
+          <div class="carousel-item">
+            <img src="/assets/img/부산-800x320.jpg" alt="" class="d-block w-100" />
+          </div>
+          <div class="carousel-item">
+            <img src="/assets/img/남이섬-800x320.jpg" alt="" class="d-block w-100" />
+          </div>
+        </c:if>
+  
+        <c:if test="${login != null && login.profile != null}">
+          <c:forEach items="${login.topThreeFavoriteTravelDtoList}" var="travel" varStatus="status">
+              <div class="carousel-item<c:out value='${status.first ? " active" : ""}'/>">
+                <a href="/travelboard/info/${travel.id}">
+                  <img src="/display${travel.travelImg}" alt="" class="d-block w-100" />
+                </a>
+              </div>
+          </c:forEach>
+        </c:if>
+
         <button class="carousel-control-prev" data-bs-target="#demo" data-bs-slide="prev">
           <span class="carousel-control-prev-icon"></span>
         </button>
@@ -107,15 +116,17 @@
       </div>
     </div>
 
-
     <!--------------------- My여행추가, My여행목록 ----------------------->
     <div class="container mt-4">
       <div class="row">
         <div class="col-sm-4">
-          <div class="card p-1">
+          <div class="card p-1 mt-2">
             <a href="/travelplan">
-              <img src="/assets/img/add-250x140.jpg" alt="" class="card-img-top img-fluid" />
+              <img src="/assets/img/add-800x320.jpg" alt="" class="card-img-top img-fluid" />
             </a>
+            <div class="pt-2">
+              <h6 class="card-title">여행을 떠나요~</h6>
+            </div>
             <!--
             <div class="card-img-overlay">
               <h4 class="card-title text-primary">여행추가</>
@@ -123,28 +134,43 @@
             -->
           </div>
         </div>
+ 
+        <c:if test="${login != null && login.profile != null}">
 
-
-        <div class="col-sm-4">
-          <div class="card p-1">
-            <img src="/assets/img/홍콩-250x140.jpg" alt="" class="card-img-top" />
-            <div class="card-img-overlay">
-              <h4 class="card-title text-white">홍콩</h4>
-              <p class="card-text text-white">침사추이, 몽콕, 스탠리, 빅토리아피크, 망고쥬스</p>
+          <c:forEach items="${login.mainTravelDtoList}" var="travel" varStatus="status">
+            <div class="col-sm-4">
+              <div class="card p-1 mt-2">
+                <a href="/my-page/mytravel/${travel.id}">
+                  <img src="/display${travel.travelImg}" class="card-img-bottom" alt="이미지를 클릭하면 해당 여행으로 이동합니다."/>
+                </a>
+                <div class="pt-2">
+                  <h6 class="card-title">${travel.title}</h6>
+                </div>
+              </div>
+            </div>
+          </c:forEach>
+<!--
+          <div class="col-sm-4">
+            <div class="card p-1">
+              <img src="/assets/img/홍콩-250x140.jpg" alt="" class="card-img-top" />
+              <div class="card-img-overlay">
+                <h4 class="card-title text-white">홍콩</h4>
+                <p class="card-text text-white">침사추이, 몽콕, 스탠리, 빅토리아피크, 망고쥬스</p>
+              </div>
             </div>
           </div>
-        </div>
 
-
-        <div class="col-sm-4">
-          <div class="card p-1">
-            <img src="/assets/img/부산-250x140.jpg" alt="" class="card-img-top" />
-            <div class="card-img-overlay">
-              <h4 class="card-title text-white">부산-마이뭇다아이가</h4>
-              <p class="card-text text-white">해운대, 광안리, 국제시장, 자갈치시장, 서면</p>
+          <div class="col-sm-4">
+            <div class="card p-1">
+              <img src="/assets/img/부산-250x140.jpg" alt="" class="card-img-top" />
+              <div class="card-img-overlay">
+                <h4 class="card-title text-white">부산-마이뭇다아이가</h4>
+                <p class="card-text text-white">해운대, 광안리, 국제시장, 자갈치시장, 서면</p>
+              </div>
             </div>
           </div>
-        </div>
+-->
+        </c:if>
       </div>
     </div>
   </body>

@@ -7,7 +7,8 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @ToString
-
+@AllArgsConstructor
+@Builder
 public class Favorite {
     private int id;
     private int memberId;

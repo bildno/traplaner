@@ -67,7 +67,7 @@ public class MyPageController {
     @GetMapping("/tempMain")
     public String tempMain() {
 
-        return "main";
+        return "old-main";
     }
 
     @PostMapping("/my-page/shareIs/{boardId}")

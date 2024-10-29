@@ -1,9 +1,11 @@
 package com.project.traplaner.mapper;
 
+import com.project.traplaner.entity.TravelBoard;
 import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -18,4 +20,7 @@ public interface TravelBoardMapper {
 
     // 검색 게시물 개수 카운트
     int getTotalCount(PageDTO page);
+
+    // 10/28 by jhjeong
+    void save(TravelBoard travelBoard);
 }

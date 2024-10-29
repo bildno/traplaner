@@ -44,6 +44,7 @@ public class Journey {
     private String reservationConfirmImagePath;
     private boolean shear;
     private PlaceType placeType;
+    private String journeyImg;
 
     @Getter @ToString @AllArgsConstructor
     public enum PlaceType {
