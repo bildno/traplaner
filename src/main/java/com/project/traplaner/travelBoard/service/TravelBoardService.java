@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +39,18 @@ public class TravelBoardService {
 
     public TravelBoardDetailResponseDTO getOne(int id) {
         return travelBoardMapper.findOne(id);
+    }
+
+    // 좋아요 상태 토글
+    @Transactional
+    public int toggleLike(int travelBoardId, int memberId) {
+        boolean isLiked = travelBoardMapper.isLikedByMember(Map.of("travelBoardId", travelBoardId, "memberId", memberId));
+        if (isLiked) {
+            travelBoardMapper.removeLike(Map.of("travelBoardId", travelBoardId, "memberId", memberId));
+        } else {
+            travelBoardMapper.addLike(Map.of("travelBoardId", travelBoardId, "memberId", memberId));
+        }
+        return travelBoardMapper.getLikeCount(travelBoardId);  // 현재 좋아요 수 반환
     }
 
 }

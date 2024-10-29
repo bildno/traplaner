@@ -87,20 +87,37 @@
                     color: #888;
                     margin-left: 8px;
                 }
+
+                #like-button {
+                    background-color: none;
+                    border: none;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    transition: background-color 0.3s;
+                }
+
+                .fa-solid {
+                    color: red;
+                }
+
+                #like-count {
+                    color: #333;
+                }
             </style>
         </head>
 
         <body>
 
             <div class="container">
-                <h1>${tb.id}</h1>
-                <h1>${tOne.id}번 게시물 내용</h1>
                 <h1>${tOne.title}</h1>
-                <p class="author-date">${tOne.writer} ${tOne.writeDate} <span class="heart"><button
-                            onclick="toggleLike(${tOne.id})"><i class="fa-regular fa-heart"
-                                style="color: #ff00bb;"></i></button>
-                        ${tOne.likeCount}</span></p>
-
+                <p class="author-date">${tOne.writer} ${tOne.writeDate}
+                    <span class="heart">
+                        <button id="like-button" onclick="toggleLike(${tOne.id})">
+                            <i class="fa-solid fa-heart"></i>
+                            <span id="like-count">${tOne.likeCount}</span>
+                        </button>
+                    </span>
+                </p>
                 <div class="section photo">사진</div>
                 <div class="section text" id="content">${tOne.content}</div>
 
@@ -112,7 +129,9 @@
 
             <script>
                 function toggleLike(travelBoardId) {
-                    fetch(`/travelboard/${travelBoardId}/toggle-like`, {
+                    const url = 'http://localhost:8181/travelboard/' + travelBoardId + '/toggle-like';
+                    console.log(travelBoardId);
+                    fetch(url, {
                         method: "POST"
                     })
                         .then(response => response.text())  // 응답을 텍스트로 받아
