@@ -8,15 +8,16 @@ spring:
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
   mail:
-    host:
-    port:
-    username:
-    password:
+    host: smtp.gmail.com
+    port: 587
+    username: 111returns1@gmail.com
+    password: dksdkffuwna
     properties:
       smtp:
-        auth:
+        auth: true
+        timeout: 10000
         starttls:
-          enable:
+          enable: true
   mvc:
     view:
       prefix: /WEB-INF/views/
