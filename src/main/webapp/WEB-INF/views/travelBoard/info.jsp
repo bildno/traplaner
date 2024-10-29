@@ -91,10 +91,10 @@
         </head>
 
         <body>
-            <!-- <h1>게시글상세조회</h1>
-            <h1>${tOne.id}번 게시물 내용</h1> -->
 
             <div class="container">
+                <!-- <h1>게시글상세조회</h1>
+            <h1>${tOne.id}번 게시물 내용</h1> -->
                 <h1>${tOne.title}</h1>
                 <p class="author-date">${tOne.writer} ${tOne.writeDate} <span class="heart"><button
                             onclick="toggleLike(${tOne.id})"><i class="fa-regular fa-heart"

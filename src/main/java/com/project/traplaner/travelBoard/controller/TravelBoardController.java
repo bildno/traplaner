@@ -32,6 +32,11 @@ public class TravelBoardController {
     public String info(Model model, @PathVariable("id") int id) {
         TravelBoardDetailResponseDTO one = travelBoardService.getOne(id);
         model.addAttribute("tOne", one);
+        log.trace("trace log={}", one);
+        log.debug("debug log={}", one);
+        log.info("info log={}", one);
+        log.warn("warn log={}", one);
+        log.error("error log={}", one);
         return "travelBoard/info";
     }
 

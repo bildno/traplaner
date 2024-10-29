@@ -233,6 +233,36 @@
                 </nav>
             </div>
 
+            <script>
+                // 검색조건 셀렉트 박스 옵션 타입 고정하기
+                function fixSearchOption() {
+                    const $select = document.getElementById('search-type');
+
+                    const $options = [...$select.children];
+                    $options.forEach($opt => {
+                        if ($opt.value === '${s.type}') {
+                            // option 태그에 selected를 주면 그 option으로 고정됨.
+                            $opt.setAttribute('selected', 'selected');
+                        }
+                    });
+                }
+
+                function fixSortOption() {
+                    const $select = document.getElementById('select-type');
+
+                    const $options = [...$select.children];
+                    $options.forEach($opt => {
+                        if ($opt.value === '${s.type}') {
+                            // option 태그에 selected를 주면 그 option으로 고정됨.
+                            $opt.setAttribute('selected', 'selected');
+                        }
+                    });
+                }
+
+                fixSearchOption();
+                fixSortOption();
+            </script>
+
         </body>
 
         </html>
