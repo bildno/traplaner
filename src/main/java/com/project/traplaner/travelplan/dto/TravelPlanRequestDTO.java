@@ -2,7 +2,6 @@ package com.project.traplaner.travelplan.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.project.traplaner.entity.Journey;
 import com.project.traplaner.entity.Travel;
 import lombok.*;
@@ -14,9 +13,6 @@ import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import static java.time.format.DateTimeFormatter.ISO_INSTANT;
-import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
 @Setter
 @Getter

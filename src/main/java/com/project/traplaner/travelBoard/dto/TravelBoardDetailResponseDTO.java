@@ -26,9 +26,8 @@ public class TravelBoardDetailResponseDTO {
     private String placeName;
     private LocalDateTime journeyStartTime;
     private String locationPin;
-    private int day;
 
-    public TravelBoardDetailResponseDTO(Member member, Travel travel, TravelBoard travelBoard, Journey journey, int likeCount, int day) {
+    public TravelBoardDetailResponseDTO(Member member, Travel travel, TravelBoard travelBoard, Journey journey, int likeCount) {
         this.id = travel.getId();
         this.title = travel.getTitle();
         this.writer = member.getNickName();
@@ -40,7 +39,6 @@ public class TravelBoardDetailResponseDTO {
         this.placeName = journey.getAccommodationName();
         this.journeyStartTime = journey.getStartTime();
         this.locationPin = journey.getGoogleMapLocationPinInformation();
-        this.day = day;
     }
 
 }
