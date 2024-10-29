@@ -81,7 +81,7 @@
                 }
 
                 /* 각 게시글 카드 스타일 */
-                .list-container a {
+                .list-container .goPost {
                     text-decoration: none;
                     color: black;
                     border: 1px solid #ddd;
@@ -91,7 +91,7 @@
                     height: 300px;
                 }
 
-                .list-container a:hover {
+                .list-container .goPost:hover {
                     transform: scale(1.05);
                     /* 마우스 오버 시 확대 효과 */
                 }
@@ -106,16 +106,16 @@
                 }
 
                 /* 제목, 날짜, 작성자 스타일 */
-                .list-container a div {
+                .list-container .goPost div {
                     padding: 6px;
                 }
 
-                .list-container a h4 {
+                .list-container .goPost h4 {
                     margin: 5px;
                     color: #373737;
                 }
 
-                .list-container a p {
+                .list-container .goPost p {
                     margin: 5px;
                     font-size: 0.9em;
                     color: #666;
@@ -190,7 +190,7 @@
             <main id="list">
                 <div class="list-container">
                     <c:forEach var="tb" items="${tbList}">
-                        <a href="localhost:8181/travelboard/info/${tb.id}">
+                        <a class="goPost" href="/travelboard/info/${tb.id}" target="_blank">
                             <img src="/assets/img/disneyland_hongkong.jpg" alt="여행이미지" class="image"> <br>
                             <div>
                                 <h4>${tb.shortTitle}</h4>
