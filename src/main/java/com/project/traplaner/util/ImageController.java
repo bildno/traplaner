@@ -19,6 +19,10 @@ import java.nio.file.Files;
 @RequestMapping("/display")
 @Slf4j
 public class ImageController {
+
+    @Value("${file.upload.root-path}")
+    private String rootImgPath;
+
     @Value("${file.upload.root-path-profile}")
     private String rootProfileImgPath;
 
@@ -29,7 +33,9 @@ public class ImageController {
     public ResponseEntity<?> getImage(@PathVariable String fileName) {
 
         log.info("-------------------------> ImageController:getImage");
-        String fullPath = String.format("%s/%s", rootProfileImgPath, fileName);
+//        String fullPath = String.format("%s/%s", rootProfileImgPath, fileName);
+        String fullPath = String.format("%s/%s", rootImgPath, fileName);
+        log.info("filename: {}", fileName);
         log.info("fullPath: {}", fullPath);
 
         File file = new File(fullPath);
