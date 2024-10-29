@@ -69,14 +69,19 @@
                     border-radius: 4px;
                 }
 
-                .section i {
+                .section img {
                     object-fit: cover;
                 }
 
-                #content {
+                #content,
+                #schedule {
                     background-color: white;
                     justify-content: flex-start;
                     align-items: flex-start;
+                }
+
+                #schedule {
+                    height: 30px;
                 }
 
                 .day-title {
@@ -131,10 +136,10 @@
                 <div class="section photo"><img src="/display${tOne.img}"></div>
                 <div class="section text" id="content">${tOne.content}</div>
 
-                <h2 class="day-title">1일차 <span class="day-date">2024년 8월 29일</span></h2>
+                <h2 class="day-date">${tOne.journeyStartTime}</h2>
 
-                <div class="section route">경로</div>
-                <div class="section schedule">여정</div>
+                <div class="section route" id="route">${tOne.locationPin}</div>
+                <div class="section schedule" id="schedule">${tOne.journeyName} ${tOne.placeName}</div>
             </div>
 
             <script>

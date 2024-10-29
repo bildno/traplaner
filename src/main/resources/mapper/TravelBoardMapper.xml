@@ -48,7 +48,7 @@
         LIMIT #{pageStart}, #{amount}
     </select>
 
-    <!-- 게시물 상세조회: 제목, 작성자, 작성일, 내용, 좋아요수, 사진 -->
+    <!-- 게시물 상세조회: 여행id, 여행제목, 작성자, 게시물작성일, 사진, 내용, 좋아요수, 여정이름, 장소이름, 여정시작시간, 경위도 -->
     <select id="findOne" resultType="com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO">
         SELECT
         t.id,
@@ -57,13 +57,19 @@
         tb.write_date,
         t.travel_img AS img,
         tb.content,
-        COUNT(f.member_id) AS likeCount
-        FROM tbl_member m
-        JOIN tbl_travel t ON m.id = t.member_id
-        JOIN tbl_travel_board tb ON t.id = tb.travel_id
-        LEFT JOIN tbl_favorite f ON tb.id = f.travel_board_id
+        COUNT(f.member_id) AS likeCount,
+        j.journey_name AS journeyName,
+        j.accommodation_name AS placeName,
+        j.start_time AS journeyStartTime,
+        j.google_map_location_pin_information AS locationPin
+        FROM tbl_travel t
+        JOIN tbl_member m ON t.member_id = m.id
+        LEFT JOIN tbl_travel_board tb ON t.id = tb.travel_id
+        LEFT JOIN tbl_journey j ON t.id = j.travel_id
+        LEFT JOIN tbl_favorite f ON t.id = f.travel_board_id
         WHERE t.id = #{id}
-        GROUP BY t.id, t.title, m.nick_name, tb.write_date, tb.content;
+        GROUP BY t.id, m.nick_name, t.title, t.travel_img, tb.write_date, tb.content, j.journey_name, j.accommodation_name, j.start_time, j.google_map_location_pin_information, j.journey_img
+        ORDER BY journeyStartTime DESC
     </select>
 
     <!-- 검색 게시물 개수 -->
