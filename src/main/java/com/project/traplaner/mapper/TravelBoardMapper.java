@@ -5,9 +5,9 @@ import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface TravelBoardMapper {
@@ -21,6 +21,15 @@ public interface TravelBoardMapper {
     // 검색 게시물 개수 카운트
     int getTotalCount(PageDTO page);
 
+    boolean isLikedByMember(Map<String, Integer> travelBoardId);
+
+    void removeLike(Map<String, Integer> travelBoardId);
+
+    void addLike(Map<String, Integer> travelBoardId);
+
+    int getLikeCount(int travelBoardId);
+
     // 10/28 by jhjeong
     void save(TravelBoard travelBoard);
+
 }
