@@ -22,6 +22,7 @@ file:
     root-path: C:/devlop/upload
     root-path-profile: C:/devlop/upload/profile
     root-path-travel: C:/devlop/upload/travel
+    root-path-reservation: C:/develop/upload/reservation
 
 # log level setting
 logging:

@@ -34,6 +34,9 @@ public class UploadController {
     @Value("${file.upload.root-path-travel}")
     private String rootTravelImgPath;
 
+    @Value("{file.upload.root-path-reservation")
+    private String rootReservationImgPath;
+
     @PostMapping("/upload-file")
     public String uploadForm(@RequestParam("thumbnail") MultipartFile file) {
 
