@@ -16,6 +16,7 @@ public class TravelBoardDetailResponseDTO {
     private String title;
     private String writer;
     private String writeDate;
+    private String img;
     private String content;
     private int likeCount;
 
@@ -24,6 +25,7 @@ public class TravelBoardDetailResponseDTO {
         this.title = travel.getTitle();
         this.writer = member.getNickName();
         this.writeDate = TravelBoardListResponseDTO.makePrettierDateString(travelBoard.getWriteDate());
+        this.img = travel.getTravelImg();
         this.content = travelBoard.getContent();
         this.likeCount = likeCount;
     }

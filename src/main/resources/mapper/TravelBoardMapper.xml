@@ -48,13 +48,14 @@
         LIMIT #{pageStart}, #{amount}
     </select>
 
-    <!-- 게시물 상세조회: 제목, 작성자, 작성일, 내용, 좋아요수 -->
+    <!-- 게시물 상세조회: 제목, 작성자, 작성일, 내용, 좋아요수, 사진 -->
     <select id="findOne" resultType="com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO">
         SELECT
         t.id,
         t.title AS title,
         m.nick_name AS writer,
         tb.write_date,
+        t.travel_img AS img,
         tb.content,
         COUNT(f.member_id) AS likeCount
         FROM tbl_member m

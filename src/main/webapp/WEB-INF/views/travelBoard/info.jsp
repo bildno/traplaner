@@ -60,7 +60,6 @@
                 .section {
                     width: 100%;
                     height: 300px;
-                    background-color: #d3d3d3;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -68,6 +67,10 @@
                     color: #333;
                     margin-bottom: 16px;
                     border-radius: 4px;
+                }
+
+                .section i {
+                    object-fit: cover;
                 }
 
                 #content {
@@ -96,12 +99,19 @@
                     transition: background-color 0.3s;
                 }
 
-                .fa-solid {
-                    color: red;
-                }
-
                 #like-count {
                     color: #333;
+                }
+
+                #like-icon {
+                    color: #333;
+                    /* 기본 색상 */
+                    transition: color 0.3s;
+                }
+
+                #like-icon.liked {
+                    color: #ff006a;
+                    /* 좋아요 클릭 후 색상 */
                 }
             </style>
         </head>
@@ -113,12 +123,12 @@
                 <p class="author-date">${tOne.writer} ${tOne.writeDate}
                     <span class="heart">
                         <button id="like-button" onclick="toggleLike(${tOne.id})">
-                            <i class="fa-solid fa-heart"></i>
+                            <i id="like-icon" class="fa-solid fa-heart"></i>
                             <span id="like-count">${tOne.likeCount}</span>
                         </button>
                     </span>
                 </p>
-                <div class="section photo">사진</div>
+                <div class="section photo"><img src="/display${tOne.img}"></div>
                 <div class="section text" id="content">${tOne.content}</div>
 
                 <h2 class="day-title">1일차 <span class="day-date">2024년 8월 29일</span></h2>
@@ -137,9 +147,14 @@
                         .then(response => response.text())  // 응답을 텍스트로 받아
                         .then(data => {
                             document.getElementById("like-count").innerText = data; // 정수를 그대로 표시
+
+                            // 아이콘 색상 토글
+                            const likeIcon = document.getElementById("like-icon");
+                            likeIcon.classList.toggle("liked"); // liked 클래스 추가/제거
                         })
                         .catch(error => console.error("Error:", error));
                 }
+
             </script>
         </body>
 
