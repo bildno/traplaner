@@ -87,6 +87,10 @@
                     color: #888;
                     margin-left: 8px;
                 }
+
+                .fa-heart:hover {
+                    cursor: pointer;
+                }
             </style>
         </head>
 
@@ -94,11 +98,12 @@
 
             <div class="container">
                 <h1>${tOne.title}</h1>
-                <p class="author-date">${tOne.writer} ${tOne.writeDate} <span class="heart"><button
-                            onclick="toggleLike(${tOne.id})"><i class="fa-regular fa-heart"
-                                style="color: #ff00bb;"></i></button>
-                        ${tOne.likeCount}</span></p>
-
+                <p class="author-date">${tOne.writer} ${tOne.writeDate}
+                    <span class="heart">
+                        <button><i class="fa-solid fa-heart" id="like" onclick="iLikeIt()"></i></button>
+                        <span id="likeCount">${tOne.likeCount}</span>
+                    </span>
+                </p>
                 <div class="section photo">사진</div>
                 <div class="section text" id="content">${tOne.content}</div>
 
@@ -108,18 +113,6 @@
                 <div class="section schedule">여정</div>
             </div>
 
-            <script>
-                function toggleLike(travelBoardId) {
-                    fetch(`/travelboard/${travelBoardId}/toggle-like`, {
-                        method: "POST"
-                    })
-                        .then(response => response.text())  // 응답을 텍스트로 받아
-                        .then(data => {
-                            document.getElementById("like-count").innerText = data; // 정수를 그대로 표시
-                        })
-                        .catch(error => console.error("Error:", error));
-                }
-            </script>
         </body>
 
         </html>
