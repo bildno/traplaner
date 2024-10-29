@@ -5,7 +5,6 @@ import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
