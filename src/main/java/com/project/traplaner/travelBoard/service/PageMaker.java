@@ -22,7 +22,7 @@ public class PageMaker {
     private int totalCount;
 
     // 한 화면에 보여질 페이지 버튼 개수
-    private static final int PAGE_COUNT = 10;
+    private static final int PAGE_COUNT = 5;
 
     // 계산에 필요한 값은 객체가 생성될 때 전달 받겠습니다.
     public PageMaker(PageDTO page, int totalCount) {

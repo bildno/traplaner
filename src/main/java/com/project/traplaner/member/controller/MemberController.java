@@ -20,6 +20,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/members")
 @Slf4j
@@ -74,15 +76,14 @@ public class MemberController {
     // 이메일, 닉네임 중복 검사
     @PostMapping("/duplicateTest")
     @ResponseBody
-    public ResponseEntity<?> check(
-            @RequestParam String type,
-            @RequestParam String keyword) {
+    public ResponseEntity<?> check(@RequestBody Map<String, Object> params) {
 
-        System.out.println("============================");
-        System.out.println("type = " + type);
-        System.out.println("keyword = " + keyword);
+        System.out.println("=====================================");
 
-        boolean flag = memberService.duplicateTest(type, keyword);
+        log.info("type: {}", params.get("type"));
+        log.info("keyword: {}", params.get("keyword"));
+
+        boolean flag = memberService.duplicateTest((String) params.get("type"), (String) params.get("keyword"));
         return ResponseEntity.ok()
                 .body(flag);
     }

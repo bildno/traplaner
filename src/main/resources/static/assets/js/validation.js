@@ -1,10 +1,21 @@
 // 서버에 중복확인 비동기 요청
 // 아이디, 이메일 중복 동시 처리하기 위해 type을 선언.
 export const checkAvailability = async (type, keyword) => {
-  const response = await fetch(
-    `http://localhost:8181/members/duplicateTest?type=${type}&keyword=${keyword}`,{
+    const payload = {
+        "type": type,
+        "keyword": keyword
+      };
+
+    const requestInfo = {
       method: "POST",
-      }
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+  };
+
+  const response = await fetch(
+    'http://localhost:8181/members/duplicateTest', requestInfo
   );
   const flag = await response.json();
   return !flag; // 논리 반전해서 리턴 -> 중복됐으면 false로 해석하기 위해.

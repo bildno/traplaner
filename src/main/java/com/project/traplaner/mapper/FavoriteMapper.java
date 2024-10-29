@@ -16,7 +16,5 @@ public interface FavoriteMapper {
     // 10/28 by jhjeong
     void save(Favorite favorite);
 
-
-//public interface FavoriteMapper {
-
 }
+

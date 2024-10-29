@@ -13,13 +13,13 @@ import java.util.List;
 public interface TravelBoardMapper {
 
     // 목록 조회
-    List<TravelBoardListResponseDTO> findAll();
+    List<TravelBoardListResponseDTO> findAll(PageDTO page);
 
      //상세 조회
     TravelBoardDetailResponseDTO findOne(int id);
 
     // 검색 게시물 개수 카운트
-//    int getTotalCount(PageDTO page);
+    int getTotalCount(PageDTO page);
 
     // 10/28 by jhjeong
     void save(TravelBoard travelBoard);

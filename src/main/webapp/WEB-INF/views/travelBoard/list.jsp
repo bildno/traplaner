@@ -8,99 +8,179 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Document</title>
 
+            <script src="https://kit.fontawesome.com/7dcd39bc6e.js" crossorigin="anonymous"></script>
             <!-- <link rel="stylesheet" href="외부 스타일 시트 파일 경로"> -->
 
             <style>
-                /* 검색창 */
+                /* 전체 페이지 스타일 */
+                body {
+                    font-family: 'Arial', sans-serif;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                /* 상단 검색창 스타일 */
+                .top-section {
+                    padding: 20px;
+                    background-color: #fff;
+                    border: none;
+                    padding-bottom: 10px;
+                }
+
                 #field {
                     border: none;
                 }
 
+                form {
+                    margin-right: 199px;
+                }
+
+                select {
+                    border-radius: 30px;
+                }
+
+                input {
+                    border-radius: 40px;
+                }
+
                 .search {
                     display: flex;
+                    align-items: center;
                     flex-direction: row-reverse;
-                    margin-right: 50px;
                 }
 
-                #option {
-                    flex-direction: row;
-                    margin-right: 8px;
-                    margin-top: 1px;
-                }
-
-                #find {
-                    flex-direction: row;
-                    border-radius: 40%;
-                }
-
+                .form-select,
                 .form-control {
                     height: 23px;
-                    width: 200px;
+                    margin-right: 3px;
                 }
 
-                #select-type {
+                .form-select {
+                    width: 80px;
+                }
+
+                #searching {
                     height: 23px;
-                    width: 100px;
+                    margin-top: 5px;
+                    border: none;
+                    background-color: #fff;
                 }
 
-                /* 목록창 */
-                a {
-                    color: black;
-                    text-decoration: none;
-                }
-
-                #list {
-                    position: relative;
-                    left: 190px;
-                    top: 50px;
-                    width: 100%;
+                /* 목록창 스타일 */
+                main {
+                    padding: 15px;
                 }
 
                 .list-container {
-                    width: 600px;
+                    width: 1050px;
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
-                    grid-template-rows: minmax(100px, auto);
-                    gap: 60px 80px;
+                    gap: 45px;
+                    margin-left: auto;
+                    margin-right: auto;
                 }
 
+                /* 각 게시글 카드 스타일 */
+                .list-container .goPost {
+                    text-decoration: none;
+                    color: black;
+                    border: 1px solid #ddd;
+                    border-radius: 2%;
+                    overflow: hidden;
+                    transition: transform 0.2s;
+                    height: 300px;
+                }
+
+                .list-container .goPost:hover {
+                    transform: scale(1.05);
+                    /* 마우스 오버 시 확대 효과 */
+                }
+
+                /* 이미지 스타일 */
                 .image {
-                    width: 300px;
-                    height: 240px;
-                    border-radius: 1%;
+                    width: 100%;
+                    height: 200px;
+                    /* 고정 높이 */
+                    object-fit: cover;
+                    /* 이미지 비율 유지 */
+                }
+
+                /* 제목, 날짜, 작성자 스타일 */
+                .list-container .goPost div {
+                    padding: 6px;
+                }
+
+                .list-container .goPost h4 {
+                    margin: 5px;
+                    color: #373737;
+                }
+
+                .list-container .goPost p {
+                    margin: 5px;
+                    font-size: 0.9em;
+                    color: #666;
+                }
+
+                /* 페이지 버튼 스타일 */
+                .bottom-section {
+                    padding: 10px;
+                    padding-bottom: 20px;
+                }
+
+                .pagination {
+                    display: flex;
+                    justify-content: center;
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                .page-item {
+                    margin: 0 5px;
+                }
+
+                .page-link {
+                    display: block;
+                    padding: 10px 15px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    text-decoration: none;
+                    color: black;
+                    transition: background-color 0.2s;
+                    border: none;
+                }
+
+                .page-link:hover {
+                    background-color: #f0f0f0;
+                    /* 마우스 오버 시 배경색 변화 */
                 }
             </style>
 
         </head>
 
         <body>
-            <h1>게시판목록</h1>
-
-
 
             <!-- 검색창 영역 -->
-            <div class="search">
+            <div class="top-section">
                 <fieldset id="field">
                     <div class="search">
                         <!-- 검색창 영역 -->
                         <form action="/travelboard/list" method="get" name="search" id="find">
-                            <!-- <select class="form-select" name="type" id="search-type">
-                                <option value="title">제목</option>
-                                <option value="content">내용</option>
-                                <option value="writer">작성자</option>
-                                <option value="tc">제목+내용</option>
-                            </select> -->
-                            <input placeholder="제목, 작성자, 내용" type="search" class="form-control" name="keyword"
-                                value="${s.keyword}" autocomplete="off">
-                            <button type="submit" id="searching">검색</button>
-                        </form>
-                        <!-- 최신순, 과거순, 좋아요순 -->
-                        <form action="/travelboard/list" method="get" id="option">
-                            <select class="form-select" name="type" id="select-type">
+                            <select class="form-select" name="sortType" id="select-type">
                                 <option value="new">최신순</option>
                                 <option value="old">과거순</option>
                                 <option value="best">좋아요순</option>
                             </select>
+                            <select class="form-select" name="type" id="search-type">
+                                <option value="title">제목</option>
+                                <option value="content">내용</option>
+                                <option value="writer">작성자</option>
+                                <option value="tc">제목+내용</option>
+                            </select>
+                            <input type="search" class="form-control" name="keyword" value="${s.keyword}"
+                                autocomplete="off">
+                            <button type="submit" id="searching"><i class="fa-solid fa-magnifying-glass fa-rotate-by"
+                                    style="color: #000000; --fa-rotate-angle: 18deg;"></i></button>
                         </form>
                     </div>
                 </fieldset>
@@ -110,15 +190,48 @@
             <main id="list">
                 <div class="list-container">
                     <c:forEach var="tb" items="${tbList}">
-                        <a href="localhost:8181/travelboard/info/${tOne.id}">
+                        <a class="goPost" href="/travelboard/info/${tb.id}" target="_blank">
                             <img src="/assets/img/disneyland_hongkong.jpg" alt="여행이미지" class="image"> <br>
-                            ${tb.shortTitle} <br>
-                            ${tb.writer} <br>
-                            ${tb.writeDate}
+                            <div>
+                                <h4>${tb.shortTitle}</h4>
+                                <p>${tb.writer}</p>
+                                <p>${tb.writeDate}</p>
+                            </div>
                         </a>
                     </c:forEach>
                 </div>
             </main>
+
+            <!-- 게시글 목록 하단 영역 -->
+            <div class="bottom-section">
+                <!-- 페이지 버튼 영역 -->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-lg pagination-custom">
+                        <c:if test="${maker.prev}">
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="/travelboard/list?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
+                            </li>
+                        </c:if>
+
+                        <!-- step은 기본값이 1, 생략 가능 -->
+                        <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
+                            <li data-page-num="${i}" class="page-item">
+                                <a class="page-link"
+                                    href="/travelboard/list?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
+                            </li>
+                        </c:forEach>
+
+
+                        <c:if test="${maker.next}">
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="/travelboard/list?pageNo=${maker.end + 1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
+                            </li>
+                        </c:if>
+                    </ul>
+                </nav>
+            </div>
 
         </body>
 
