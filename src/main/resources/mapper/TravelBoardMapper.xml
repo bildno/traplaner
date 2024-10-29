@@ -23,6 +23,7 @@
     <select id="findAll" resultType="com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO">
         SELECT
         t.id,
+        t.travel_img AS img,
         t.title AS short_title,
         m.nick_name AS writer,
         tb.write_date,
