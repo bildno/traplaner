@@ -15,12 +15,12 @@ public interface TravelMapper {
 
     void saveTravel(Travel travel);
     void save(Travel travel);
-/*
+
     Travel fineOne(int memberId);
 
     void postJourney(Journey journey);
     List<Travel> findAll(int memberId);
-  */
+
     List<TopThreeFavoriteTravelDto> findTopThree();
 
     void updateJourney(Journey journey);
