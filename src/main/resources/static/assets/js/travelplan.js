@@ -106,8 +106,8 @@ function updateJourneyView() {
         <p><strong>일정 제목:</strong> ${journey.title}</p>
         <p><strong>장소:</strong> ${journey.location}</p>
         <p><strong>예산:</strong> ₩${journey.budget}</p>
-        <p><strong>예약:</strong> ${journey.reservation}</p>
-        <button data-id = ${journey.id}>x</button>
+        <p><strong>예약:</strong> ${journey.reservation.name}</p>
+        <button data-id = ${journey.id}>x</button>  
       `
             journeyItem.style.borderBottom = "1px solid black";
             journeyItem.style.marginBottom = '10px';

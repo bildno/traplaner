@@ -7,7 +7,16 @@ spring:
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
-    #jsp view resolver setting
+  mail:
+    host:
+    port:
+    username:
+    password:
+    properties:
+      smtp:
+        auth:
+        starttls:
+          enable:
   mvc:
     view:
       prefix: /WEB-INF/views/
