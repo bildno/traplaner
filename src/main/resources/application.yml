@@ -31,6 +31,8 @@ logging:
     org:
       hibernate:
         SQL: debug
+    com:
+      project: debug
 
 #mybatis setting
 mybatis:

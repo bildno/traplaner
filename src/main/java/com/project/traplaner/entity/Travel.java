@@ -19,6 +19,7 @@ public class Travel {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private LocalDateTime createdAt;
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
     private boolean share;
+    private String travelImg;
 }

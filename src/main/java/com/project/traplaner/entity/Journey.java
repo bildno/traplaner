@@ -45,6 +45,7 @@ public class Journey {
     private boolean share;
     private PlaceType placeType;
     private int budget;
+    private String journeyImg;
 
     @Getter @ToString @AllArgsConstructor
     public enum PlaceType {

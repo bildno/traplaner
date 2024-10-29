@@ -1,4 +1,4 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
   .container {
     margin-top: 150px;
@@ -124,7 +124,7 @@
     name="join"
     id="signUpForm"
     method="post"
-    action="<c:url value="/members/sign-up"/>"
+    action="/members/sign-up"
     enctype="multipart/form-data">
 
     <!-- 프로필 이미지 -->
