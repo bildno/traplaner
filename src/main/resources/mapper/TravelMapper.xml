@@ -17,7 +17,7 @@
         VALUES (
         #{travelId}, #{accommodationName}, #{journeyName},
         #{accommodationRoadAddressName}, #{startDate}, #{endDate},
-        #{googleMapLocationPinInformation}, #{reservationConfirmImagePath}, #{budget}
+        #{googleMapLocationPinInformation}, #{reservationConfirmImagePath}, #{budget})
     </insert>
     <insert id="save">
         INSERT INTO
