@@ -193,7 +193,6 @@
                         <a class="goPost" href="/travelboard/info/${tb.id}" target="_blank">
                             <img src="/assets/img/disneyland_hongkong.jpg" alt="여행이미지" class="image"> <br>
                             <div>
-                                <h4>${tb.id}</h4>
                                 <h4>${tb.shortTitle}</h4>
                                 <p>${tb.writer}</p>
                                 <p>${tb.writeDate}</p>
