@@ -42,12 +42,13 @@ public class MemberController {
     //비밀 번호 변경 양식 열기
     @GetMapping("/pw-change")
     public String pwChange() {
-
         return "member/pw-change";
     }
+//    @PostMapping("pw-change")
+//    public String pwChange(){
+//
+//    }
     // 회원가입 양식 열기
-
-
     @GetMapping("/sign-up")
     public String join() {
         return "member/sign-up";

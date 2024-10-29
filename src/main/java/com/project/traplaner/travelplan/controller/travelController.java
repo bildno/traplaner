@@ -62,6 +62,6 @@ public class travelController {
         travelService.saveJourneys(requestDTO.getJourneys());
 
         // 마이 페이지로 리턴
-        return "travelplan/travelplan";
+        return "my-page/"+ LoginDto.getId();
     }
 }
