@@ -61,7 +61,7 @@
         JOIN tbl_travel t ON m.id = t.member_id
         JOIN tbl_travel_board tb ON t.id = tb.travel_id
         LEFT JOIN tbl_favorite f ON tb.id = f.travel_board_id
-        WHERE tb.id = #{id}
+        WHERE t.id = #{id}
         GROUP BY t.id, t.title, m.nick_name, tb.write_date, tb.content;
     </select>
 
