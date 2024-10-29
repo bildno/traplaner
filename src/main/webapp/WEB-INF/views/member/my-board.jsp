@@ -71,6 +71,39 @@
       text-decoration: none;
       color: black;
     }
+    /* 페이지 버튼 스타일 */
+    .bottom-section {
+      padding: 10px;
+      padding-bottom: 20px;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .page-item {
+      margin: 0 5px;
+    }
+
+    .page-link {
+      display: block;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      text-decoration: none;
+      color: black;
+      transition: background-color 0.2s;
+      border: none;
+    }
+
+    .page-link:hover {
+      background-color: #f0f0f0;
+      /* 마우스 오버 시 배경색 변화 */
+    }
   </style>
 </head>
 <body>
@@ -121,7 +154,7 @@
               <td><input type="text" name="con_text" id="con_text"
                          value="${dto.title}"
                          readonly></td>
-              <td><span>${dto.formatDate}</span></td>
+              <td><span>${dto.writeDate}</span></td>
 
 
 
@@ -130,6 +163,40 @@
 
 
         </table>
+
+
+            <!-- 게시글 목록 하단 영역 -->
+            <div class="bottom-section">
+                <!-- 페이지 버튼 영역 -->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-lg pagination-custom">
+                        <c:if test="${maker.prev}">
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="/my-page/mytravel?pageNo=${maker.begin-1}">&lt;&lt;</a>
+                            </li>
+                        </c:if>
+
+                        <!-- step은 기본값이 1, 생략 가능 -->
+                        <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
+                            <li data-page-num="${i}" class="page-item">
+                                <a class="page-link"
+                                    href="/my-page/mytravel?pageNo=${i}">${i}</a>
+                            </li>
+                        </c:forEach>
+
+
+                        <c:if test="${maker.next}">
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="/my-page/mytravel?pageNo=${maker.end + 1}">&gt;&gt;</a>
+                            </li>
+                        </c:if>
+                    </ul>
+                </nav>
+            </div>
+
+
       </div>
     </div>
   </div>

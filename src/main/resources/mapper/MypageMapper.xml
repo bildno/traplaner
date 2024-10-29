@@ -34,6 +34,31 @@
 
 
 
+    <select id="findAll" resultType="travel">
+        SELECT * from tbl_travel where member_id = #{memberId} LIMIT #{page.pageStart},#{page.amount}
+    </select>
 
+    <select id="getTotalCount" resultType="int">
+        select count(*) from tbl_travel where member_id = #{memberId}
+    </select>
+
+    <select id="getBoardTotal" resultType="int">
+        select count(*) from tbl_travel_board where member_nick_name = #{nickName}
+    </select>
+
+    <select id="findBoardAll" resultType="com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO">
+
+        select
+        board.id,
+        board.travel_id,
+        board.member_nick_name,
+        DATE_FORMAT(board.write_date, '%Y-%m-%d') as write_date,
+        board.content,
+        travel.title
+        from tbl_travel_board board
+        join tbl_travel travel
+        on board.travel_id = travel.id
+        where board.member_nick_name = #{nickName} LIMIT #{page.pageStart}, #{page.amount}
+    </select>
 
 </mapper>

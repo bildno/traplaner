@@ -7,6 +7,7 @@ import com.project.traplaner.mypage.dto.response.FavoriteListResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
 import com.project.traplaner.mypage.service.MyPageBoardService;
+import com.project.traplaner.travelBoard.dto.PageDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -40,10 +43,13 @@ public class MyPageController {
     // 마이 페이지 내 게시물
     // db연동 아직 x
     @GetMapping("/my-page/mytravelboard/{nickName}")
-    public String myBoard(@PathVariable String nickName, Model model) {
+    public String myBoard(@PathVariable String nickName, Model model,
+                          @ModelAttribute("s") PageDTO page) {
 
-        List<TravelBoardResponseDTO> dtoList = myPageBoardService.getTravelList(nickName);
-        model.addAttribute("dtoList", dtoList);
+        Map<String, Object> map = myPageBoardService.findBoardAll(nickName, page);
+
+        model.addAttribute("dtoList", map.get("boardAll"));
+        model.addAttribute("maker", map.get("pm"));
 
         return "member/my-board";
     }
@@ -52,17 +58,17 @@ public class MyPageController {
     // 마이페이지 나의 여행
     // 페이징기능 x, member_id 받아오는 처리 해야댐
     @GetMapping("/my-page/mytravel/{member_id}")
-    public String myPlan(@PathVariable int member_id,
-                         Model model) {
+    public String myTravel(@PathVariable int member_id, Model model,
+                           @ModelAttribute("s") PageDTO page) {
 
-        System.out.println(member_id);
-        List<TravelListResponseDTO> dtoList = myPageBoardService.getList(member_id);
+        Map<String, Object> map = myPageBoardService.findAll(member_id, page);
 
-
-        model.addAttribute("list", dtoList);
+        model.addAttribute("list", map.get("travels"));
+        model.addAttribute("maker", map.get("pm"));
 
         return "member/my-plan";
     }
+
 
     @GetMapping("/tempMain")
     public String tempMain() {
@@ -74,7 +80,6 @@ public class MyPageController {
     @ResponseBody
     public ResponseEntity<?> shareIs(@PathVariable int boardId) {
         myPageBoardService.updateShare(boardId);
-        System.out.println("asdasd");
 
         return ResponseEntity.ok().body("success");
     }
