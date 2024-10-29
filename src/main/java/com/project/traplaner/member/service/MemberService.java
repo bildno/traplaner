@@ -124,4 +124,7 @@ public class MemberService {
         return memberMapper.update(dto.toEntity(encoder));
     }
 
+    public void changePassword(String email, String password) {
+
+    }
 }

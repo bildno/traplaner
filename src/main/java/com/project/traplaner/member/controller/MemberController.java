@@ -47,10 +47,14 @@ public class MemberController {
     public String pwChange() {
         return "member/pw-change";
     }
-//    @PostMapping("pw-change")
-//    public String pwChange(){
-//
-//    }
+    //비밀번호 변경로직
+    @PostMapping("pw-change")
+    public String pwChange(@RequestBody Map<String, String> params){
+        memberService.changePassword(params.get("email"),params.get("password"));
+        return "redirect:/members/sign-in";
+    }
+
+
     // 회원가입 양식 열기
     @GetMapping("/sign-up")
     public String join() {
@@ -183,4 +187,5 @@ public class MemberController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
 }
