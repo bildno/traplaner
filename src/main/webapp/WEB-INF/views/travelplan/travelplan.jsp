@@ -252,11 +252,7 @@
                 $location.setAttribute("data-placeId", place.id)
                 $location.setAttribute("data-address", place.formattedAddress)
 
-                const markerView = new AdvancedMarkerElement({
-                    map,
-                    position: place.location,
-                    title: place.displayName,
-                });
+
 
                 bounds.extend(place.location);
                 console.log(place);
@@ -265,6 +261,11 @@
                     center: bounds.getCenter(),
                     zoom: 14,
                     mapId: "DEMO_MAP_ID",
+                });
+                const markerView = new AdvancedMarkerElement({
+                    map,
+                    position: place.location,
+                    title: place.displayName,
                 });
             });
 
