@@ -6,17 +6,16 @@
 
     <sql id="search">
         <if test="type == 'title'">
-            WHERE t.title LIKE CONCAT('%', #{keyword}, '%')
+            AND t.title LIKE CONCAT('%', #{keyword}, '%')
         </if>
         <if test="type == 'content'">
-            WHERE tb.content LIKE CONCAT('%', #{keyword}, '%')
+            AND tb.content LIKE CONCAT('%', #{keyword}, '%')
         </if>
         <if test="type == 'writer'">
-            WHERE m.nick_name LIKE CONCAT('%', #{keyword}, '%')
+            AND m.nick_name LIKE CONCAT('%', #{keyword}, '%')
         </if>
         <if test="type == 'tc'">
-            WHERE t.title LIKE CONCAT('%', #{keyword}, '%')
-            OR tb.content LIKE CONCAT('%', #{keyword}, '%')
+            AND (t.title LIKE CONCAT('%', #{keyword}, '%') OR tb.content LIKE CONCAT('%', #{keyword}, '%'))
         </if>
     </sql>
 
@@ -32,6 +31,7 @@
         JOIN tbl_travel AS t ON m.id = t.member_id
         JOIN tbl_travel_board AS tb ON t.id = tb.travel_id
         LEFT JOIN tbl_favorite AS f ON tb.id = f.travel_board_id
+        WHERE t.share = 1  <!-- t.share 조건 추가 -->
         <include refid="search"/>
         GROUP BY tb.id, m.nick_name, t.id, t.title, tb.write_date, tb.content
         <choose>
