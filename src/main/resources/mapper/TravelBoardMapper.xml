@@ -72,12 +72,13 @@
         j.journey_name AS journeyName,
         j.accommodation_name AS placeName,
         j.start_time AS journeyStartTime,
-        j.google_map_location_pin_information AS locationPin
+        j.google_map_location_pin_information AS locationPin,
+        j.journey_img AS journeyImg
         FROM tbl_travel t
         LEFT JOIN tbl_journey j
         ON t.id = j.travel_id
         WHERE t.id = #{id}
-        GROUP BY j.journey_name, j.accommodation_name, j.start_time, j.google_map_location_pin_information
+        GROUP BY j.journey_name, j.accommodation_name, j.start_time, j.google_map_location_pin_information, j.journey_img
         ORDER BY journeyStartTime DESC
     </select>
 

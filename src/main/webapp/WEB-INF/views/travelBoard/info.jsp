@@ -116,6 +116,12 @@
                     color: #ff006a;
                     /* 좋아요 클릭 후 색상 */
                 }
+
+                .map-top {
+                    width: 700px;
+                    margin-left: 60px;
+                    margin-bottom: 20px;
+                }
             </style>
         </head>
 
@@ -131,7 +137,7 @@
                         </button>
                     </span>
                 </p>
-                <div class="section photo"><img src="/display${tOne.img}"></div>
+                <div class="section photo"><img src="/display/${tOne.img}"></div>
                 <div class="section text" id="content">${tOne.content}</div>
 
                 <c:if test="${not empty journey}">
@@ -156,6 +162,7 @@
 
 
                 <c:forEach var="j" items="${journey}">
+                    <div class="section photo"><img src="/display/${j.journeyImg}"></div>
                     <h2 class="day-date">${j.journeyStartTime}</h2>
                     <div class="section schedule" id="schedule">${j.placeName} ${j.journeyName}</div>
                 </c:forEach>
