@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -103,12 +104,26 @@
         #like-count {
             color: #333;
         }
+        .content-box{
+            text-align: center;
+        }
+        .button-box{
+            text-align: center;
+        }
+        .button-box button{
+            height: 50px;
+            width: 100px;
+            border-radius: 5px;
+            border: 1px solid lightgrey;
+        }
     </style>
 </head>
 
 <body>
 
 <div class="container">
+  
+            <%@ include file="../header.jsp" %>
 
     <h1>${travel.title}</h1>
     <form action="/my-page/insert-board" method="post" enctype="multipart/form-data">
@@ -129,7 +144,9 @@
                 <div>
                     <input type="hidden" value="${journey.id}" name="journeyId">
                     <h2 class="day-title">${journey.journeyName} <span class="day-date">${journey.startTime} - ${journey.endTime}</span></h2>
-                    <div style="text-align: center"><img src="" alt="" style="display: none" class="journeyImg-box${journey.id}"></div>
+                    <div style="text-align: center;">
+                            <img src="" alt="" style="display: none" class="journeyImg-box${journey.id}">
+                    </div>
                     <div class="section photo" id="journeyImage${journey.id}" data-journey-id="${journey.id}">여정의 사진을 등록해주세요!!
                         <input
                                 type="file"
@@ -140,94 +157,86 @@
                         />
                     </div>
 
-                </div>
-
             </c:forEach>
+      <div class="content-box">
+            <textarea name="content" rows="15" cols="100"></textarea>
         </div>
-
-        <textarea name="content" rows="3"></textarea>
-
-        <div>
+        <div class="button-box">
             <button type="submit">게시글 저장</button>
         </div>
+
     </form>
+                </div>
 
-</div>
-
-</body>
-
-<script>
-    // 프로필 사진 업로드 관련 스크립트  --->
-    const $travelImage = document.getElementById("travelImage");
-    const $fileInput = document.getElementById("travelImgInput");
-
-    $travelImage.onclick = (e) => {
-        $fileInput.click();
-    };
-
-    // 단순히 화면단에 썸네일 띄우는 것.
-    $fileInput.onchange = (e) => {
-        const fileData = $fileInput.files[0];
-        console.log(fileData);
-        const reader = new FileReader();
-        reader.readAsDataURL(fileData);
-        reader.onloadend = (e) => {
-            const $img = document.querySelector(".travelImg-box");
-            $travelImage.style.display = "none";
-            $img.style.display = "";
-            $img.setAttribute("src", reader.result);
-        };
-    };
+        </body>
 
 
-    const journeyList = '${journey}';
-    const $journeyWrap = document.querySelector('.journey-wrap'); // 여정들을 감싸고 있는 부모 요소
+        <script>
+            // 프로필 사진 업로드 관련 스크립트  --->
+            const $travelImage = document.getElementById("travelImage");
+            const $fileInput = document.getElementById("travelImgInput");
 
-    // 사용자가 각 여정에 이미지를 등록하기 위해 div 영역을 클릭할 때 발생하는 이벤트 일괄 처리
-    $journeyWrap.addEventListener('click', e => {
-        if (!e.target.matches('div.section.photo')) return;
+            $travelImage.onclick = (e) => {
+                $fileInput.click();
+            };
 
-        console.log('여정 사진 이벤트 등록 이벤트 발생!');
+            // 단순히 화면단에 썸네일 띄우는 것.
+            $fileInput.onchange = (e) => {
+                const fileData = $fileInput.files[0];
+                console.log(fileData);
+                const reader = new FileReader();
+                reader.readAsDataURL(fileData);
+                reader.onloadend = (e) => {
+                    const $img = document.querySelector(".travelImg-box");
+                    $travelImage.style.display = "none";
+                    $img.style.display = "";
+                    $img.setAttribute("src", reader.result);
+                };
+            };
 
-        const $targetInput = e.target.firstElementChild; // 클릭이 된 div 내부에 있는 input
-        $targetInput.click();
-    });
 
-    $journeyWrap.addEventListener('change', e => {
-       if (!e.target.matches('div.section.photo > input')) return;
+            const journeyList = '${journey}';
+            const $journeyWrap = document.querySelector('.journey-wrap'); // 여정들을 감싸고 있는 부모 요소
 
-        console.log('이미지 업로드를 시도함!');
-        console.log('input change 요소: ', e.target);
+            // 사용자가 각 여정에 이미지를 등록하기 위해 div 영역을 클릭할 때 발생하는 이벤트 일괄 처리
+            $journeyWrap.addEventListener('click', e => {
+                if (!e.target.matches('div.section.photo')) return;
 
-        uploadThumbnailImage(e.target);
-    });
+                console.log('여정 사진 이벤트 등록 이벤트 발생!');
 
+                const $targetInput = e.target.firstElementChild; // 클릭이 된 div 내부에 있는 input
+                $targetInput.click();
+            });
 
-    <%--for(let i=0; i < journeyList.length; i++) {--%>
-    <%--    const $journeyImg${joureny.id} = document.getElementById("journeyImage'${journey.id}'")--%>
-    <%--    const $journeyInput${joureny.id} = document.getElementById("journeyImgInput'${journey.id}'")--%>
+            $journeyWrap.addEventListener('change', e => {
+                if (!e.target.matches('div.section.photo > input')) return;
 
-    <%--}--%>
+                console.log('이미지 업로드를 시도함!');
+                console.log('input change 요소: ', e.target);
+
+                uploadThumbnailImage(e.target);
+            });
+
 
     // 각 input 영역에 썸네일 띄우는 동작을 담당하는 함수
     const uploadThumbnailImage = ($targetInput) => {
-        const fileData = $targetInput.files[0];
-        console.log(fileData);
-        const reader = new FileReader();
-        reader.readAsDataURL(fileData);
-        reader.onloadend = (e) => {
-            const $parentDiv = $targetInput.parentNode;
-            const $img = $parentDiv.previousElementSibling.firstElementChild;
-            $parentDiv.style.display = "none";
-            $img.style.display = "";
-            $img.setAttribute("src", reader.result);
-        };
-    }
+                const fileData = $targetInput.files[0];
+                console.log(fileData);
+                const reader = new FileReader();
+                reader.readAsDataURL(fileData);
+                reader.onloadend = (e) => {
+                    const $parentDiv = $targetInput.parentNode;
+                    const $img = $parentDiv.previousElementSibling.firstElementChild;
+                    $parentDiv.style.display = "none";
+                    $img.style.display = "";
+                    $img.setAttribute("src", reader.result);
+                };
+            }
 
 
 
 
 
-</script>
+        </script>
 
-</html>
+        </html>

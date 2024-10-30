@@ -25,8 +25,8 @@
                 member_id,
                 title,
                 is_domestic,
-                start_date,
-                end_date,
+                start_time,
+                end_time,
                 updated_at,
                 share,
                 travel_img
@@ -35,8 +35,8 @@
             #{memberId},
             #{title},
             #{isDomestic},
-            #{startDate},
-            #{endDate},
+            #{startTime},
+            #{endTime},
             #{updatedAt},
             #{share},
             #{travelImg}
