@@ -30,7 +30,7 @@
             </c:if>
 
             <c:if test="${login != null && login.profile != null}">
-              <img src="/display${login.profile}" alt="프사" style="width: 30px" class="rounded-pill" />
+              <img src="/display/${login.profile}" alt="프사" style="width: 30px" class="rounded-pill" />
             </c:if>
             <span class="navbar-text">&nbsp;&nbsp;Welcome ${sessionScope.login == null ? '' : login.nickName}</span>
             <!--- 프로필 출력::종료 --->
@@ -91,7 +91,7 @@
               <c:forEach items="${login.topThreeFavoriteTravelDtoList}" var="travel" varStatus="status">
                 <div class="carousel-item<c:out value='${status.first ? " active" : "" }' />">
                 <a href="/travelboard/info/${travel.id}">
-                  <img src="/display${travel.travelImg}" alt="" class="d-block w-100" />
+                  <img src="/display/${travel.travelImg}" alt="" class="d-block w-100" />
                 </a>
           </div>
           </c:forEach>
