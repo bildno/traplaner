@@ -7,6 +7,7 @@ import com.project.traplaner.travelBoard.dto.PageDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
@@ -34,4 +35,9 @@ public interface MyPageBoardMapper {
     List<Journey> journeySelect(int id);
 
 
+    void updateTravelImg(int travelId,  String savePath);
+
+    void updateJourneyImg(Integer journeyId, String savePath);
+
+    void createBoard(int travelId, String nickName, LocalDate now, String content);
 }
