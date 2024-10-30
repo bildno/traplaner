@@ -56,7 +56,6 @@ public class MyPageController {
 
 
     // 마이페이지 나의 여행
-    // 페이징기능 x, member_id 받아오는 처리 해야댐
     @GetMapping("/my-page/mytravel/{member_id}")
     public String myTravel(@PathVariable int member_id, Model model,
                            @ModelAttribute("s") PageDTO page) {
@@ -121,9 +120,7 @@ public class MyPageController {
 
     @PostMapping("/my-page/changeConfirm")
     public ResponseEntity<?> changeConfirm(@Validated @RequestBody ModifyMemberInfoDTO dto) {
-        System.out.println("asdasd");
 
-        System.out.println(dto.getNewPw() + "asaddasaswwww");
         boolean b = memberService.updateInfo(dto);
 
 
@@ -149,6 +146,16 @@ public class MyPageController {
             return ResponseEntity.badRequest().body("fail");
         }
 
+    }
+
+    @GetMapping("my-page/board-info/{travelNo}")
+    public String boardInfo(@PathVariable int travelNo, Model model) {
+        Map<String, Object> travel = myPageBoardService.travel(travelNo);
+
+        model.addAttribute("travel",travel.get("travels"));
+        model.addAttribute("journey",travel.get("journeys"));
+
+        return "member/my-board-info";
     }
 
 }

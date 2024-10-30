@@ -1,5 +1,6 @@
 package com.project.traplaner.mypage.service;
 
+import com.project.traplaner.entity.Journey;
 import com.project.traplaner.entity.Travel;
 import com.project.traplaner.entity.TravelBoard;
 import com.project.traplaner.mapper.FavoriteMapper;
@@ -92,6 +93,19 @@ public class MyPageBoardService {
         result.put("pm",pageMaker);
 
         return result;
+    }
+
+    public Map<String, Object> travel(int travelId){
+        List<Journey> journeys = myPageBoardMapper.journeySelect(travelId);
+        Travel travels = myPageBoardMapper.travelSelect(travelId);
+
+        Map<String, Object> result = new HashMap<>();
+
+        result.put("journeys",journeys);
+        result.put("travels", travels);
+
+        return result;
+
     }
 
 

@@ -28,4 +28,9 @@
         )
     </insert>
 
+    <select id="getTotal">
+        select * from tbl_favorite where member_id = #{memberId}
+    </select>
+
+
 </mapper>

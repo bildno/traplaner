@@ -163,10 +163,12 @@
                     <c:forEach var="travels" items="${list}">
                         <tr>
                             <td><span>${travels.id}</span></td>
-                            <td><input type="text" name="con_text"
-                                       value="${travels.title}"
-                                       onclick="location.href='community_info?community_number=&contents_number='"
-                                       readonly></td>
+
+<%--                            <td><input type="text" name="con_text"--%>
+<%--                                       value="${travels.title}"--%>
+<%--                                       href='my-page/board-info/${travels.id}'--%>
+<%--                                       readonly></td>--%>
+                                     <td> <a href="/my-page/board-info/${travels.id}" style="text-decoration: none; color: black">${travels.title}</a></td>
                             <td>
                                 <span>${travels.startDate} ~ ${travels.endDate}</span>
                             <td>
