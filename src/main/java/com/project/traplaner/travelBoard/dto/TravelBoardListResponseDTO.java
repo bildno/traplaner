@@ -12,7 +12,8 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TravelBoardListResponseDTO {
-    private int id;
+    private int travelId;
+    private int boardId;
     private String img;
     private String shortTitle;
     private String writer;

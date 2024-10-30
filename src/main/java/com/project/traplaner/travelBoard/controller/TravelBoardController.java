@@ -32,10 +32,11 @@ public class TravelBoardController {
     }
 
     @GetMapping("/info/{id}")
-    public String info(Model model, @PathVariable("id") int id) {
-        Map<String, Object> one = travelBoardService.getOne(id);
+    public String info(Model model, @PathVariable("id") int id, HttpSession session) {
+        Map<String, Object> one = travelBoardService.getOne(id, session);
         model.addAttribute("tOne", one.get("tOne"));
         model.addAttribute("journey", one.get("journey"));
+        model.addAttribute("likeFlag", one.get("likeFlag"));
         return "travelBoard/info";
     }
 

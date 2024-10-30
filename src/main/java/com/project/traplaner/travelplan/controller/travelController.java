@@ -65,6 +65,8 @@ public class travelController {
         travelService.saveTravel(requestDTO.getTravel(),LoginDto.getId());
         travelService.saveJourneys(requestDTO.getJourneys());
 
+        travelService.refreshLoginUserTravel(LoginDto.getEmail(), session);
+
         return ResponseEntity.ok().body(LoginDto.getId());
     }
 }

@@ -1,6 +1,8 @@
 package com.project.traplaner.travelplan.service;
+import com.project.traplaner.main.dto.MainTravelDto;
 import com.project.traplaner.mapper.TravelMapper;
 import com.project.traplaner.util.FileUtils;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,5 +39,10 @@ public class TravelService {
                 travelMapper.postJourney(journey.toEntity(travelId));
             }
         }
+    }
+
+    public void refreshLoginUserTravel(String email, HttpSession session) {
+        List<MainTravelDto> mainTravelDtoList = travelMapper.findByEmail(email);
+        session.setAttribute("mainTravelDtoList", mainTravelDtoList);
     }
 }

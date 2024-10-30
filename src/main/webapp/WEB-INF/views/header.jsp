@@ -126,6 +126,9 @@
           <c:when test="${login.profile == null}">
             <img src="/assets/img/anonymous.jpg" alt="프사" class="profile-img" />
           </c:when>
+          <c:when test="${login.profile != null && login.loginMethod == 'KAKAO'}">
+             <img src="${login.profile}" alt="프사" class="profile-img" />
+          </c:when>
           <c:otherwise>
             <img src="/display${login.profile}" alt="프사" class="profile-img" />
           </c:otherwise>

@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TravelBoardDetailResponseDTO {
-    private int id;
+    private int travelId;
+    private int boardId;
     private String title;
     private String writer;
     private String writeDate;
@@ -23,7 +24,7 @@ public class TravelBoardDetailResponseDTO {
     private int likeCount;
 
     public TravelBoardDetailResponseDTO(Member member, Travel travel, TravelBoard travelBoard, Journey journey, int likeCount) {
-        this.id = travel.getId();
+        this.travelId = travel.getId();
         this.title = travel.getTitle();
         this.writer = member.getNickName();
         this.writeDate = TravelBoardListResponseDTO.makePrettierDateString(travelBoard.getWriteDate());

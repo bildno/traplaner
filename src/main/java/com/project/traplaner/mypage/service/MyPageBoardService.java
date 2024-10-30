@@ -2,6 +2,7 @@ package com.project.traplaner.mypage.service;
 
 import com.project.traplaner.entity.Journey;
 import com.project.traplaner.entity.Travel;
+import com.project.traplaner.main.dto.MainTravelDto;
 import com.project.traplaner.mapper.FavoriteMapper;
 import com.project.traplaner.mapper.MemberMapper;
 import com.project.traplaner.mapper.MyPageBoardMapper;
@@ -10,6 +11,7 @@ import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
 import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelBoard.service.PageMaker;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -74,8 +76,16 @@ public class MyPageBoardService {
         myPageBoardMapper.updateShare(id);
     }
 
-    public void deleteBoard(int boardId) {
+    public void deleteBoard(int boardId, HttpSession session) {
         myPageBoardMapper.deleteTravelByMemberOrder(boardId);
+        List<MainTravelDto> dtoList = (List<MainTravelDto>) session.getAttribute("mainTravelDtoList");
+
+        List<MainTravelDto> filteredList = dtoList.stream()
+                .filter(dto -> dto.getId() != boardId)
+                .collect(Collectors.toList());
+
+        session.setAttribute("mainTravelDtoList", filteredList);
+
     }
 
     public Map<String, Object> favorite(int memberId,PageDTO page) {

@@ -14,6 +14,13 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
           crossorigin="anonymous"></script>
+
+        <style>
+          .profile-img {
+            width: 30px;
+          }
+        </style>
+
       </head>
 
       <body>
@@ -25,13 +32,17 @@
               TRAPLAN
             </a>
             <!--- 프로필 출력::시작 --->
-            <c:if test="${login.profile == null}">
-              <img src="/assets/img/anonymous.jpg" alt="프사" style="width: 30px" class="rounded-pill" />
-            </c:if>
-
-            <c:if test="${login != null && login.profile != null}">
-              <img src="/display/${login.profile}" alt="프사" style="width: 30px" class="rounded-pill" />
-            </c:if>
+            <c:choose>
+              <c:when test="${login.profile == null}">
+                <img src="/assets/img/anonymous.jpg" alt="프사" class="profile-img"/>
+              </c:when>
+              <c:when test="${login.profile != null && login.loginMethod == 'KAKAO'}">
+                <img src="${login.profile}" alt="프사" class="profile-img" />
+              </c:when>
+              <c:otherwise>
+                <img src="/display${login.profile}" alt="프사" class="profile-img" />
+              </c:otherwise>
+            </c:choose>
             <span class="navbar-text">&nbsp;&nbsp;Welcome ${sessionScope.login == null ? '' : login.nickName}</span>
             <!--- 프로필 출력::종료 --->
 
@@ -75,7 +86,7 @@
 
           <div class="carousel-inner">
 
-            <c:if test="${login.profile == null}">
+            <c:if test="${login == null}">
               <div class="carousel-item active">
                 <img src="/assets/img/경주-800x320.jpg" alt="" class="d-block w-100" />
               </div>
@@ -87,15 +98,15 @@
               </div>
             </c:if>
 
-            <c:if test="${login != null && login.profile != null}">
-              <c:forEach items="${login.topThreeFavoriteTravelDtoList}" var="travel" varStatus="status">
+            <c:if test="${login != null}">
+              <c:forEach items="${topThree}" var="travel" varStatus="status">
                 <div class="carousel-item<c:out value='${status.first ? " active" : "" }' />">
-                <a href="/travelboard/info/${travel.id}">
-                  <img src="/display/${travel.travelImg}" alt="" class="d-block w-100" />
-                </a>
-          </div>
-          </c:forEach>
-          </c:if>
+                  <a href="/travelboard/info/${travel.id}">
+                    <img src="/display/${travel.travelImg}" alt="" class="d-block w-100" />
+                  </a>
+                </div>
+            </c:forEach>
+           </c:if>
 
           <button class="carousel-control-prev" data-bs-target="#demo" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
@@ -125,9 +136,9 @@
 
           const travelList = [];
 
-          <c:if test="${login != null && login.profile != null}">
+          <c:if test="${login != null}">
         // JSTL을 사용해 JSP에서 자바스크립트 배열로 데이터 전송
-            <c:forEach items="${login.mainTravelDtoList}" var="travel" varStatus="status">
+            <c:forEach items="${mainTravelDtoList}" var="travel" varStatus="status">
               travelList.push({
                 id: "${travel.id}",
               travelImg: "${fn:escapeXml(travel.travelImg)}",
@@ -168,16 +179,17 @@
 
             // My Travel List
             cards.forEach(card => {
+              console.log('card: ', card);
               const cardElement = document.createElement("div");
               cardElement.className = "col";
               console.log(card.travelImg.replace(/^"/, ''));
-              cardElement.innerHTML = `        
+              const cardTravelImg = card.travelImg.replace(/^"/, '');
+              cardElement.innerHTML = `
                 <div class="card p-1 mt-2">
-                  <a href="/my-page/mytravel/` + card.id + `">
-                    <img src="/display/` + card.travelImg.replace(/^"/, '') + `" class="card-img-top img-fluid" alt="이미지를 클릭하면 해당 여행으로 이동합니다."/>
-                  </a>
+                    \${cardTravelImg ? `<a href = "/my-page/mytravel/${login.id}" > <img src="/display/\${cardTravelImg}" class="card-img-top img-fluid" alt="이미지를 클릭하면 해당 여행으로 이동합니다."/> </a>`
+                    : `<a href="/my-page/board-info/\${card.id}"> 여행에 이미지를 등록하세요! </a>`}
                   <div class="pt-2">
-                    <h6 class="card-title">` + card.travelTitle + `</h6>
+                    <h6 class="card-title">\${card.travelTitle} </h6>
                   </div>
                 </div>
               </div>

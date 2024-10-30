@@ -131,8 +131,8 @@
                 <h1>${tOne.title}</h1>
                 <p class="author-date">${tOne.writer} ${tOne.writeDate}
                     <span class="heart">
-                        <button id="like-button" onclick="toggleLike(${tOne.id})">
-                            <i id="like-icon" class="fa-solid fa-heart"></i>
+                        <button id="like-button" onclick="toggleLike(${tOne.boardId})">
+                            <i id="like-icon" class="${likeFlag ? 'fa-solid fa-heart liked' : 'fa-solid fa-heart'}"></i>
                             <span id="like-count">${tOne.likeCount}</span>
                         </button>
                     </span>
@@ -170,6 +170,11 @@
 
             <script>
                 function toggleLike(travelBoardId) {
+                    if ('${login}' == null) {
+                        alert('로그인 하지 않은 사용자는 좋아요를 할 수 없습니다.');
+                        return;
+                    }
+
                     const url = 'http://localhost:8181/travelboard/' + travelBoardId + '/toggle-like';
                     console.log(travelBoardId);
                     fetch(url, {

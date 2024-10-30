@@ -6,6 +6,7 @@ import com.project.traplaner.mypage.dto.ModifyMemberInfoDTO;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
 import com.project.traplaner.mypage.service.MyPageBoardService;
 import com.project.traplaner.travelBoard.dto.PageDTO;
+import com.project.traplaner.travelplan.service.TravelService;
 import com.project.traplaner.util.FileUtils;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,6 +31,7 @@ public class MyPageController {
 
     private final MyPageBoardService myPageBoardService;
     private final MemberService memberService;
+    private final TravelService travelService;
 
     // 마이페이지 메인 (달력 있는 곳)
     // 달력에 일정 띄워주는 작업 해야댐
@@ -90,13 +93,14 @@ public class MyPageController {
     @ResponseBody
     public ResponseEntity<?> deleteBoard(@PathVariable int boardId,
                                          @PathVariable int memberId,
-                                         Model model) {
+                                         Model model,
+                                         HttpSession session) {
 
         List<TravelListResponseDTO> dtoList = myPageBoardService.getList(memberId);
 
         model.addAttribute("list", dtoList);
 
-        myPageBoardService.deleteBoard(boardId);
+        myPageBoardService.deleteBoard(boardId, session);
 
         return ResponseEntity.ok().body("success");
     }
@@ -169,12 +173,14 @@ public class MyPageController {
                                       @RequestParam List<MultipartFile> journeyImage,
                                       @RequestParam String content,
                                       @RequestParam List<Integer> journeyId,
+                                      RedirectAttributes ra,
                                       HttpSession session) {
 
 
 
         LoginUserResponseDTO login = (LoginUserResponseDTO) session.getAttribute("login");
         String nickName = login.getNickName();
+        int id = login.getId();
 
 
         String savePath = FileUtils.uploadFile(travelImg, rootPath);
@@ -188,8 +194,12 @@ public class MyPageController {
             myPageBoardService.updateJourneyImg(journeyId.get(i), save);
         }
 
+        travelService.refreshLoginUserTravel(login.getEmail(), session);
 
-        return "travelBoard/list";
+        ra.addFlashAttribute("msg", "새로운 여행이 등록되었습니다!");
+
+
+        return "redirect:/my-page/mytravel/" + id;
     }
 
 

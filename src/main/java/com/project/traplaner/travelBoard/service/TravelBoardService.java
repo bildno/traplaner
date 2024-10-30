@@ -1,10 +1,12 @@
 package com.project.traplaner.travelBoard.service;
 
 import com.project.traplaner.mapper.TravelBoardMapper;
+import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import com.project.traplaner.travelBoard.dto.JourneyResponseDTO;
 import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO;
+import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,16 +40,26 @@ public class TravelBoardService {
         return result;
     }
 
-    public Map<String, Object> getOne(int id) {
+    public Map<String, Object> getOne(int id, HttpSession session) {
 
         TravelBoardDetailResponseDTO travelBoardDetailResponseDTO = travelBoardMapper.findOne(id);
+        log.info("게시글 상세보기: {}", travelBoardDetailResponseDTO);
 
-        List<JourneyResponseDTO> journeyResponseDTOS = travelBoardMapper.journeys(id);
+        List<JourneyResponseDTO> journeyResponseDTOS = travelBoardMapper.journeys(travelBoardDetailResponseDTO.getTravelId());
         List<JourneyResponseDTO> journey = new ArrayList<>(journeyResponseDTOS);
+
+        boolean flag = false;
+        if (session.getAttribute("login") != null) {
+            LoginUserResponseDTO login = (LoginUserResponseDTO) session.getAttribute("login");
+            flag = travelBoardMapper.isLikedByMember(Map.of("travelBoardId", id, "memberId", login.getId()));
+        }
+
+        log.info("좋아요 여부: {}", flag);
 
         Map<String, Object> result = new HashMap<>();
         result.put("tOne", travelBoardDetailResponseDTO);
         result.put("journey", journey);
+        result.put("likeFlag", flag);
 
         return result;
     }

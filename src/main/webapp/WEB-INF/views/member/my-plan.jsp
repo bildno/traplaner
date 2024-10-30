@@ -124,6 +124,9 @@
                         background-color: #f0f0f0;
                         /* 마우스 오버 시 배경색 변화 */
                     }
+                    .profile-img {
+                        width: 30px;
+                    }
                 </style>
 
 
@@ -137,15 +140,17 @@
                         <h1 id="mypage_h1">나의 여행</h1>
                         <div class="mypage_section">
                             <div class="mypage_section1">
-                                <c:if test="${login.profile == null}">
-                                    <img src="/assets/img/anonymous.jpg" alt="프사" style="width: 30px"
-                                        class="rounded-pill" />
-                                </c:if>
-                                <c:if test="${login != null && login.profile != null}">
-                                    <img src="/display${login.profile}" alt="프사"
-                                        style="width: 250px; border-radius: 50%; margin-bottom: 50px; margin-top: 30px"
-                                        class="rounded-pill" />
-                                </c:if>
+                                <c:choose>
+                                  <c:when test="${login.profile == null}">
+                                    <img src="/assets/img/anonymous.jpg" alt="프사" class="profile-img"/>
+                                  </c:when>
+                                  <c:when test="${login.profile != null && login.loginMethod == 'KAKAO'}">
+                                    <img src="${login.profile}" alt="프사" class="profile-img" />
+                                  </c:when>
+                                  <c:otherwise>
+                                    <img src="/display${login.profile}" alt="프사" class="profile-img" />
+                                  </c:otherwise>
+                                </c:choose>
                                 <div class="manage_box">
                                     <a href="/my-page/pwChange">계정관리</a><a
                                         href="/my-page/mytravelboard/${login.nickName}">내
@@ -246,6 +251,10 @@
 
                     <script>
 
+                        let msg = '${msg}';
+                        if (msg !== '') {
+                            alert(msg);
+                        }
 
                         function shareChange(id) {
                             const url = 'http://localhost:8181/my-page/shareIs/' + id;

@@ -196,7 +196,7 @@
                     <main id="list">
                         <div class="list-container">
                             <c:forEach var="tb" items="${tbList}">
-                                <a class="goPost" href="/travelboard/info/${tb.id}" target="_blank">
+                                <a class="goPost" href="/travelboard/info/${tb.boardId}" target="_blank">
                                     <img src="/display/${tb.img}" alt="여행이미지" class="image"> <br>
                                     <div>
                                         <h4>${tb.shortTitle}</h4>

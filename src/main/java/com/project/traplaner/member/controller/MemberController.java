@@ -2,6 +2,7 @@ package com.project.traplaner.member.controller;
 
 import com.project.traplaner.entity.Member;
 
+import com.project.traplaner.main.dto.TopThreeFavoriteTravelDto;
 import com.project.traplaner.member.dto.LoginRequestDto;
 import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import com.project.traplaner.member.service.LoginResult;
@@ -19,9 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -147,7 +150,10 @@ public class MemberController {
         LoginUserResponseDTO dto
                 = (LoginUserResponseDTO) session.getAttribute("login");
 
+
+
         if (dto.getLoginMethod().equals("KAKAO")) {
+            log.info("카카오 로그인 한 사람 로그아웃!");
             memberService.kakaoLogout(dto, session);
 
             String reqUri = "https://kauth.kakao.com/oauth/logout";
@@ -165,11 +171,13 @@ public class MemberController {
 //            reqUri += "&logout_redirect_uri=" + naverLogoutRedirectUri;
 //            return "redirect:" + reqUri;
 //        }
+
         // 세션에서 로그인 정보 기록 삭제
         session.removeAttribute("login");
 
         // 세션 전체 무효화 (초기화)
         session.invalidate();
+
 
         return "redirect:/";
     }

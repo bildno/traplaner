@@ -61,11 +61,7 @@ public class MemberService {
     public void maintainLoginState(HttpSession session, String email) {
         Member foundMember = memberMapper.findOne(email);
 
-        // Top 3 Favorite, 10/28, by jhjeong
-        List<TopThreeFavoriteTravelDto> topThreeFavoriteTravelDtoList = travelMapper.findTopThree();
-        System.out.println("--------------------------------------------------");
-        System.out.println(topThreeFavoriteTravelDtoList.toString());
-        System.out.println("--------------------------------------------------");
+
 
         // 가입자 Travel 가져오기
         List<MainTravelDto> mainTravelDtoList = travelMapper.findByEmail(email);
@@ -80,17 +76,18 @@ public class MemberService {
                 .id(foundMember.getId())
                 .nickName(foundMember.getNickName())
                 .email(foundMember.getEmail())
-                .loginMethod(foundMember.getLoginMethod().toString())
+                .loginMethod(foundMember.getLoginMethod().getType())
                 .profile(foundMember.getProfileImg())
-                .topThreeFavoriteTravelDtoList(topThreeFavoriteTravelDtoList) // 10/28 by jhjeong
-                .mainTravelDtoList(mainTravelDtoList)   // 10/28 by jhjeong
                 .build();
+
+        log.info("로그인 사용자 dto: {}", dto);
 
         // 세션에 로그인 한 회원 정보를 저장
         session.setAttribute("login", dto);
+        session.setAttribute("mainTravelDtoList", mainTravelDtoList);
+
         // 세션 수명 설정
         session.setMaxInactiveInterval(60 * 60); // 1시간
-
     }
 
     public void kakaoLogout(LoginUserResponseDTO dto, HttpSession session) {
@@ -98,13 +95,18 @@ public class MemberService {
         String requestUri = "https://kapi.kakao.com/v1/user/logout";
 
         String accessToken = (String) session.getAttribute("access_token");
+        long kakaoAcount = (long) session.getAttribute("kakaoAccount");
+        log.info("accessToken: {}", accessToken);
+        log.info("kakaoAcount: {}", kakaoAcount);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + accessToken);
 
         MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
-        params.add("target_id_type", "email");
-        params.add("target_id", dto.getEmail());
+        params.add("target_id_type", "user_id");
+        params.add("target_id", kakaoAcount);
+
+        session.invalidate();
 
         ResponseEntity<Map> responseEntity = new RestTemplate().exchange(
                 requestUri,

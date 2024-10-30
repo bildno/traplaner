@@ -22,7 +22,8 @@
     <!-- 목록: 제목, 작성자, 작성일 -->
     <select id="findAll" resultType="com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO">
         SELECT
-        t.id,
+        t.id AS travelId,
+        tb.id AS boardId,
         t.travel_img AS img,
         t.title AS short_title,
         m.nick_name AS writer,
@@ -52,7 +53,8 @@
     <!-- 게시물 상세조회: 여행id, 여행제목, 작성자, 게시물작성일, 사진, 내용, 좋아요수 -->
     <select id="findOne" resultType="com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO">
         SELECT
-        t.id,
+        t.id AS travelId,
+        tb.id AS boardId,
         t.title AS title,
         m.nick_name AS writer,
         tb.write_date,
@@ -62,9 +64,9 @@
         FROM tbl_travel t
         JOIN tbl_member m ON t.member_id = m.id
         LEFT JOIN tbl_travel_board tb ON t.id = tb.travel_id
-        LEFT JOIN tbl_favorite f ON t.id = f.travel_board_id
-        WHERE t.id = #{id}
-        GROUP BY t.id, m.nick_name, t.title, t.travel_img, tb.write_date, tb.content
+        LEFT JOIN tbl_favorite f ON tb.id = f.travel_board_id
+        WHERE tb.id = #{id}
+        GROUP BY t.id, m.nick_name, t.title, t.travel_img, tb.id, tb.write_date, tb.content
     </select>
 
     <select id="journeys" resultType="com.project.traplaner.travelBoard.dto.JourneyResponseDTO">
@@ -101,7 +103,7 @@
     </select>
 
     <!-- 좋아요 추가 -->
-    <insert id="addLike">
+    <insert id="addLike" parameterType="map">
         INSERT INTO tbl_favorite (travel_board_id, member_id)
         VALUES (#{travelBoardId}, #{memberId})
     </insert>

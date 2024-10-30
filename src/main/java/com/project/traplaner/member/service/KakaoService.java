@@ -31,6 +31,8 @@ public class KakaoService {
         String accessToken = getKakaoAccessToken(params);
         // 발급받은 액세스 토큰으로 사용자 정보 가져오기
         KakaoUserResponseDTO kakaoUser = getKakaoUserInfo(accessToken);
+        session.setAttribute("access_token", accessToken);
+        session.setAttribute("kakaoAccount", kakaoUser.getId());
         // 이제 카카오 인증 서버와의 연결은 더 필요하지 않습니다.
         // 문서에도 나와있었지만, 자체 로그인 처리 완료는 우리 서비스에서 마무리 지어 줘야 합니다.
         // 가져온 카카오 유저로 우리서비스에 이용자인지 확인하기

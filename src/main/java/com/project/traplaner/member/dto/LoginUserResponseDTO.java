@@ -17,9 +17,4 @@ public class LoginUserResponseDTO {
     private String loginMethod;
     private String profile;
 
-    // 10/28, by jhjeong
-    private List<TopThreeFavoriteTravelDto> topThreeFavoriteTravelDtoList;
-
-    // 10/28, by jhjeong
-    private List<MainTravelDto> mainTravelDtoList;
 }
