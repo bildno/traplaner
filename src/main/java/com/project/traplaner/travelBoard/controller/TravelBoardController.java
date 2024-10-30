@@ -33,8 +33,9 @@ public class TravelBoardController {
 
     @GetMapping("/info/{id}")
     public String info(Model model, @PathVariable("id") int id) {
-        TravelBoardDetailResponseDTO one = travelBoardService.getOne(id);
-        model.addAttribute("tOne", one);
+        Map<String, Object> one = travelBoardService.getOne(id);
+        model.addAttribute("tOne", one.get("tOne"));
+        model.addAttribute("journey", one.get("journey"));
         return "travelBoard/info";
     }
 

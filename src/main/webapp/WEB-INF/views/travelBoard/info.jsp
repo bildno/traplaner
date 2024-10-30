@@ -136,10 +136,12 @@
                 <div class="section photo"><img src="/display${tOne.img}"></div>
                 <div class="section text" id="content">${tOne.content}</div>
 
-                <h2 class="day-date">${tOne.journeyStartDate}</h2>
+                <c:forEach var="j" items="${journey}">
+                    <h2 class="day-date">${j.journeyStartDate}</h2>
 
-                <div class="section route" id="route">${tOne.locationPin}</div>
-                <div class="section schedule" id="schedule">${tOne.placeName} ${t.journeyName}</div>
+                    <div class="section route" id="route">${j.locationPin}</div>
+                    <div class="section schedule" id="schedule">${j.placeName} ${j.journeyName}</div>
+                </c:forEach>
             </div>
 
             <script>

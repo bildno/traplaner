@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class TravelBoardDetailResponseDTO {
     private int id;
     private String title;
@@ -22,10 +21,6 @@ public class TravelBoardDetailResponseDTO {
     private String img;
     private String content;
     private int likeCount;
-    private String journeyName;
-    private String placeName;
-    private LocalDateTime journeyStartDate;
-    private String locationPin;
 
     public TravelBoardDetailResponseDTO(Member member, Travel travel, TravelBoard travelBoard, Journey journey, int likeCount) {
         this.id = travel.getId();
@@ -35,10 +30,6 @@ public class TravelBoardDetailResponseDTO {
         this.img = travel.getTravelImg();
         this.content = travelBoard.getContent();
         this.likeCount = likeCount;
-        this.journeyName = journey.getJourneyName();
-        this.placeName = journey.getAccommodationName();
-        this.journeyStartDate = journey.getStartDate();
-        this.locationPin = journey.getGoogleMapLocationPinInformation();
     }
 
 }
