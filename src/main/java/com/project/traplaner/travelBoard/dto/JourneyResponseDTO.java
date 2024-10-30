@@ -15,6 +15,7 @@ public class JourneyResponseDTO {
     private String placeName;
     private LocalDateTime journeyStartTime;
     private String locationPin;
+    private String journeyImg;
 
     public JourneyResponseDTO(Journey journey) {
         this.journeyName = journey.getJourneyName();
