@@ -4,7 +4,6 @@ import com.project.traplaner.entity.Journey;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @ToString
