@@ -49,6 +49,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 | 👨‍💻 김민지 | FRONT, BACK, UI/UX     | https://github.com/sup226 |
 | 👨‍💻 전상윤 | FRONT, BACK     | https://github.com/oslob99     |
 | 👩‍💻 정재훈 | FRONT, BACK     | https://github.com/Hazel0c0    |
+| 👩‍💻 최현진 | FRONT, BACK     | https://github.com/Hazel0c0    |
 
 <br><br>
 
