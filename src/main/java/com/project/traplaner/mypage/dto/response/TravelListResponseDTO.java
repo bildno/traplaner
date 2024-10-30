@@ -23,7 +23,7 @@ public class TravelListResponseDTO {
         this.id = travel.getId();
         this.title = travel.getTitle();
         this.startDate = makeDateStringFomatter((travel.getStartDate()));
-        this.endDate = makeDateStringFomatter((travel.getEndDate()));
+        this.endDate = makeDateStringFomatter((travel.getEndDate().plusDays(1)));
         this.share = travel.isShare();
     }
 

@@ -40,8 +40,8 @@ public class TravelPlanRequestDTO {
             return Travel.builder()
                     .memberId(memberId)
                     .title(title)
-                    .startDate(startOffsetDateTime.toLocalDateTime())
-                    .endDate(endOffsetDateTime.toLocalDateTime())
+                    .startDate(startOffsetDateTime.toLocalDateTime().plusDays(1))
+                    .endDate(endOffsetDateTime.toLocalDateTime().plusDays(1))
                     .build();
         }
     }

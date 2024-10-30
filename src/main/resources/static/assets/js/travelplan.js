@@ -35,10 +35,12 @@ async function calendarRender(){
         select: await function (info) {
             start = info.start;
             end = info.end;
+            console.log(start,end);
+            end.setDate(end.getDate() - 1);
             //여행 시작 끝 데이터 객체에 넣어두기
             data.travel.startDate = start;
             data.travel.endDate = end;
-            end.setDate(end.getDate() - 1);
+
             const diffDays = (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24) + 1;
             period = start.getFullYear() + '년 ' + (start.getMonth() + 1) + '월 ' + start.getDate() + '일 ' + "~ " +
                 end.getFullYear() + '년 ' + (end.getMonth()+1) + '월 ' + end.getDate() + '일';
@@ -60,7 +62,7 @@ document.addEventListener('DOMContentLoaded',calendarRender);
 let journeyId = 0; // 삭제 로직을 위한 고유 id 선언
 function addJourney() {
     const $day = document.querySelector('#day-select');
-    const day = parseInt($day.options[$day.selectedIndex].text.replace(/\D/g, ''))
+    const day = parseInt($day.options[$day.selectedIndex].text.replace(/\D/g, ''));
     const date = data.travel.startDate;
     date.setDate(date.getDate()+day-1);
     const startTime = document.getElementById('start-time').value;
