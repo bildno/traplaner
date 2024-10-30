@@ -70,7 +70,7 @@
     </select>
 
     <select id="journeySelect" resultType="com.project.traplaner.entity.Journey">
-        select * from tbl_journey where travel_id = #{id}
+        select * from tbl_journey where travel_id = #{id} order by end_time;
     </select>
 
     <update id="updateTravelImg">
