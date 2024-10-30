@@ -5,7 +5,7 @@
 <mapper namespace="com.project.traplaner.mapper.TravelMapper">
 
     <insert id="saveTravel">
-        INSERT INTO tbl_travel (member_id,title, start_time, end_time)
+        INSERT INTO tbl_travel (member_id,title, start_date, end_date)
         VALUES (#{memberId}, #{title}, #{startDate}, #{endDate})
     </insert>
     <insert id="postJourney" parameterType="com.project.traplaner.entity.Journey">
