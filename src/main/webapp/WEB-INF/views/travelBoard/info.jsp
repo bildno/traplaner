@@ -58,8 +58,6 @@
                 }
 
                 .section {
-                    width: 100%;
-                    height: 300px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -70,7 +68,7 @@
                 }
 
                 .section img {
-                    object-fit: cover;
+                    style: none;
                 }
 
                 #content,
