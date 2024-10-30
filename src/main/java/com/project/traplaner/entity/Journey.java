@@ -36,8 +36,8 @@ public class Journey {
     private String journeyName;
     private String accommodationName;
     private String accommodationRoadAddressName;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private String googleMapLocationPinInformation;

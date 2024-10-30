@@ -109,40 +109,125 @@
 <body>
 
 <div class="container">
+
     <h1>${travel.title}</h1>
-    <p class="author-date"> ${travel.startDate} ~ ${travel.endDate}
-    </p>
+    <form action="/my-page/insert-board" method="post" enctype="multipart/form-data">
+        <input type="hidden" value="${travel.id}" name="travelId">
+        <p class="author-date"> ${travel.startDate} ~ ${travel.endDate}</p>
+        <div style="text-align: center"><img src="" alt="" style="display: none" class="travelImg-box"></div>
+        <div class="section photo" id="travelImage" >여행의 사진을 등록해주세요!!
+            <input
+                    type="file"
+                    id="travelImgInput"
+                    accept="image/*"
+                    style="display: none"
+                    name="travelImg"
+            />
+        </div>
+        <div class="journey-wrap">
+            <c:forEach var="journey" items="${journey}">
+                <div>
+                    <input type="hidden" value="${journey.id}" name="journeyId">
+                    <h2 class="day-title">${journey.journeyName} <span class="day-date">${journey.startTime} - ${journey.endTime}</span></h2>
+                    <div style="text-align: center"><img src="" alt="" style="display: none" class="journeyImg-box${journey.id}"></div>
+                    <div class="section photo" id="journeyImage${journey.id}" data-journey-id="${journey.id}">여정의 사진을 등록해주세요!!
+                        <input
+                                type="file"
+                                id="journeyImgInput${journey.id}"
+                                accept="image/*"
+                                style="display: none"
+                                name="journeyImage"
+                        />
+                    </div>
 
-    <c:forEach var="journey" items="${journey}">
-        <div class="section photo">사진</div>
-        <div class="section text">${tOne.content}</div>
+                </div>
 
-        <h2 class="day-title">${journey.journeyName} <span class="day-date">2024년 8월 29일</span></h2>
+            </c:forEach>
+        </div>
 
-        <div class="section route">경로</div>
-        <div class="section schedule">여정</div>
-    </c:forEach>
+        <textarea name="content" rows="3"></textarea>
 
-    <div>
-        <button>게시글 저장</button>
-    </div>
+        <div>
+            <button type="submit">게시글 저장</button>
+        </div>
+    </form>
 
 </div>
 
-<script>
-    function toggleLike(travelBoardId) {
-        const url = 'http://localhost:8181/travelboard/' + travelBoardId + '/toggle-like';
-        console.log(travelBoardId);
-        fetch(url, {
-            method: "POST"
-        })
-            .then(response => response.text())  // 응답을 텍스트로 받아
-            .then(data => {
-                document.getElementById("like-count").innerText = data; // 정수를 그대로 표시
-            })
-            .catch(error => console.error("Error:", error));
-    }
-</script>
 </body>
+
+<script>
+    // 프로필 사진 업로드 관련 스크립트  --->
+    const $travelImage = document.getElementById("travelImage");
+    const $fileInput = document.getElementById("travelImgInput");
+
+    $travelImage.onclick = (e) => {
+        $fileInput.click();
+    };
+
+    // 단순히 화면단에 썸네일 띄우는 것.
+    $fileInput.onchange = (e) => {
+        const fileData = $fileInput.files[0];
+        console.log(fileData);
+        const reader = new FileReader();
+        reader.readAsDataURL(fileData);
+        reader.onloadend = (e) => {
+            const $img = document.querySelector(".travelImg-box");
+            $travelImage.style.display = "none";
+            $img.style.display = "";
+            $img.setAttribute("src", reader.result);
+        };
+    };
+
+
+    const journeyList = '${journey}';
+    const $journeyWrap = document.querySelector('.journey-wrap'); // 여정들을 감싸고 있는 부모 요소
+
+    // 사용자가 각 여정에 이미지를 등록하기 위해 div 영역을 클릭할 때 발생하는 이벤트 일괄 처리
+    $journeyWrap.addEventListener('click', e => {
+        if (!e.target.matches('div.section.photo')) return;
+
+        console.log('여정 사진 이벤트 등록 이벤트 발생!');
+
+        const $targetInput = e.target.firstElementChild; // 클릭이 된 div 내부에 있는 input
+        $targetInput.click();
+    });
+
+    $journeyWrap.addEventListener('change', e => {
+       if (!e.target.matches('div.section.photo > input')) return;
+
+        console.log('이미지 업로드를 시도함!');
+        console.log('input change 요소: ', e.target);
+
+        uploadThumbnailImage(e.target);
+    });
+
+
+    <%--for(let i=0; i < journeyList.length; i++) {--%>
+    <%--    const $journeyImg${joureny.id} = document.getElementById("journeyImage'${journey.id}'")--%>
+    <%--    const $journeyInput${joureny.id} = document.getElementById("journeyImgInput'${journey.id}'")--%>
+
+    <%--}--%>
+
+    // 각 input 영역에 썸네일 띄우는 동작을 담당하는 함수
+    const uploadThumbnailImage = ($targetInput) => {
+        const fileData = $targetInput.files[0];
+        console.log(fileData);
+        const reader = new FileReader();
+        reader.readAsDataURL(fileData);
+        reader.onloadend = (e) => {
+            const $parentDiv = $targetInput.parentNode;
+            const $img = $parentDiv.previousElementSibling.firstElementChild;
+            $parentDiv.style.display = "none";
+            $img.style.display = "";
+            $img.setAttribute("src", reader.result);
+        };
+    }
+
+
+
+
+
+</script>
 
 </html>

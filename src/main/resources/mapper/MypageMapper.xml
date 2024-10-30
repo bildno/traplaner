@@ -73,5 +73,16 @@
         select * from tbl_journey where travel_id = #{id}
     </select>
 
+    <update id="updateTravelImg">
+        update tbl_travel set travel_img = #{savePath} where id = #{travelId}
+    </update>
+
+    <update id="updateJourneyImg">
+        update tbl_journey set journey_img = #{savePath} where id = #{journeyId}
+    </update>
+
+    <insert id="createBoard">
+        insert into tbl_travel_board (travel_id, member_nick_name, write_date, content) value(#{travelId}, #{nickName}, #{now}, #{content})
+    </insert>
 
 </mapper>

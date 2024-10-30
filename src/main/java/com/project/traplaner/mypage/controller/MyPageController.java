@@ -1,22 +1,24 @@
 package com.project.traplaner.mypage.controller;
 
-import com.project.traplaner.entity.Member;
+import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.mypage.dto.ModifyMemberInfoDTO;
-import com.project.traplaner.mypage.dto.response.FavoriteListResponseDTO;
-import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
 import com.project.traplaner.mypage.service.MyPageBoardService;
 import com.project.traplaner.travelBoard.dto.PageDTO;
+import com.project.traplaner.util.FileUtils;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -157,6 +159,38 @@ public class MyPageController {
 
         return "member/my-board-info";
     }
+
+    @Value("${file.upload.root-path}")
+    private String rootPath;
+
+    @PostMapping("/my-page/insert-board")
+    public String insertTravelJourney(@RequestParam int travelId,
+                                      @RequestParam MultipartFile travelImg,
+                                      @RequestParam List<MultipartFile> journeyImage,
+                                      @RequestParam String content,
+                                      @RequestParam List<Integer> journeyId,
+                                      HttpSession session) {
+
+
+        LoginUserResponseDTO login = (LoginUserResponseDTO) session.getAttribute("login");
+        String nickName = login.getNickName();
+
+
+        String savePath = FileUtils.uploadFile(travelImg, rootPath);
+
+        myPageBoardService.updateTravelImg(travelId, savePath);
+        myPageBoardService.createBoard(travelId, nickName, LocalDate.now(), content);
+
+
+        for (int i = 0, j = journeyId.size(); i < j; i++ ) {
+            String save = FileUtils.uploadFile(journeyImage.get(i), rootPath);
+            myPageBoardService.updateJourneyImg(journeyId.get(i), save);
+        }
+
+
+        return "travelBoard/list";
+    }
+
 
 }
 

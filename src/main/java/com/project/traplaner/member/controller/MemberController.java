@@ -34,12 +34,6 @@ public class MemberController {
     @Value("${file.upload.root-path}")
     private String rootPath;
 
-    @Value("${file.upload.root-path-profile}")
-    private String rootPathProfile;
-
-    @Value("${file.upload.root-path-travel}")
-    private String rootPathTravel;
-
     private final MemberService memberService;
 
     //비밀 번호 변경 양식 열기
