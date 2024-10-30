@@ -53,6 +53,8 @@ public class MemberController {
                            @RequestParam("password") String password)
     {
         memberService.changePassword(email,password);
+        log.info(email);
+        log.info("변경 비밀번호: {}", password);
         return "redirect:/members/sign-in";
     }
 

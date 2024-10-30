@@ -127,7 +127,7 @@ public class MemberService {
         Member foundMember = memberMapper.findOne(email);
         int id = foundMember.getId();
         String nickName = foundMember.getNickName();
-        ModifyMemberInfoDTO dto = new ModifyMemberInfoDTO(id,nickName,password);
+        ModifyMemberInfoDTO dto = new ModifyMemberInfoDTO(id,password,nickName);
         memberMapper.update(dto.toEntity(encoder));
     }
 }
