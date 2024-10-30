@@ -136,7 +136,7 @@
                 <div class="section photo"><img src="/display${tOne.img}"></div>
                 <div class="section text" id="content">${tOne.content}</div>
 
-                <h2 class="day-date">${tOne.journeyStartTime}</h2>
+                <h2 class="day-date">${tOne.journeyStartDate}</h2>
 
                 <div class="section route" id="route">${tOne.locationPin}</div>
                 <div class="section schedule" id="schedule">${tOne.placeName} ${tOne.journeyName}</div>

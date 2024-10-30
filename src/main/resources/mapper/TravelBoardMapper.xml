@@ -61,7 +61,7 @@
         COUNT(f.member_id) AS likeCount,
         j.journey_name AS journeyName,
         j.accommodation_name AS placeName,
-        j.start_time AS journeyStartTime,
+        j.start_date AS journeyStartDate,
         j.google_map_location_pin_information AS locationPin
         FROM tbl_travel t
         JOIN tbl_member m ON t.member_id = m.id
@@ -69,8 +69,8 @@
         LEFT JOIN tbl_journey j ON t.id = j.travel_id
         LEFT JOIN tbl_favorite f ON t.id = f.travel_board_id
         WHERE t.id = #{id}
-        GROUP BY t.id, m.nick_name, t.title, t.travel_img, tb.write_date, tb.content, j.journey_name, j.accommodation_name, j.start_time, j.google_map_location_pin_information, j.journey_img
-        ORDER BY journeyStartTime DESC
+        GROUP BY t.id, m.nick_name, t.title, t.travel_img, tb.write_date, tb.content, j.journey_name, j.accommodation_name, j.start_date, j.google_map_location_pin_information, j.journey_img
+        ORDER BY journeyStartDate DESC
     </select>
 
     <!-- 검색 게시물 개수 -->
