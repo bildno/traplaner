@@ -27,7 +27,6 @@ public class Member {
     private String password;
     private String email;
 
-
     private LoginMethod loginMethod;
 
     @Getter @ToString @AllArgsConstructor
