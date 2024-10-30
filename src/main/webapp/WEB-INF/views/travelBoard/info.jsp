@@ -139,7 +139,7 @@
                 <h2 class="day-date">${tOne.journeyStartDate}</h2>
 
                 <div class="section route" id="route">${tOne.locationPin}</div>
-                <div class="section schedule" id="schedule">${tOne.placeName} ${t.journeyName}</div>
+                <div class="section schedule" id="schedule">${tOne.placeName} ${tOne.journeyName}</div>
             </div>
 
             <script>
