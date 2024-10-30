@@ -1,5 +1,6 @@
 package com.project.traplaner.mapper;
 
+import com.project.traplaner.entity.Journey;
 import com.project.traplaner.entity.Travel;
 import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.travelBoard.dto.PageDTO;
@@ -28,4 +29,9 @@ public interface MyPageBoardMapper {
     int getBoardTotal(PageDTO page, String nickName);
 
     List<TravelBoardResponseDTO> findBoardAll(@Param("nickName") String nickName, @Param("page") PageDTO page);
+
+    Travel travelSelect(int id);
+    List<Journey> journeySelect(int id);
+
+
 }

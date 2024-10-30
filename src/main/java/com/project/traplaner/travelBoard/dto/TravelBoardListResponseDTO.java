@@ -13,12 +13,14 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 public class TravelBoardListResponseDTO {
     private int id;
+    private String img;
     private String shortTitle;
     private String writer;
     private String writeDate;
     private int likeCount;
 
     public TravelBoardListResponseDTO(TravelBoardDetailResponseDTO board) {
+        this.img = board.getImg();
         this.shortTitle = makeShortTitle(board.getTitle());
         this.writer = board.getWriter();
         this.writeDate = board.getWriteDate();
