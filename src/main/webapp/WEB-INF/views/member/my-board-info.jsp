@@ -39,6 +39,7 @@
             background-color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 1%;
+            margin-top: 50px;
         }
 
         h1 {
@@ -120,10 +121,10 @@
 </head>
 
 <body>
+            <%@ include file="../header.jsp" %>
 
 <div class="container">
-  
-            <%@ include file="../header.jsp" %>
+
 
     <h1>${travel.title}</h1>
     <form action="/my-page/insert-board" method="post" enctype="multipart/form-data">
