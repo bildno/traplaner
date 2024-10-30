@@ -65,4 +65,13 @@
         select count(*) from tbl_favorite where member_id = #{memberId}
     </select>
 
+    <select id="travelSelect" resultType="com.project.traplaner.entity.Travel">
+        select * from tbl_travel where id = #{id}
+    </select>
+
+    <select id="journeySelect" resultType="com.project.traplaner.entity.Journey">
+        select * from tbl_journey where travel_id = #{id}
+    </select>
+
+
 </mapper>
