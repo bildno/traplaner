@@ -185,7 +185,7 @@
               cardElement.innerHTML = `        
                 <div class="card p-1 mt-2">
                   <a href="/my-page/mytravel/` + card.id + `">
-                    <img src="/display/042` + card.travelImg.replace(/^"/, '') + `" class="card-img-top img-fluid" alt="이미지를 클릭하면 해당 여행으로 이동합니다."/>
+                    <img src="/display/` + card.travelImg.replace(/^"/, '') + `" class="card-img-top img-fluid" alt="이미지를 클릭하면 해당 여행으로 이동합니다."/>
                   </a>
                   <div class="pt-2">
                     <h6 class="card-title">` + card.travelTitle +`</h6>

@@ -149,7 +149,7 @@
 
 
           <c:forEach var="dto" items="${ dtoList }">
-            <tr>
+            <tr onclick="location.href='/travelboard/info/${dto.travelId}'">
               <td><span>${ dto.id }</span></td>
               <td><input type="text" name="con_text" id="con_text"
                          value="${dto.title}"

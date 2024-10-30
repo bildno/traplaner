@@ -103,6 +103,18 @@
         #like-count {
             color: #333;
         }
+        .content-box{
+            text-align: center;
+        }
+        .button-box{
+            text-align: center;
+        }
+        .button-box button{
+            height: 50px;
+            width: 100px;
+            border-radius: 5px;
+            border: 1px solid lightgrey;
+        }
     </style>
 </head>
 
@@ -129,7 +141,9 @@
                 <div>
                     <input type="hidden" value="${journey.id}" name="journeyId">
                     <h2 class="day-title">${journey.journeyName} <span class="day-date">${journey.startTime} - ${journey.endTime}</span></h2>
-                    <div style="text-align: center"><img src="" alt="" style="display: none" class="journeyImg-box${journey.id}"></div>
+                    <div style="text-align: center;">
+                            <img src="" alt="" style="display: none" class="journeyImg-box${journey.id}">
+                    </div>
                     <div class="section photo" id="journeyImage${journey.id}" data-journey-id="${journey.id}">여정의 사진을 등록해주세요!!
                         <input
                                 type="file"
@@ -145,11 +159,15 @@
             </c:forEach>
         </div>
 
-        <textarea name="content" rows="3"></textarea>
 
-        <div>
+
+        <div class="content-box">
+            <textarea name="content" rows="15" cols="100"></textarea>
+        </div>
+        <div class="button-box">
             <button type="submit">게시글 저장</button>
         </div>
+
     </form>
 
 </div>

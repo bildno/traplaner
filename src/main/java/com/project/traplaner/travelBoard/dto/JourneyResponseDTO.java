@@ -20,7 +20,7 @@ public class JourneyResponseDTO {
     public JourneyResponseDTO(Journey journey) {
         this.journeyName = journey.getJourneyName();
         this.placeName = journey.getAccommodationName();
-        this.journeyStartDate = journey.getStartDate();
+        this.journeyStartDate = journey.getStartTime();
         this.locationPin = journey.getGoogleMapLocationPinInformation();
     }
 }

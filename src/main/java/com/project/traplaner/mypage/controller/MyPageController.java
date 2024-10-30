@@ -172,6 +172,7 @@ public class MyPageController {
                                       HttpSession session) {
 
 
+
         LoginUserResponseDTO login = (LoginUserResponseDTO) session.getAttribute("login");
         String nickName = login.getNickName();
 
