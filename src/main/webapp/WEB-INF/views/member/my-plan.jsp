@@ -142,7 +142,7 @@
                                         class="rounded-pill" />
                                 </c:if>
                                 <c:if test="${login != null && login.profile != null}">
-                                    <img src="/display${login.profile}" alt="프사"
+                                    <img src="/display/${login.profile}" alt="프사"
                                         style="width: 250px; border-radius: 50%; margin-bottom: 50px; margin-top: 30px"
                                         class="rounded-pill" />
                                 </c:if>

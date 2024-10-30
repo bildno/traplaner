@@ -127,7 +127,7 @@
             <img src="/assets/img/anonymous.jpg" alt="프사" class="profile-img" />
           </c:when>
           <c:otherwise>
-            <img src="/display${login.profile}" alt="프사" class="profile-img" />
+            <img src="/display/${login.profile}" alt="프사" class="profile-img" />
           </c:otherwise>
         </c:choose>
         <span class="navbar-text">
