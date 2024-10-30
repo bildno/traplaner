@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <!DOCTYPE html>
         <html lang="ko">
@@ -154,114 +154,121 @@
                     background-color: #f0f0f0;
                     /* 마우스 오버 시 배경색 변화 */
                 }
+
+                .allList {
+                    margin-top: 50px;
+                }
             </style>
 
         </head>
 
         <body>
-
-            <!-- 검색창 영역 -->
-            <div class="top-section">
-                <fieldset id="field">
-                    <div class="search">
-                        <!-- 검색창 영역 -->
-                        <form action="/travelboard/list" method="get" name="search" id="find">
-                            <select class="form-select" name="sortType" id="select-type">
-                                <option value="new">최신순</option>
-                                <option value="old">과거순</option>
-                                <option value="best">좋아요순</option>
-                            </select>
-                            <select class="form-select" name="type" id="search-type">
-                                <option value="title">제목</option>
-                                <option value="content">내용</option>
-                                <option value="writer">작성자</option>
-                                <option value="tc">제목+내용</option>
-                            </select>
-                            <input type="search" class="form-control" name="keyword" value="${s.keyword}"
-                                autocomplete="off">
-                            <button type="submit" id="searching"><i class="fa-solid fa-magnifying-glass fa-rotate-by"
-                                    style="color: #000000; --fa-rotate-angle: 18deg;"></i></button>
-                        </form>
-                    </div>
-                </fieldset>
-            </div>
-
-            <!-- 목록창 영역 -->
-            <main id="list">
-                <div class="list-container">
-                    <c:forEach var="tb" items="${tbList}">
-                        <a class="goPost" href="/travelboard/info/${tb.id}" target="_blank">
-                            <img src="/display${tb.img}" alt="여행이미지" class="image"> <br>
-                            <div>
-                                <h4>${tb.shortTitle}</h4>
-                                <p>${tb.writer}</p>
-                                <p>${tb.writeDate}</p>
+            <%@ include file="../header.jsp" %>
+                <div class="allList">
+                    <!-- 검색창 영역 -->
+                    <div class="top-section">
+                        <fieldset id="field">
+                            <div class="search">
+                                <!-- 검색창 영역 -->
+                                <form action="/travelboard/list" method="get" name="search" id="find">
+                                    <select class="form-select" name="sortType" id="select-type">
+                                        <option value="new">최신순</option>
+                                        <option value="old">과거순</option>
+                                        <option value="best">좋아요순</option>
+                                    </select>
+                                    <select class="form-select" name="type" id="search-type">
+                                        <option value="title">제목</option>
+                                        <option value="content">내용</option>
+                                        <option value="writer">작성자</option>
+                                        <option value="tc">제목+내용</option>
+                                    </select>
+                                    <input type="search" class="form-control" name="keyword" value="${s.keyword}"
+                                        autocomplete="off">
+                                    <button type="submit" id="searching"><i
+                                            class="fa-solid fa-magnifying-glass fa-rotate-by"
+                                            style="color: #000000; --fa-rotate-angle: 18deg;"></i></button>
+                                </form>
                             </div>
-                        </a>
-                    </c:forEach>
+                        </fieldset>
+                    </div>
+
+                    <!-- 목록창 영역 -->
+                    <main id="list">
+                        <div class="list-container">
+                            <c:forEach var="tb" items="${tbList}">
+                                <a class="goPost" href="/travelboard/info/${tb.id}" target="_blank">
+                                    <img src="/display${tb.img}" alt="여행이미지" class="image"> <br>
+                                    <div>
+                                        <h4>${tb.shortTitle}</h4>
+                                        <p>${tb.writer}</p>
+                                        <p>${tb.writeDate}</p>
+                                    </div>
+                                </a>
+                            </c:forEach>
+                        </div>
+                    </main>
+
+                    <!-- 게시글 목록 하단 영역 -->
+                    <div class="bottom-section">
+                        <!-- 페이지 버튼 영역 -->
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination pagination-lg pagination-custom">
+                                <c:if test="${maker.prev}">
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            href="/travelboard/list?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
+                                    </li>
+                                </c:if>
+
+                                <!-- step은 기본값이 1, 생략 가능 -->
+                                <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
+                                    <li data-page-num="${i}" class="page-item">
+                                        <a class="page-link"
+                                            href="/travelboard/list?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
+                                    </li>
+                                </c:forEach>
+
+
+                                <c:if test="${maker.next}">
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            href="/travelboard/list?pageNo=${maker.end + 1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-            </main>
 
-            <!-- 게시글 목록 하단 영역 -->
-            <div class="bottom-section">
-                <!-- 페이지 버튼 영역 -->
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination pagination-lg pagination-custom">
-                        <c:if test="${maker.prev}">
-                            <li class="page-item">
-                                <a class="page-link"
-                                    href="/travelboard/list?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
-                            </li>
-                        </c:if>
+                <script>
+                    // 검색조건 셀렉트 박스 옵션 타입 고정하기
+                    function fixSearchOption() {
+                        const $select = document.getElementById('search-type');
 
-                        <!-- step은 기본값이 1, 생략 가능 -->
-                        <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
-                            <li data-page-num="${i}" class="page-item">
-                                <a class="page-link"
-                                    href="/travelboard/list?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
-                            </li>
-                        </c:forEach>
+                        const $options = [...$select.children];
+                        $options.forEach($opt => {
+                            if ($opt.value === '${s.type}') {
+                                // option 태그에 selected를 주면 그 option으로 고정됨.
+                                $opt.setAttribute('selected', 'selected');
+                            }
+                        });
+                    }
 
+                    function fixSortOption() {
+                        const $select = document.getElementById('select-type');
 
-                        <c:if test="${maker.next}">
-                            <li class="page-item">
-                                <a class="page-link"
-                                    href="/travelboard/list?pageNo=${maker.end + 1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
-                            </li>
-                        </c:if>
-                    </ul>
-                </nav>
-            </div>
+                        const $options = [...$select.children];
+                        $options.forEach($opt => {
+                            if ($opt.value === '${s.type}') {
+                                // option 태그에 selected를 주면 그 option으로 고정됨.
+                                $opt.setAttribute('selected', 'selected');
+                            }
+                        });
+                    }
 
-            <script>
-                // 검색조건 셀렉트 박스 옵션 타입 고정하기
-                function fixSearchOption() {
-                    const $select = document.getElementById('search-type');
-
-                    const $options = [...$select.children];
-                    $options.forEach($opt => {
-                        if ($opt.value === '${s.type}') {
-                            // option 태그에 selected를 주면 그 option으로 고정됨.
-                            $opt.setAttribute('selected', 'selected');
-                        }
-                    });
-                }
-
-                function fixSortOption() {
-                    const $select = document.getElementById('select-type');
-
-                    const $options = [...$select.children];
-                    $options.forEach($opt => {
-                        if ($opt.value === '${s.type}') {
-                            // option 태그에 selected를 주면 그 option으로 고정됨.
-                            $opt.setAttribute('selected', 'selected');
-                        }
-                    });
-                }
-
-                fixSearchOption();
-                fixSortOption();
-            </script>
+                    fixSearchOption();
+                    fixSortOption();
+                </script>
 
         </body>
 

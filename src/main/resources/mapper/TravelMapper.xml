@@ -5,13 +5,13 @@
 <mapper namespace="com.project.traplaner.mapper.TravelMapper">
 
     <insert id="saveTravel">
-        INSERT INTO tbl_travel (member_id,title, start_date, end_date)
+        INSERT INTO tbl_travel (member_id,title, start_time, end_time)
         VALUES (#{memberId}, #{title}, #{startDate}, #{endDate})
     </insert>
     <insert id="postJourney" parameterType="com.project.traplaner.entity.Journey">
         INSERT INTO tbl_journey (
         travel_id, accommodation_name, journey_name,
-        accommodation_road_address_name, start_date, end_date,
+        accommodation_road_address_name, start_time, end_time,
         google_map_location_pin_information, reservation_confirm_image_path, budget
         )
         VALUES (
@@ -25,8 +25,8 @@
                 member_id,
                 title,
                 is_domestic,
-                start_date,
-                end_date,
+                start_time,
+                end_time,
                 updated_at,
                 share,
                 travel_img
@@ -35,8 +35,8 @@
             #{memberId},
             #{title},
             #{isDomestic},
-            #{startDate},
-            #{endDate},
+            #{startTime},
+            #{endTime},
             #{updatedAt},
             #{share},
             #{travelImg}
