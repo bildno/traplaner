@@ -1,5 +1,6 @@
-import {checkAvailability, validateInput} from "./validation";
+import {checkAvailability, validateInput} from "./validation.js";
 
+const form = document.getElementsBy("form");
 const fields = [
     {
         id: 'password',
@@ -29,11 +30,9 @@ let code = ''; // 이메일 전송 인증번호를 전역변수로 선언.
 
 // 이메일 인증버튼 클릭 이벤트
 document.getElementById('email').onclick = () => {
-    // 우선 올바른 이메일 형식인지, 중복이 발생하지 않았는지 먼저 체크하기.
-    // 여기에서는 따로 진행하지 않겠습니다. (sign-up.jsp에는 이미 되어있음)
     const email = document.getElementById('email-value').value.trim();
     console.log('완성된 email: ', email);
-    if(checkAvailability("email",email)){
+    if(!checkAvailability("email",email)){
         alert("가입 되지않은 이메일 입니다.")
         return;
     }
@@ -82,7 +81,7 @@ document.getElementById('check-num').onclick = (e) => {
     }
 };
 
-document.getElementById(joinbtn).addEventListener('click', async (e) => {
+document.getElementById('joinbtn').addEventListener('click', async (e) => {
     e.preventDefault();
     //비밀 번호 유효성 확인 로직
     let passwordValue = document.getElementById('userPs').value;

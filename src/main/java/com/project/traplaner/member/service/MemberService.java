@@ -18,7 +18,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -125,6 +124,10 @@ public class MemberService {
     }
 
     public void changePassword(String email, String password) {
-
+        Member foundMember = memberMapper.findOne(email);
+        int id = foundMember.getId();
+        String nickName = foundMember.getNickName();
+        ModifyMemberInfoDTO dto = new ModifyMemberInfoDTO(id,nickName,password);
+        memberMapper.update(dto.toEntity(encoder));
     }
 }
