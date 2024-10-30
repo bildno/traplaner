@@ -136,10 +136,29 @@
                 <div class="section photo"><img src="/display${tOne.img}"></div>
                 <div class="section text" id="content">${tOne.content}</div>
 
+                <c:if test="${not empty journey}">
+                    <!-- origin과 destination 초기화 -->
+                    <c:set var="origin" value="place_id:${journey[0].locationPin}" />
+                    <c:set var="destination" value="place_id:${journey[journey.size() - 1].locationPin}" />
+
+                    <!-- waypoints 초기화 및 값 추가 -->
+                    <c:set var="waypoints" value="" />
+                    <c:forEach var="j" items="${journey}" varStatus="status">
+                        <c:if test="${!status.first && !status.last}">
+                            <!-- 콤마로 구분하여 waypoints 추가 -->
+                            <c:set var="waypoints" value="${waypoints}${status.index > 1 ? '|' : ''}place_id:${j.locationPin}" />
+                        </c:if>
+                    </c:forEach>
+
+                    <!-- iframe에 동적으로 설정한 URL 사용 -->
+                    <iframe allowfullscreen="" class="map-top" height="450"
+                            src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBY7CGNgsIdVaut54UGlivQkiCYAyoS19I&origin=${origin}&destination=${destination}&waypoints=${waypoints}"
+                            width="598"></iframe>
+                </c:if>
+
+
                 <c:forEach var="j" items="${journey}">
                     <h2 class="day-date">${j.journeyStartTime}</h2>
-
-                    <div class="section route" id="route">${j.locationPin}</div>
                     <div class="section schedule" id="schedule">${j.placeName} ${j.journeyName}</div>
                 </c:forEach>
             </div>
