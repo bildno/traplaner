@@ -11,7 +11,7 @@
     <insert id="postJourney" parameterType="com.project.traplaner.entity.Journey">
         INSERT INTO tbl_journey (
         travel_id, accommodation_name, journey_name,
-        accommodation_road_address_name, start_time, end_time,
+        accommodation_road_address_name, start_date, end_date,
         google_map_location_pin_information, reservation_confirm_image_path, budget
         )
         VALUES (

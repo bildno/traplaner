@@ -137,7 +137,7 @@
                 <div class="section text" id="content">${tOne.content}</div>
 
                 <c:forEach var="j" items="${journey}">
-                    <h2 class="day-date">${j.journeyStartDate}</h2>
+                    <h2 class="day-date">${j.journeyStartTime}</h2>
 
                     <div class="section route" id="route">${j.locationPin}</div>
                     <div class="section schedule" id="schedule">${j.placeName} ${j.journeyName}</div>
