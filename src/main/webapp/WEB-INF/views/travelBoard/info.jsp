@@ -137,7 +137,7 @@
                         </button>
                     </span>
                 </p>
-                <div class="section photo"><img src="/display${tOne.img}"></div>
+                <div class="section photo"><img src="/display/${tOne.img}"></div>
                 <div class="section text" id="content">${tOne.content}</div>
 
                 <c:if test="${not empty journey}">
@@ -162,7 +162,7 @@
 
 
                 <c:forEach var="j" items="${journey}">
-                    <div class="section photo"><img src="/display${j.journeyImg}"></div>
+                    <div class="section photo"><img src="/display/${j.journeyImg}"></div>
                     <h2 class="day-date">${j.journeyStartTime}</h2>
                     <div class="section schedule" id="schedule">${j.placeName} ${j.journeyName}</div>
                 </c:forEach>
