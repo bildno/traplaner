@@ -49,8 +49,10 @@ public class MemberController {
     }
     //비밀번호 변경로직
     @PostMapping("pw-change")
-    public String pwChange(@RequestBody Map<String, String> params){
-        memberService.changePassword(params.get("email"),params.get("password"));
+    public String pwChange(@RequestParam("email") String email,
+                           @RequestParam("password") String password)
+    {
+        memberService.changePassword(email,password);
         return "redirect:/members/sign-in";
     }
 

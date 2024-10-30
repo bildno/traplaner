@@ -1,6 +1,6 @@
 import {checkAvailability, validateInput} from "./validation.js";
 
-const form = document.getElementsBy("form");
+const form = document.getElementById("change-pw");
 const fields = [
     {
         id: 'password',
