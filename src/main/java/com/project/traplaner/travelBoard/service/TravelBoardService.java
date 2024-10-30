@@ -1,6 +1,7 @@
 package com.project.traplaner.travelBoard.service;
 
 import com.project.traplaner.mapper.TravelBoardMapper;
+import com.project.traplaner.travelBoard.dto.JourneyResponseDTO;
 import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardDetailResponseDTO;
 import com.project.traplaner.travelBoard.dto.TravelBoardListResponseDTO;
@@ -37,8 +38,18 @@ public class TravelBoardService {
         return result;
     }
 
-    public TravelBoardDetailResponseDTO getOne(int id) {
-        return travelBoardMapper.findOne(id);
+    public Map<String, Object> getOne(int id) {
+
+        TravelBoardDetailResponseDTO travelBoardDetailResponseDTO = travelBoardMapper.findOne(id);
+
+        List<JourneyResponseDTO> journeyResponseDTOS = travelBoardMapper.journeys(id);
+        List<JourneyResponseDTO> journey = new ArrayList<>(journeyResponseDTOS);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("tOne", travelBoardDetailResponseDTO);
+        result.put("journey", journey);
+
+        return result;
     }
 
     // 좋아요 상태 토글
