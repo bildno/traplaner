@@ -14,13 +14,13 @@ import java.util.List;
 public class JourneyResponseDTO {
     private String journeyName;
     private String placeName;
-    private LocalDateTime journeyStartDate;
+    private LocalDateTime journeyStartTime;
     private String locationPin;
 
     public JourneyResponseDTO(Journey journey) {
         this.journeyName = journey.getJourneyName();
         this.placeName = journey.getAccommodationName();
-        this.journeyStartDate = journey.getStartDate();
+        this.journeyStartTime = journey.getStartTime();
         this.locationPin = journey.getGoogleMapLocationPinInformation();
     }
 }
