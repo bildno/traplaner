@@ -37,9 +37,9 @@ public class FileUtils {
 
         log.info("완성된 경로: {}", uploadPath.getPath());
 
-        // 프로파일 이미지 경로: C:/devlop/profile/upload/kajfljslfjdslf-fdkfsjlf.jpg
+        // 프로파일 이미지 경로: C:/devlop/profile/upload/kajfljslfjdslf-fdkfsjlf.jpg  \n \t
         // 트래블 이미지 경로: c:/devlop/travel/upload/kajfljslfjdslf-fdkfsjlf.jpg
         // 리턴 경로: /kajfljslfjdslf-fdkfsjlf.jpg
-        return uploadPath.getPath().substring(rootPath.length());
+        return uploadPath.getPath().substring(rootPath.length() + 1);
     }
 }
