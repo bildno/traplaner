@@ -2,7 +2,6 @@ package com.project.traplaner.mypage.service;
 
 import com.project.traplaner.entity.Journey;
 import com.project.traplaner.entity.Travel;
-import com.project.traplaner.entity.TravelBoard;
 import com.project.traplaner.mapper.FavoriteMapper;
 import com.project.traplaner.mapper.MemberMapper;
 import com.project.traplaner.mapper.MyPageBoardMapper;
@@ -13,9 +12,9 @@ import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelBoard.service.PageMaker;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.tags.shaded.org.apache.bcel.generic.NEW;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,7 +88,7 @@ public class MyPageBoardService {
         });
 
         Map<String, Object> result = new HashMap<>();
-        result.put("favorites",favorites);
+        result.put("favorite",favorites);
         result.put("pm",pageMaker);
 
         return result;
@@ -109,5 +108,18 @@ public class MyPageBoardService {
     }
 
 
+    public void updateTravelImg(int travelId, String savePath) {
+        myPageBoardMapper.updateTravelImg(travelId, savePath);
+
+    }
+
+
+    public void updateJourneyImg(Integer travelId, String save) {
+        myPageBoardMapper.updateJourneyImg(travelId, save);
+    }
+
+    public void createBoard(int travelId, String nickName, LocalDate now, String content) {
+        myPageBoardMapper.createBoard(travelId, nickName, now, content);
+    }
 }
 
