@@ -1,157 +1,174 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <!DOCTYPE html>
-        <html lang="ko">
 
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="ko">
 
-            <script src="https://kit.fontawesome.com/7dcd39bc6e.js" crossorigin="anonymous"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-            <style>
-                button {
-                    background: none;
-                    border: none;
-                    width: auto;
-                    height: auto;
-                }
+    <script src="https://kit.fontawesome.com/7dcd39bc6e.js" crossorigin="anonymous"></script>
 
-                * {
-                    margin: 0;
-                    padding: 0;
-                    box-sizing: border-box;
-                }
+    <style>
+        button {
+            background: none;
+            border: none;
+            width: auto;
+            height: auto;
+        }
 
-                body {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin: 0;
-                }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-                .container {
-                    width: 90%;
-                    max-width: 980px;
-                    padding: 40px 80px;
-                    background-color: #ffffff;
-                    border: 1px solid #ddd;
-                    border-radius: 1%;
-                }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
 
-                h1 {
-                    font-size: 24px;
-                    font-weight: bold;
-                    margin-bottom: 12px;
-                }
+        .container {
+            width: 90%;
+            max-width: 980px;
+            padding: 40px 80px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 1%;
+        }
 
-                .author-date {
-                    font-size: 14px;
-                    color: #606060;
-                    margin-bottom: 20px;
-                }
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
 
-                .heart {
-                    float: right;
-                    color: #606060;
-                }
+        .author-date {
+            font-size: 14px;
+            color: #606060;
+            margin-bottom: 20px;
+        }
 
-                .section {
-                    width: 100%;
-                    height: 300px;
-                    background-color: #d3d3d3;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 20px;
-                    color: #333;
-                    margin-bottom: 16px;
-                    border-radius: 4px;
-                }
+        .heart {
+            float: right;
+            color: #606060;
+        }
 
-                #content {
-                    background-color: white;
-                    justify-content: flex-start;
-                    align-items: flex-start;
-                }
+        .section {
+            width: 100%;
+            height: 300px;
+            background-color: #d3d3d3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 16px;
+            border-radius: 4px;
+        }
 
-                .day-title {
-                    font-size: 18px;
-                    font-weight: bold;
-                    margin-bottom: 12px;
-                }
+        #content {
+            background-color: white;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
 
-                .day-date {
-                    font-size: 14px;
-                    color: #888;
-                    margin-left: 8px;
-                }
+        .day-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
 
-                #like-button {
-                    /*background-color: none;*/
-                    border: none;
-                    cursor: pointer;
-                    border-radius: 5px;
-                    transition: background-color 0.3s;
-                }
+        .day-date {
+            font-size: 14px;
+            color: #888;
+            margin-left: 8px;
+        }
 
-                .fa-solid {
-                    color: red;
-                }
+        #like-button {
+            /*background-color: none;*/
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
 
-                #like-count {
-                    color: #333;
-                }
-            </style>
-        </head>
+        .fa-solid {
+            color: red;
+        }
 
-        <body>
+        #like-count {
+            color: #333;
+        }
+        .content-box{
+            text-align: center;
+        }
+        .button-box{
+            text-align: center;
+        }
+        .button-box button{
+            height: 50px;
+            width: 100px;
+            border-radius: 5px;
+            border: 1px solid lightgrey;
+        }
+    </style>
+</head>
 
+<body>
+
+<div class="container">
+  
             <%@ include file="../header.jsp" %>
 
-                <div class="container">
+    <h1>${travel.title}</h1>
+    <form action="/my-page/insert-board" method="post" enctype="multipart/form-data">
+        <input type="hidden" value="${travel.id}" name="travelId">
+        <p class="author-date"> ${travel.startDate} ~ ${travel.endDate}</p>
+        <div style="text-align: center"><img src="" alt="" style="display: none" class="travelImg-box"></div>
+        <div class="section photo" id="travelImage" >여행의 사진을 등록해주세요!!
+            <input
+                    type="file"
+                    id="travelImgInput"
+                    accept="image/*"
+                    style="display: none"
+                    name="travelImg"
+            />
+        </div>
+        <div class="journey-wrap">
+            <c:forEach var="journey" items="${journey}">
+                <div>
+                    <input type="hidden" value="${journey.id}" name="journeyId">
+                    <h2 class="day-title">${journey.journeyName} <span class="day-date">${journey.startTime} - ${journey.endTime}</span></h2>
+                    <div style="text-align: center;">
+                            <img src="" alt="" style="display: none" class="journeyImg-box${journey.id}">
+                    </div>
+                    <div class="section photo" id="journeyImage${journey.id}" data-journey-id="${journey.id}">여정의 사진을 등록해주세요!!
+                        <input
+                                type="file"
+                                id="journeyImgInput${journey.id}"
+                                accept="image/*"
+                                style="display: none"
+                                name="journeyImage"
+                        />
+                    </div>
 
-                    <h1>${travel.title}</h1>
-                    <form action="/my-page/insert-board" method="post" enctype="multipart/form-data">
-                        <input type="hidden" value="${travel.id}" name="travelId">
-                        <p class="author-date"> ${travel.startDate} ~ ${travel.endDate}</p>
-                        <div style="text-align: center"><img src="" alt="" style="display: none" class="travelImg-box">
-                        </div>
-                        <div class="section photo" id="travelImage">여행의 사진을 등록해주세요!!
-                            <input type="file" id="travelImgInput" accept="image/*" style="display: none"
-                                name="travelImg" />
-                        </div>
-                        <div class="journey-wrap">
-                            <c:forEach var="journey" items="${journey}">
-                                <div>
-                                    <input type="hidden" value="${journey.id}" name="journeyId">
-                                    <h2 class="day-title">${journey.journeyName} <span
-                                            class="day-date">${journey.startTime}
-                                            - ${journey.endTime}</span></h2>
-                                    <div style="text-align: center"><img src="" alt="" style="display: none"
-                                            class="journeyImg-box${journey.id}"></div>
-                                    <div class="section photo" id="journeyImage${journey.id}"
-                                        data-journey-id="${journey.id}">여정의 사진을 등록해주세요!!
-                                        <input type="file" id="journeyImgInput${journey.id}" accept="image/*"
-                                            style="display: none" name="journeyImage" />
-                                    </div>
+      <div class="content-box">
+            <textarea name="content" rows="15" cols="100"></textarea>
+        </div>
+        <div class="button-box">
+            <button type="submit">게시글 저장</button>
+        </div>
 
-                                </div>
-
-                            </c:forEach>
-                        </div>
-
-                        <textarea name="content" rows="3"></textarea>
-
-                        <div>
-                            <button type="submit">게시글 저장</button>
-                        </div>
-                    </form>
-
+    </form>
                 </div>
 
         </body>
+
 
         <script>
             // 프로필 사진 업로드 관련 스크립트  --->
@@ -199,13 +216,6 @@
                 uploadThumbnailImage(e.target);
             });
 
-
-    <% --for (let i = 0; i < journeyList.length; i++) {
-                --%>
-    <% --    const $journeyImg${ joureny.id } = document.getElementById("journeyImage'${journey.id}'")-- %>
-    <% --    const $journeyInput${ joureny.id } = document.getElementById("journeyImgInput'${journey.id}'")-- %>
-
-    <% --} --%>
 
     // 각 input 영역에 썸네일 띄우는 동작을 담당하는 함수
     const uploadThumbnailImage = ($targetInput) => {

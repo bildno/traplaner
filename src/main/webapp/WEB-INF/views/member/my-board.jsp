@@ -165,13 +165,13 @@
 
 
 
-                  <c:forEach var="dto" items="${ dtoList }">
-                    <tr>
-                      <td><span>${ dto.id }</span></td>
-                      <td><input type="text" name="con_text" id="con_text" value="${dto.title}" readonly></td>
-                      <td><span>${dto.writeDate}</span></td>
-
-
+          <c:forEach var="dto" items="${ dtoList }">
+            <tr onclick="location.href='/travelboard/info/${dto.travelId}'">
+              <td><span>${ dto.id }</span></td>
+              <td><input type="text" name="con_text" id="con_text"
+                         value="${dto.title}"
+                         readonly></td>
+              <td><span>${dto.writeDate}</span></td>
 
                     </tr>
                   </c:forEach>
