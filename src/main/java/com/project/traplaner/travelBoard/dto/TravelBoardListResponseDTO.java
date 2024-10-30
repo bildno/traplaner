@@ -1,6 +1,5 @@
 package com.project.traplaner.travelBoard.dto;
 
-import com.project.traplaner.entity.Travel;
 import lombok.*;
 
 import java.time.LocalDateTime;
