@@ -87,7 +87,7 @@ signupButton.addEventListener('click', async (e) => {
   //비밀 번호 확인 부분과 동일한지
   passwordValue = document.getElementById('userPs').value;
   const passwordConfirm = document.getElementById('userPc').value;
-  const validateResult2 = await validateInput.passwordCheck(passwordConfirm,passwordConfirm);
+  const validateResult2 = await validateInput.passwordCheck(passwordValue,passwordConfirm);
   if(validateResult2.valid) {
     fields[1].valid = true;
 

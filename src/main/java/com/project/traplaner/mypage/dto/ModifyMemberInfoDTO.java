@@ -2,16 +2,14 @@ package com.project.traplaner.mypage.dto;
 
 
 import com.project.traplaner.entity.Member;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Setter
 @Getter
 @ToString
 @Builder
+@AllArgsConstructor
 public class ModifyMemberInfoDTO {
 
     private int id;

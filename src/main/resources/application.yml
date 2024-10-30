@@ -7,7 +7,17 @@ spring:
     username: root
     password: mysql
     driver-class-name: com.mysql.cj.jdbc.Driver
-    #jsp view resolver setting
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: 111returns1@gmail.com
+    password: nvzswtgttmfwghqk
+    properties:
+      smtp:
+        auth: true
+        timeout: 10000
+        starttls:
+          enable: true
   mvc:
     view:
       prefix: /WEB-INF/views/

@@ -9,6 +9,8 @@ import com.project.traplaner.member.service.LoginResult;
 import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.member.dto.SignUpRequestDto;
 import com.project.traplaner.util.FileUtils;
+import com.project.traplaner.util.MailSenderService;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +30,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MemberController {
 
+    private final MailSenderService mailSenderService;
     @Value("${file.upload.root-path}")
     private String rootPath;
 
@@ -44,10 +47,18 @@ public class MemberController {
     public String pwChange() {
         return "member/pw-change";
     }
-//    @PostMapping("pw-change")
-//    public String pwChange(){
-//
-//    }
+    //비밀번호 변경로직
+    @PostMapping("pw-change")
+    public String pwChange(@RequestParam("email") String email,
+                           @RequestParam("password") String password)
+    {
+        memberService.changePassword(email,password);
+        log.info(email);
+        log.info("변경 비밀번호: {}", password);
+        return "redirect:/members/sign-in";
+    }
+
+
     // 회원가입 양식 열기
     @GetMapping("/sign-up")
     public String join() {
@@ -168,4 +179,17 @@ public class MemberController {
 
         return "redirect:/";
     }
+    @PostMapping("/email")
+    @ResponseBody
+    public ResponseEntity<?> mailCheck(@RequestBody String email) {
+        log.info("이메일 인증 요청 들어옴!: {}", email);
+        try {
+            String authNum = mailSenderService.joinMail(email);
+            return ResponseEntity.ok().body(authNum);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }

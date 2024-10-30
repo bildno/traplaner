@@ -36,6 +36,7 @@
     }
 
     #insert input[type="text"],
+    input[type="number"],
     input[type="text"],
     input[type="email"],
     input[type="password"] {
@@ -55,9 +56,11 @@
         background-color: white;
         color: gray;
         margin-left: 20%;
+        cursor: pointer;
     }
 
-    #id_check {
+
+    .id_check {
         padding: 5px;
         border: 1px solid rgb(238, 238, 238);
         border-radius: 5px;
@@ -65,54 +68,74 @@
         margin-left: 5px;
         background-color: white;
         color: gray;
+        cursor: pointer;
     }
     #profile_img{
         width: 300px;
     }
 </style>
-<div class="container">
-    <%@ include file="../header.jsp"%>
-    <h1 id="join_h1">비밀번호 변경</h1>
-    <h2 id="join_exp"></h2>
-    <img id="profile_img" src="/assets/img/basicProfile.png" alt="업따" />
-    <div class="contents">
-        <form name="join" method="post">
-            <div id="insert">
-                <div>
-                    <input type="email" placeholder="이메일" name="email" class="email_input" />
-                    <input
-                            id="id_check"
-                            type="button"
-                            value="이메일인증"
-                            formaction=""
-                    />
-                </div>
-                <div>
-                    <input
-                            type="password"
-                            placeholder="새 비밀번호"
-                            name="password"
-                            id="userPs"
-                    />
-                </div>
-                <div>
-                    <input
-                            type="password"
-                            placeholder="비밀번호 확인"
-                            name="password_check"
-                            id="userPc"
-                    />
-                </div>
+<html>
+    <body>
+    <div class="container">
+        <%@ include file="../header.jsp"%>
+        <h1 id="join_h1">비밀번호 변경</h1>
+        <h2 id="join_exp"></h2>
+        <img id="profile_img" src="/assets/img/basicProfile.png" alt="업따" />
+        <div class="contents">
+            <form id="change-pw" name="join" method="post" action="/members/pw-change">
+                <div id="insert">
+                    <div>
+                        <input type="email" placeholder="이메일" name="email" class="email_input" id="email-value" />
+                        <input
+                                id="email"
+                                class="id_check"
+                                type="button"
+                                value="이메일인증"
+                                formaction=""
+                        />
+                    </div>
+                    <div>
+                        <input type="number" placeholder="인증 번호를 입력해주세요" name="check-num" class="email_input" id="check-num-value" />
+                        <input
+                                id= "check-num"
+                                class="id_check"
+                                type="button"
+                                value="확인"
+                                formaction=""
+                        />
+                    </div>
+                    <div>
+                        <input
+                                type="password"
+                                placeholder="새 비밀번호"
+                                name="password"
+                                id="userPs"
+                        />
+                    </div>
+                    <div>
+                        <input
+                                type="password"
+                                placeholder="비밀번호 확인"
+                                name="password_check"
+                                id="userPc"
+                        />
+                    </div>
 
+                    <br />
+                    <input
+                            type="submit"
+                            value="비밀번호 변경"
+                            id="joinbtn"
+                            formaction="/members/pw-change"
+                    />
+                </div>
                 <br />
-                <input
-                        type="submit"
-                        value="비밀번호 변경"
-                        id="joinbtn"
-                        formaction="/members/pw-change"
-                />
-            </div>
-            <br />
-        </form>
+            </form>
+        </div>
     </div>
-</div>
+    <script type="module" src="/assets/js/pw-change.js"></script>
+    </body>
+
+</html>
+
+
