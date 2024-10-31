@@ -1,5 +1,6 @@
 # TRAPLAN
-![traplaner main](https://github.com/user-attachments/assets/5f58f4c0-9aab-463e-94fe-b0caaef45a08)
+
+<img src="https://github.com/user-attachments/assets/e2032dc5-a591-4d94-9d68-fa89b67f4c78"/>
 
 ※MainPage
 <br><br><br>
@@ -103,7 +104,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 - 비밀번호를 잊은 회원은 이메일 인증을 통해 [비밀번호 변경] 할 수 있습니다.
 
 <br><br><br>
-<img src="https://github.com/user-attachments/assets/53b1cc34-f406-4588-9612-abb9db31f0be"/>
+<img src="https://github.com/user-attachments/assets/44a2ae3c-23bf-47b4-9f6a-4cb0362beac4"/>
 
 
 ### 📄 메인페이지
@@ -111,7 +112,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 - 나의 여행 계획을 작성하는 버튼이 있습니다.
 - 나의 지난 여행에 바로 접근할 수 있습니다.
  
-<img src="https://github.com/user-attachments/assets/5f58f4c0-9aab-463e-94fe-b0caaef45a08"/>
+<img src="https://github.com/user-attachments/assets/e2032dc5-a591-4d94-9d68-fa89b67f4c78"/>
 
 
 ### 📄 여행계획페이지
@@ -121,7 +122,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 - 장소 주소는 구글맵API를 통해 장소를 조회하는 즉시 위치를 오른쪽 지도에서 눈으로 확인할 수 있습니다.
 - 예산은 자동으로 계산되어 여행 기간동안의 총예산을 확인할 수 있습니다.
 
-<img src="https://github.com/user-attachments/assets/956f9725-85c5-4a79-aa8b-1cf1ddbb90a6"/>
+<img src="https://github.com/user-attachments/assets/a2900bb5-536e-48c2-a8c8-9978690039b9"/>
 
 
 ### 📄 마이페이지
@@ -140,7 +141,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
     - 나의 비밀번호 및 닉네임을 변경할 수 있습니다.
       <br><br>
 
-<img src="https://github.com/user-attachments/assets/d80c1218-623b-48db-ac7f-bfad605fb092"/>
+<img src="https://github.com/user-attachments/assets/f5b76f45-02e1-4293-a41e-38e64ae01e30"/>
 
 
 
@@ -164,7 +165,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 ### 📄 게시글(여행후기) 페이지
 - 대표사진과 후기, 일정별 경로와 여정의 사진 및 정보를 볼 수 있습니다.
 
- <img src="https://github.com/user-attachments/assets/6ad42b0b-58ed-4496-a47d-4c20ceae1942"/>
+ <img src="https://github.com/user-attachments/assets/e700d8ce-4a35-4da9-b540-9deccc5d48e1"/>
 
 
 <br><br>
@@ -187,7 +188,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 ---
 ### 5 TABLES
 
-   <img src="https://github.com/user-attachments/assets/bea82cbf-c3b0-488c-b836-5a1086c9b6dd"/>
+   <img src="https://github.com/user-attachments/assets/40dfffb6-a1e8-45e1-831c-a1945a11a80a"/>
 
 <br><br>
 
