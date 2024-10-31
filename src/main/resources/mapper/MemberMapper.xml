@@ -9,7 +9,25 @@
         values(#{nickName}, #{profileImg}, #{loginMethod}, #{password}, #{email})
     </insert>
 
-    <select id="overlapping" resultType="boolean">
-        select * from tbl_member where email = #{#email}
+    <select id="duplicateTest" resultType="boolean">
+        SELECT COUNT(*)
+        FROM tbl_member
+        <if test="type == 'nickname'">
+            WHERE nick_name = #{keyword}
+        </if>
+        <if test="type == 'email'">
+            WHERE email = #{keyword}
+        </if>
     </select>
+    <select id="findOne" resultType="member">
+        SELECT *
+        FROM tbl_member
+        WHERE email = #{email}
+    </select>
+
+
+    <update id="update">
+        update tbl_member set password = #{password}, nick_name= #{nickName} where id = #{id};
+    </update>
+
 </mapper>
