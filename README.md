@@ -112,7 +112,6 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 - 나의 지난 여행에 바로 접근할 수 있습니다.
 
 ![traplaner main](https://github.com/user-attachments/assets/5f58f4c0-9aab-463e-94fe-b0caaef45a08)
-<br><br>
 
 
 ### 📄 여행계획페이지
@@ -123,6 +122,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 - 예산은 자동으로 계산되어 여행 기간동안의 총예산을 확인할 수 있습니다.
 
 ![traplaner 여행등록 게시글 사진 등록](https://github.com/user-attachments/assets/956f9725-85c5-4a79-aa8b-1cf1ddbb90a6)
+
 
 ### 📄 마이페이지
 1. 나의 일정
@@ -147,6 +147,9 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 - 여행을 다녀온 뒤에 마이페이 나의 여행에서 제목을 누르면 나의 여행을 작성할 수 있습니다.
 - 여행 후기와 대표 사진, 여정별로 사진을 등록할 수 있습니다.
 
+
+
+
 ### 📄 게시판 페이지
 - 다른 유저들이 공유한 게시글(여행후기)을 볼 수 있습니다.
 - 옵션을 선택하여 최신순/과거순/좋아요순으로 정렬할 수 있습니다.
@@ -154,8 +157,13 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 - 게시글을 누르면 여행후기가 새 탭에서 띄워집니다.
 
 
+
+
 ### 📄 게시글(여행후기) 페이지
 - 대표사진과 후기, 일정별 경로와 여정의 사진 및 정보를 볼 수 있습니다.
+
+
+
 
 ![traplaner 좋아요 기능](https://github.com/user-attachments/assets/6ad42b0b-58ed-4496-a47d-4c20ceae1942)
 
