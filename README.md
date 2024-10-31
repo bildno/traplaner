@@ -1,7 +1,7 @@
 traplaner
 # TRAPLAN
 
-<img src="https://github.com/5slob/ddamddamclub/assets/122959190/a68c6df0-d4d9-4197-85ab-7e6c38ffac69.gif" width="100%"/>
+<img src="https://github.com/user-attachments/assets/5b582ba5-6bc3-4e1e-9040-3d59697cd7a9 width="100%"/>
 ※MainPage
 <br><br><br>
 
