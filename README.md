@@ -102,15 +102,16 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 - 회원은 일반, 카카오 계정을 통해 회원가입 및 로그인이 가능합니다.
 - 비밀번호를 잊은 회원은 이메일 인증을 통해 [비밀번호 변경] 할 수 있습니다.
 
-![traplaner 로그인](https://github.com/user-attachments/assets/53b1cc34-f406-4588-9612-abb9db31f0be)
+<br><br><br>
+<img src="https://github.com/user-attachments/assets/53b1cc34-f406-4588-9612-abb9db31f0be"/>
 
 
 ### 📄 메인페이지
 - 좋아요를 가장 많이 받은 게시글 4개를 보여줍니다.
 - 나의 여행 계획을 작성하는 버튼이 있습니다.
 - 나의 지난 여행에 바로 접근할 수 있습니다.
-
-![traplaner main](https://github.com/user-attachments/assets/5f58f4c0-9aab-463e-94fe-b0caaef45a08)
+ 
+<img src="https://github.com/user-attachments/assets/5f58f4c0-9aab-463e-94fe-b0caaef45a08"/>
 
 
 ### 📄 여행계획페이지
@@ -120,7 +121,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 - 장소 주소는 구글맵API를 통해 장소를 조회하는 즉시 위치를 오른쪽 지도에서 눈으로 확인할 수 있습니다.
 - 예산은 자동으로 계산되어 여행 기간동안의 총예산을 확인할 수 있습니다.
 
-![traplaner 여행등록 게시글 사진 등록](https://github.com/user-attachments/assets/956f9725-85c5-4a79-aa8b-1cf1ddbb90a6)
+<img src="https://github.com/user-attachments/assets/956f9725-85c5-4a79-aa8b-1cf1ddbb90a6"/>
 
 
 ### 📄 마이페이지
@@ -139,7 +140,9 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
     - 나의 비밀번호 및 닉네임을 변경할 수 있습니다.
       <br><br>
 
-![TRAPLAN(Main) - Chrome 2024-10-31 10-38-45](https://github.com/user-attachments/assets/d80c1218-623b-48db-ac7f-bfad605fb092)
+<img src="https://github.com/user-attachments/assets/d80c1218-623b-48db-ac7f-bfad605fb092"/>
+
+
 
 
 ### 📄 나의 여행 작성 페이지
@@ -161,10 +164,8 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 ### 📄 게시글(여행후기) 페이지
 - 대표사진과 후기, 일정별 경로와 여정의 사진 및 정보를 볼 수 있습니다.
 
+ <img src="https://github.com/user-attachments/assets/6ad42b0b-58ed-4496-a47d-4c20ceae1942"/>
 
-
-
-![traplaner 좋아요 기능](https://github.com/user-attachments/assets/6ad42b0b-58ed-4496-a47d-4c20ceae1942)
 
 <br><br>
 ### 📜 개발 이력
@@ -186,7 +187,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 ---
 ### 5 TABLES
 
-![erd](https://github.com/user-attachments/assets/bea82cbf-c3b0-488c-b836-5a1086c9b6dd)
+   <img src="https://github.com/user-attachments/assets/bea82cbf-c3b0-488c-b836-5a1086c9b6dd"/>
 
 <br><br>
 
@@ -209,4 +210,4 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 
 - #### feature/[기능] : 기능을 개발하는 브랜치
 
-> ex. feature/login : 로그인 기능을 개발하는 브랜치
+> -> [기능] : 기능을 개발하는 브랜치
