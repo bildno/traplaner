@@ -1,4 +1,3 @@
-traplaner
 # TRAPLAN
 ![traplaner main](https://github.com/user-attachments/assets/5f58f4c0-9aab-463e-94fe-b0caaef45a08)
 
