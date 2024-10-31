@@ -40,7 +40,7 @@
                 <img src="${login.profile}" alt="프사" class="profile-img" />
               </c:when>
               <c:otherwise>
-                <img src="/display${login.profile}" alt="프사" class="profile-img" />
+                <img src="/display/${login.profile}" alt="프사" class="profile-img" />
               </c:otherwise>
             </c:choose>
             <span class="navbar-text">&nbsp;&nbsp;Welcome ${sessionScope.login == null ? '' : login.nickName}</span>
@@ -102,7 +102,7 @@
               <c:forEach items="${topThree}" var="travel" varStatus="status">
                 <div class="carousel-item<c:out value='${status.first ? " active" : "" }' />">
                   <a href="/travelboard/info/${travel.id}">
-                    <img src="/display/${travel.travelImg}" alt="" class="d-block w-100" />
+                    <img src="/display/${travel.travelImg}" alt="" class="d-block w-100"  />
                   </a>
                 </div>
             </c:forEach>
@@ -186,7 +186,7 @@
               const cardTravelImg = card.travelImg.replace(/^"/, '');
               cardElement.innerHTML = `
                 <div class="card p-1 mt-2">
-                    \${cardTravelImg ? `<a href = "/my-page/mytravel/${login.id}" > <img src="/display/\${cardTravelImg}" class="card-img-top img-fluid" alt="이미지를 클릭하면 해당 여행으로 이동합니다."/> </a>`
+                    \${cardTravelImg ? `<a href = "/my-page/mytravel/${login.id}" > <img style="height: 165px"  src="/display/\${cardTravelImg}" class="card-img-top img-fluid" alt="이미지를 클릭하면 해당 여행으로 이동합니다."/> </a>`
                     : `<a href="/my-page/board-info/\${card.id}"> 여행에 이미지를 등록하세요! </a>`}
                   <div class="pt-2">
                     <h6 class="card-title">\${card.travelTitle} </h6>
@@ -194,9 +194,11 @@
                 </div>
               </div>
               `;
+
               cardContainer.appendChild(cardElement);
             });
           }
+
 
           function displayPagination() {
             const pagination = document.getElementById("pagination");

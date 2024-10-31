@@ -52,7 +52,7 @@ class MemberMapperTest {
                     .email("test" + i + "@abc.net")
                     .password(passwordEncoder.encode("1234@qwer"))
                     .loginMethod(LoginMethod.COMMON)
-                    .profileImg("\\47a3e6ea4e1d4377ab87d07c85e1b124.png")
+                    .profileImg("47a3e6ea4e1d4377ab87d07c85e1b124.png")
                     .build();
             boolean b = memberMapper.save(m);
         }
@@ -67,7 +67,7 @@ class MemberMapperTest {
             LocalDateTime tmpUpdatedDate =
                     LocalDateTime.now().plusDays(3 + (int) (Math.random() * randomPara) + 1);
 
-            String fileName = String.format("\\0425d9dc324e4d2a822b8ac905123b%02d.jpg", (int) (Math.random() * 9) + 1);
+            String fileName = String.format("0425d9dc324e4d2a822b8ac905123b%02d.jpg", (int) (Math.random() * 9) + 1);
 
             Travel travel = Travel.builder()
                     .memberId(tmpMemberId)

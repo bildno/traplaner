@@ -117,7 +117,7 @@
                                         class="rounded-pill" class="rounded-pill" />
                                 </c:if>
                                 <c:if test="${login != null && login.profile != null}">
-                                    <img src="/display${login.profile}" alt="프사"
+                                    <img src="/display/${login.profile}" alt="프사"
                                         style="width: 250px; border-radius: 50%; margin-bottom: 50px; margin-top: 30px"
                                         class="rounded-pill" />
                                 </c:if>
@@ -133,11 +133,11 @@
                                 <div class="con22">
                                     <div class="info-box">
                                         <c:if test="${login != null && login.profile != null}">
-                                            <img src="/display${login.profile}" alt="프사"
+                                            <img src="/display/${login.profile}" alt="프사"
                                                 style="width: 250px; border-radius: 50%; margin-bottom: 50px; margin-top: 30px"
                                                 class="rounded-pill" />
                                         </c:if>
-                                        <input type="emailtext" value="${login.email}" readonly
+                                        <input type="email" value="${login.email}" readonly
                                             style="border: none; outline: none">
                                         <input id="newPw" placeholder="새 비밀번호" type="password">
                                         <input id="pwChk" placeholder="비밀번호 확인" type="password">

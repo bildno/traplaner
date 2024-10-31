@@ -16,8 +16,8 @@ public class MainTravelDto {
     private boolean isDomestic;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private LocalDateTime createdDt;
-    private LocalDateTime updatedDt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private boolean share;
     private String travelImg;
 }

@@ -124,9 +124,7 @@
                         background-color: #f0f0f0;
                         /* 마우스 오버 시 배경색 변화 */
                     }
-                    .profile-img {
-                        width: 30px;
-                    }
+
                 </style>
 
 
@@ -148,7 +146,10 @@
                                     <img src="${login.profile}" alt="프사" class="profile-img" />
                                   </c:when>
                                   <c:otherwise>
-                                    <img src="/display${login.profile}" alt="프사" class="profile-img" />
+                                    <img src="/display/${login.profile}" alt="프사"
+                                      style="width: 250px; border-radius: 50%; margin-bottom: 50px; margin-top: 30px"
+                                                class="rounded-pill"
+                                         />
                                   </c:otherwise>
                                 </c:choose>
                                 <div class="manage_box">
