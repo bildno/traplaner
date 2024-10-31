@@ -161,7 +161,7 @@
             const end = start + cardsPerPage;
             const cards = travelList.slice(start, end);
 
-            // 여행추가 고정카드 
+            // 여행추가 고정카드
             const emptyCardElement = document.createElement("div");
             emptyCardElement.className = "col";
             emptyCardElement.innerHTML = `
