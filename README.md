@@ -137,7 +137,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
    - 게시판에 있는 게시물 중 좋아요를 누른 게시물만 모아서 볼 수 있습니다.
    - 제목을 누르면 해당 게시물로 이동합니다. 
 5. 계정관리
-  - 나의 비밀번호 및 닉네임을 변경할 수 있습니다.
+   - 나의 비밀번호 및 닉네임을 변경할 수 있습니다.
 <br><br>
 
 ![TRAPLAN(Main) - Chrome 2024-10-31 10-38-45](https://github.com/user-attachments/assets/d80c1218-623b-48db-ac7f-bfad605fb092)
