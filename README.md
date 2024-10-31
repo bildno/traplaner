@@ -168,6 +168,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 2024-10-21 ~ 2024-10-30
 
 <br>
+  <img src="https://github.com/user-attachments/assets/8f6f3694-8e29-44c2-8c5a-99e1991731b1"/>
 
 
 
