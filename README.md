@@ -1,7 +1,7 @@
 traplaner
 # TRAPLAN
+![traplaner main](https://github.com/user-attachments/assets/5f58f4c0-9aab-463e-94fe-b0caaef45a08)
 
-<img src="https://github.com/user-attachments/assets/5b582ba5-6bc3-4e1e-9040-3d59697cd7a9 width="100%"/>
 ※MainPage
 <br><br><br>
 
@@ -45,7 +45,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 
 | 이름        | 담당                      | GITHUB                         |
 |-----------|-------------------------|--------------------------------|
-| 👩‍💻 이진규 | PM, FRONT, BACK | https://github.com/sup226     |
+| 👩‍💻 이진규 | PM, FRONT, BACK | https://github.com/bildno     |
 | 👨‍💻 김민지 | FRONT, BACK, UI/UX     | https://github.com/sup226 |
 | 👨‍💻 전상윤 | FRONT, BACK     | https://github.com/oslob99     |
 | 👩‍💻 정재훈 | FRONT, BACK     | https://github.com/Hazel0c0    |
@@ -71,7 +71,7 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 
 #### 📀 DB
 <p align="left">
-  <img src="https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=mariadb&logoColor=white" alt="MySQL" height="25"/>
+   <img src="https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white" alt="IntelliJ IDEA" height="25"/>
 </p>
 
 #### ✂️ Tool
@@ -85,7 +85,9 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
   <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git" height="25"/>
   <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white" alt="GitHub" height="25"/>
   <img src="https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=Postman&logoColor=white" alt="Postman" height="25"/>
-  지라, 슬랙, 피그마, 스프레드시트, 마이바티스, ERD클라우드드
+  <img src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white" alt="Postman" height="25"/>
+  <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white" height="25"/>
+  <img src="https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white" height="25"/>
 </p>
 <br>
 
@@ -101,11 +103,17 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 - 회원은 일반, 카카오 계정을 통해 회원가입 및 로그인이 가능합니다.
 - 비밀번호를 잊은 회원은 이메일 인증을 통해 [비밀번호 변경] 할 수 있습니다.
 
+![traplaner 로그인](https://github.com/user-attachments/assets/53b1cc34-f406-4588-9612-abb9db31f0be)
+
+
 ### 📄 메인페이지
 - 좋아요를 가장 많이 받은 게시글 4개를 보여줍니다.
 - 나의 여행 계획을 작성하는 버튼이 있습니다.
 - 나의 지난 여행에 바로 접근할 수 있습니다.
-<img src="https://github.com/5slob/ddamddamclub/assets/122959190/36d40ff7-92b2-4e26-87c6-1f8cd7e69341.gif" width="450" />
+
+![traplaner main](https://github.com/user-attachments/assets/5f58f4c0-9aab-463e-94fe-b0caaef45a08)
+  <br><br>
+
 
 ### 📄 여행계획페이지
 - 달력을 통해 전체 여행 기간을 설정할 수 있습니다.
@@ -113,7 +121,8 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 - 일정일별로 여정을 추가하고 삭제할 수 있습니다. (시간, 여정 이름, 장소 이름, 장소 주소, 예산, 예약바우처 파일)
 - 장소 주소는 구글맵API를 통해 장소를 조회하는 즉시 위치를 오른쪽 지도에서 눈으로 확인할 수 있습니다.
 - 예산은 자동으로 계산되어 여행 기간동안의 총예산을 확인할 수 있습니다.
-<img src="https://github.com/5slob/ddamddamclub/assets/122959190/2e151161-c943-4f93-b1fe-634fea1fd1e6).gif" width="450" />
+
+![traplaner 여행등록 게시글 사진 등록](https://github.com/user-attachments/assets/956f9725-85c5-4a79-aa8b-1cf1ddbb90a6)
 
 ### 📄 마이페이지
 1. 나의 일정
@@ -128,7 +137,11 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
    - 게시판에 있는 게시물 중 좋아요를 누른 게시물만 모아서 볼 수 있습니다.
    - 제목을 누르면 해당 게시물로 이동합니다. 
 5. 계정관리
-- 나의 비밀번호 및 닉네임을 변경할 수 있습니다.
+  - 나의 비밀번호 및 닉네임을 변경할 수 있습니다.
+<br><br>
+
+![TRAPLAN(Main) - Chrome 2024-10-31 10-38-45](https://github.com/user-attachments/assets/d80c1218-623b-48db-ac7f-bfad605fb092)
+
 
 ### 📄 나의 여행 작성 페이지
 - 여행을 다녀온 뒤에 마이페이 나의 여행에서 제목을 누르면 나의 여행을 작성할 수 있습니다.
@@ -140,10 +153,13 @@ TRAPLAN은 "TRAVEL"과 "PLAN"의 합성어로, 여행할 때 필요한 정보를
 - 옵션을 선택하여 제목/작성자/내용/제목+내용에 맞게 검색할 수 있습니다.
 - 게시글을 누르면 여행후기가 새 탭에서 띄워집니다.
 
+
 ### 📄 게시글(여행후기) 페이지
 - 대표사진과 후기, 일정별 경로와 여정의 사진 및 정보를 볼 수 있습니다.
-<img src="https://github.com/5slob/ddamddamclub/assets/122959190/2e151161-c943-4f93-b1fe-634fea1fd1e6).gif" width="450" />
 
+![traplaner 좋아요 기능](https://github.com/user-attachments/assets/6ad42b0b-58ed-4496-a47d-4c20ceae1942)
+
+<br><br>
 ### 📜 개발 이력
 
 ---
@@ -305,44 +321,12 @@ timeline
 
 <br><br>
 
-### 💡 버전 정보
-
----
-
-#### ✅ v1.0.0
-
----
-
-```mermaid
-flowchart LR
-    회원가입 --> 로그인 --> 서비스이용
-    서비스이용 --> 모집게시판
-    서비스이용 --> 취업게시판
-    서비스이용 --> Q&A게시판
-    서비스이용 --> 마이페이지
-```
-
-```mermaid
-flowchart LR
-    모집게시판 --> 멘토/멘티모집
-    모집게시판 --> 프로젝트모집
-    취업게시판 --> 취업후기공유
-    취업게시판 --> 채용공고확인
-    Q&A게시판 --> Q&A
-    마이페이지 --> 회원정보수정
-    마이페이지 --> 비밀번호변경
-```
-        
-
-
-<br><br>
-
 ### ⚙ DataBase
 
 ---
-### 14 TABLES
+### 5 TABLES
 
-![ex_screenshot](DB.png)
+![erd](https://github.com/user-attachments/assets/bea82cbf-c3b0-488c-b836-5a1086c9b6dd)
 
 <br><br>
 
