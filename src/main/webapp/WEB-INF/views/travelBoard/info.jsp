@@ -32,6 +32,7 @@
         }
 
         .container {
+            margin-top: 50px;
             width: 90%;
             max-width: 980px;
             padding: 40px 80px;
@@ -126,6 +127,7 @@
 </head>
 
 <body>
+<%@ include file="../header.jsp" %>
 
 <div class="container">
     <h1>${tOne.title}</h1>
