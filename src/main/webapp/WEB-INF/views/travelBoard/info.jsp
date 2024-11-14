@@ -38,6 +38,7 @@
             background-color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 1%;
+            margin-top: 60px;
         }
 
         h1 {
@@ -126,7 +127,7 @@
 </head>
 
 <body>
-
+<%@ include file="../header.jsp" %>
 <div class="container">
     <h1>${tOne.title}</h1>
     <p class="author-date">${tOne.writer} ${tOne.writeDate}

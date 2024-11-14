@@ -108,7 +108,6 @@
                 <%@ include file="../header.jsp" %>
 
                     <div class="container">
-                        <h1 id="mypage_h1">계정관리</h1>
                         <div class="mypage_section">
                             <div class="mypage_section1">
                                 <c:if test="${login.profile == null}">
