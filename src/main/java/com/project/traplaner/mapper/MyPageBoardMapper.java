@@ -40,4 +40,5 @@ public interface MyPageBoardMapper {
     void updateJourneyImg(Integer journeyId, String savePath);
 
     void createBoard(int travelId, String nickName, LocalDate now, String content);
+
 }

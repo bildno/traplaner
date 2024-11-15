@@ -131,5 +131,12 @@ public class MyPageBoardService {
     public void createBoard(int travelId, String nickName, LocalDate now, String content) {
         myPageBoardMapper.createBoard(travelId, nickName, now, content);
     }
+
+    public int findByTravelId(int travelId) {
+
+        return myPageBoardMapper.findById(travelId);
+    }
+
+
 }
 
