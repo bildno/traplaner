@@ -1,7 +1,6 @@
 package com.project.traplaner.entity;
-
+import jakarta.persistence.*;
 import lombok.*;
-
 
 @Getter
 @Setter
@@ -9,8 +8,18 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @Builder
+@Entity
+@Table(name = "tbl_favorite")
 public class Favorite {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int memberId;
-    private int travelBoardId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable = false)
+    Member member;
+
+    @ManyToOne
+    @JoinColumn(name = "travel_board_id", nullable = false)
+    TravelBoard travelBoard;
 }

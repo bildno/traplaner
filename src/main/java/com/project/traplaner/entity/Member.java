@@ -13,6 +13,7 @@ CREATE TABLE `tbl_member` (
  */
 
 
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter @ToString
@@ -20,13 +21,27 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
+@Table(name ="tbl_member")
 public class Member {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(unique = true, nullable = false)
     private String nickName;
+
+    @Column(name = "profile_img", nullable = false)
     private String profileImg;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private String email;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "login_method", nullable = false)
     private LoginMethod loginMethod;
 
     @Getter @ToString @AllArgsConstructor

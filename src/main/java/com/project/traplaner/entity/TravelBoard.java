@@ -1,7 +1,9 @@
 package com.project.traplaner.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -24,10 +26,23 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Slf4j
+@Entity
+@Table(name = "tbl_travel_board")
 public class TravelBoard {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int travelId;
+
+    @OneToOne
+    @JoinColumn(name = "travel_id")
+    Travel travel;
+
+    @Column(name = "member_nick_name")
     private String memberNickName;
+
+    @CreationTimestamp
+    @Column(name = "write_date")
     private LocalDateTime writeDate;
+
     private String content;
 }
