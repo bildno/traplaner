@@ -81,7 +81,7 @@
         ON t.id = j.travel_id
         WHERE t.id = #{id}
         GROUP BY j.journey_name, j.accommodation_name, j.start_time, j.google_map_location_pin_information, j.journey_img
-        ORDER BY journeyStartTime DESC
+        ORDER BY journeyStartTime ASC
     </select>
 
     <!-- 검색 게시물 개수 -->

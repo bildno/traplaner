@@ -32,13 +32,13 @@
         }
 
         .container {
-            margin-top: 50px;
             width: 90%;
             max-width: 980px;
             padding: 40px 80px;
             background-color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 1%;
+            margin-top: 60px;
         }
 
         h1 {
@@ -128,7 +128,6 @@
 
 <body>
 <%@ include file="../header.jsp" %>
-
 <div class="container">
     <h1>${tOne.title}</h1>
     <p class="author-date">${tOne.writer} ${tOne.writeDate}

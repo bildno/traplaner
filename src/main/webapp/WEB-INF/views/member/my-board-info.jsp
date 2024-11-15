@@ -38,7 +38,7 @@
             background-color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 1%;
-            margin-top: 50px;
+            margin-top: 70px;
         }
 
         h1 {
