@@ -85,4 +85,8 @@
         insert into tbl_travel_board (travel_id, member_nick_name, write_date, content) value(#{travelId}, #{nickName}, #{now}, #{content})
     </insert>
 
+    <select id="findById" resultType="int">
+        select count(*) from tbl_travel_board where travel_id = ${travel_id}
+    </select>
+
 </mapper>
