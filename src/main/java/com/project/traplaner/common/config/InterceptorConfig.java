@@ -1,4 +1,4 @@
-package com.project.traplaner.config;
+package com.project.traplaner.common.config;
 
 import com.project.traplaner.interceptor.AfterLoginInterceptor;
 import com.project.traplaner.interceptor.TravelBoardInterceptor;

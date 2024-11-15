@@ -1,5 +1,6 @@
 package com.project.traplaner.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -29,32 +30,47 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
+@Table(name ="tbl_journey")
 public class Journey {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int travelId;
+
+    @ManyToOne
+    @JoinColumn(name = "travel_id", nullable = false)
+    Travel travel;
+
+    @Column(name = "journey_name", nullable = false)
     private String journeyName;
+
+    @Column(name = "accommodation_name", nullable = false)
     private String accommodationName;
+
+    @Column(name = "accomodation_road_address_name", nullable = false)
     private String accommodationRoadAddressName;
+
+    @Column(nullable = false)
+    private int day;
+
+    @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
+
+    @Column(name = "end_time", nullable = false)
     private LocalDateTime endTime;
-    private LocalDateTime createTime;
-    private LocalDateTime updateTime;
+
+    @Column(name = "google_map_location_pin_information")
     private String googleMapLocationPinInformation;
+
+    @Column(name = "reservation_confirm_image_path")
     private String reservationConfirmImagePath;
+
     private boolean share;
-    private PlaceType placeType;
+
+    @Column(name = "journey_img")
     private String journeyImg;
+
     private int budget;
 
-    @Getter @ToString @AllArgsConstructor
-    public enum PlaceType {
-        LODGING("숙박시설", 1),
-        RESTAURANT("휴게음식점", 2),
-        LOCATION("관광지", 3),
-        ETC("기타",4);
 
-        private String type;
-        private int value;
-    }
 }

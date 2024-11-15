@@ -1,4 +1,4 @@
-package com.project.traplaner.config;
+package com.project.traplaner.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
