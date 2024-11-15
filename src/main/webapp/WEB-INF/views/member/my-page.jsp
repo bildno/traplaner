@@ -11,7 +11,7 @@
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    margin-top: 70px;
+                    margin-top: 90px;
                 }
 
                 .mypage_section {

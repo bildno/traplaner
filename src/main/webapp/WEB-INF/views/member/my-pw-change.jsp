@@ -14,6 +14,7 @@
                         flex-direction: column;
                         align-items: center;
                         justify-content: center;
+                        margin-top: 40px;
                     }
 
                     .mypage_section {
@@ -107,6 +108,7 @@
             <body>
                 <%@ include file="../header.jsp" %>
 
+                    <div class="container">
                     <div class="container">
                         <div class="mypage_section">
                             <div class="mypage_section1">
