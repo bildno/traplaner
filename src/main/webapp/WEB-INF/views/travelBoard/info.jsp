@@ -69,7 +69,8 @@
         }
 
         .section img {
-            style: none;
+            max-height: 580px;
+            max-width: 750px;
         }
 
         #content,
@@ -96,7 +97,6 @@
         }
 
         #like-button {
-            background-color: none;
             border: none;
             cursor: pointer;
             border-radius: 5px;
