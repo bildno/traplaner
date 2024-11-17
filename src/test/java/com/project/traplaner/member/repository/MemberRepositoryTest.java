@@ -4,11 +4,10 @@ import com.project.traplaner.entity.Favorite;
 import com.project.traplaner.entity.Member;
 import com.project.traplaner.entity.Travel;
 import com.project.traplaner.entity.TravelBoard;
-import com.project.traplaner.mapper.FavoriteMapper;
-import com.project.traplaner.mapper.MemberMapper;
-import com.project.traplaner.mapper.TravelBoardMapper;
-import com.project.traplaner.mapper.TravelMapper;
+import com.project.traplaner.travelBoard.repository.FavoriteRepository;
+import com.project.traplaner.travelBoard.repository.TravelBoardRepository;
 import com.project.traplaner.travelplan.repository.TravelRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ import static com.project.traplaner.entity.Member.builder;
 @SpringBootTest
 @Transactional
 @Rollback(false)
-class MemberMapperTest {
+class MemberRepositoryTest {
 
     @Autowired
     MemberRepository memberRepository;
@@ -36,11 +35,13 @@ class MemberMapperTest {
     @Autowired
     TravelRepository travelRepository;
 
-//    @Autowired
-//    TravelBoardRepository travelBoardMapper;
-//
-//    @Autowired
-//    FavoriteRepository favoriteMapper;
+    @Autowired
+    TravelBoardRepository travelBoardRepository;
+
+    @Autowired
+    FavoriteRepository favoriteMapperRepository;
+    @Autowired
+    private FavoriteRepository favoriteRepository;
 
 
     @Test
@@ -63,10 +64,10 @@ class MemberMapperTest {
             Member member = memberRepository.save(m);
         }
 
-/*        for (int i = 1; i <= subscriberCount; i++) {
-            int randNum = (int) (Math.random() * randomPara) + 1;
-            int tmpMemberId = randNum;
-            int tmpMemberNickNameId = randNum;
+        for (int i = 1; i <= subscriberCount; i++) {
+            long randNum = (long) (Math.random() * randomPara) + 1;
+            long tmpMemberId = randNum;
+            long tmpMemberNickNameId = randNum;
 
             LocalDateTime tmpStartDate = LocalDateTime.now();
             LocalDateTime tmpEndDate = LocalDateTime.now().plusDays(3);
@@ -74,40 +75,47 @@ class MemberMapperTest {
                     LocalDateTime.now().plusDays(3 + (int) (Math.random() * randomPara) + 1);
 
             String fileName = String.format("0425d9dc324e4d2a822b8ac905123b%02d.jpg", (int) (Math.random() * 9) + 1);
-
+            Member member = memberRepository.findById(tmpMemberId).orElseThrow(
+                        ()->new EntityNotFoundException("Member not found")
+            );
             Travel travel = Travel.builder()
-                    .memberId(tmpMemberId)
+                    .member(member)
                     .title("여행-" + i)
                     .startDate(tmpStartDate)
                     .endDate(tmpEndDate)
-                    .updatedAt(tmpUpdatedDate)
                     .share(true)
 //                    .travelImg("\\0425d9dc324e4d2a822b8ac905123b9"
 //                            + (int) (Math.random() * 9) + 1
 //                            +"1.jpg")
                     .travelImg(fileName)
                     .build();
-            travelMapper.save(travel);
+            travelRepository.save(travel);
 
             TravelBoard travelBoard = TravelBoard.builder()
-                    .travelId(i)
+                    .travel(travel)
                     .memberNickName("테스트" + tmpMemberNickNameId)
                     .writeDate(tmpEndDate)
                     .content("여행-" + i + " 좋았음. !!!!!!!!!!!!")
                     .build();
-            travelBoardMapper.save(travelBoard);
+            travelBoardRepository.save(travelBoard);
         }
 
         for (int i = 1; i <= favoriteCount; i++) {
-            int tmpFavoriteMemberId = (int) (Math.random() * randomFavoritePara) + 1;
-            int tmpFavoriteTravelBoardId = (int) (Math.random() * randomFavoritePara) + 1;
+            long tmpFavoriteMemberId = (long) (Math.random() * randomFavoritePara) + 1;
+            long tmpFavoriteTravelBoardId = (long) (Math.random() * randomFavoritePara) + 1;
+            Member member = memberRepository.findById(tmpFavoriteMemberId).orElseThrow(
+                    ()->new EntityNotFoundException("Member not found")
+            );
+            TravelBoard travelBoard = travelBoardRepository.findById(tmpFavoriteTravelBoardId).orElseThrow(
+                    ()->new EntityNotFoundException("TravelBoard not found")
+            );
             Favorite favorite = Favorite.builder()
-                    .memberId(tmpFavoriteMemberId)
-                    .travelBoardId(tmpFavoriteTravelBoardId)
+                    .member(member)
+                    .travelBoard(travelBoard)
                     .build();
 
-            favoriteMapper.save(favorite);
+            favoriteRepository.save(favorite);
         }
-*/
+
     }
 }

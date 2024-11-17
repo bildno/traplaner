@@ -5,6 +5,7 @@ import com.project.traplaner.main.dto.MainTravelDto;
 import com.project.traplaner.mapper.MemberMapper;
 import com.project.traplaner.mapper.TravelMapper;
 import com.project.traplaner.member.repository.MemberRepository;
+import com.project.traplaner.travelplan.repository.JourneyRepository;
 import com.project.traplaner.travelplan.repository.TravelRepository;
 import com.project.traplaner.util.FileUtils;
 import jakarta.persistence.EntityNotFoundException;
@@ -29,13 +30,14 @@ public class TravelService {
     private final TravelMapper travelMapper;
     private final MemberRepository memberRepository;
     private final TravelRepository travelRepository;
+    private final JourneyRepository journeyRepository;
     @Value("${file.upload.root-path}")
     private String rootPath;
 
-    public void saveTravel(TravelInfo travelInfo, long memberId) {
+    public Travel saveTravel(TravelInfo travelInfo, String email) {
 //        travelMapper.saveTravel(travel.toEntity(memberId));
         //jpa로 변환
-        Member member = memberRepository.findById(memberId).orElseThrow(
+        Member member = memberRepository.findByEmail(email).orElseThrow(
                 () -> new EntityNotFoundException("member not found")
         );
         OffsetDateTime startOffsetDateTime = OffsetDateTime.parse(travelInfo.getStartDate());
@@ -46,7 +48,7 @@ public class TravelService {
                 .startDate(startOffsetDateTime.toLocalDateTime())
                 .endDate(endOffsetDateTime.toLocalDateTime())
                         .build();
-        travelMapper.saveTravel(travel);
+        return travelRepository.save(travel);
     }
 
     public void saveJourneys(List<JourneyInfo> journeys) {
@@ -59,13 +61,12 @@ public class TravelService {
             if(journey.getReservationConfirmImagePath()!=null) {
                 String savePath = FileUtils.uploadFile(
                         journey.getReservationConfirmImagePath(), rootPath);
-//                travelMapper.postJourney(journey.toEntity(travelId,savePath));
+                journeyRepository.save(journey.toEntity(travel,savePath));
             }
             else{
-//                travelMapper.postJourney(journey.toEntity(travelId));
+                journeyRepository.save(journey.toEntity(travel));
             }
         }
-
 
     }
 
