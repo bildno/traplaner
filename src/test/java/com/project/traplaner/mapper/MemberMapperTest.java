@@ -57,51 +57,52 @@ class MemberMapperTest {
             boolean b = memberMapper.save(m);
         }
 
-        for (int i = 1; i <= subscriberCount; i++) {
-            int randNum = (int) (Math.random() * randomPara) + 1;
-            int tmpMemberId = randNum;
-            int tmpMemberNickNameId = randNum;
-
-            LocalDateTime tmpStartDate = LocalDateTime.now();
-            LocalDateTime tmpEndDate = LocalDateTime.now().plusDays(3);
-            LocalDateTime tmpUpdatedDate =
-                    LocalDateTime.now().plusDays(3 + (int) (Math.random() * randomPara) + 1);
-
-            String fileName = String.format("0425d9dc324e4d2a822b8ac905123b%02d.jpg", (int) (Math.random() * 9) + 1);
-
-            Travel travel = Travel.builder()
-                    .memberId(tmpMemberId)
-                    .title("여행-" + i)
-                    .startDate(tmpStartDate)
-                    .endDate(tmpEndDate)
-                    .updatedAt(tmpUpdatedDate)
-                    .share(true)
-//                    .travelImg("\\0425d9dc324e4d2a822b8ac905123b9"
-//                            + (int) (Math.random() * 9) + 1
-//                            +"1.jpg")
-                    .travelImg(fileName)
-                    .build();
-            travelMapper.save(travel);
-
-            TravelBoard travelBoard = TravelBoard.builder()
-                    .travelId(i)
-                    .memberNickName("테스트" + tmpMemberNickNameId)
-                    .writeDate(tmpEndDate)
-                    .content("여행-" + i + " 좋았음. !!!!!!!!!!!!")
-                    .build();
-            travelBoardMapper.save(travelBoard);
-        }
-
-        for (int i = 1; i <= favoriteCount; i++) {
-            int tmpFavoriteMemberId = (int) (Math.random() * randomFavoritePara) + 1;
-            int tmpFavoriteTravelBoardId = (int) (Math.random() * randomFavoritePara) + 1;
-            Favorite favorite = Favorite.builder()
-                    .memberId(tmpFavoriteMemberId)
-                    .travelBoardId(tmpFavoriteTravelBoardId)
-                    .build();
-
-            favoriteMapper.save(favorite);
-        }
-
+//        for (int i = 1; i <= subscriberCount; i++) {
+//            int randNum = (int) (Math.random() * randomPara) + 1;
+//            int tmpMemberId = randNum;
+//            int tmpMemberNickNameId = randNum;
+//
+//            LocalDateTime tmpStartDate = LocalDateTime.now();
+//            LocalDateTime tmpEndDate = LocalDateTime.now().plusDays(3);
+//            LocalDateTime tmpUpdatedDate =
+//                    LocalDateTime.now().plusDays(3 + (int) (Math.random() * randomPara) + 1);
+//
+//            String fileName = String.format("0425d9dc324e4d2a822b8ac905123b%02d.jpg", (int) (Math.random() * 9) + 1);
+//
+//            Travel travel = Travel.builder()
+//                    .memberId(tmpMemberId)
+//                    .title("여행-" + i)
+//                    .startDate(tmpStartDate)
+//                    .endDate(tmpEndDate)
+//                    .updatedAt(tmpUpdatedDate)
+//                    .share(true)
+////                    .travelImg("\\0425d9dc324e4d2a822b8ac905123b9"
+////                            + (int) (Math.random() * 9) + 1
+////                            +"1.jpg")
+//                    .travelImg(fileName)
+//                    .build();
+//            travelMapper.save(travel);
+//
+//            TravelBoard travelBoard = TravelBoard.builder()
+//                    .travelId(i)
+//                    .memberNickName("테스트" + tmpMemberNickNameId)
+//                    .writeDate(tmpEndDate)
+//                    .content("여행-" + i + " 좋았음. !!!!!!!!!!!!")
+//                    .build();
+//            travelBoardMapper.save(travelBoard);
+//        }
+//
+//        for (int i = 1; i <= favoriteCount; i++) {
+//            int tmpFavoriteMemberId = (int) (Math.random() * randomFavoritePara) + 1;
+//            int tmpFavoriteTravelBoardId = (int) (Math.random() * randomFavoritePara) + 1;
+//            Favorite favorite = Favorite.builder()
+//                    .memberId(tmpFavoriteMemberId)
+//                    .travelBoardId(tmpFavoriteTravelBoardId)
+//                    .build();
+//
+//            favoriteMapper.save(favorite);
+//        }
+//
     }
+
 }
