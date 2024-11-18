@@ -58,7 +58,7 @@
         from tbl_travel_board board
         join tbl_travel travel
         on board.travel_id = travel.id
-        where board.member_nick_name = #{nickName} and travel.share = 1 LIMIT #{page.pageStart}, #{page.amount}
+        where board.member_nick_name = #{nickName} and travel.share = 1
     </select>
 
     <select id="getTotal" resultType="int">

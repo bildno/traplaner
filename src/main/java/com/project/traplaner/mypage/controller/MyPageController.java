@@ -1,9 +1,13 @@
 package com.project.traplaner.mypage.controller;
 
+import com.project.traplaner.entity.Member;
+import com.project.traplaner.entity.TravelBoard;
 import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.mypage.dto.ModifyMemberInfoDTO;
+import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
+import com.project.traplaner.mypage.repository.MyPageTravelRepository;
 import com.project.traplaner.mypage.service.MyPageBoardService;
 import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelplan.service.TravelService;
@@ -13,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.awt.print.Pageable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -38,28 +44,54 @@ public class MyPageController {
     // 마이페이지 메인 (달력 있는 곳)
     // 달력에 일정 띄워주는 작업 해야댐
     // 계정관리 페이지 작성 필요
-   @GetMapping("/my-page/{member_id}")
-   public String myPage(@PathVariable int member_id, Model model) {
-       List<TravelListResponseDTO> dtoList = myPageBoardService.getList(member_id);
-       model.addAttribute("dtoList", dtoList);
-       return "member/my-page";
-   }
+//   @GetMapping("/my-page/{member_id}")
+//   public String myPage(@PathVariable int member_id, Model model) {
+//       List<TravelListResponseDTO> dtoList = myPageBoardService.getList(member_id);
+//       model.addAttribute("dtoList", dtoList);
+//       return "member/my-page";
+//   }
 
+    @GetMapping("/my-page")
+    public ResponseEntity<?> myPage() {
+
+        List<TravelListResponseDTO> travelListResponseDTOS = myPageBoardService.myPage();
+
+
+        return new ResponseEntity<>(travelListResponseDTOS, HttpStatus.OK);
+    }
 
 
     // 마이 페이지 내 게시물
     // db연동 아직 x
-    @GetMapping("/my-page/mytravelboard/{nickName}")
-    public String myBoard(@PathVariable String nickName, Model model,
-                          @ModelAttribute("s") PageDTO page) {
+//    @GetMapping("/my-page/mytravelboard/{nickName}")
+//    public String myBoard(@PathVariable String nickName, Model model,
+//                          @ModelAttribute("s") PageDTO page) {
+//
+//        Map<String, Object> map = myPageBoardService.findBoardAll(nickName, page);
+//
+//        model.addAttribute("dtoList", map.get("boardAll"));
+//        model.addAttribute("maker", map.get("pm"));
+//
+//        return "member/my-board";
+//    }
 
-        Map<String, Object> map = myPageBoardService.findBoardAll(nickName, page);
+    @GetMapping("/my-page/mytravelboard")
+    public ResponseEntity<?> myBoard(Pageable pageable) {
 
-        model.addAttribute("dtoList", map.get("boardAll"));
-        model.addAttribute("maker", map.get("pm"));
+        List<TravelBoardResponseDTO> map = myPageBoardService.findBoardAll();
 
-        return "member/my-board";
+
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
+
+
+//    @GetMapping("my-page/mytravelboard")
+//    public ResponseEntity<?> myTravelBoard(Pageable pageable) {
+//
+//        List<TravelBoard> byNickName = myPageBoardService.findByNickName(pageable);
+//
+//        return new ResponseEntity<>(byNickName, HttpStatus.OK);
+//    }
 
 
     // 마이페이지 나의 여행
@@ -113,7 +145,7 @@ public class MyPageController {
                            Model model) {
         Map<String, Object> map = myPageBoardService.favorite(memberId, page);
 
-        model.addAttribute("list", map.get("favorite") );
+        model.addAttribute("list", map.get("favorite"));
         model.addAttribute("maker", map.get("pm"));
 
         return "member/favorite";
@@ -160,8 +192,8 @@ public class MyPageController {
     public String boardInfo(@PathVariable int travelNo, Model model) {
         Map<String, Object> travel = myPageBoardService.travel(travelNo);
 
-        model.addAttribute("travel",travel.get("travels"));
-        model.addAttribute("journey",travel.get("journeys"));
+        model.addAttribute("travel", travel.get("travels"));
+        model.addAttribute("journey", travel.get("journeys"));
 
         return "member/my-board-info";
     }
@@ -169,50 +201,50 @@ public class MyPageController {
     @Value("${file.upload.root-path}")
     private String rootPath;
 
-    @PostMapping("/my-page/insert-board")
-    public String insertTravelJourney(@RequestParam int travelId,
-                                      @RequestParam MultipartFile travelImg,
-                                      @RequestParam List<MultipartFile> journeyImage,
-                                      @RequestParam String content,
-                                      @RequestParam List<Integer> journeyId,
-                                      RedirectAttributes ra,
-                                      HttpSession session) {
-
-
-        LoginUserResponseDTO login = (LoginUserResponseDTO) session.getAttribute("login");
-        String nickName = login.getNickName();
-        int id = login.getId();
-
-
-        if (StringUtils.hasText(travelImg.getOriginalFilename())) {
-
-            String savePath = FileUtils.uploadFile(travelImg, rootPath);
-
-            myPageBoardService.updateTravelImg(travelId, savePath);
-
-        }
-
-        int byTravelId = myPageBoardService.findByTravelId(travelId);
-
-
-        if(byTravelId == 0) {
-            myPageBoardService.createBoard(travelId, nickName, LocalDate.now(), content);
-        }
-
-        if (!journeyImage.isEmpty()) {
-            for (int i = 0, j = journeyId.size(); i < j; i++ ) {
-                String save = FileUtils.uploadFile(journeyImage.get(i), rootPath);
-                if (save != null )myPageBoardService.updateJourneyImg(journeyId.get(i), save);
-            }
-        }
-
-        travelService.refreshLoginUserTravel(login.getEmail(), session);
-
-        ra.addFlashAttribute("msg", "저장되었습니다!!!");
-
-
-        return "redirect:/my-page/mytravel/" + id;
-    }
+//    @PostMapping("/my-page/insert-board")
+//    public String insertTravelJourney(@RequestParam int travelId,
+//                                      @RequestParam MultipartFile travelImg,
+//                                      @RequestParam List<MultipartFile> journeyImage,
+//                                      @RequestParam String content,
+//                                      @RequestParam List<Integer> journeyId,
+//                                      RedirectAttributes ra,
+//                                      HttpSession session) {
+//
+//
+//        LoginUserResponseDTO login = (LoginUserResponseDTO) session.getAttribute("login");
+//        String nickName = login.getNickName();
+//        int id = login.getId();
+//
+//
+//        if (StringUtils.hasText(travelImg.getOriginalFilename())) {
+//
+//            String savePath = FileUtils.uploadFile(travelImg, rootPath);
+//
+//            myPageBoardService.updateTravelImg(travelId, savePath);
+//
+//        }
+//
+////        int byTravelId = myPageBoardService.findByTravelId(travelId);
+//
+//
+//        if(byTravelId == 0) {
+//            myPageBoardService.createBoard(travelId, nickName, LocalDate.now(), content);
+//        }
+//
+//        if (!journeyImage.isEmpty()) {
+//            for (int i = 0, j = journeyId.size(); i < j; i++ ) {
+//                String save = FileUtils.uploadFile(journeyImage.get(i), rootPath);
+//                if (save != null )myPageBoardService.updateJourneyImg(journeyId.get(i), save);
+//            }
+//        }
+//
+//        travelService.refreshLoginUserTravel(login.getEmail(), session);
+//
+//        ra.addFlashAttribute("msg", "저장되었습니다!!!");
+//
+//
+//        return "redirect:/my-page/mytravel/" + id;
+//    }
 
 
 }

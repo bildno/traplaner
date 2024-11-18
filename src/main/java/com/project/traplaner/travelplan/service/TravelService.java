@@ -34,10 +34,10 @@ public class TravelService {
         Member member = memberRepository.findById(memberId).orElseThrow(
                 () -> new EntityNotFoundException("member not found")
         );
-        Travel travel = Travel.builder()
-                .
-                        .build();
-        travelMapper.saveTravel();
+//        Travel travel = Travel.builder()
+//
+//                        .build();
+//        travelMapper.saveTravel();
     }
 
     public void saveJourneys(List<JourneyInfo> journeys) {

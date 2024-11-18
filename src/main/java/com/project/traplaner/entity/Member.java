@@ -26,7 +26,7 @@ import lombok.*;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(unique = true, nullable = false)
     private String nickName;
@@ -52,6 +52,17 @@ public class Member {
 
         private String type;
         private int value;
+    }
+
+
+    public Member fromEntity() {
+        return Member.builder()
+                .id(id)
+                .nickName(nickName)
+                .email(email)
+                .loginMethod(loginMethod)
+                .profileImg(profileImg)
+                .build();
     }
 
 }

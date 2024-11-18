@@ -18,7 +18,7 @@ public class Travel extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -27,8 +27,8 @@ public class Travel extends BaseTimeEntity {
     private String title;
 
     //이거 필요한가?
-    @Column(name = "is_domestic")
-    private boolean isDomestic;
+//    @Column(name = "is_domestic")
+//    private boolean isDomestic;
 
     @Column(name = "start_date")
     private LocalDateTime startDate;
