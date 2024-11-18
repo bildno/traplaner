@@ -40,7 +40,6 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> {
                     auth
-//                    .requestMatchers("/user/list").hasAnyRole("ADMIN")
                             .requestMatchers("/", "/members/**"
                                     ,"/WEB-INF/views/**","static/**","assets/img/*","/favicon.ico","/error").permitAll()
                             .anyRequest().authenticated();

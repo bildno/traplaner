@@ -42,13 +42,15 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
                 // 토큰 서명 위조 검사와 토큰을 파싱해서 클레임을 얻어내는 작업.
                 TokenUserInfo userInfo = jwtTokenProvider.validateAndGetTokenUserInfo(token);
-
+                List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+                authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
                 // 인증 완료 처리
                 // spring security에게 인증 정보를 전달해서 전역적으로 어플리케이션 내에서
                 // 인증 정보를 활용할 수 있도록 설정.
                 Authentication auth = new UsernamePasswordAuthenticationToken(
                         userInfo, // 컨트롤러 등에서 활용할 유저 정보
                         "" // 인증된 사용자 비밀번호: 보통 null 혹은 빈 문자열로 선언.
+                        ,authorities
                 );
 
                 // 시큐리티 컨테이너에 인증 정보 객체 등록

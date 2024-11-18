@@ -1,12 +1,9 @@
 package com.project.traplaner.member.controller;
-
 import com.project.traplaner.common.auth.JwtTokenProvider;
 import com.project.traplaner.common.dto.CommonErrorDto;
 import com.project.traplaner.common.dto.CommonResDto;
 import com.project.traplaner.entity.Member;
-
 import com.project.traplaner.member.dto.LoginRequestDto;
-
 import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.member.dto.SignUpRequestDto;
 import com.project.traplaner.util.FileUtils;
@@ -52,9 +49,11 @@ public class MemberController {
     //비밀번호 변경로직
     @Transactional
     @PutMapping("pw-change")
-    public ResponseEntity<?> pwChange(@RequestParam("email") String email,
-                                                 @RequestParam("password") String password)
+    @ResponseBody
+    public ResponseEntity<?> pwChange(@RequestBody Map<String, String> map)
     {
+        String email = map.get("email");
+        String password = map.get("password");
         String flag = memberService.changePassword(email, password)?"성공!":"실패!";
         log.info(email);
         log.info("변경 비밀번호: {}", password);
@@ -199,8 +198,10 @@ public class MemberController {
     public ResponseEntity<?> mailCheck(@RequestBody String email) {
         log.info("이메일 인증 요청 들어옴!: {}", email);
         if(!memberService.duplicateTest("email", email)){
+            log.info("존재하지 않는 회원");
             CommonResDto resDto
                     = new CommonResDto(HttpStatus.BAD_REQUEST,"존재하지 않는 회원입니다.", "");
+            return new ResponseEntity<>(resDto, HttpStatus.BAD_REQUEST);
         };
         try {
             String authNum = mailSenderService.joinMail(email);
