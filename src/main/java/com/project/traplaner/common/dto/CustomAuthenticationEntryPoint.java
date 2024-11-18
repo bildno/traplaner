@@ -21,6 +21,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
+        log.info(request.getRequestURI());
         log.warn("커스텀 인증 클래스의 commence 호출!");
         log.warn(authException.getMessage());
 

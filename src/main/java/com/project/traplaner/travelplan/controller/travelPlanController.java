@@ -2,6 +2,9 @@ package com.project.traplaner.travelplan.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.traplaner.common.auth.TokenUserInfo;
+import com.project.traplaner.common.dto.CommonResDto;
+import com.project.traplaner.entity.Travel;
 import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import com.project.traplaner.travelplan.dto.TravelPlanRequestDTO;
 import com.project.traplaner.travelplan.service.TravelService;
@@ -9,21 +12,20 @@ import com.project.traplaner.util.FileUtils;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
-@Controller
+@RestController
 @Slf4j
 @RequiredArgsConstructor
-public class travelController {
+public class travelPlanController {
     private final TravelService travelService;
 
     @GetMapping("/travelplan")
@@ -31,16 +33,16 @@ public class travelController {
         return "travelplan/travelplan";
     }
 
-
     @PostMapping("/travelplan")
     @ResponseBody
-    public ResponseEntity<?> travelSave(@RequestParam("data") String data,
-                                     @RequestParam Map<String, MultipartFile> reservationFiles,
-                                     HttpSession session
+    public ResponseEntity<?> travelSave(@AuthenticationPrincipal TokenUserInfo userInfo,
+                                        @RequestParam("data") String data,
+                                        @RequestParam Map<String, MultipartFile> reservationFiles
                              ) throws JsonProcessingException {
 
         log.info("reservationFile: {}", reservationFiles);
 
+        // json을 dto로 받아주는 역할을 하는 jackson라이브러리의 객체
         ObjectMapper objectMapper = new ObjectMapper();
         TravelPlanRequestDTO requestDTO = objectMapper.readValue(data, TravelPlanRequestDTO.class);
 
@@ -56,17 +58,20 @@ public class travelController {
             requestDTO.getJourneys().get(journeyId).setReservationConfirmImagePath(file);
         }
 
-        //사용자 확인
-        LoginUserResponseDTO LoginDto
-                = (LoginUserResponseDTO) session.getAttribute("login");
 
-        //서비스 로직으로 전환된 json 데이터 전달?
+        //서비스 로직으로 전환된 json 데이터 전달
 
-        travelService.saveTravel(requestDTO.getTravel(),LoginDto.getId());
+        Travel savedTravel = travelService.saveTravel(requestDTO.getTravel(), userInfo.getEmail());
         travelService.saveJourneys(requestDTO.getJourneys());
 
-        travelService.refreshLoginUserTravel(LoginDto.getEmail(), session);
+        //이거 뭐임...? 기억에 없는데엽...? 내가 쓴건가? 강사님이 고쳐주신건가보당 ㅎㅎ;;; 근데 왜 있어야하는거지ㅠ......?
+        //진규님한테 물어봐야겠당.
+//        travelService.refreshLoginUserTravel(LoginDto.getEmail(), session);
 
-        return ResponseEntity.ok().body(LoginDto.getId());
+        CommonResDto resDto =
+                new CommonResDto(HttpStatus.CREATED,"여행 여정추가 완료!", savedTravel.getId());
+
+
+        return new ResponseEntity<>(resDto, HttpStatus.CREATED);
     }
 }

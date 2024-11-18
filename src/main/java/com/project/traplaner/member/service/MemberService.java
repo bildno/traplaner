@@ -2,14 +2,14 @@ package com.project.traplaner.member.service;
 
 import com.project.traplaner.entity.Member;
 import com.project.traplaner.main.dto.MainTravelDto;
-import com.project.traplaner.main.dto.TopThreeFavoriteTravelDto;
 import com.project.traplaner.mapper.MemberMapper;
 import com.project.traplaner.mapper.TravelMapper;
 import com.project.traplaner.member.dto.LoginRequestDto;
 import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import com.project.traplaner.member.dto.SignUpRequestDto;
+import com.project.traplaner.member.repository.MemberRepository;
 import com.project.traplaner.mypage.dto.ModifyMemberInfoDTO;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -26,8 +26,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Map;
 
-import static com.project.traplaner.member.service.LoginResult.*;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -36,27 +34,17 @@ public class MemberService {
     private final MemberMapper memberMapper;
     private final PasswordEncoder encoder;
     private final TravelMapper travelMapper;
+    private final MemberRepository memberRepository;
 
-    public boolean join(SignUpRequestDto dto, String savePath){
-
-        return memberMapper.save(dto.toEntity(encoder, savePath));
+    public Member join(SignUpRequestDto dto, String savePath){
+        return memberRepository.save(dto.toEntity(encoder,savePath));
+//        return memberMapper.save(dto.toEntity(encoder, savePath));
     }
 
     public boolean duplicateTest(String type, String keyword){
        return memberMapper.duplicateTest(type,keyword);
     }
 
-    //로그인 검증
-    public LoginResult authenticate(LoginRequestDto dto, HttpSession session, HttpServletResponse response) {
-        Member foundMember = memberMapper.findOne(dto.getEmail());
-        if(foundMember == null){
-            return NO_ACC;
-        }
-        if (!encoder.matches(dto.getPassword(), foundMember.getPassword())) {
-            return NO_PW;
-        }
-        return SUCCESS;
-    }
 
     public void maintainLoginState(HttpSession session, String email) {
         Member foundMember = memberMapper.findOne(email);
@@ -125,11 +113,33 @@ public class MemberService {
         return memberMapper.update(dto.toEntity(encoder));
     }
 
-    public void changePassword(String email, String password) {
-        Member foundMember = memberMapper.findOne(email);
-        int id = foundMember.getId();
-        String nickName = foundMember.getNickName();
-        ModifyMemberInfoDTO dto = new ModifyMemberInfoDTO(id,password,nickName);
-        memberMapper.update(dto.toEntity(encoder));
+
+    public boolean changePassword(String email, String password) {
+
+        Member foundMember = memberRepository.findByEmail(email).orElseThrow(()->
+                new EntityNotFoundException("비밀번호 변경 실패!")
+                );
+        foundMember.setPassword(encoder.encode(password));
+        memberRepository.save(foundMember);
+        return true;
+    }
+
+    public Member login(LoginRequestDto dto) {
+        Member member  = memberRepository.findByEmail(dto.getEmail()).orElseThrow(() ->
+                new EntityNotFoundException("User not found")
+        );
+
+        // 비밀번호 확인하기 (암호화 되어있으니 encoder에게 부탁)
+        if (!encoder.matches(dto.getPassword(), member.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        return member;
+    }
+
+    public Member findById(long id) {
+        return memberRepository.findById(id).orElseThrow(
+                ()->new EntityNotFoundException("Member not found")
+        );
     }
 }
