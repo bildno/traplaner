@@ -16,7 +16,8 @@ CREATE TABLE `tbl_member` (
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter @ToString
+// 엔티티에 세터 추가 해도 되나?
+@Getter @Setter @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor

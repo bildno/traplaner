@@ -16,11 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 public class SignUpRequestDto {
 
-    @NotBlank
+    @NotBlank(message = "이메일 필수!")
     @Email
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "비밀번호 필수입니다.")
     private String password;
 
     @NotBlank
