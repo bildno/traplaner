@@ -1,9 +1,9 @@
 package com.project.traplaner.member.service;
 
-import com.project.traplaner.entity.Member;
+import com.project.traplaner.member.entity.Member;
 import com.project.traplaner.main.dto.MainTravelDto;
-import com.project.traplaner.mapper.MemberMapper;
-import com.project.traplaner.mapper.TravelMapper;
+import com.project.traplaner.member.mapper.MemberMapper;
+import com.project.traplaner.travelplan.mapper.TravelMapper;
 import com.project.traplaner.member.dto.LoginRequestDto;
 import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import com.project.traplaner.member.dto.SignUpRequestDto;

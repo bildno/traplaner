@@ -1,6 +1,6 @@
 package com.project.traplaner.mypage.dto.response;
 
-import com.project.traplaner.entity.Travel;
+import com.project.traplaner.travelplan.entity.Travel;
 import lombok.*;
 
 import java.time.LocalDateTime;

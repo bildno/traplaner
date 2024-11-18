@@ -1,11 +1,11 @@
 package com.project.traplaner.mypage.service;
 
-import com.project.traplaner.entity.Journey;
-import com.project.traplaner.entity.Travel;
+import com.project.traplaner.travelplan.entity.Journey;
+import com.project.traplaner.travelplan.entity.Travel;
 import com.project.traplaner.main.dto.MainTravelDto;
-import com.project.traplaner.mapper.FavoriteMapper;
-import com.project.traplaner.mapper.MemberMapper;
-import com.project.traplaner.mapper.MyPageBoardMapper;
+import com.project.traplaner.travelBoard.mapper.FavoriteMapper;
+import com.project.traplaner.member.mapper.MemberMapper;
+import com.project.traplaner.mypage.mapper.MyPageBoardMapper;
 import com.project.traplaner.mypage.dto.response.FavoriteListResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;

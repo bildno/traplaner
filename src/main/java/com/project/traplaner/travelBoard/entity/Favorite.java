@@ -1,4 +1,5 @@
-package com.project.traplaner.entity;
+package com.project.traplaner.travelBoard.entity;
+import com.project.traplaner.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -2,7 +2,7 @@ package com.project.traplaner.member.service;
 
 //import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.common.auth.JwtTokenProvider;
-import com.project.traplaner.entity.Member;
+import com.project.traplaner.member.entity.Member;
 import com.project.traplaner.member.dto.KakaoUserResponseDTO;
 import com.project.traplaner.member.dto.SignUpRequestDto;
 import jakarta.servlet.http.HttpSession;

@@ -1,21 +1,15 @@
 package com.project.traplaner.mypage.service;
 
-import com.project.traplaner.entity.Travel;
-import com.project.traplaner.mapper.MyPageBoardMapper;
-import jakarta.validation.constraints.AssertTrue;
+import com.project.traplaner.travelplan.entity.Travel;
+import com.project.traplaner.mypage.mapper.MyPageBoardMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 

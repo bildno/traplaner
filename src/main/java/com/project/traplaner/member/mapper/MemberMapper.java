@@ -1,7 +1,6 @@
-package com.project.traplaner.mapper;
+package com.project.traplaner.member.mapper;
 
-import com.project.traplaner.entity.Member;
-import com.project.traplaner.mypage.dto.ModifyMemberInfoDTO;
+import com.project.traplaner.member.entity.Member;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,6 +1,6 @@
 package com.project.traplaner.member.dto;
 
-import com.project.traplaner.entity.Member;
+import com.project.traplaner.member.entity.Member;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

@@ -1,7 +1,7 @@
 package com.project.traplaner.mypage.dto;
 
 
-import com.project.traplaner.entity.Member;
+import com.project.traplaner.member.entity.Member;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

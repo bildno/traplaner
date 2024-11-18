@@ -1,5 +1,6 @@
-package com.project.traplaner.entity;
+package com.project.traplaner.travelBoard.entity;
 
+import com.project.traplaner.travelplan.entity.Travel;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.project.traplaner.entity;
+package com.project.traplaner.member.entity;
 
 /*
 -- 회원 관리 테이블
@@ -11,7 +11,6 @@ CREATE TABLE `tbl_member` (
         `email`        varchar(200)        NOT NULL
 );
  */
-
 
 import jakarta.persistence.*;
 import lombok.*;

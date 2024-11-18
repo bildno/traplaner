@@ -1,7 +1,6 @@
 package com.project.traplaner.mypage.repository;
 
-import com.project.traplaner.entity.Travel;
-import com.project.traplaner.entity.TravelBoard;
+import com.project.traplaner.travelplan.entity.Travel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.awt.print.Pageable;

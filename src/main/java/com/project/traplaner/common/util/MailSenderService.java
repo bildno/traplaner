@@ -1,4 +1,4 @@
-package com.project.traplaner.util;
+package com.project.traplaner.common.util;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

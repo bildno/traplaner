@@ -1,7 +1,7 @@
-package com.project.traplaner.mapper;
+package com.project.traplaner.mypage.mapper;
 
-import com.project.traplaner.entity.Journey;
-import com.project.traplaner.entity.Travel;
+import com.project.traplaner.travelplan.entity.Journey;
+import com.project.traplaner.travelplan.entity.Travel;
 import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.travelBoard.dto.PageDTO;
 import org.apache.ibatis.annotations.Mapper;
