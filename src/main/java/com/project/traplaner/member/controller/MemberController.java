@@ -4,6 +4,7 @@ import com.project.traplaner.common.dto.CommonErrorDto;
 import com.project.traplaner.common.dto.CommonResDto;
 import com.project.traplaner.entity.Member;
 import com.project.traplaner.member.dto.LoginRequestDto;
+import com.project.traplaner.member.service.KakaoService;
 import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.member.dto.SignUpRequestDto;
 import com.project.traplaner.util.FileUtils;
@@ -36,6 +37,7 @@ public class MemberController {
     private String rootPath;
 
     private final MemberService memberService;
+    private final KakaoService kakaoService;
     private final JwtTokenProvider jwtTokenProvider;
 
     @Qualifier("member-template")
@@ -175,6 +177,10 @@ public class MemberController {
         log.info("레디스에서 조회한 데이터: {}", obj);
         if (obj == null) { // refresh token의 수명이 다됨.
             log.info("refresh 만료!");
+            if(member.getLoginMethod() == Member.LoginMethod.KAKAO) {
+                // 카카오 로그인 세션 종료시키기 어떻게하징........ㅠ
+//                kakaoService.logout();
+            }
             return new ResponseEntity<>(new CommonErrorDto(
                     HttpStatus.UNAUTHORIZED,
                     "EXPIRED_RT"

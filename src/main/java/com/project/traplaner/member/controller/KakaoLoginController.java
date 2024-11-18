@@ -21,6 +21,8 @@ public class KakaoLoginController {
     private  String kakaoClientId;
     @Value("${sns.kakao.redirect-uri}")
     private String kakaoRedirectUri;
+    @Value("${sns.kakao.logout-redirect}")
+    private String kakaoLogoutRedirectUri;
     private final KakaoService kakaoService;
 
     @GetMapping("/kakao/login")

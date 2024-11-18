@@ -1,12 +1,14 @@
 package com.project.traplaner.member.service;
 
 //import com.project.traplaner.member.service.MemberService;
+import com.project.traplaner.common.auth.JwtTokenProvider;
 import com.project.traplaner.entity.Member;
 import com.project.traplaner.member.dto.KakaoUserResponseDTO;
 import com.project.traplaner.member.dto.SignUpRequestDto;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -18,12 +20,15 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class KakaoService {
     private final MemberService memberService;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final RedisTemplate redisTemplate;
 
     // 로그인 처리
     public void login(Map<String, String> params, HttpSession session) {
@@ -33,10 +38,12 @@ public class KakaoService {
         KakaoUserResponseDTO kakaoUser = getKakaoUserInfo(accessToken);
         session.setAttribute("access_token", accessToken);
         session.setAttribute("kakaoAccount", kakaoUser.getId());
+
+        String kakaoUserEmail = kakaoUser.getAccount().getEmail();
         // 이제 카카오 인증 서버와의 연결은 더 필요하지 않습니다.
         // 문서에도 나와있었지만, 자체 로그인 처리 완료는 우리 서비스에서 마무리 지어 줘야 합니다.
         // 가져온 카카오 유저로 우리서비스에 이용자인지 확인하기
-        if (!memberService.duplicateTest("email", kakaoUser.getAccount().getEmail())) {
+        if (!memberService.duplicateTest("email", kakaoUserEmail)) {
             // 커먼 아이디와 같은 이메일일 경우를 처리 해야함
             // 한 번도 카카오 로그인을 한 적이 없다면 회원 가입이 들어간다.
             memberService.join(SignUpRequestDto.builder()
@@ -47,9 +54,39 @@ public class KakaoService {
                             .build(), kakaoUser.getProperties().getProfileImage());
         }
         // 우리 사이트 로그인 처리
-        memberService.maintainLoginState(session, kakaoUser.getAccount().getEmail());
+        log.info("카카오 로그인이에욥!");
+        String token
+                = jwtTokenProvider.createToken(kakaoUserEmail,accessToken);
+        log.info("token: {}", token);
+
+        String refreshToken
+                = jwtTokenProvider.createRefreshToken(kakaoUserEmail);
+        // refresh Token을 DB에 저장하자. -> redis에 저장.
+        redisTemplate.opsForValue().set(kakaoUserEmail, refreshToken, 240, TimeUnit.HOURS);
+
 
     }
+    //아마 프론트쪽에도 비슷한 로직 구현해야할듯.
+    public void logout(String accessToken) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + accessToken);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        String url = "https://kapi.kakao.com/v1/user/logout";
+        try {
+            ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
+            if (response.getStatusCode().is2xxSuccessful()) {
+                log.info("카카오 로그아웃 성공: {}", response.getBody());
+            } else {
+                log.info("카카오 로그아웃 실패: {}", response.getStatusCode());
+            }
+        } catch (Exception e) {
+            log.info("카카오 로그아웃 중 오류 발생: {}", e.getMessage());
+        }
+    }
+
 
     private KakaoUserResponseDTO getKakaoUserInfo(String accessToken) {
 

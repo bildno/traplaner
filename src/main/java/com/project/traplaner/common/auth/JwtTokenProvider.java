@@ -54,6 +54,19 @@ public class JwtTokenProvider {
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
+    public String createToken(String email,String kakaoToken) {
+        // Claims: 페이로드에 들어갈 사용자 정보
+        Claims claims = Jwts.claims().setSubject(email).setSubject(kakaoToken);
+        Date date = new Date();
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(date)
+                //현재 시간 밀리초에 30분을 더한 시간을 만료시간으로 세팅
+                .setExpiration(new Date(date.getTime() + expiration * 60 * 1000L))
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
+    }
 
     public String createRefreshToken(String email) {
         // Claims: 페이로드에 들어갈 사용자 정보
@@ -92,8 +105,6 @@ public class JwtTokenProvider {
         return TokenUserInfo.builder()
                 .email(claims.getSubject())
                 .build();
-
-
 
     }
 }
