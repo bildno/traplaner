@@ -19,7 +19,7 @@
         /* 네비게이션바 스타일 */
         #navbar {
           width: 100%;
-          background-color: #f8f9fa;
+          background-color: #ffffff;
           position: fixed;
           top: 0;
           display: flex;

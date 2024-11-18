@@ -12,6 +12,7 @@
           flex-direction: column;
           align-items: center;
           justify-content: center;
+          margin-top: 90px;
         }
 
         .mypage_section {
@@ -131,7 +132,6 @@
 
       <%@ include file="../header.jsp" %>
         <div class="container">
-          <h1 id="mypage_h1">내 게시물</h1>
           <div class="mypage_section">
             <div class="mypage_section1">
               <c:if test="${login.profile == null}">
@@ -166,7 +166,7 @@
 
 
           <c:forEach var="dto" items="${ dtoList }">
-            <tr onclick="location.href='/travelboard/info/${dto.travelId}'">
+            <tr onclick="location.href='/travelboard/info/${dto.id}'">
               <td><span>${ dto.id }</span></td>
               <td><input type="text" name="con_text" id="con_text"
                          value="${dto.title}"

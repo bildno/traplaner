@@ -1,6 +1,7 @@
 package com.project.traplaner.util;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -12,6 +13,8 @@ public class FileUtils {
 
     public static String uploadFile(MultipartFile profileImage, String rootPath) {
 
+        if (!StringUtils.hasText(profileImage.getOriginalFilename())) return null;
+
         log.info("rootPath: {}", rootPath);
         File root = new File(rootPath);
         if(!root.exists()) root.mkdirs();
@@ -19,6 +22,8 @@ public class FileUtils {
         String newFileName = UUID.randomUUID()
                 .toString()
                 .replace("-", "");
+
+        log.info("원본이미지: {}",  profileImage.getOriginalFilename() );
 
         String fileExt = profileImage.getOriginalFilename().substring(
                 profileImage.getOriginalFilename().lastIndexOf(".")

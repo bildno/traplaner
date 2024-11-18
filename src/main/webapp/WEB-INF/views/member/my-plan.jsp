@@ -14,6 +14,7 @@
                         flex-direction: column;
                         align-items: center;
                         justify-content: center;
+                        margin-top: 40px;
                     }
 
                     .mypage_section {
@@ -135,7 +136,7 @@
                 <%@ include file="../header.jsp" %>
 
                     <div class="container">
-                        <h1 id="mypage_h1">나의 여행</h1>
+                    <div class="container">
                         <div class="mypage_section">
                             <div class="mypage_section1">
                                 <c:choose>
