@@ -175,6 +175,7 @@
 
 
     <c:forEach var="j" items="${journey}">
+        <h1>DAY 1</h1>
         <div class="section photo"><img src="/display/${j.journeyImg}" style=""></div>
         <h2 class="day-date">${j.journeyStartTime}</h2>
         <div class="section schedule" id="schedule">${j.placeName} ${j.journeyName}</div>
