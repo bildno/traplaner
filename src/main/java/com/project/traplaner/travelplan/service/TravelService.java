@@ -41,11 +41,6 @@ public class TravelService {
                 () -> new EntityNotFoundException("member not found")
         );
 
-        Travel travel = Travel.builder()
-
-                        .build();
-        travelMapper.saveTravel();
-
         OffsetDateTime startOffsetDateTime = OffsetDateTime.parse(travelInfo.getStartDate());
         OffsetDateTime endOffsetDateTime = OffsetDateTime.parse(travelInfo.getEndDate());
         Travel travel = Travel.builder()
