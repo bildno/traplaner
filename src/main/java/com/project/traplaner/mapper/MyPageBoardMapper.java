@@ -29,7 +29,7 @@ public interface MyPageBoardMapper {
 
     int getBoardTotal(PageDTO page, String nickName);
 
-    List<TravelBoardResponseDTO> findBoardAll(@Param("nickName") String nickName, @Param("page") PageDTO page);
+    List<TravelBoardResponseDTO> findBoardAll(@Param("nickName") String nickName);
 
     Travel travelSelect(int id);
     List<Journey> journeySelect(int id);

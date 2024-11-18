@@ -40,6 +40,12 @@ public class TravelService {
         Member member = memberRepository.findByEmail(email).orElseThrow(
                 () -> new EntityNotFoundException("member not found")
         );
+
+        Travel travel = Travel.builder()
+
+                        .build();
+        travelMapper.saveTravel();
+
         OffsetDateTime startOffsetDateTime = OffsetDateTime.parse(travelInfo.getStartDate());
         OffsetDateTime endOffsetDateTime = OffsetDateTime.parse(travelInfo.getEndDate());
         Travel travel = Travel.builder()
@@ -49,6 +55,7 @@ public class TravelService {
                 .endDate(endOffsetDateTime.toLocalDateTime())
                         .build();
         return travelRepository.save(travel);
+
     }
 
     public void saveJourneys(List<JourneyInfo> journeys) {

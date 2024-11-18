@@ -9,6 +9,8 @@ import com.project.traplaner.mapper.MyPageBoardMapper;
 import com.project.traplaner.mypage.dto.response.FavoriteListResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
+import com.project.traplaner.mypage.repository.MyPageRepository;
+import com.project.traplaner.mypage.repository.MyPageTravelRepository;
 import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelBoard.service.PageMaker;
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +32,8 @@ public class MyPageBoardService {
     private final MyPageBoardMapper myPageBoardMapper;
     private final FavoriteMapper favoriteMapper;
     private final MemberMapper memberMapper;
+    private final MyPageRepository MyPageRepository;
+    private final MyPageTravelRepository MyPageTravelRepository;
 
     public Map<String, Object> findAll(int memberId, PageDTO page) {
         PageMaker pageMaker = new PageMaker(page, myPageBoardMapper.getTotalCount(page, memberId));
@@ -40,25 +44,24 @@ public class MyPageBoardService {
                 .collect(Collectors.toList());
 
 
-
         Map<String, Object> result = new HashMap<>();
-        result.put("travels",dtoList);
-        result.put("pm",pageMaker);
+        result.put("travels", dtoList);
+        result.put("pm", pageMaker);
 
         return result;
     }
 
 
-    public Map<String, Object> findBoardAll(String nickName, PageDTO page) {
-        PageMaker pageMaker = new PageMaker(page, myPageBoardMapper.getBoardTotal(page, nickName));
-        List<TravelBoardResponseDTO> boardAll = myPageBoardMapper.findBoardAll(nickName, page);
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("boardAll",boardAll);
-        result.put("pm",pageMaker);
-
-        return result;
-    }
+//    public Map<String, Object> findBoardAll(String nickName, PageDTO page) {
+//        PageMaker pageMaker = new PageMaker(page, myPageBoardMapper.getBoardTotal(page, nickName));
+//        List<TravelBoardResponseDTO> boardAll = myPageBoardMapper.findBoardAll(nickName, page);
+//
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("boardAll", boardAll);
+//        result.put("pm", pageMaker);
+//
+//        return result;
+//    }
 
 
     public List<TravelListResponseDTO> getList(int memberId) {
@@ -69,6 +72,16 @@ public class MyPageBoardService {
                 .collect(Collectors.toList());
 
         return dtoList;
+    }
+
+    public List<TravelListResponseDTO> myPage() {
+        int id = 105;
+
+        List<Travel> byMemberId = MyPageTravelRepository.findByMemberId(id);
+        List<TravelListResponseDTO> dtoList = byMemberId.stream().map(travel -> new TravelListResponseDTO(travel)).collect(Collectors.toList());
+
+        return dtoList;
+
     }
 
 
@@ -88,7 +101,7 @@ public class MyPageBoardService {
 
     }
 
-    public Map<String, Object> favorite(int memberId,PageDTO page) {
+    public Map<String, Object> favorite(int memberId, PageDTO page) {
         PageMaker pageMaker = new PageMaker(page, favoriteMapper.getTotal(page, memberId));
         List<FavoriteListResponseDTO> favorites = favoriteMapper.favorite_List(memberId, page);
 
@@ -98,19 +111,19 @@ public class MyPageBoardService {
         });
 
         Map<String, Object> result = new HashMap<>();
-        result.put("favorite",favorites);
-        result.put("pm",pageMaker);
+        result.put("favorite", favorites);
+        result.put("pm", pageMaker);
 
         return result;
     }
 
-    public Map<String, Object> travel(int travelId){
+    public Map<String, Object> travel(int travelId) {
         List<Journey> journeys = myPageBoardMapper.journeySelect(travelId);
         Travel travels = myPageBoardMapper.travelSelect(travelId);
 
         Map<String, Object> result = new HashMap<>();
 
-        result.put("journeys",journeys);
+        result.put("journeys", journeys);
         result.put("travels", travels);
 
         return result;
@@ -132,9 +145,11 @@ public class MyPageBoardService {
         myPageBoardMapper.createBoard(travelId, nickName, now, content);
     }
 
-    public int findByTravelId(int travelId) {
+    public List<TravelBoardResponseDTO> findBoardAll() {
+        String nickName = "마루";
+        List<TravelBoardResponseDTO> boardAll = myPageBoardMapper.findBoardAll(nickName);
 
-        return myPageBoardMapper.findById(travelId);
+        return boardAll;
     }
 
 
