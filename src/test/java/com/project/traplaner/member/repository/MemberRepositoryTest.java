@@ -1,9 +1,9 @@
 package com.project.traplaner.member.repository;
 
-import com.project.traplaner.entity.Favorite;
-import com.project.traplaner.entity.Member;
-import com.project.traplaner.entity.Travel;
-import com.project.traplaner.entity.TravelBoard;
+import com.project.traplaner.travelBoard.entity.Favorite;
+import com.project.traplaner.member.entity.Member;
+import com.project.traplaner.travelplan.entity.Travel;
+import com.project.traplaner.travelBoard.entity.TravelBoard;
 import com.project.traplaner.travelBoard.repository.FavoriteRepository;
 import com.project.traplaner.travelBoard.repository.TravelBoardRepository;
 import com.project.traplaner.travelplan.repository.TravelRepository;
@@ -17,9 +17,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
-import static com.project.traplaner.entity.Member.builder;
+import static com.project.traplaner.member.entity.Member.builder;
 
 @SpringBootTest
 @Transactional

@@ -2,6 +2,7 @@ package com.project.traplaner.mapper;
 
 import com.project.traplaner.main.dto.MainTravelDto;
 import com.project.traplaner.main.dto.TopThreeFavoriteTravelDto;
+import com.project.traplaner.travelplan.mapper.TravelMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,16 +1,14 @@
 package com.project.traplaner.member.controller;
-
 import com.project.traplaner.common.auth.JwtTokenProvider;
 import com.project.traplaner.common.dto.CommonErrorDto;
 import com.project.traplaner.common.dto.CommonResDto;
-import com.project.traplaner.entity.Member;
-
+import com.project.traplaner.member.entity.Member;
 import com.project.traplaner.member.dto.LoginRequestDto;
-
+import com.project.traplaner.member.service.KakaoService;
 import com.project.traplaner.member.service.MemberService;
 import com.project.traplaner.member.dto.SignUpRequestDto;
-import com.project.traplaner.util.FileUtils;
-import com.project.traplaner.util.MailSenderService;
+import com.project.traplaner.common.util.FileUtils;
+import com.project.traplaner.common.util.MailSenderService;
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -22,7 +20,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +36,7 @@ public class MemberController {
     private String rootPath;
 
     private final MemberService memberService;
+    private final KakaoService kakaoService;
     private final JwtTokenProvider jwtTokenProvider;
 
     @Qualifier("member-template")
@@ -52,9 +50,11 @@ public class MemberController {
     //비밀번호 변경로직
     @Transactional
     @PutMapping("pw-change")
-    public ResponseEntity<?> pwChange(@RequestParam("email") String email,
-                                                 @RequestParam("password") String password)
+    @ResponseBody
+    public ResponseEntity<?> pwChange(@RequestBody Map<String, String> map)
     {
+        String email = map.get("email");
+        String password = map.get("password");
         String flag = memberService.changePassword(email, password)?"성공!":"실패!";
         log.info(email);
         log.info("변경 비밀번호: {}", password);
@@ -176,6 +176,10 @@ public class MemberController {
         log.info("레디스에서 조회한 데이터: {}", obj);
         if (obj == null) { // refresh token의 수명이 다됨.
             log.info("refresh 만료!");
+            if(member.getLoginMethod() == Member.LoginMethod.KAKAO) {
+                // 카카오 로그인 세션 종료시키기 어떻게하징........ㅠ
+//                kakaoService.logout();
+            }
             return new ResponseEntity<>(new CommonErrorDto(
                     HttpStatus.UNAUTHORIZED,
                     "EXPIRED_RT"
@@ -199,8 +203,10 @@ public class MemberController {
     public ResponseEntity<?> mailCheck(@RequestBody String email) {
         log.info("이메일 인증 요청 들어옴!: {}", email);
         if(!memberService.duplicateTest("email", email)){
+            log.info("존재하지 않는 회원");
             CommonResDto resDto
                     = new CommonResDto(HttpStatus.BAD_REQUEST,"존재하지 않는 회원입니다.", "");
+            return new ResponseEntity<>(resDto, HttpStatus.BAD_REQUEST);
         };
         try {
             String authNum = mailSenderService.joinMail(email);

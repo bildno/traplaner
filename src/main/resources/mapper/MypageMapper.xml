@@ -3,9 +3,9 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.project.traplaner.mapper.MyPageBoardMapper">
+<mapper namespace="com.project.traplaner.mypage.mapper.MyPageBoardMapper">
 
-    <select id="selectTravelById" resultType="com.project.traplaner.entity.Travel">
+    <select id="selectTravelById" resultType="com.project.traplaner.travelplan.entity.Travel">
         select * from tbl_travel where member_id = #{id}
     </select>
 
@@ -65,11 +65,11 @@
         select count(*) from tbl_favorite where member_id = #{memberId}
     </select>
 
-    <select id="travelSelect" resultType="com.project.traplaner.entity.Travel">
+    <select id="travelSelect" resultType="com.project.traplaner.travelplan.entity.Travel">
         select * from tbl_travel where id = #{id}
     </select>
 
-    <select id="journeySelect" resultType="com.project.traplaner.entity.Journey">
+    <select id="journeySelect" resultType="com.project.traplaner.travelplan.entity.Journey">
         select * from tbl_journey where travel_id = #{id} order by end_time;
     </select>
 

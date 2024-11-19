@@ -3,7 +3,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.project.traplaner.mapper.MemberMapper">
+<mapper namespace="com.project.traplaner.member.mapper.MemberMapper">
     <insert id="save">
         insert into tbl_member(nick_name, profile_img, login_method, password, email)
         values(#{nickName}, #{profileImg}, #{loginMethod}, #{password}, #{email})

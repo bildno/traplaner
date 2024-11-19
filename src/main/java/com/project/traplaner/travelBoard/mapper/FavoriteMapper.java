@@ -1,7 +1,7 @@
-package com.project.traplaner.mapper;
+package com.project.traplaner.travelBoard.mapper;
 
 
-import com.project.traplaner.entity.Favorite;
+import com.project.traplaner.travelBoard.entity.Favorite;
 import com.project.traplaner.mypage.dto.response.FavoriteListResponseDTO;
 import com.project.traplaner.travelBoard.dto.PageDTO;
 import org.apache.ibatis.annotations.Mapper;

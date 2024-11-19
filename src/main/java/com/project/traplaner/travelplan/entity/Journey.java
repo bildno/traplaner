@@ -1,4 +1,4 @@
-package com.project.traplaner.entity;
+package com.project.traplaner.travelplan.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

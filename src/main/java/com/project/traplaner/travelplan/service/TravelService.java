@@ -1,13 +1,13 @@
 package com.project.traplaner.travelplan.service;
-import com.project.traplaner.entity.Member;
-import com.project.traplaner.entity.Travel;
+import com.project.traplaner.member.entity.Member;
+import com.project.traplaner.travelplan.entity.Travel;
 import com.project.traplaner.main.dto.MainTravelDto;
-import com.project.traplaner.mapper.MemberMapper;
-import com.project.traplaner.mapper.TravelMapper;
+import com.project.traplaner.member.mapper.MemberMapper;
+import com.project.traplaner.travelplan.mapper.TravelMapper;
 import com.project.traplaner.member.repository.MemberRepository;
 import com.project.traplaner.travelplan.repository.JourneyRepository;
 import com.project.traplaner.travelplan.repository.TravelRepository;
-import com.project.traplaner.util.FileUtils;
+import com.project.traplaner.common.util.FileUtils;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -40,11 +39,6 @@ public class TravelService {
         Member member = memberRepository.findByEmail(email).orElseThrow(
                 () -> new EntityNotFoundException("member not found")
         );
-
-        Travel travel = Travel.builder()
-
-                        .build();
-        travelMapper.saveTravel();
 
         OffsetDateTime startOffsetDateTime = OffsetDateTime.parse(travelInfo.getStartDate());
         OffsetDateTime endOffsetDateTime = OffsetDateTime.parse(travelInfo.getEndDate());

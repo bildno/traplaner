@@ -1,7 +1,7 @@
 package com.project.traplaner.main;
 
 import com.project.traplaner.main.dto.TopThreeFavoriteTravelDto;
-import com.project.traplaner.mapper.TravelMapper;
+import com.project.traplaner.travelplan.mapper.TravelMapper;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

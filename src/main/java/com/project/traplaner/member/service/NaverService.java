@@ -1,14 +1,11 @@
 package com.project.traplaner.member.service;
 
-import com.project.traplaner.entity.Member;
-import com.project.traplaner.member.dto.NaverSignUpRequestDto;
+import com.project.traplaner.member.entity.Member;
 import com.project.traplaner.member.dto.NaverUserResponseDto;
 import com.project.traplaner.member.dto.SignUpRequestDto;
-import jakarta.mail.Header;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.angus.mail.imap.SortTerm;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -18,7 +15,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 

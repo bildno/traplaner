@@ -21,8 +21,11 @@ public class KakaoLoginController {
     private  String kakaoClientId;
     @Value("${sns.kakao.redirect-uri}")
     private String kakaoRedirectUri;
+    @Value("${sns.kakao.logout-redirect}")
+    private String kakaoLogoutRedirectUri;
     private final KakaoService kakaoService;
 
+    //이거 프론트 단으로 가야해....
     @GetMapping("/kakao/login")
     public String kakaoLogin() {
         // 카카오 인가코드 신청 -> 카카오 인증 서버에서 클라이언트와 로그인 과정을 거친 후

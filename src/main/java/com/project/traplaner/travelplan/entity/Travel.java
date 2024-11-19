@@ -1,6 +1,7 @@
-package com.project.traplaner.entity;
+package com.project.traplaner.travelplan.entity;
 
 import com.project.traplaner.common.entity.BaseTimeEntity;
+import com.project.traplaner.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,6 +1,6 @@
 package com.project.traplaner.travelBoard.service;
 
-import com.project.traplaner.mapper.TravelBoardMapper;
+import com.project.traplaner.travelBoard.mapper.TravelBoardMapper;
 import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import com.project.traplaner.travelBoard.dto.JourneyResponseDTO;
 import com.project.traplaner.travelBoard.dto.PageDTO;

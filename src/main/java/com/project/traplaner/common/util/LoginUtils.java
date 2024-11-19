@@ -1,4 +1,4 @@
-package com.project.traplaner.util;
+package com.project.traplaner.common.util;
 import com.project.traplaner.member.dto.LoginUserResponseDTO;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;

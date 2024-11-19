@@ -1,4 +1,4 @@
-package com.project.traplaner.util;
+package com.project.traplaner.common.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
