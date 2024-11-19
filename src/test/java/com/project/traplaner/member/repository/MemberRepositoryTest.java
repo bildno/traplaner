@@ -2,10 +2,12 @@ package com.project.traplaner.member.repository;
 
 import com.project.traplaner.travelBoard.entity.Favorite;
 import com.project.traplaner.member.entity.Member;
+import com.project.traplaner.travelplan.entity.Journey;
 import com.project.traplaner.travelplan.entity.Travel;
 import com.project.traplaner.travelBoard.entity.TravelBoard;
 import com.project.traplaner.travelBoard.repository.FavoriteRepository;
 import com.project.traplaner.travelBoard.repository.TravelBoardRepository;
+import com.project.traplaner.travelplan.repository.JourneyRepository;
 import com.project.traplaner.travelplan.repository.TravelRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;
@@ -41,6 +43,8 @@ class MemberRepositoryTest {
     FavoriteRepository favoriteMapperRepository;
     @Autowired
     private FavoriteRepository favoriteRepository;
+    @Autowired
+    private JourneyRepository journeyRepository;
 
 
     @Test
@@ -52,6 +56,7 @@ class MemberRepositoryTest {
         int favoriteCount = subscriberCount;
         int randomFavoritePara = (subscriberCount / 10) - 1;
 
+        //멤버 100명 생성
         for (int i = 1; i <= subscriberCount; i++) {
             Member m = builder()
                     .nickName("테스트" + i)
@@ -63,6 +68,7 @@ class MemberRepositoryTest {
             Member member = memberRepository.save(m);
         }
 
+        //여행 더미 데이터 생성
         for (int i = 1; i <= subscriberCount; i++) {
             long randNum = (long) (Math.random() * randomPara) + 1;
             long tmpMemberId = randNum;
@@ -97,6 +103,40 @@ class MemberRepositoryTest {
                     .content("여행-" + i + " 좋았음. !!!!!!!!!!!!")
                     .build();
             travelBoardRepository.save(travelBoard);
+        }
+
+        // 여정 더미 데이터 생성
+        for (int i = 1; i <= subscriberCount; i++) {
+            long randNum = (long) (Math.random() * randomPara) + 1;
+            long tmpTravelId = randNum;
+            Travel travel = travelRepository.findById(tmpTravelId).orElseThrow(
+                    ()->new EntityNotFoundException("Travel not found")
+            );
+            LocalDateTime tmpStartTime = travel.getStartDate();
+            LocalDateTime tmpEndTime = tmpStartTime.plusHours(3);
+
+            String fileName = String.format("0425d9dc324e4d2a822b8ac905123b%02d.jpg", (int) (Math.random() * 9) + 1);
+
+            String[] journeyNameArr = {"아침 식사","동물원 탐방","점심 식사","놀이 공원","저녁 식사"};
+            String[] accomodationNameArr = {"스타 벅스", "서울 대공원", "정식당","롯데월드","고든램지버거"};
+            String[] accomodationAdressArr = {"서울특별시 강남구 강남대로 328","경기도 과천시 대공원광장로 102"
+                                            ,"서울특별시 강남구 선릉로158길 11", "서울특별시 송파구 올림픽로 240"
+                                            ,"서울특별시 송파구 올림픽로 300 롯데월드몰 B1"};
+
+            Journey journey = Journey.builder()
+                            .travel(travel)
+                            .journeyName(journeyNameArr[i%5])
+                            .accommodationName(accomodationNameArr[i%5])
+                            .accommodationRoadAddressName(accomodationAdressArr[i%5])
+                            .day(1)
+                            .startTime(tmpStartTime)
+                            .endTime(tmpEndTime)
+                            .googleMapLocationPinInformation("testGoogleMapLocationPinInfo")
+                            .reservationConfirmImagePath(fileName)
+                            .share(true)
+                            .build();
+            journeyRepository.save(journey);
+
         }
 
         for (int i = 1; i <= favoriteCount; i++) {
