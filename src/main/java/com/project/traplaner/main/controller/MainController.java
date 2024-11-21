@@ -1,20 +1,19 @@
-package com.project.traplaner.main;
+package com.project.traplaner.main.controller;
 
+import com.project.traplaner.common.dto.CommonResDto;
 import com.project.traplaner.main.dto.TopThreeFavoriteTravelDto;
 import com.project.traplaner.main.repository.TopThreeFavoriteTravelRepository;
-import com.project.traplaner.travelplan.mapper.TravelMapper;
-import jakarta.servlet.http.HttpSession;
+import com.project.traplaner.main.service.MainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
 /*
    Old Code, 주석처리, 11.21, by jhjeong
 
@@ -29,13 +28,19 @@ import java.util.List;
 @Slf4j
 public class MainController {
 
-    private final TopThreeFavoriteTravelRepository topThreeFavoriteTravelRepository;
+//    private final TopThreeFavoriteTravelRepository topThreeFavoriteTravelRepository;
+    private final MainService mainService;
 
     @GetMapping("/top3-favorite")
     public ResponseEntity<?> listTop3FavoriteTravel() {
         log.info("listTop3FavoriteTravel");
-        mainService.getTop3FavoriteTravels();
-        return null;
+        List<TopThreeFavoriteTravelDto> top3FavoriteTravels
+                = mainService.getTop3FavoriteTravels();
+
+        CommonResDto resDto
+                = new CommonResDto(HttpStatus.OK, "Top3 Favorite Travels", top3FavoriteTravels);
+
+        return new ResponseEntity<>(resDto, HttpStatus.OK);
     }
 
 //

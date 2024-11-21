@@ -26,6 +26,32 @@ public interface TopThreeFavoriteTravelRepository
     @Query(value = """
             SELECT new com.project.traplaner.main.dto.TopThreeFavoriteTravelDto(
                 t.id, 
+                t.member.id,
+                tb.memberNickName,
+                t.title,
+                t.travelImg,
+                COUNT(f.id),
+                tb.content
+            )
+            FROM Travel t
+            JOIN t.travelBoard tb
+            LEFT JOIN tb.favorites f
+            GROUP BY t.id, t.member.id, tb.memberNickName, t.title, t.travelImg, tb.content
+            ORDER BY COUNT(f.id) DESC
+            """
+    )
+
+    List<TopThreeFavoriteTravelDto> findTopThreeFavoriteTravel(Pageable pageable);
+
+
+}
+
+/*
+ *  Member 객체 통으로 가져오기.
+
+    @Query(value = """
+            SELECT new com.project.traplaner.main.dto.TopThreeFavoriteTravelDto(
+                t.id,
                 t.member,
                 tb.memberNickName,
                 t.title,
@@ -40,8 +66,4 @@ public interface TopThreeFavoriteTravelRepository
             ORDER BY COUNT(f.id) DESC
             """
     )
-
-    List<TopThreeFavoriteTravelDto> findTopThreeFavoriteTravel(Pageable pageable);
-
-
-}
+ */
