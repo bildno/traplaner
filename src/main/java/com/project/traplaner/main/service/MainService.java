@@ -1,10 +1,13 @@
 package com.project.traplaner.main.service;
 
+import com.project.traplaner.common.auth.TokenUserInfo;
+import com.project.traplaner.main.dto.MainTravelDto;
 import com.project.traplaner.main.dto.TopThreeFavoriteTravelDto;
-import com.project.traplaner.main.repository.TopThreeFavoriteTravelRepository;
+import com.project.traplaner.main.repository.MainTravelRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +19,7 @@ import java.util.List;
 @Slf4j
 public class MainService {
 
-    private final TopThreeFavoriteTravelRepository topThreeFavoriteTravelRepository;
+    private final MainTravelRepository mainTravelRepository;
 
     public List<TopThreeFavoriteTravelDto> getTop3FavoriteTravels() {
 
@@ -26,8 +29,20 @@ public class MainService {
 
         // when
         List<TopThreeFavoriteTravelDto> topThreeFavoriteTravel
-                = topThreeFavoriteTravelRepository.findTopThreeFavoriteTravel(pageRequest);
+                = mainTravelRepository.findTopThreeFavoriteTravel(pageRequest);
 
         return topThreeFavoriteTravel;
+    }
+
+    public List<MainTravelDto> getMyTravelList() {
+
+        TokenUserInfo userInfo
+                = (TokenUserInfo) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+
+        List<MainTravelDto> dtoList
+                = mainTravelRepository.findAllTravelByMemberEmail(userInfo.getEmail());
+
+        return dtoList;
     }
 }

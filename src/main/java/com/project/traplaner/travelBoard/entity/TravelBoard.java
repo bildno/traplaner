@@ -35,9 +35,9 @@ public class TravelBoard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)   // by jhjeong 11.21
     @JoinColumn(name = "travel_id")
-    Travel travel;
+    private Travel travel;              // by jhjeong 11.21
 
     @Column(name = "member_nick_name")
     private String memberNickName;
@@ -50,6 +50,6 @@ public class TravelBoard {
     private String content;
 
     // by jhjeong 11.20
-    @OneToMany(mappedBy = "travelBoard", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "travelBoard", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Favorite> favorites;
 }

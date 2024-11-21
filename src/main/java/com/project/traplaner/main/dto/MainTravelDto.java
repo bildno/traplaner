@@ -13,7 +13,7 @@ public class MainTravelDto {
     private int id;
     private int memberId;
     private String title;
-    private boolean isDomestic;
+//    private boolean isDomestic;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private LocalDateTime createdAt;

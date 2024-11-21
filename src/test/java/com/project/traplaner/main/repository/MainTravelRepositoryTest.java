@@ -1,5 +1,6 @@
 package com.project.traplaner.main.repository;
 
+import com.project.traplaner.main.dto.MainTravelDto;
 import com.project.traplaner.main.dto.TopThreeFavoriteTravelDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
 @Rollback(false)
-class TopThreeFavoriteTravelTest {
+class MainTravelRepositoryTest {
 
     @Autowired
-    TopThreeFavoriteTravelRepository topThreeFavoriteTravelRepository;
+    MainTravelRepository mainTravelRepository;
 
     @Test
     @DisplayName("Top 3 좋아요 Travel 조회")
@@ -29,10 +30,42 @@ class TopThreeFavoriteTravelTest {
 
         // when
         List<TopThreeFavoriteTravelDto> topThreeFavoriteTravel
-                = topThreeFavoriteTravelRepository.findTopThreeFavoriteTravel(pageRequest);
+                = mainTravelRepository.findTopThreeFavoriteTravel(pageRequest);
 
         // then
         topThreeFavoriteTravel.forEach(System.out::println);
         assertNotNull(topThreeFavoriteTravel);
     }
+
+    @Test
+    @DisplayName("Email로 가입자의 모든 Travel 조회")
+    void findTravelListByMemberEmail() {
+        // given
+        String email = "test78@abc.net";
+
+        // when
+        List<MainTravelDto> travelDtoList
+                = mainTravelRepository.findAllTravelByMemberEmail(email);
+
+        // then
+        System.out.println("travelDtoList = " + travelDtoList);
+
+        assertNotNull(travelDtoList);
+
+    }
+//    @Test
+//    @DisplayName("")
+//    void testFindByEmail() {
+//        // given
+//        String email = "test78@abc.net";
+//
+//        // when
+//        List<Travel> travelList = topThreeFavoriteTravelRepository.findByEmail(email);
+//
+//
+//        // then
+//        travelList.forEach(System.out::println);
+//        assertNotNull(travelList);
+//
+//    }
 }
