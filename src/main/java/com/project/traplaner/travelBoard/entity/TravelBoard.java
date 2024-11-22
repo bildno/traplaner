@@ -32,7 +32,7 @@ import java.time.LocalDateTime;
 public class TravelBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @OneToOne
     @JoinColumn(name = "travel_id")

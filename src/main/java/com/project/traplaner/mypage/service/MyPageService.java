@@ -1,5 +1,11 @@
 package com.project.traplaner.mypage.service;
 
+import com.project.traplaner.common.auth.TokenUserInfo;
+import com.project.traplaner.member.entity.Member;
+import com.project.traplaner.member.repository.MemberRepository;
+import com.project.traplaner.mypage.dto.TravelBoardDto;
+import com.project.traplaner.mypage.repository.MyPageTravelBoardRepository;
+import com.project.traplaner.travelBoard.entity.TravelBoard;
 import com.project.traplaner.travelplan.entity.Journey;
 import com.project.traplaner.travelplan.entity.Travel;
 import com.project.traplaner.main.dto.MainTravelDto;
@@ -13,12 +19,17 @@ import com.project.traplaner.mypage.repository.MyPageRepository;
 import com.project.traplaner.mypage.repository.MyPageTravelRepository;
 import com.project.traplaner.travelBoard.dto.PageDTO;
 import com.project.traplaner.travelBoard.service.PageMaker;
+import com.project.traplaner.travelplan.repository.JourneyRepository;
+import com.project.traplaner.travelplan.repository.TravelRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,13 +38,21 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class MyPageBoardService {
+public class MyPageService {
 
     private final MyPageBoardMapper myPageBoardMapper;
     private final FavoriteMapper favoriteMapper;
     private final MemberMapper memberMapper;
     private final MyPageRepository MyPageRepository;
     private final MyPageTravelRepository MyPageTravelRepository;
+    private final MemberRepository memberRepository;
+    private final MyPageTravelBoardRepository MyPageTravelBoardRepository;
+    private final MyPageTravelRepository myPageTravelRepository;
+    private final TravelRepository travelRepository;
+    private final JourneyRepository journeyRepository;
+
+
+
 
     public Map<String, Object> findAll(int memberId, PageDTO page) {
         PageMaker pageMaker = new PageMaker(page, myPageBoardMapper.getTotalCount(page, memberId));
@@ -64,20 +83,16 @@ public class MyPageBoardService {
 //    }
 
 
-    public List<TravelListResponseDTO> getList(int memberId) {
-
-        List<Travel> travels = myPageBoardMapper.selectTravelById(memberId);
-        List<TravelListResponseDTO> dtoList = travels.stream()
-                .map(travel -> new TravelListResponseDTO(travel))
-                .collect(Collectors.toList());
-
-        return dtoList;
-    }
-
+    // jpa
     public List<TravelListResponseDTO> myPage() {
-        int id = 105;
 
-        List<Travel> byMemberId = MyPageTravelRepository.findByMemberId(id);
+        TokenUserInfo userinfo = (TokenUserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email = userinfo.getEmail();
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new NullPointerException("없는 사람"));
+        log.info("이메일 {}", email);
+        log.info("아이디 {}", member.getId());
+
+        List<Travel> byMemberId = MyPageTravelRepository.findByMemberId(member.getId());
         List<TravelListResponseDTO> dtoList = byMemberId.stream().map(travel -> new TravelListResponseDTO(travel)).collect(Collectors.toList());
 
         return dtoList;
@@ -131,27 +146,59 @@ public class MyPageBoardService {
     }
 
 
-    public void updateTravelImg(int travelId, String savePath) {
-        myPageBoardMapper.updateTravelImg(travelId, savePath);
-
+    public void updateTravelImg(Long travelId, String savePath) {
+        Travel travel = travelRepository.findById(travelId).orElseThrow(() -> new NullPointerException("업따"));
+        travel.setTravelImg(savePath);
+        travelRepository.save(travel);
     }
 
 
-    public void updateJourneyImg(Integer travelId, String save) {
-        myPageBoardMapper.updateJourneyImg(travelId, save);
+    public void updateJourneyImg(Long travelId, String save) {
+        Travel travel = travelRepository.findById(travelId).orElseThrow(() -> new NullPointerException("없따"));
+        Journey journey = journeyRepository.findByTravel(travel).orElseThrow();
+        journey.setJourneyImg(save);
+        journeyRepository.save(journey);
     }
 
-    public void createBoard(int travelId, String nickName, LocalDate now, String content) {
-        myPageBoardMapper.createBoard(travelId, nickName, now, content);
+    public TravelBoard createBoard(Long travelId, String memberNickName, LocalDateTime writeDate, String content) {
+        Travel travel = travelRepository.findById(travelId).orElseThrow();
+        TravelBoardDto build = TravelBoardDto.builder()
+                .travel(travel)
+                .memberNickName(memberNickName)
+                .writeDate(writeDate)
+                .content(content)
+                .build();
+
+        TravelBoard travelBoard = build.toEntity();
+
+        return MyPageTravelBoardRepository.save(travelBoard);
     }
 
-    public List<TravelBoardResponseDTO> findBoardAll() {
-        String nickName = "마루";
-        List<TravelBoardResponseDTO> boardAll = myPageBoardMapper.findBoardAll(nickName);
+    public Page<TravelBoardResponseDTO> findBoardAll(Pageable pageable) {
 
-        return boardAll;
+        TokenUserInfo userinfo = (TokenUserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email = userinfo.getEmail();
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new NullPointerException("없는사람"));
+        String nickName = member.getNickName();
+
+
+        return MyPageTravelBoardRepository.findByMemberNickName(nickName, pageable);
     }
 
 
+    public Page<Travel> myTravel(Pageable pageable) {
+        TokenUserInfo user = (TokenUserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Member member = memberRepository.findByEmail(user.getEmail()).orElseThrow(() -> new NullPointerException("없는사람"));
+
+
+        return myPageTravelRepository.findByMemberId(member.getId(), pageable);
+    }
+
+    public int findByTravelId(Long travelId) {
+        Long travel = MyPageTravelBoardRepository.countById(travelId);
+
+        return Math.toIntExact(travel);
+    }
 }
 
