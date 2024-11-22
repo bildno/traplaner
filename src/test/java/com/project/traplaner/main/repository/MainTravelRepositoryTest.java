@@ -53,19 +53,5 @@ class MainTravelRepositoryTest {
         assertNotNull(travelDtoList);
 
     }
-//    @Test
-//    @DisplayName("")
-//    void testFindByEmail() {
-//        // given
-//        String email = "test78@abc.net";
-//
-//        // when
-//        List<Travel> travelList = topThreeFavoriteTravelRepository.findByEmail(email);
-//
-//
-//        // then
-//        travelList.forEach(System.out::println);
-//        assertNotNull(travelList);
-//
-//    }
+
 }
