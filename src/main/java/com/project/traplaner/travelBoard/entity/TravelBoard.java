@@ -33,7 +33,7 @@ import java.util.List;
 public class TravelBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY)   // by jhjeong 11.21
     @JoinColumn(name = "travel_id")
