@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /*
    1. 여행 목록 게시판 Entity 클래스
@@ -34,9 +35,9 @@ public class TravelBoard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)   // by jhjeong 11.21
     @JoinColumn(name = "travel_id")
-    Travel travel;
+    private Travel travel;              // by jhjeong 11.21
 
     @Column(name = "member_nick_name")
     private String memberNickName;
@@ -45,5 +46,10 @@ public class TravelBoard {
     @Column(name = "write_date")
     private LocalDateTime writeDate;
 
+    @Column(name = "content")   // by jhjeong 11.20
     private String content;
+
+    // by jhjeong 11.20
+    @OneToMany(mappedBy = "travelBoard", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Favorite> favorites;
 }

@@ -40,8 +40,16 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> {
                     auth
-                            .requestMatchers("/", "/members/**"
-                                    ,"/WEB-INF/views/**","static/**","assets/img/*","/favicon.ico","/error").permitAll()
+                            .requestMatchers(
+                                    "/",
+                                    "/members/**",
+                                    "/WEB-INF/views/**",
+                                    "static/**",
+                                    "assets/img/*",
+                                    "/favicon.ico",
+                                    "/error",
+                                    "/main/top3-favorite")
+                            .permitAll()
                             .anyRequest().authenticated();
                 })
                 // 커스텀 필터를 등록.

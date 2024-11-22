@@ -18,9 +18,9 @@ public class Favorite {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
-    Member member;
+    private Member member;                  // by jhjeong 11.21
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)      // by jhjeong 11.21
     @JoinColumn(name = "travel_board_id", nullable = false)
-    TravelBoard travelBoard;
+    private TravelBoard travelBoard;        // by jhjeong 11.21
 }

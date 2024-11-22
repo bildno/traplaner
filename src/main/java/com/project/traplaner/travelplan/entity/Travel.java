@@ -2,6 +2,7 @@ package com.project.traplaner.travelplan.entity;
 
 import com.project.traplaner.common.entity.BaseTimeEntity;
 import com.project.traplaner.member.entity.Member;
+import com.project.traplaner.travelBoard.entity.TravelBoard;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -41,4 +42,8 @@ public class Travel extends BaseTimeEntity {
 
     @Column(name = "travel_img")
     private String travelImg;
+
+    // by jhjeong 11.20
+    @OneToOne(mappedBy="travel", fetch = FetchType.LAZY)
+    private TravelBoard travelBoard;
 }

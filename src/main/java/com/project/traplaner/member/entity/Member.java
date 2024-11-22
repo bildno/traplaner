@@ -12,8 +12,11 @@ CREATE TABLE `tbl_member` (
 );
  */
 
+import com.project.traplaner.travelplan.entity.Travel;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 // 엔티티에 세터 추가 해도 되나?
 @Getter @Setter @ToString
@@ -54,6 +57,10 @@ public class Member {
         private int value;
     }
 
+    // by jhjeong 11.21 --------------------
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Travel> travels;
+    // -------------------------------------
 
     public Member fromEntity() {
         return Member.builder()
