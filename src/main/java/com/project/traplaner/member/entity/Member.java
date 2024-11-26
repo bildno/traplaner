@@ -58,8 +58,8 @@ public class Member {
     }
 
     // by jhjeong 11.21 --------------------
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Travel> travels;
+//    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Travel> travels;
     // -------------------------------------
 
     public Member fromEntity() {

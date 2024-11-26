@@ -8,7 +8,8 @@
 
     <select id="favorite_List" resultType="com.project.traplaner.mypage.dto.response.FavoriteListResponseDTO">
 
-        select favorite.*, board.member_nick_name, board.write_date, travel.title from tbl_favorite favorite
+        select favorite.*, board.member_nick_name, board.write_date, travel.title
+        from tbl_favorite favorite
         join tbl_travel_board board on favorite.travel_board_id = board.id
         join tbl_travel travel on board.travel_id = travel.id
         where favorite.member_id = #{memberId}  LIMIT #{page.pageStart}, #{page.amount}

@@ -3,7 +3,10 @@ package com.project.traplaner.mypage.service;
 import com.project.traplaner.common.auth.TokenUserInfo;
 import com.project.traplaner.member.entity.Member;
 import com.project.traplaner.member.repository.MemberRepository;
+import com.project.traplaner.mypage.dto.FavoriteRes;
 import com.project.traplaner.mypage.dto.TravelBoardDto;
+import com.project.traplaner.mypage.dto.TravelJourneyRes;
+import com.project.traplaner.mypage.repository.MyPageFavoriteRepository;
 import com.project.traplaner.mypage.repository.MyPageTravelBoardRepository;
 import com.project.traplaner.travelBoard.entity.TravelBoard;
 import com.project.traplaner.travelplan.entity.Journey;
@@ -12,15 +15,13 @@ import com.project.traplaner.main.dto.MainTravelDto;
 import com.project.traplaner.travelBoard.mapper.FavoriteMapper;
 import com.project.traplaner.member.mapper.MemberMapper;
 import com.project.traplaner.mypage.mapper.MyPageBoardMapper;
-import com.project.traplaner.mypage.dto.response.FavoriteListResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelBoardResponseDTO;
 import com.project.traplaner.mypage.dto.response.TravelListResponseDTO;
 import com.project.traplaner.mypage.repository.MyPageRepository;
 import com.project.traplaner.mypage.repository.MyPageTravelRepository;
-import com.project.traplaner.travelBoard.dto.PageDTO;
-import com.project.traplaner.travelBoard.service.PageMaker;
 import com.project.traplaner.travelplan.repository.JourneyRepository;
 import com.project.traplaner.travelplan.repository.TravelRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,37 +51,8 @@ public class MyPageService {
     private final MyPageTravelRepository myPageTravelRepository;
     private final TravelRepository travelRepository;
     private final JourneyRepository journeyRepository;
+    private final MyPageFavoriteRepository myPageFavoriteRepository;
 
-
-
-
-    public Map<String, Object> findAll(int memberId, PageDTO page) {
-        PageMaker pageMaker = new PageMaker(page, myPageBoardMapper.getTotalCount(page, memberId));
-        List<Travel> travels = myPageBoardMapper.findAll(memberId, page);
-
-        List<TravelListResponseDTO> dtoList = travels.stream()
-                .map(travel -> new TravelListResponseDTO(travel))
-                .collect(Collectors.toList());
-
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("travels", dtoList);
-        result.put("pm", pageMaker);
-
-        return result;
-    }
-
-
-//    public Map<String, Object> findBoardAll(String nickName, PageDTO page) {
-//        PageMaker pageMaker = new PageMaker(page, myPageBoardMapper.getBoardTotal(page, nickName));
-//        List<TravelBoardResponseDTO> boardAll = myPageBoardMapper.findBoardAll(nickName, page);
-//
-//        Map<String, Object> result = new HashMap<>();
-//        result.put("boardAll", boardAll);
-//        result.put("pm", pageMaker);
-//
-//        return result;
-//    }
 
 
     // jpa
@@ -99,37 +71,37 @@ public class MyPageService {
 
     }
 
-
     public void updateShare(int id) {
-        myPageBoardMapper.updateShare(id);
+
+        Travel travel = myPageTravelRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("업따"));
+        travel.setShare(!travel.isShare());
+        myPageTravelRepository.save(travel);
     }
 
     public void deleteBoard(int boardId, HttpSession session) {
-        myPageBoardMapper.deleteTravelByMemberOrder(boardId);
+//        myPageBoardMapper.deleteTravelByMemberOrder(boardId);
+        MyPageTravelBoardRepository.deleteById(boardId);
+
         List<MainTravelDto> dtoList = (List<MainTravelDto>) session.getAttribute("mainTravelDtoList");
 
-        List<MainTravelDto> filteredList = dtoList.stream()
-                .filter(dto -> dto.getId() != boardId)
-                .collect(Collectors.toList());
 
-        session.setAttribute("mainTravelDtoList", filteredList);
 
     }
 
-    public Map<String, Object> favorite(int memberId, PageDTO page) {
-        PageMaker pageMaker = new PageMaker(page, favoriteMapper.getTotal(page, memberId));
-        List<FavoriteListResponseDTO> favorites = favoriteMapper.favorite_List(memberId, page);
+    public Page<FavoriteRes> favorite(Pageable pageable) {
+//        List<FavoriteListResponseDTO> favorites = favoriteMapper.favorite_List(memberId, page);
+        TokenUserInfo userinfo = (TokenUserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Member member = memberRepository.findByEmail(userinfo.getEmail()).orElseThrow(() -> new EntityNotFoundException("업따"));
 
-        favorites.forEach(dto -> {
-            dto.setFormatDate(FavoriteListResponseDTO.makeDateStringFomatter(dto.getWriteDate()));
+        Page<FavoriteRes> byMemberId = myPageFavoriteRepository.findByMemberId(member.getId(), pageable);
 
-        });
 
-        Map<String, Object> result = new HashMap<>();
-        result.put("favorite", favorites);
-        result.put("pm", pageMaker);
+//        favorites.forEach(dto -> {
+//            dto.setFormatDate(FavoriteListResponseDTO.makeDateStringFomatter(dto.getWriteDate()));
+//
+//        });
 
-        return result;
+        return byMemberId;
     }
 
     public Map<String, Object> travel(int travelId) {
@@ -153,9 +125,10 @@ public class MyPageService {
     }
 
 
-    public void updateJourneyImg(Long travelId, String save) {
-        Travel travel = travelRepository.findById(travelId).orElseThrow(() -> new NullPointerException("없따"));
-        Journey journey = journeyRepository.findByTravel(travel).orElseThrow();
+    public void updateJourneyImg(Long journeyId, String save) {
+//        Travel travel = travelRepository.findById(travelId).orElseThrow(() -> new NullPointerException("없따"));
+//        List<Journey> journeys = journeyRepository.findByTravel(travel).orElseThrow();
+        Journey journey = journeyRepository.findById(journeyId).orElseThrow(() -> new EntityNotFoundException("업따"));
         journey.setJourneyImg(save);
         journeyRepository.save(journey);
     }
@@ -199,6 +172,16 @@ public class MyPageService {
         Long travel = MyPageTravelBoardRepository.countById(travelId);
 
         return Math.toIntExact(travel);
+    }
+
+    public List<TravelJourneyRes> boardInfo(int travelNo) {
+        List<TravelJourneyRes> travelJourneyResDtos
+                = myPageTravelRepository.findTravelById(travelNo).orElseThrow(() -> new NullPointerException("업따"));
+
+
+
+        return travelJourneyResDtos;
+
     }
 }
 

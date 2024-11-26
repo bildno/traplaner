@@ -2,6 +2,8 @@ package com.project.traplaner.member.repository;
 
 import com.project.traplaner.member.entity.Member;
 import com.project.traplaner.travelplan.entity.Travel;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -12,6 +14,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
 
     Optional<Member> findByEmail(String email);
+
+    
 
 //    @Query("SELECT m FROM Member m JOIN FETCH m.travels")
 //    List<Travel> findAllByEmail();
